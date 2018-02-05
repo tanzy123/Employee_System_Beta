@@ -20,7 +20,7 @@ public class Employee {
 	private UserLogin userLogin;
 	
 	@Enumerated(EnumType.STRING)
-	private final LogInType logInType = LogInType.EMPLOYEE;
+	private LogInType logInType = LogInType.EMPLOYEE;
 	
 	@OneToOne
 	@JoinColumn(name = "role")

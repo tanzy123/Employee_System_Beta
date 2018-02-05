@@ -24,7 +24,7 @@ public class CompanyAdministrator {
 	private UserLogin userLogin;
 	
 	@Enumerated(EnumType.STRING)
-	private final LogInType logInType = LogInType.COMPANY_ADMINISTRATOR;
+	private LogInType logInType = LogInType.COMPANY_ADMINISTRATOR;
 
 	public UserLogin getUserLogin() {
 		return userLogin;
