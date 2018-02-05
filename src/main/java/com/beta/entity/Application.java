@@ -5,12 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -19,12 +17,8 @@ public class Application {
 	
 	@Id
 	private Long applicationId;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	private Company company;
 
 	@OneToMany
-	@JoinColumn(name="referenceId")
 	private List<VendorReference> vendorReferences;
 
 	@ManyToOne
@@ -34,15 +28,21 @@ public class Application {
 	private String POC;
 
 	private String remarks;
+	
+	private Long companyId;
+	
+	private Long vendorId;
+	
+	private String currentStatus;
 
-	@OneToOne
-	@JoinColumn(name="status")
-	private ApprovalStatus approvalStatus;
+	private String approvalStatus;
 
 	@Temporal(TemporalType.DATE)
 	private Date applicationDate;
 
 	private Period vendorPeriod;
+	
+	private Date modifiedDate;
 
 	private String officialRemarks;
 
@@ -128,14 +128,6 @@ public class Application {
 		this.vetter = vetter;
 	}
 
-	public ApprovalStatus getApprovalStatus() {
-		return approvalStatus;
-	}
-
-	public void setApprovalStatus(ApprovalStatus approvalStatus) {
-		this.approvalStatus = approvalStatus;
-	}
-
 	public List<Requirement> getClientRequirement() {
 		return clientRequirement;
 	}
@@ -160,12 +152,44 @@ public class Application {
 		this.officialRemarks = officialRemarks;
 	}
 
-	public Company getCompany() {
-		return company;
+	public Long getCompanyId() {
+		return companyId;
 	}
 
-	public void setCompany(Company company) {
-		this.company = company;
+	public void setCompanyId(Long companyId) {
+		this.companyId = companyId;
+	}
+
+	public Long getVendorId() {
+		return vendorId;
+	}
+
+	public void setVendorId(Long vendorId) {
+		this.vendorId = vendorId;
+	}
+
+	public String getCurrentStatus() {
+		return currentStatus;
+	}
+
+	public void setCurrentStatus(String currentStatus) {
+		this.currentStatus = currentStatus;
+	}
+
+	public String getApprovalStatus() {
+		return approvalStatus;
+	}
+
+	public void setApprovalStatus(String approvalStatus) {
+		this.approvalStatus = approvalStatus;
+	}
+
+	public Date getModifiedDate() {
+		return modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
 	}
 
 }

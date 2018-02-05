@@ -12,20 +12,20 @@ public class Employee {
 
 	@Id
 	private Long employeeId;
-	
+
 	private Long companyId;
-	
-	@OneToOne
-	@JoinColumn(name = "userName")
-	private UserLogin userLogin;
-	
+
+	private String userName;
+
+	private String password;
+
 	@Enumerated(EnumType.STRING)
 	private LogInType logInType = LogInType.EMPLOYEE;
-	
+
 	@OneToOne
 	@JoinColumn(name = "role")
 	private Role role;
-	
+
 	@OneToOne
 	@JoinColumn(name = "departmentName")
 	private Department department;
@@ -36,14 +36,6 @@ public class Employee {
 
 	public void setEmployeeId(Long employeeId) {
 		this.employeeId = employeeId;
-	}
-
-	public UserLogin getUserLogin() {
-		return userLogin;
-	}
-
-	public void setUserLogin(UserLogin userLogin) {
-		this.userLogin = userLogin;
 	}
 
 	public Role getRole() {
@@ -73,6 +65,21 @@ public class Employee {
 	public LogInType getLogInType() {
 		return logInType;
 	}
-	
-	
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 }

@@ -4,15 +4,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Company {
@@ -25,16 +22,9 @@ public class Company {
 
 	private String companyName;
 
-	@OneToOne
-	@JoinColumn(name = "userName")
-	private UserLogin userLogin;
-	
-	@Enumerated(EnumType.STRING)
-	private LogInType logInType = LogInType.COMPANY;
-
 	private String companyAddress;
 
-	@Column(nullable=false, unique=true)
+	@Column(nullable = false, unique = true)
 	private String companyEmail;
 
 	private String contactNumber;
@@ -44,32 +34,27 @@ public class Company {
 	private Long turnover;
 
 	@ManyToMany
-	@JoinTable(name="COMPANY_VENDOR",
-	joinColumns={@JoinColumn(name="companyEmail")},
-	inverseJoinColumns={@JoinColumn(name="vendorEmail")})
+	@JoinTable(name = "COMPANY_VENDOR", joinColumns = { @JoinColumn(name = "companyEmail") }, inverseJoinColumns = {
+			@JoinColumn(name = "vendorEmail") })
 	private List<Company> vendors;
 
-	@ManyToMany(mappedBy="vendors")
+	@ManyToMany(mappedBy = "vendors")
 	private List<Company> clients;
-	
+
 	@OneToMany
-	@JoinColumn(name="applicationId")
+	@JoinColumn(name = "applicationId")
 	private List<Application> applications;
 
 	@OneToMany
-	@JoinColumn(name="role")
+	@JoinColumn(name = "role")
 	private List<Role> roles;
 
 	@OneToMany
-	@JoinColumn(name="departmentName")
+	@JoinColumn(name = "departmentName")
 	private List<Department> department;
 
 	@OneToMany
-	@JoinColumn(name="status")
-	private List<ApprovalStatus> approvalStatus;
-	
-	@OneToMany
-	@JoinColumn(name="employeeId")
+	@JoinColumn(name = "employeeId")
 	private List<Employee> employees;
 
 	public String getCompanyAddress() {
@@ -107,7 +92,7 @@ public class Company {
 	public List<Company> getVendors() {
 		return vendors;
 	}
- 
+
 	public void setVendors(List<Company> vendors) {
 		this.vendors = vendors;
 	}
@@ -126,14 +111,6 @@ public class Company {
 
 	public void setApplications(List<Application> applications) {
 		this.applications = applications;
-	}
-
-	public UserLogin getUserLogin() {
-		return userLogin;
-	}
-
-	public void setUserLogin(UserLogin userLogin) {
-		this.userLogin = userLogin;
 	}
 
 	public List<Role> getRoles() {
@@ -182,9 +159,5 @@ public class Company {
 
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
-	}
-
-	public LogInType getLogInType() {
-		return logInType;
 	}
 }
