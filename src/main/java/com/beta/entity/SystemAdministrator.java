@@ -20,7 +20,7 @@ public class SystemAdministrator {
 	private UserLogin userLogin;
 	
 	@Enumerated(EnumType.STRING)
-	private final LogInType logInType = LogInType.SYSTEM_ADMINISTRATOR;
+	private LogInType logInType = LogInType.SYSTEM_ADMINISTRATOR;
 
 	public UserLogin getUserLogin() {
 		return userLogin;
