@@ -30,7 +30,7 @@ public class Company {
 	private UserLogin userLogin;
 	
 	@Enumerated(EnumType.STRING)
-	private final LogInType logInType = LogInType.COMPANY;
+	private LogInType logInType = LogInType.COMPANY;
 
 	private String companyAddress;
 
@@ -51,8 +51,9 @@ public class Company {
 
 	@ManyToMany(mappedBy="vendors")
 	private List<Company> clients;
-
-	@OneToMany(mappedBy="applicationId")
+	
+	@OneToMany
+	@JoinColumn(name="applicationId")
 	private List<Application> applications;
 
 	@OneToMany
