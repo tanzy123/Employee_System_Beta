@@ -26,5 +26,11 @@ public class Role {
 	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
 	}
+
+	@Override
+	public String toString() {
+		return "Role [roleId=" + roleId + ", role=" + role + "]";
+	}
+	
 	
 }
