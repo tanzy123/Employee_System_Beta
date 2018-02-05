@@ -167,5 +167,10 @@ public class Application {
 	public void setCompany(Company company) {
 		this.company = company;
 	}
+	
+	public void test()
+	{
+		System.out.println("Testing testing");
+	}
 
 }
