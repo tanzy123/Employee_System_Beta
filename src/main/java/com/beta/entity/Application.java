@@ -168,9 +168,5 @@ public class Application {
 		this.company = company;
 	}
 	
-	public void test()
-	{
-		System.out.println("Testing testing");
-	}
 
 }
