@@ -3,14 +3,18 @@ package com.beta.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class ApplicationResult {
 	
 	@Id
 	@GeneratedValue
-	private Long applicationId;
+	private Long applicationResultId;
 
+	@OneToOne
+	@JoinColumn(name = "applicationId")
 	private Application application;
 	
 	private String remarks;
@@ -32,10 +36,10 @@ public class ApplicationResult {
 	}
 
 	public Long getApplicationId() {
-		return applicationId;
+		return applicationResultId;
 	}
 
 	public void setApplicationId(Long applicationId) {
-		this.applicationId = applicationId;
+		this.applicationResultId = applicationId;
 	}
 }

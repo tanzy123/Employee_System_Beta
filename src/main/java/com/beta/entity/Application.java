@@ -5,9 +5,14 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Application {
@@ -15,30 +20,42 @@ public class Application {
 	@Id
 	private Long applicationId;
 	
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Company company;
 
-	private List<String> vendorReferences;
+	@OneToMany
+	@JoinColumn(name="referenceId")
+	private List<VendorReference> vendorReferences;
 
 	@ManyToOne
+	@JoinColumn(name="categoryName")
 	private Category category;
 
 	private String POC;
 
 	private String remarks;
 
+	@OneToOne
+	@JoinColumn(name="status")
 	private ApprovalStatus approvalStatus;
 
+	@Temporal(TemporalType.DATE)
 	private Date applicationDate;
 
 	private Period vendorPeriod;
 
-	@OneToOne
-	private Official official;
+	private String officialRemarks;
 
+	@OneToMany
+	@JoinColumn(name="documentId")
 	private List<Documents> supportingDocument;
 
+	@OneToMany
+	@JoinColumn(name="requirementId")
 	private List<Requirement> clientRequirement;
 
+	@OneToMany
+	@JoinColumn(name="employeeId")
 	private List<Employee> vetter;
 
 	// start date
@@ -71,14 +88,6 @@ public class Application {
 		this.remarks = remarks;
 	}
 
-	public List<String> getVendorReferences() {
-		return vendorReferences;
-	}
-
-	public void setVendorReferences(List<String> vendorReferences) {
-		this.vendorReferences = vendorReferences;
-	}
-
 	public Date getApplicationDate() {
 		return applicationDate;
 	}
@@ -101,14 +110,6 @@ public class Application {
 
 	public void setVendorPeriod(Period vendorPeriod) {
 		this.vendorPeriod = vendorPeriod;
-	}
-
-	public Official getOfficial() {
-		return official;
-	}
-
-	public void setOfficial(Official official) {
-		this.official = official;
 	}
 
 	public List<Documents> getSupportingDocument() {
@@ -135,20 +136,36 @@ public class Application {
 		this.approvalStatus = approvalStatus;
 	}
 
-	public Company getCompany() {
-		return company;
-	}
-
-	public void setCompany(Company company) {
-		this.company = company;
-	}
-
 	public List<Requirement> getClientRequirement() {
 		return clientRequirement;
 	}
 
 	public void setClientRequirement(List<Requirement> clientRequirement) {
 		this.clientRequirement = clientRequirement;
+	}
+
+	public List<VendorReference> getVendorReferences() {
+		return vendorReferences;
+	}
+
+	public void setVendorReferences(List<VendorReference> vendorReferences) {
+		this.vendorReferences = vendorReferences;
+	}
+
+	public String getOfficialRemarks() {
+		return officialRemarks;
+	}
+
+	public void setOfficialRemarks(String officialRemarks) {
+		this.officialRemarks = officialRemarks;
+	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
 	}
 
 }

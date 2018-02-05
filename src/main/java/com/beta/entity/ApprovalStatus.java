@@ -7,6 +7,8 @@ import javax.persistence.Id;
 public class ApprovalStatus {
 	
 	@Id
+	private Long statusId;
+	
 	private String status;
 
 	public String getStatus() {
@@ -15,5 +17,13 @@ public class ApprovalStatus {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Long getApprovalId() {
+		return statusId;
+	}
+
+	public void setApprovalId(Long approvalId) {
+		this.statusId = approvalId;
 	}
 }

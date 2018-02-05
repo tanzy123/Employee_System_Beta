@@ -2,68 +2,74 @@ package com.beta.entity;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Company {
-	
+
 	@Id
 	@GeneratedValue
-	private Long companyId;
-	
-	private Long registerationNumber;
-	
-	private UserLogin userLogin;
+	private Long companyPrimaryId;
+
+	private Long companyReferenceNumber;
 
 	private String companyName;
 
-	private String companyAddress;
+	@OneToOne
+	@JoinColumn(name = "userName")
+	private UserLogin userLogin;
 	
-	private String email;
+	@Enumerated(EnumType.STRING)
+	private final LogInType logInType = LogInType.COMPANY;
+
+	private String companyAddress;
+
+	@Column(nullable=false, unique=true)
+	private String companyEmail;
 
 	private String contactNumber;
-	
+
 	private String companyWebsite;
-	
+
 	private Long turnover;
-	
-	@OneToMany
+
+	@ManyToMany
+	@JoinTable(name="COMPANY_VENDOR",
+	joinColumns={@JoinColumn(name="companyEmail")},
+	inverseJoinColumns={@JoinColumn(name="vendorEmail")})
 	private List<Company> vendors;
-	
-	@OneToMany
+
+	@ManyToMany(mappedBy="vendors")
 	private List<Company> clients;
+
+	@OneToMany(mappedBy="applicationId")
+	private List<Application> applications;
+
+	@OneToMany
+	@JoinColumn(name="role")
+	private List<Role> roles;
+
+	@OneToMany
+	@JoinColumn(name="departmentName")
+	private List<Department> department;
+
+	@OneToMany
+	@JoinColumn(name="status")
+	private List<ApprovalStatus> approvalStatus;
 	
 	@OneToMany
-	private List<Application> applications;
-	
-	@ManyToMany
-	private List<Role> roles;
-	
-	@ManyToMany
-	private List<Department> department;
-	
-	@ManyToMany
-	private List<ApprovalStatus> approvalStatus;
-
-	public Long getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(Long companyId) {
-		this.companyId = companyId;
-	}
-
-	public String getCompanyName() {
-		return companyName;
-	}
-
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
+	@JoinColumn(name="employeeId")
+	private List<Employee> employees;
 
 	public String getCompanyAddress() {
 		return companyAddress;
@@ -71,14 +77,6 @@ public class Company {
 
 	public void setCompanyAddress(String companyAddress) {
 		this.companyAddress = companyAddress;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getContactNumber() {
@@ -108,7 +106,7 @@ public class Company {
 	public List<Company> getVendors() {
 		return vendors;
 	}
-
+ 
 	public void setVendors(List<Company> vendors) {
 		this.vendors = vendors;
 	}
@@ -153,11 +151,39 @@ public class Company {
 		this.department = department;
 	}
 
-	public Long getRegisterationNumber() {
-		return registerationNumber;
+	public Long getCompanyReferenceNumber() {
+		return companyReferenceNumber;
 	}
 
-	public void setRegisterationNumber(Long registerationNumber) {
-		this.registerationNumber = registerationNumber;
+	public void setCompanyReferenceNumber(Long companyReferenceNumber) {
+		this.companyReferenceNumber = companyReferenceNumber;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public String getCompanyEmail() {
+		return companyEmail;
+	}
+
+	public void setCompanyEmail(String companyEmail) {
+		this.companyEmail = companyEmail;
+	}
+
+	public List<Employee> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(List<Employee> employees) {
+		this.employees = employees;
+	}
+
+	public LogInType getLogInType() {
+		return logInType;
 	}
 }

@@ -1,7 +1,11 @@
 package com.beta.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Employee {
@@ -11,10 +15,19 @@ public class Employee {
 	
 	private Long companyId;
 	
+	@OneToOne
+	@JoinColumn(name = "userName")
 	private UserLogin userLogin;
 	
+	@Enumerated(EnumType.STRING)
+	private final LogInType logInType = LogInType.EMPLOYEE;
+	
+	@OneToOne
+	@JoinColumn(name = "role")
 	private Role role;
 	
+	@OneToOne
+	@JoinColumn(name = "departmentName")
 	private Department department;
 
 	public Long getEmployeeId() {
@@ -55,6 +68,10 @@ public class Employee {
 
 	public void setCompanyId(Long companyId) {
 		this.companyId = companyId;
+	}
+
+	public LogInType getLogInType() {
+		return logInType;
 	}
 	
 	

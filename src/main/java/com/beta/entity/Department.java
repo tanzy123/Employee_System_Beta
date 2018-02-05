@@ -7,6 +7,8 @@ import javax.persistence.Id;
 public class Department {
 
 	@Id
+	private Long departmentId;
+	
 	private String departmentName;
 
 	public String getDepartmentName() {
@@ -15,5 +17,13 @@ public class Department {
 
 	public void setDepartmentName(String departmentName) {
 		this.departmentName = departmentName;
+	}
+
+	public Long getDepartmentId() {
+		return departmentId;
+	}
+
+	public void setDepartmentId(Long departmentId) {
+		this.departmentId = departmentId;
 	}
 }
