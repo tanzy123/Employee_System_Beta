@@ -24,10 +24,14 @@ public class TestDocumentsService {
 	@Rollback //(value=false)
 	public void testDocCreation(){
 		Documents doc = new Documents();
-		doc.setDocumentId(10L);
-		Byte[] documents= {1,2,20};
-		doc.setDocuments(documents);
+		doc.setDocumentId((long)10);
+	//	Byte[] documents= {1,2,20};
+		String example = "This is an example";
+	//    byte[] bytes = example.getBytes();
+	//	doc.setDocuments(bytes);
+		System.out.println("AAA");
 		docService.saveOrUpdate(doc);
+		System.out.println("BBB");
 		
 	//	doc = (Documents) docService.find((long)10);
 	//	assertEquals(10L, doc.getDocumentId());

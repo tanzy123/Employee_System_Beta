@@ -13,8 +13,9 @@ import com.beta.dao.RoleDao;
 import com.beta.entity.Documents;
 import com.beta.entity.Role;
 
-@Repository("docDAO")
+@Repository("docDao")
 public class DocDaoImpl  extends JpaDAOImpl<Long, Documents> implements DocDao{
+	
 	@Autowired
     EntityManagerFactory entityManagerFactory;
 	
@@ -31,8 +32,6 @@ public class DocDaoImpl  extends JpaDAOImpl<Long, Documents> implements DocDao{
         super.setEntityManagerFactory(entityManagerFactory);
         super.setEntityManager(entityManager);
     }
-
-    
 
 	public EntityManagerFactory getEntityManagerFactory() {
 		return entityManagerFactory;

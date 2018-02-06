@@ -10,12 +10,9 @@ import org.springframework.transaction.annotation.Propagation;
 
 import com.beta.dao.DocDao;
 import com.beta.dao.JPADAO;
-import com.beta.dao.RoleDao;
 import com.beta.entity.Documents;
-import com.beta.entity.Role;
 import com.beta.exception.VendorMgmtException;
 import com.beta.services.DocService;
-import com.beta.services.RoleService;
 
 @Service("docService")
 @org.springframework.transaction.annotation.Transactional(propagation= Propagation.REQUIRED, rollbackFor=VendorMgmtException.class)

@@ -2,7 +2,7 @@ package com.beta.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
+	
 @Entity
 public class Documents {
 	
@@ -10,11 +10,11 @@ public class Documents {
 	private Long documentId;
 	
 	private Byte[] documents;
-
+	
 	public Byte[] getDocuments() {
 		return documents;
 	}
-
+	
 	public void setDocuments(Byte[] documents) {
 		this.documents = documents;
 	}
