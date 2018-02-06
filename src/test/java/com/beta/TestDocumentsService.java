@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.beta.entity.Documents;
-import com.beta.services.DocService;
+import com.beta.services.DocumentsService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:appContext.xml"})
@@ -17,7 +17,7 @@ import com.beta.services.DocService;
 public class TestDocumentsService {
 	
 	@Autowired
-	DocService docService;
+	DocumentsService docService;
 	
 	@SuppressWarnings("unchecked") //create
 	@Test
