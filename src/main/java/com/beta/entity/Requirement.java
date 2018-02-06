@@ -1,5 +1,7 @@
 package com.beta.entity;
 
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,12 +15,24 @@ public class Requirement {
 	@GeneratedValue
 	private Long requirementId;
 	
-	private Long employeeId;
+	private String userName;
 	
 	private String requirement;
 	
 	@Enumerated(EnumType.STRING)
 	private ApprovalStatus status;
+	
+	Date statusUpdateDate;
+	
+
+	
+	public Date getStatusUpdateDate() {
+		return statusUpdateDate;
+	}
+
+	public void setStatusUpdateDate(Date statusUpdateDate) {
+		this.statusUpdateDate = statusUpdateDate;
+	}
 
 	public String getRequirement() {
 		return requirement;
@@ -36,12 +50,13 @@ public class Requirement {
 		this.requirementId = requirementId;
 	}
 
-	public Long getEmployeeId() {
-		return employeeId;
+
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setEmployeeId(Long employeeId) {
-		this.employeeId = employeeId;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public ApprovalStatus getStatus() {
