@@ -4,6 +4,7 @@ import java.time.Period;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -53,11 +54,9 @@ public class Application {
 	private String officialRemarks;
 
 	@OneToMany
-	@JoinColumn(name="documentId")
 	private List<Documents> supportingDocument;
 
-	@OneToMany
-	@JoinColumn(name="requirementId")
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<Requirement> vetterRequirement;
 
 	public Category getCategory() {
@@ -116,11 +115,11 @@ public class Application {
 		this.supportingDocument = supportingDocument;
 	}
 
-	public List<Requirement> getClientRequirement() {
+	public List<Requirement> getVettorRequirement() {
 		return vetterRequirement;
 	}
 
-	public void setClientRequirement(List<Requirement> clientRequirement) {
+	public void setVettorRequirement(List<Requirement> clientRequirement) {
 		this.vetterRequirement = clientRequirement;
 	}
 

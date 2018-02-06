@@ -8,16 +8,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Employee {
+public class Employee extends UserAccount {
 
 	@Id
 	private Long employeeId;
 
 	private Long companyId;
-
-	private String userName;
-
-	private String password;
 
 	@Enumerated(EnumType.STRING)
 	private LogInType logInType = LogInType.EMPLOYEE;
@@ -64,22 +60,6 @@ public class Employee {
 
 	public LogInType getLogInType() {
 		return logInType;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 }

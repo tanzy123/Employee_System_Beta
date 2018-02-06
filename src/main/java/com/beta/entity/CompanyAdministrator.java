@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
-public class CompanyAdministrator {
+public class CompanyAdministrator extends UserAccount{
 
 	@Id
 	@GeneratedValue
@@ -18,10 +18,6 @@ public class CompanyAdministrator {
 	@OneToOne
 	@JoinColumn(name = "companyEmail")
 	private Company company;
-
-	private String userName;
-
-	private String password;
 
 	@Enumerated(EnumType.STRING)
 	private LogInType logInType = LogInType.COMPANY_ADMINISTRATOR;
@@ -36,22 +32,6 @@ public class CompanyAdministrator {
 
 	public LogInType getLogInType() {
 		return logInType;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 }

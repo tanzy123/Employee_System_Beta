@@ -17,7 +17,6 @@ import com.beta.services.CategoryService;
 @Service("CategoryService")
 
 @org.springframework.transaction.annotation.Transactional(propagation= Propagation.REQUIRED, rollbackFor=VendorMgmtException.class)
-
 public class CategoryServiceImpl extends BaseServiceImpl<Long, Category> implements CategoryService{
 
 	
