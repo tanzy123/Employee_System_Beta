@@ -93,4 +93,24 @@ public class VendorReference {
 		this.endDate = endDate;
 	}
 
+	@Override
+	public String toString() {
+		return "VendorReference [referenceId=" + referenceId + ", companyName="
+				+ companyName + ", companyAddress=" + companyAddress
+				+ ", contactPerson=" + contactPerson + ", phoneNumber="
+				+ phoneNumber + ", emailAddress=" + emailAddress
+				+ ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", getReferenceId()=" + getReferenceId()
+				+ ", getCompanyName()=" + getCompanyName()
+				+ ", getCompanyAddress()=" + getCompanyAddress()
+				+ ", getContactPerson()=" + getContactPerson()
+				+ ", getPhoneNumber()=" + getPhoneNumber()
+				+ ", getEmailAddress()=" + getEmailAddress()
+				+ ", getStartDate()=" + getStartDate() + ", getEndDate()="
+				+ getEndDate() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + ", toString()=" + super.toString() + "]";
+	}
+	
+	
+
 }
