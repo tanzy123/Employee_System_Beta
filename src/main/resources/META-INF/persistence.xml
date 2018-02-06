@@ -9,8 +9,6 @@ Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
 </description>
 <!-- <provider>org.hibernate.ejb.HibernatePersistence</provider> -->
 <class>com.beta.entity.Application</class>
-<class>com.beta.entity.ApplicationResult</class>
-<class>com.beta.entity.ApprovalStatus</class>
 <class>com.beta.entity.Category</class>
 <class>com.beta.entity.Company</class>
 <class>com.beta.entity.CompanyAdministrator</class>
@@ -19,8 +17,6 @@ Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
 <class>com.beta.entity.Employee</class>
 <class>com.beta.entity.Requirement</class>
 <class>com.beta.entity.Role</class>
-<class>com.beta.entity.SystemAdministrator</class>
-<class>com.beta.entity.UserLogin</class>
 <class>com.beta.entity.VendorReference</class>
 	<properties>
 	
