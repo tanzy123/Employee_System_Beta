@@ -1,12 +1,14 @@
 package com.beta.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Department {
 
 	@Id
+	@GeneratedValue
 	private Long departmentId;
 	
 	private String departmentName;
