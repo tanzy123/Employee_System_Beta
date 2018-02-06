@@ -4,7 +4,9 @@ import java.time.Period;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,7 +18,11 @@ import javax.persistence.TemporalType;
 public class Application {
 	
 	@Id
+	@GeneratedValue
 	private Long applicationId;
+	
+	@Column(nullable = false, unique = true)
+	private String applicationRef;
 
 	@OneToMany
 	private List<VendorReference> vendorReferences;
@@ -52,17 +58,7 @@ public class Application {
 
 	@OneToMany
 	@JoinColumn(name="requirementId")
-	private List<Requirement> clientRequirement;
-
-	@OneToMany
-	@JoinColumn(name="employeeId")
-	private List<Employee> vetter;
-
-	// start date
-	// application date
-	// status in open ended enum
-	// All application request should have a type so that we can send it to the
-	// right approver
+	private List<Requirement> vetterRequirement;
 
 	public Category getCategory() {
 		return category;
@@ -120,20 +116,12 @@ public class Application {
 		this.supportingDocument = supportingDocument;
 	}
 
-	public List<Employee> getVetter() {
-		return vetter;
-	}
-
-	public void setVetter(List<Employee> vetter) {
-		this.vetter = vetter;
-	}
-
 	public List<Requirement> getClientRequirement() {
-		return clientRequirement;
+		return vetterRequirement;
 	}
 
 	public void setClientRequirement(List<Requirement> clientRequirement) {
-		this.clientRequirement = clientRequirement;
+		this.vetterRequirement = clientRequirement;
 	}
 
 	public List<VendorReference> getVendorReferences() {
@@ -190,6 +178,14 @@ public class Application {
 
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
+	}
+
+	public String getApplicationRef() {
+		return applicationRef;
+	}
+
+	public void setApplicationRef(String applicationRef) {
+		this.applicationRef = applicationRef;
 	}
 	
 

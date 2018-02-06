@@ -42,7 +42,7 @@ public class Company {
 	private List<Company> clients;
 
 	@OneToMany
-	@JoinColumn(name = "applicationId")
+	@JoinColumn(name = "applicationRef")
 	private List<Application> applications;
 
 	@OneToMany
