@@ -8,31 +8,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 
-import com.beta.dao.DocDao;
+import com.beta.dao.CategoryDao;
 import com.beta.dao.JPADAO;
-import com.beta.dao.RoleDao;
-import com.beta.entity.Documents;
-import com.beta.entity.Role;
+import com.beta.entity.Category;
 import com.beta.exception.VendorMgmtException;
-import com.beta.services.DocService;
-import com.beta.services.RoleService;
+import com.beta.services.CategoryService;
 
-@Service("docService")
+@Service("CategoryService")
+
 @org.springframework.transaction.annotation.Transactional(propagation= Propagation.REQUIRED, rollbackFor=VendorMgmtException.class)
-public class DocServiceImpl extends BaseServiceImpl<Long, Documents> implements DocService{
-	
-//	ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-//	Validator validator = factory.getValidator();
+
+public class CategoryServiceImpl extends BaseServiceImpl<Long, Category> implements CategoryService{
+
 	
 	@Autowired
-    protected DocDao dao;
-
+	protected CategoryDao dao;
+	
 	@PostConstruct
-    public void init() throws Exception {
-	 super.setDAO( (JPADAO)dao);
-    }
-    
-    @PreDestroy
+	public void init() throws Exception
+	{
+		super.setDAO((JPADAO)dao);
+	}
+	
+	@PreDestroy
     public void destroy() {
     }
     
@@ -40,14 +38,6 @@ public class DocServiceImpl extends BaseServiceImpl<Long, Documents> implements 
     public void setEntityManagerOnDao(EntityManager entityManager){
     	dao.setEntityManager(entityManager);
     }
-/*
-	@Override
-	public void saveOrUpdate(Role role) throws VendorMgmtException {
-		// TODO Auto-generated method stub
-		dao.persist(role); 
-	}*/
-	
-	
 
-	
+
 }
