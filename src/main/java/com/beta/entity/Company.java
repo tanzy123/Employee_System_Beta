@@ -62,6 +62,10 @@ public class Company implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name="companyReferenceNumber", referencedColumnName="companyReferenceNumber")
 	private List<Category> category;
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name="companyReferenceNumber", referencedColumnName="companyReferenceNumber")
+	private List<CompanyAdministrator> companyAdministrator;
 
 	public Company(String companyReferenceNumber, String companyName, String companyAddress, String companyEmail,
 			String contactNumber, String companyWebsite, Long turnover,
@@ -206,4 +210,16 @@ public class Company implements Serializable{
 	public void setCategory(List<Category> category) {
 		this.category = category;
 	}
+
+
+	public List<CompanyAdministrator> getCompanyAdministrator() {
+		return companyAdministrator;
+	}
+
+
+	public void setCompanyAdministrator(List<CompanyAdministrator> companyAdministrator) {
+		this.companyAdministrator = companyAdministrator;
+	}
+	
+	
 }

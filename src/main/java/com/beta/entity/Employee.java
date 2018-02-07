@@ -9,7 +9,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class Employee extends UserAccount {
 
-	private Long employeeId;
+	private String employeeId;
 	
 	private String employeeEmail;
 	
@@ -21,18 +21,33 @@ public class Employee extends UserAccount {
 	private LogInType logInType = LogInType.EMPLOYEE;
 
 	@OneToOne
-	@JoinColumn(name = "role_id")
+	@JoinColumn(name="role", referencedColumnName="role")
 	private Role role;
 
 	@OneToOne
-	@JoinColumn(name = "department_id")
+	@JoinColumn(name="department", referencedColumnName="departmentName")
 	private Department department;
 
-	public Long getEmployeeId() {
+	
+	
+	public Employee(String userName, String password, String employeeId, String employeeEmail, String contactNumber,
+			String companyReferenceNumber, Role role, Department department) {
+		super(userName, password);
+		this.employeeId = employeeId;
+		this.employeeEmail = employeeEmail;
+		this.contactNumber = contactNumber;
+		this.companyReferenceNumber = companyReferenceNumber;
+		this.role = role;
+		this.department = department;
+	}
+
+	public Employee() {}
+
+	public String getEmployeeId() {
 		return employeeId;
 	}
 
-	public void setEmployeeId(Long employeeId) {
+	public void setEmployeeId(String employeeId) {
 		this.employeeId = employeeId;
 	}
 

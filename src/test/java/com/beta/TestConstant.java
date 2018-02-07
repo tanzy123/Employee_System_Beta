@@ -12,6 +12,7 @@ import com.beta.entity.Category;
 import com.beta.entity.Company;
 import com.beta.entity.Department;
 import com.beta.entity.Documents;
+import com.beta.entity.Employee;
 import com.beta.entity.Requirement;
 import com.beta.entity.Role;
 import com.beta.entity.VendorReference;
@@ -55,6 +56,8 @@ public class TestConstant {
 	public static final List<Application> SAMPLE_APPLICATION_LIST;
 	
 	public static final Company SAMPLE_COMPANY;
+	
+	public static final Employee SAMPLE_EMPLOYEE;
 	
 	static {
 		List<Role> roleList = new ArrayList<>();
@@ -121,6 +124,10 @@ public class TestConstant {
 				"India", "cognizant@cognizant.com", "+6122343243", "www.cognizant.com", 
 				25000000L, SAMPLE_APPLICATION_LIST, 
 				SAMPLE_ROLE_LIST, SAMPLE_DEPARTMENT_LIST, SAMPLE_CATEGORY_LIST);
+		
+		SAMPLE_EMPLOYEE = new Employee("Employee123", "123123", 
+				"645686", "hello@cognizant.com", "+54243325", 
+				"1231231", SAMPLE_ROLE1, SAMPLE_DEPARTMENT1);
 		
 	}
 }

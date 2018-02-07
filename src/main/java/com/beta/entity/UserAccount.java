@@ -16,6 +16,15 @@ public class UserAccount {
 	private String userName;
 
 	private String password;
+	
+	private Boolean isValidated;
+
+	public UserAccount(String userName, String password) {
+		this.userName = userName;
+		this.password = password;
+	}
+	
+	public UserAccount() {}
 
 	public String getUserName() {
 		return userName;
@@ -47,5 +56,13 @@ public class UserAccount {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public Boolean getIsValidated() {
+		return isValidated;
+	}
+
+	public void setIsValidated(Boolean isValidated) {
+		this.isValidated = isValidated;
 	}
 }

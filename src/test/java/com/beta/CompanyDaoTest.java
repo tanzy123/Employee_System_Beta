@@ -1,6 +1,6 @@
 package com.beta;
 
-import static com.beta.TestConstant.SAMPLE_COMPANY;
+import static com.beta.TestConstant.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
