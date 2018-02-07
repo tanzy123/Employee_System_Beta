@@ -3,7 +3,11 @@ package com.beta.entity;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -11,10 +15,15 @@ import javax.persistence.TemporalType;
 public class VendorReference {
 	
 	@Id
+	@GeneratedValue
 	private Long referenceId;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "application_id")
+    private Application application;
 
 	private String companyName;
-	
+
 	private String companyAddress;
 	
 	private String contactPerson;
@@ -29,6 +38,24 @@ public class VendorReference {
 	@Temporal(TemporalType.DATE)
 	private Date endDate;
 	
+	public VendorReference(String companyName, String companyAddress, String contactPerson, String phoneNumber,
+			String emailAddress, Date startDate, Date endDate) {
+		super();
+		this.companyName = companyName;
+		this.companyAddress = companyAddress;
+		this.contactPerson = contactPerson;
+		this.phoneNumber = phoneNumber;
+		this.emailAddress = emailAddress;
+		this.startDate = startDate;
+		this.endDate = endDate;
+	}
+
+	
+	public VendorReference() {
+		super();
+	}
+
+
 	public Long getReferenceId() {
 		return referenceId;
 	}

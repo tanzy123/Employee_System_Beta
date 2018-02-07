@@ -12,6 +12,18 @@ public class Department {
 	private Long departmentId;
 	
 	private String departmentName;
+	
+	private String companyReferenceNumber;
+
+	
+	public Department() {
+		super();
+	}
+
+	public Department(String departmentName) {
+		super();
+		this.departmentName = departmentName;
+	}
 
 	public String getDepartmentName() {
 		return departmentName;
@@ -27,5 +39,13 @@ public class Department {
 
 	public void setDepartmentId(Long departmentId) {
 		this.departmentId = departmentId;
+	}
+
+	public String getCompanyReferenceNumber() {
+		return companyReferenceNumber;
+	}
+
+	public void setCompanyReferenceNumber(String companyReferenceNumber) {
+		this.companyReferenceNumber = companyReferenceNumber;
 	}
 }

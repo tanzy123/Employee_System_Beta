@@ -26,7 +26,7 @@ public class TestDocumentsService {
 		Documents doc = new Documents();
 		doc.setDocumentId(10L);
 		Byte[] documents= {1,2,20};
-		doc.setDocuments(documents);
+//		doc.setDocuments(documents);
 		docService.saveOrUpdate(doc);
 		
 	//	doc = (Documents) docService.find((long)10);

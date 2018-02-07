@@ -1,21 +1,25 @@
 package com.beta.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Documents {
 	
 	@Id
+	@GeneratedValue
 	private Long documentId;
 	
-	private Byte[] documents;
+	private String applicationRef;
+	
+	private byte[] documents;
 
-	public Byte[] getDocuments() {
+	public byte[] getDocuments() {
 		return documents;
 	}
 
-	public void setDocuments(Byte[] documents) {
+	public void setDocuments(byte[] documents) {
 		this.documents = documents;
 	}
 
@@ -25,6 +29,23 @@ public class Documents {
 
 	public void setDocumentId(Long documentId) {
 		this.documentId = documentId;
+	}
+
+	public Documents(byte[] bs) {
+		super();
+		this.documents = bs;
+	}
+
+	public Documents() {
+		super();
+	}
+
+	public String getApplicationRef() {
+		return applicationRef;
+	}
+
+	public void setApplicationRef(String applicationRef) {
+		this.applicationRef = applicationRef;
 	}
 	
 	

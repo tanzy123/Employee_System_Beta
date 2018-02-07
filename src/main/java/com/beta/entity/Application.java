@@ -1,12 +1,14 @@
 package com.beta.entity;
 
-import java.time.Period;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -16,48 +18,74 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Application {
-	
+public class Application implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7471758161505829102L;
+
 	@Id
 	@GeneratedValue
 	private Long applicationId;
-	
+
 	@Column(nullable = false, unique = true)
 	private String applicationRef;
 
-	@OneToMany
+	@OneToMany(mappedBy = "application", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<VendorReference> vendorReferences;
 
 	@ManyToOne
-	@JoinColumn(name="categoryName")
+	@JoinColumn(name = "categoryName", referencedColumnName="categoryName")
 	private Category category;
+
+	private String companyReferenceNumber;
+
+	private String vendorReferenceNumber;
 
 	private String POC;
 
 	private String remarks;
-	
-	private Long companyId;
-	
-	private Long vendorId;
-	
-	private String currentStatus;
 
-	private String approvalStatus;
+	@Enumerated(EnumType.STRING)
+	private ApplicationStatus applicationStatus;
 
 	@Temporal(TemporalType.DATE)
 	private Date applicationDate;
 
-	private Period vendorPeriod;
-	
+	private Long vendorPeriod;
+
+	@Temporal(TemporalType.DATE)
 	private Date modifiedDate;
 
-	private String officialRemarks;
-
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name="applicationRef", referencedColumnName="applicationRef")
 	private List<Documents> supportingDocument;
 
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name="applicationRef", referencedColumnName="applicationRef")
 	private List<Requirement> vetterRequirement;
+
+	public Application(String applicationRef, List<VendorReference> vendorReferences, Category category, String vendorReferenceNumber,
+			String pOC, String remarks, ApplicationStatus applicationStatus, Date applicationDate, Long vendorPeriod,
+			List<Documents> supportingDocument, List<Requirement> vetterRequirement) {
+		super();
+		this.applicationRef = applicationRef;
+		this.vendorReferences = vendorReferences;
+		this.category = category;
+		this.vendorReferenceNumber = vendorReferenceNumber;
+		POC = pOC;
+		this.remarks = remarks;
+		this.applicationStatus = applicationStatus;
+		this.applicationDate = applicationDate;
+		this.vendorPeriod = vendorPeriod;
+		this.supportingDocument = supportingDocument;
+		this.vetterRequirement = vetterRequirement;
+	}
+
+	public Application() {
+		super();
+	}
 
 	public Category getCategory() {
 		return category;
@@ -99,11 +127,11 @@ public class Application {
 		this.applicationId = applicationId;
 	}
 
-	public Period getVendorPeriod() {
+	public Long getVendorPeriod() {
 		return vendorPeriod;
 	}
 
-	public void setVendorPeriod(Period vendorPeriod) {
+	public void setVendorPeriod(Long vendorPeriod) {
 		this.vendorPeriod = vendorPeriod;
 	}
 
@@ -131,46 +159,6 @@ public class Application {
 		this.vendorReferences = vendorReferences;
 	}
 
-	public String getOfficialRemarks() {
-		return officialRemarks;
-	}
-
-	public void setOfficialRemarks(String officialRemarks) {
-		this.officialRemarks = officialRemarks;
-	}
-
-	public Long getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(Long companyId) {
-		this.companyId = companyId;
-	}
-
-	public Long getVendorId() {
-		return vendorId;
-	}
-
-	public void setVendorId(Long vendorId) {
-		this.vendorId = vendorId;
-	}
-
-	public String getCurrentStatus() {
-		return currentStatus;
-	}
-
-	public void setCurrentStatus(String currentStatus) {
-		this.currentStatus = currentStatus;
-	}
-
-	public String getApprovalStatus() {
-		return approvalStatus;
-	}
-
-	public void setApprovalStatus(String approvalStatus) {
-		this.approvalStatus = approvalStatus;
-	}
-
 	public Date getModifiedDate() {
 		return modifiedDate;
 	}
@@ -186,6 +174,29 @@ public class Application {
 	public void setApplicationRef(String applicationRef) {
 		this.applicationRef = applicationRef;
 	}
-	
+
+	public ApplicationStatus getApplicationStatus() {
+		return applicationStatus;
+	}
+
+	public void setApplicationStatus(ApplicationStatus applicationStatus) {
+		this.applicationStatus = applicationStatus;
+	}
+
+	public String getCompanyReferenceNumber() {
+		return companyReferenceNumber;
+	}
+
+	public void setCompanyReferenceNumber(String companyReferenceNumber) {
+		this.companyReferenceNumber = companyReferenceNumber;
+	}
+
+	public String getVendorReferenceNumber() {
+		return vendorReferenceNumber;
+	}
+
+	public void setVendorReferenceNumber(String vendorReferenceNumber) {
+		this.vendorReferenceNumber = vendorReferenceNumber;
+	}
 
 }

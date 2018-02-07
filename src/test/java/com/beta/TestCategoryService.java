@@ -32,7 +32,6 @@ public class TestCategoryService {
 		Category category = new Category();
 		category.setCategoryName("IT");
 		category.setCategoryId(100L);
-		
 		categoryService.saveOrUpdate(category);
 		
 		category = (Category) categoryService.find(100L);
@@ -57,7 +56,6 @@ public class TestCategoryService {
 		Category category = new Category();
 		category.setCategoryName("supply");
 		category.setCategoryId(100L);
-		
 		categoryService.saveOrUpdate(category);
 		
 		category = (Category) categoryService.find(100L);

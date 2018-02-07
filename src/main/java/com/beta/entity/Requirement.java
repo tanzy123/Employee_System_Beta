@@ -1,6 +1,7 @@
 package com.beta.entity;
 
 import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -19,6 +20,8 @@ public class Requirement {
 	@Id
 	@GeneratedValue
 	private Long requirementId;
+	
+	private String applicationRef;
 	
 	private String userName;
 	
@@ -68,4 +71,25 @@ public class Requirement {
 	public void setStatusUpdateDate(Date statusUpdateDate) {
 		this.statusUpdateDate = statusUpdateDate;
 	}
+
+	public Requirement(String userName, String requirement, ApprovalStatus status) {
+		super();
+		this.userName = userName;
+		this.requirement = requirement;
+		this.status = status;
+	}
+
+	public Requirement() {
+		super();
+	}
+
+	public String getApplicationRef() {
+		return applicationRef;
+	}
+
+	public void setApplicationRef(String applicationRef) {
+		this.applicationRef = applicationRef;
+	}
+	
+	
 }
