@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2018-02-06 17:40:18 INFO  DefaultTestContextBootstrapper:260 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
 2018-02-06 17:40:18 INFO  DefaultTestContextBootstrapper:187 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@64bfbc86, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@64bf3bbf, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@55d56113, org.springframework.test.context.support.DirtiesContextTestExecutionListener@148080bb, org.springframework.test.context.transaction.TransactionalTestExecutionListener@dc24521, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@10bdf5e5]
 2018-02-06 17:40:18 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [appContext.xml]
@@ -19,6 +20,31 @@
 2018-02-06 17:40:22 INFO  Version:30 - HV000001: Hibernate Validator 5.4.0.Final
 2018-02-06 17:40:22 INFO  Version:26 - HSEARCH000034: Hibernate Search 5.6.0.Final
 2018-02-06 17:40:24 WARN  ExceptionHandlerLoggedImpl:27 - GenerationTarget encountered exception accepting command : Error executing DDL via JDBC Statement
+=======
+2018-02-06 16:48:00 INFO  DefaultTestContextBootstrapper:260 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-02-06 16:48:00 INFO  DefaultTestContextBootstrapper:187 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@bfbc86, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@bf3bbf, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@1d56113, org.springframework.test.context.support.DirtiesContextTestExecutionListener@8080bb, org.springframework.test.context.transaction.TransactionalTestExecutionListener@1c24521, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@bdf5e5]
+2018-02-06 16:48:00 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [appContext.xml]
+2018-02-06 16:48:02 INFO  GenericApplicationContext:583 - Refreshing org.springframework.context.support.GenericApplicationContext@a7e666: startup date [Tue Feb 06 16:48:02 SGT 2018]; root of context hierarchy
+2018-02-06 16:48:02 INFO  AutowiredAnnotationBeanPostProcessor:155 - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-02-06 16:48:02 INFO  MLog:212 - MLog clients using slf4j logging.
+2018-02-06 16:48:03 INFO  C3P0Registry:212 - Initializing c3p0-0.9.5.2 [built 08-December-2015 22:06:04 -0800; debug? true; trace: 10]
+2018-02-06 16:48:03 INFO  LocalContainerEntityManagerFactoryBean:349 - Building JPA container EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-06 16:48:03 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: VendorManagementPersistentUnit
+	...]
+2018-02-06 16:48:03 INFO  Version:37 - HHH000412: Hibernate Core {5.1.3.Final}
+2018-02-06 16:48:03 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2018-02-06 16:48:03 INFO  Environment:317 - HHH000021: Bytecode provider name : javassist
+2018-02-06 16:48:03 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-02-06 16:48:03 INFO  AbstractPoolBackedDataSource:212 - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 5000, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, contextClassLoaderSource -> caller, dataSourceName -> 2xg08o9ttht1d8gyqbn4|d29f28, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, extensions -> {}, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, forceSynchronousCheckins -> false, forceUseNamedDriverClass -> false, identityToken -> 2xg08o9ttht1d8gyqbn4|d29f28, idleConnectionTestPeriod -> 60, initialPoolSize -> 3, jdbcUrl -> jdbc:mysql://localhost:3306/vendormanagement, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 10, maxIdleTime -> 180, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 25, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 6, numHelperThreads -> 3, preferredTestQuery -> SELECT 1, privilegeSpawnedThreads -> false, properties -> {user=******, password=******}, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, testConnectionOnCheckin -> true, testConnectionOnCheckout -> true, unreturnedConnectionTimeout -> 0, userOverrides -> {}, usesTraditionalReflectiveProxies -> false ]
+2018-02-06 16:48:03 WARN  BasicResourcePool:220 - Bad pool size config, start 3 < min 6. Using 6 as start.
+2018-02-06 16:48:03 INFO  Dialect:156 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2018-02-06 16:48:04 INFO  Version:30 - HV000001: Hibernate Validator 5.4.0.Final
+2018-02-06 16:48:04 INFO  Version:26 - HSEARCH000034: Hibernate Search 5.6.0.Final
+2018-02-06 16:48:07 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Application_VendorReference
+2018-02-06 16:48:07 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Application_VendorReference
+2018-02-06 16:48:11 WARN  ExceptionHandlerLoggedImpl:27 - GenerationTarget encountered exception accepting command : Error executing DDL via JDBC Statement
+>>>>>>> e0fa0a9ec9c2ac23b3df6561cc721fe46aad3b94
 org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL via JDBC Statement
 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67)
 	at org.hibernate.tool.schema.internal.SchemaMigratorImpl.applySqlString(SchemaMigratorImpl.java:568)
@@ -72,6 +98,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL vi
 	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
 	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
 	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191)
+<<<<<<< HEAD
 	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
 	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:539)
@@ -79,6 +106,15 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL vi
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:461)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:207)
 Caused by: java.sql.SQLException: Can't create table 'vendormanagement.#sql-ac8_27d' (errno: 150)
+=======
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLException: Can't create table 'vendormanagement.#sql-a3c_4111' (errno: 150)
+>>>>>>> e0fa0a9ec9c2ac23b3df6561cc721fe46aad3b94
 	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1078)
 	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4187)
 	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4119)
@@ -91,7 +127,11 @@ Caused by: java.sql.SQLException: Can't create table 'vendormanagement.#sql-ac8_
 	at com.mchange.v2.c3p0.impl.NewProxyStatement.execute(NewProxyStatement.java:75)
 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
 	... 57 more
+<<<<<<< HEAD
 2018-02-06 17:40:24 WARN  ExceptionHandlerLoggedImpl:27 - GenerationTarget encountered exception accepting command : Error executing DDL via JDBC Statement
+=======
+2018-02-06 16:48:12 WARN  ExceptionHandlerLoggedImpl:27 - GenerationTarget encountered exception accepting command : Error executing DDL via JDBC Statement
+>>>>>>> e0fa0a9ec9c2ac23b3df6561cc721fe46aad3b94
 org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL via JDBC Statement
 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67)
 	at org.hibernate.tool.schema.internal.SchemaMigratorImpl.applySqlString(SchemaMigratorImpl.java:568)
@@ -145,6 +185,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL vi
 	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
 	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
 	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191)
+<<<<<<< HEAD
 	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
 	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:539)
@@ -152,6 +193,15 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL vi
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:461)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:207)
 Caused by: java.sql.SQLException: Can't create table 'vendormanagement.#sql-ac8_27d' (errno: 150)
+=======
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLException: Can't create table 'vendormanagement.#sql-a3c_4111' (errno: 150)
+>>>>>>> e0fa0a9ec9c2ac23b3df6561cc721fe46aad3b94
 	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1078)
 	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4187)
 	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4119)
@@ -164,7 +214,11 @@ Caused by: java.sql.SQLException: Can't create table 'vendormanagement.#sql-ac8_
 	at com.mchange.v2.c3p0.impl.NewProxyStatement.execute(NewProxyStatement.java:75)
 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
 	... 57 more
+<<<<<<< HEAD
 2018-02-06 17:40:25 WARN  ExceptionHandlerLoggedImpl:27 - GenerationTarget encountered exception accepting command : Error executing DDL via JDBC Statement
+=======
+2018-02-06 16:48:12 WARN  ExceptionHandlerLoggedImpl:27 - GenerationTarget encountered exception accepting command : Error executing DDL via JDBC Statement
+>>>>>>> e0fa0a9ec9c2ac23b3df6561cc721fe46aad3b94
 org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL via JDBC Statement
 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67)
 	at org.hibernate.tool.schema.internal.SchemaMigratorImpl.applySqlString(SchemaMigratorImpl.java:568)
@@ -218,6 +272,7 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL vi
 	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
 	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
 	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191)
+<<<<<<< HEAD
 	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
 	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:539)
@@ -225,6 +280,15 @@ org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL vi
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:461)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:207)
 Caused by: java.sql.SQLException: Can't create table 'vendormanagement.#sql-ac8_27d' (errno: 150)
+=======
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLException: Can't create table 'vendormanagement.#sql-a3c_4111' (errno: 150)
+>>>>>>> e0fa0a9ec9c2ac23b3df6561cc721fe46aad3b94
 	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1078)
 	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4187)
 	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4119)
@@ -237,6 +301,7 @@ Caused by: java.sql.SQLException: Can't create table 'vendormanagement.#sql-ac8_
 	at com.mchange.v2.c3p0.impl.NewProxyStatement.execute(NewProxyStatement.java:75)
 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
 	... 57 more
+<<<<<<< HEAD
 2018-02-06 17:40:25 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
 2018-02-06 17:40:25 INFO  LocalContainerEntityManagerFactoryBean:379 - Initialized JPA EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
 2018-02-06 17:40:25 ERROR TestContextManager:234 - Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@55d56113] to prepare test instance [com.beta.TestRequirementServiceImpl@5b5a4aed]
@@ -8522,3 +8587,10 @@ Caused by: java.sql.SQLException: Can't create table 'vendormanagement.#sql-ac8_
 2018-02-06 21:31:50 INFO  TransactionContext:136 - Rolled back transaction for test context [DefaultTestContext@5ad1904f testClass = TestRequirementServiceImpl, testInstance = com.beta.TestRequirementServiceImpl@2ffe243f, testMethod = testGetRequirementByUsernameAndStatusSuccess@TestRequirementServiceImpl, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@2525a5b8 testClass = TestRequirementServiceImpl, locations = '{classpath:appContext.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]].
 2018-02-06 21:31:50 INFO  GenericApplicationContext:984 - Closing org.springframework.context.support.GenericApplicationContext@72b6cbcc: startup date [Tue Feb 06 21:31:39 SGT 2018]; root of context hierarchy
 2018-02-06 21:31:50 INFO  LocalContainerEntityManagerFactoryBean:548 - Closing JPA EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+=======
+2018-02-06 16:48:12 INFO  LocalContainerEntityManagerFactoryBean:379 - Initialized JPA EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-06 16:48:13 INFO  TransactionContext:101 - Began transaction (1) for test context [DefaultTestContext@7a356 testClass = TestNotification, testInstance = com.beta.TestNotification@1dd84b5, testMethod = testSendEmail@TestNotification, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@101eebe testClass = TestNotification, locations = '{classpath:appContext.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@17e8044]; rollback [true]
+2018-02-06 16:48:19 INFO  TransactionContext:136 - Rolled back transaction for test context [DefaultTestContext@7a356 testClass = TestNotification, testInstance = com.beta.TestNotification@1dd84b5, testMethod = testSendEmail@TestNotification, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@101eebe testClass = TestNotification, locations = '{classpath:appContext.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]].
+2018-02-06 16:48:19 INFO  GenericApplicationContext:984 - Closing org.springframework.context.support.GenericApplicationContext@a7e666: startup date [Tue Feb 06 16:48:02 SGT 2018]; root of context hierarchy
+2018-02-06 16:48:19 INFO  LocalContainerEntityManagerFactoryBean:548 - Closing JPA EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+>>>>>>> e0fa0a9ec9c2ac23b3df6561cc721fe46aad3b94
