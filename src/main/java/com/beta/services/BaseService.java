@@ -52,10 +52,7 @@ public interface BaseService<Long,E> {
      *
      * @return the list of entities
      */
-    public List<E> findByNamedQueryAndNamedParams(
-        final String queryName,
-        final Map<String, ?extends Object> params
-    );
+    public List<E> findByNamedQueryAndNamedParams(final String queryName, final Map<String, ?extends Object> params);
     
     public List<E> findByNamedQueryAndNamedParams(
 	        final String queryName,

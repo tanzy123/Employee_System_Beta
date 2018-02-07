@@ -6,17 +6,17 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class UserAccount {
-	
+
 	@Id
 	@GeneratedValue
 	private Long accountId;
-	
+
 	private String token;
 
 	private String userName;
 
 	private String password;
-	
+
 	public String getUserName() {
 		return userName;
 	}
