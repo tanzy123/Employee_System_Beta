@@ -1,7 +1,9 @@
 package com.beta.entity;
 
+
 public class UserAccount {
 
+	
 	private String userName;
 
 	private String password;

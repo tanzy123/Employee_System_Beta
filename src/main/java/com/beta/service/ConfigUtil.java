@@ -1,4 +1,4 @@
-package com.beta;
+package com.beta.service;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

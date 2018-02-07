@@ -1,4 +1,4 @@
-package com.beta;
+package com.beta.service;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class MailMail implements NotificationService{
+public class MailNotification implements NotificationService{
 
 //	private MailSender mailSender;
 	
@@ -60,6 +60,13 @@ public class MailMail implements NotificationService{
 		email.send();
 		System.out.println("Email Sent");
 
+	}
+
+
+	@Override
+	public void SmsService() throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
