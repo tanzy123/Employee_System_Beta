@@ -18,7 +18,6 @@ public class TestVerificationEmail {
 	{
 		DefaultRegistrationVerificationByEmail verificationEmail= new DefaultRegistrationVerificationByEmail();
 	
-		
 		Company company =new Company();
 		company.setCompanyReferenceNumber("CTS");
 		company.setCompanyName("Cognizant");
@@ -28,6 +27,7 @@ public class TestVerificationEmail {
 		company.setCompanyWebsite("www.cognizant.com");
 		company.setTurnover(9999999L);
 		verificationEmail.SendVarificationEmail(company);
+
 	}
 	
 }

@@ -1,5 +1,7 @@
 package com.beta.services;
 
-public interface ApplicationService extends BaseService {
+import com.beta.entity.Application;
 
+public interface ApplicationService extends BaseService<Long, Application> {
+	public Application findByApplicationRefNo(String applicationRef);
 }

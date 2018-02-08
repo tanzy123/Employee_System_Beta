@@ -27,8 +27,8 @@ public interface BaseService<Long,E> {
         public List<E> find(int startFrom, int maxResults) throws VendorMgmtException;
 	
     public void save(E entity) throws VendorMgmtException;
-    public E update(E entity) throws VendorMgmtException;
-    public E saveOrUpdate(E entity) throws VendorMgmtException;
+    public void update(E entity) throws VendorMgmtException;
+    public void saveOrUpdate(E entity) throws VendorMgmtException;
     
     /**
      * Will throw an exception if entity to be deleted is not found.
