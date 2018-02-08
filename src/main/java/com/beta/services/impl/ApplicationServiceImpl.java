@@ -36,4 +36,34 @@ public class ApplicationServiceImpl extends BaseServiceImpl<Long, Application> i
 	public void setEntityManagerOnDao(EntityManager entityManager) {
 		dao.setEntityManager(entityManager);
 	}
+
+	@Override
+	public void save(Application entity) throws VendorMgmtException {
+		
+		
+	}
+
+	@Override
+	public Application update(Application entity) throws VendorMgmtException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Application saveOrUpdate(Application entity) throws VendorMgmtException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delete(long id) throws VendorMgmtException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteIfExisting(long id) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }

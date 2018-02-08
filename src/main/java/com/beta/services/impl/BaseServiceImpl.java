@@ -11,7 +11,7 @@ import com.beta.exception.VendorMgmtException;
 import com.beta.services.BaseService;
 
 
-public class BaseServiceImpl<K, E> implements BaseService {
+public abstract class BaseServiceImpl<K, E> implements BaseService<K, E> {
 	private JPADAO dao;
 
 	protected Class<E> entityClass;
@@ -56,33 +56,33 @@ public class BaseServiceImpl<K, E> implements BaseService {
 		}
 	}
 
-	public void save(Object entity) throws VendorMgmtException {
-		try {
-			dao.persist(entity);
-		} catch (Exception e) {
-			throw new VendorMgmtException(entityClass.getName() + " - ", e);
-		}
-
-	}
-
-	public E update(Object entity) throws VendorMgmtException {
-		try {
-			dao.merge(entity);
-			return (E) dao.flush(entity);
-		} catch (Exception e) {
-			throw new VendorMgmtException(entityClass.getName() + " - ", e);
-		}
-	}
-
-	public E saveOrUpdate(Object entity) throws VendorMgmtException {
-		try {
-			entity = dao.merge(entity);
-			return (E) dao.flush(entity);
-		} catch (Exception e) {
-			throw new VendorMgmtException(entityClass.getName() + " - ", e);
-		}
-
-	}
+//	public void save(Object entity) throws VendorMgmtException {
+//		try {
+//			dao.persist(entity);
+//		} catch (Exception e) {
+//			throw new VendorMgmtException(entityClass.getName() + " - ", e);
+//		}
+//
+//	}
+//
+//	public E update(Object entity) throws VendorMgmtException {
+//		try {
+//			dao.merge(entity);
+//			return (E) dao.flush(entity);
+//		} catch (Exception e) {
+//			throw new VendorMgmtException(entityClass.getName() + " - ", e);
+//		}
+//	}
+//
+//	public E saveOrUpdate(Object entity) throws VendorMgmtException {
+//		try {
+//			entity = dao.merge(entity);
+//			return (E) dao.flush(entity);
+//		} catch (Exception e) {
+//			throw new VendorMgmtException(entityClass.getName() + " - ", e);
+//		}
+//
+//	}
 
 	public void delete(long id) throws VendorMgmtException {
 		E e = null;
@@ -116,7 +116,6 @@ public class BaseServiceImpl<K, E> implements BaseService {
 		} catch (Exception e) {
 			throw new VendorMgmtException(entityClass.getName() + " - ", e);
 		}
-
 	}
 
 	public List findByNamedQueryAndNamedParams(String queryName, Map params) {

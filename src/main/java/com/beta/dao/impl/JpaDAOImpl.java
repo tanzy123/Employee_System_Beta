@@ -42,8 +42,12 @@ public class JpaDAOImpl <K, E> implements JPADAO<E, K>{
 
     public void persist(E entity) { 
        // getJpaTemplate().persist(entity); 
+    	if (!getEntityManager().contains(entity)) {
     	getEntityManager().persist(entity);
     	getEntityManager().flush();
+    	}
+    	else
+    		merge(entity);
     } 
 
     public void remove(E entity) { 
@@ -188,4 +192,6 @@ public class JpaDAOImpl <K, E> implements JPADAO<E, K>{
 		}
     	return ((Long)query.getSingleResult()).intValue();	
     }
+    
+    
 }

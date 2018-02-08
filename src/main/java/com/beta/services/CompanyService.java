@@ -1,5 +1,7 @@
 package com.beta.services;
 
-public interface CompanyService extends BaseService {
+import com.beta.entity.Company;
 
+public interface CompanyService extends BaseService<Long, Company> {
+	Company findbyCompanyNameAndRefNo(String companyReferenceNumber, String companyName);
 }

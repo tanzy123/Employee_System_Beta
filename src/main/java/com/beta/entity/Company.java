@@ -9,10 +9,28 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name="Company.findByNameAndRefNo",
+                query="SELECT c FROM Company c where c.companyReferenceNumber = :companyReferenceNumber"
+                		+ " AND c.companyName = :companyName"),
+})
 public class Company implements Serializable{
+
+	@Override
+	public String toString() {
+		return "Company [companyPrimaryId=" + companyPrimaryId + ", companyReferenceNumber=" + companyReferenceNumber
+				+ ", companyName=" + companyName + ", companyAddress=" + companyAddress + ", companyEmail="
+				+ companyEmail + ", contactNumber=" + contactNumber + ", companyWebsite=" + companyWebsite
+				+ ", turnover=" + turnover + ", applications=" + applications + ", roles=" + roles + ", department="
+				+ department + ", employees=" + employees + ", category=" + category + ", companyAdministrator="
+				+ companyAdministrator + "]";
+	}
+
 
 	/**
 	 * 
