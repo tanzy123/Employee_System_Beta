@@ -12,8 +12,7 @@ import com.beta.dao.EmployeeDao;
 import com.beta.entity.Employee;
 
 
-@Repository("EmployeeDAO")
-
+@Repository("EmployeeJPADAO")
 public class EmployeeDaoImpl extends JpaDAOImpl<Long, Employee> implements EmployeeDao {
 
 	

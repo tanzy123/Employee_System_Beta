@@ -12,7 +12,7 @@ import com.beta.dao.CompanyAdministratorDao;
 import com.beta.entity.CompanyAdministrator;
 
 
-@Repository("CompanyAdminstratorDAO")
+@Repository("CompanyAdminstratorJPADAO")
 public class CompanyAdminstratorDaoImpl extends JpaDAOImpl<Long,CompanyAdministrator> implements CompanyAdministratorDao{
 
 	@Autowired

@@ -12,13 +12,13 @@ import com.beta.dao.JPADAO;
 import com.beta.dao.VendorReferenceDao;
 import com.beta.entity.VendorReference;
 import com.beta.exception.VendorMgmtException;
-import com.beta.services.VendorService;
+import com.beta.services.VendorReferenceService;
 
 
 
-@Service("vendorService")
+@Service("VendorJPAService")
 @org.springframework.transaction.annotation.Transactional(propagation= Propagation.REQUIRED, rollbackFor=VendorMgmtException.class)
-public class VendorReferenceServiceImpl extends BaseServiceImpl<Long, VendorReference> implements VendorService{
+public class VendorReferenceServiceImpl extends BaseServiceImpl<Long, VendorReference> implements VendorReferenceService{
 	
 //	ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 //	Validator validator = factory.getValidator();
@@ -52,6 +52,18 @@ public class VendorReferenceServiceImpl extends BaseServiceImpl<Long, VendorRefe
 	@Override
 	public void delete(VendorReference vendorReference) {
 		
+		
+	}
+
+	@Override
+	public void save(VendorReference entity) throws VendorMgmtException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(VendorReference entity) throws VendorMgmtException {
+		// TODO Auto-generated method stub
 		
 	}
 

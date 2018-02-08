@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.beta.dao.CompanyDao;
 import com.beta.entity.Company;
 
-@Repository("CompanyDAO")
+@Repository("CompanyJPADAO")
 public class CompanyDaoImpl extends JpaDAOImpl<Long, Company> implements CompanyDao {
 
 	@Autowired

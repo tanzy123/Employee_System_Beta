@@ -35,6 +35,8 @@ public class TestConstant {
 	
 	public static final Category SAMPLE_CATEGORY1 = new Category("Utilities");
 	public static final Category SAMPLE_CATEGORY2 = new Category("HR");
+	public static final Category SAMPLE_CATEGORY3 = new Category("Food");
+	public static final Category SAMPLE_CATEGORY4 = new Category("IT");
 	public static final List<Category> SAMPLE_CATEGORY_LIST;
 	
 	public static final Documents SAMPLE_DOCUMENT1 = new Documents("asd".getBytes());
@@ -53,6 +55,7 @@ public class TestConstant {
 	
 	public static final Application SAMPLE_APPLICATION1;
 	public static final Application SAMPLE_APPLICATION2;
+	public static final Application SAMPLE_APPLICATION3;
 	public static final List<Application> SAMPLE_APPLICATION_LIST;
 	
 	public static final Company SAMPLE_COMPANY;
@@ -113,6 +116,10 @@ public class TestConstant {
 		
 		SAMPLE_APPLICATION2 = new Application("YRS1231", SAMPLE_REFERENCE_LIST, SAMPLE_CATEGORY1,
 				"CS123213", "Mary", "No remarks", ApplicationStatus.REJECT, new Date(1000L), 
+				1L, SAMPLE_DOCUMENT_LIST, SAMPLE_REQUIREMENT_LIST);
+		
+		SAMPLE_APPLICATION3 = new Application("ZZC123", SAMPLE_REFERENCE_LIST, SAMPLE_CATEGORY1,
+				"5634654gf", "Richard", "No remarks", ApplicationStatus.REJECT, new Date(103300L), 
 				1L, SAMPLE_DOCUMENT_LIST, SAMPLE_REQUIREMENT_LIST);
 		
 		List<Application> applicationList = new ArrayList<>();

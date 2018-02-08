@@ -12,7 +12,7 @@ import com.beta.dao.RequirementDao;
 import com.beta.entity.Requirement;
 
 
-@Repository("RequirementDAO")
+@Repository("RequirementJPADAO")
 public class RequirementDaoImpl extends JpaDAOImpl<Long, Requirement> implements RequirementDao {
 
 	@Autowired

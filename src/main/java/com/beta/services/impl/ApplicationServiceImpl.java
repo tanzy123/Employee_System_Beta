@@ -15,13 +15,11 @@ import org.springframework.transaction.annotation.Propagation;
 import com.beta.dao.ApplicationDao;
 import com.beta.dao.JPADAO;
 import com.beta.entity.Application;
-import com.beta.entity.Company;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.FieldCopyUtil;
 import com.beta.services.ApplicationService;
 
-@Service("applicationService")
-
+@Service("ApplicationJPAService")
 @org.springframework.transaction.annotation.Transactional(propagation = Propagation.REQUIRED, rollbackFor = VendorMgmtException.class)
 public class ApplicationServiceImpl extends BaseServiceImpl<Long, Application> implements ApplicationService {
 

@@ -3,8 +3,15 @@ package com.beta.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name="Category.findByNameAndRefNo",
+                query="SELECT c FROM Category c where c.companyReferenceNumber = :companyReferenceNumber"
+                		+ " AND c.categoryName = :categoryName"),
+})
 public class Category {
 
 	@Id

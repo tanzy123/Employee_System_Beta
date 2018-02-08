@@ -12,7 +12,7 @@ import com.beta.dao.CategoryDao;
 import com.beta.entity.Category;
 
 
-@Repository("CategoryDAO")
+@Repository("CategoryJPADAO")
 public class CategoryDaoImpl extends JpaDAOImpl<Long,Category>implements CategoryDao {
 
 	@Autowired

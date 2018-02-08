@@ -4,7 +4,7 @@ import com.beta.entity.VendorReference;
 import com.beta.exception.VendorMgmtException;
 
 
-public interface VendorService extends BaseService{
+public interface VendorReferenceService extends BaseService<Long, VendorReference>{
 	
 	public void saveOrUpdate(VendorReference vendorReference) throws VendorMgmtException  ;
 

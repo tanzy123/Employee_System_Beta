@@ -9,12 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.beta.dao.DocDao;
-import com.beta.dao.RoleDao;
 import com.beta.entity.Documents;
-import com.beta.entity.Role;
 
-@Repository("docDAO")
-public class DocDaoImpl  extends JpaDAOImpl<Long, Documents> implements DocDao{
+@Repository("DocumentJPADAO")
+public class DocumentsDaoImpl  extends JpaDAOImpl<Long, Documents> implements DocDao{
 	@Autowired
     EntityManagerFactory entityManagerFactory;
 	

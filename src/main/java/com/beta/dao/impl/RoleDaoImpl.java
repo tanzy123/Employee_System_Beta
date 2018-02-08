@@ -12,7 +12,7 @@ import com.beta.dao.RoleDao;
 import com.beta.entity.Role;
 
 
-@Repository("roleDAO")
+@Repository("RoleJPADAO")
 public class RoleDaoImpl  extends JpaDAOImpl<Long, Role> implements RoleDao{
 	@Autowired
     EntityManagerFactory entityManagerFactory;

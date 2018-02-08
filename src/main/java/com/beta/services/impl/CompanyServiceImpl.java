@@ -19,8 +19,7 @@ import com.beta.exception.VendorMgmtException;
 import com.beta.service.FieldCopyUtil;
 import com.beta.services.CompanyService;
 
-@Service("CompanyService")
-
+@Service("CompanyJPAService")
 @org.springframework.transaction.annotation.Transactional(propagation = Propagation.REQUIRED, rollbackFor = VendorMgmtException.class)
 public class CompanyServiceImpl extends BaseServiceImpl<Long, Company> implements CompanyService {
 

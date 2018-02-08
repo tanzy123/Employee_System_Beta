@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.beta.dao.VendorReferenceDao;
 import com.beta.entity.VendorReference;
 
-@Repository("vendorReferenceDao")
+@Repository("VendorReferenceJPADao")
 public class VendorReferenceDaoImpl extends JpaDAOImpl<Long, VendorReference> implements VendorReferenceDao{
 	
 	@Autowired

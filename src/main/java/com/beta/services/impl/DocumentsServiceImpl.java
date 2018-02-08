@@ -11,11 +11,10 @@ import org.springframework.transaction.annotation.Propagation;
 import com.beta.dao.DocDao;
 import com.beta.dao.JPADAO;
 import com.beta.entity.Documents;
-import com.beta.entity.VendorReference;
 import com.beta.exception.VendorMgmtException;
 import com.beta.services.DocumentsService;
 
-@Service("documentService")
+@Service("DocumentJPAService")
 @org.springframework.transaction.annotation.Transactional(propagation= Propagation.REQUIRED, rollbackFor=VendorMgmtException.class)
 public class DocumentsServiceImpl extends BaseServiceImpl<Long, Documents> implements DocumentsService{
 	
@@ -38,6 +37,24 @@ public class DocumentsServiceImpl extends BaseServiceImpl<Long, Documents> imple
     public void setEntityManagerOnDao(EntityManager entityManager){
     	dao.setEntityManager(entityManager);
     }
+
+	@Override
+	public void save(Documents entity) throws VendorMgmtException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(Documents entity) throws VendorMgmtException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void saveOrUpdate(Documents entity) throws VendorMgmtException {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 
