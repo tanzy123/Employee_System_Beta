@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @NamedQueries({
@@ -27,7 +29,10 @@ public class Requirement {
 	
 	private String requirement;
 	
+	@Temporal(TemporalType.DATE)
 	private Date statusUpdateDate;
+	
+	private Integer sequence;
 	
 	@Enumerated(EnumType.STRING)
 	private ApprovalStatus status;
@@ -89,6 +94,14 @@ public class Requirement {
 
 	public void setApplicationRef(String applicationRef) {
 		this.applicationRef = applicationRef;
+	}
+
+	public Integer getSequence() {
+		return sequence;
+	}
+
+	public void setSequence(Integer sequence) {
+		this.sequence = sequence;
 	}
 	
 	

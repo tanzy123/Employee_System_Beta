@@ -21,16 +21,6 @@ import javax.persistence.OneToMany;
 })
 public class Company implements Serializable{
 
-	@Override
-	public String toString() {
-		return "Company [companyPrimaryId=" + companyPrimaryId + ", companyReferenceNumber=" + companyReferenceNumber
-				+ ", companyName=" + companyName + ", companyAddress=" + companyAddress + ", companyEmail="
-				+ companyEmail + ", contactNumber=" + contactNumber + ", companyWebsite=" + companyWebsite
-				+ ", turnover=" + turnover + ", applications=" + applications + ", roles=" + roles + ", department="
-				+ department + ", employees=" + employees + ", category=" + category + ", companyAdministrator="
-				+ companyAdministrator + "]";
-	}
-
 
 	/**
 	 * 
