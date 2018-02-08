@@ -19,7 +19,6 @@ import com.beta.services.CategoryService;
 @org.springframework.transaction.annotation.Transactional(propagation= Propagation.REQUIRED, rollbackFor=VendorMgmtException.class)
 public class CategoryServiceImpl extends BaseServiceImpl<Long, Category> implements CategoryService{
 
-	
 	@Autowired
 	protected CategoryDao dao;
 	
@@ -37,6 +36,21 @@ public class CategoryServiceImpl extends BaseServiceImpl<Long, Category> impleme
     public void setEntityManagerOnDao(EntityManager entityManager){
     	dao.setEntityManager(entityManager);
     }
+
+	@Override
+	public void save(Category entity) throws VendorMgmtException {
+		
+	}
+
+	@Override
+	public void update(Category entity) throws VendorMgmtException {
+		Category category = dao.findById(entity.getCategoryId());
+	}
+
+	@Override
+	public void saveOrUpdate(Category entity) throws VendorMgmtException {
+		
+	}
 
 
 }

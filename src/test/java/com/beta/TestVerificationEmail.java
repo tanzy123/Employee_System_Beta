@@ -36,7 +36,7 @@ public class TestVerificationEmail {
 	{
 		DefaultRegistrationVerificationByEmail verificationEmail= new DefaultRegistrationVerificationByEmail();
 		
-		verificationEmail.SendVarificationEmail(Company company);
+//		verificationEmail.SendVarificationEmail(Company company);
 	}
 	
 <<<<<<< HEAD:src/test/java/com/beta/VendorApplicationTests.java

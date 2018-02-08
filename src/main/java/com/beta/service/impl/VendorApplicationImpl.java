@@ -78,7 +78,7 @@ public class VendorApplicationImpl implements VendorApplication {
 				else {
 				for (Category c: category) {
 				if (vendorCategory.getCategoryName().equals(c.getCategoryName()) && vendorCategory.getCompanyReferenceNumber().equals(application.getCompanyReferenceNumber())) { 
-				//	appservice.saveOrUpdate(application); //why cannot saveOrUpdate????
+					appservice.saveOrUpdate(application); //why cannot saveOrUpdate????
 					return "APPLICATION UPLOADED SUCCESSFULLY";
 				}
 				}

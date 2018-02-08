@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +29,25 @@ import com.beta.services.CompanyService;
 @ContextConfiguration(locations = {"classpath:appContext.xml"})
 @Transactional
 public class TestVendorApplication {
-	
+
 	@Autowired
 	VendorApplication ven;
 	
 	@Autowired
 	CompanyService comService;
 	
-	@Test
+	@Before
 	public void TestCOYPersist() {
 		
-		comService.saveOrUpdate(SAMPLE_COMPANY);
+		Company com = new Company();
+		
+		com.setCompanyReferenceNumber("AA-11");
+		com.setCompanyName("ABC");
+		com.setCompanyAddress("S'pore");
+		com.setCompanyEmail("www.abc.com");
+		com.setContactNumber("9999 9999");
+		com.setTurnover(2000L);
+		comService.saveOrUpdate(com);
 	
 	}
 	
@@ -50,10 +59,15 @@ public class TestVendorApplication {
 		Date applicationDate = sdf.parse(sdf.format(new Date()));
 		Date modifiedDate = sdf.parse(sdf.format(new Date()));
 		
+		Category cat = new Category();
+		cat.setCategoryId(1L);
+		cat.setCategoryName("TECH");
+		cat.setCompanyReferenceNumber("AA-11");
+		
 		Application app = new Application();
 		Application app1 = new Application();
 		app.setApplicationId(1L);
-		app.setCategory(SAMPLE_CATEGORY1);
+		app.setCategory(cat);
 		app.setCompanyReferenceNumber("AA-11");
 		app.setPOC("Yi Fan");
 		app.setSupportingDocument(SAMPLE_DOCUMENT_LIST);
@@ -89,6 +103,7 @@ public class TestVendorApplication {
 		app1=ven.generateVendorApplication(app);
 		String results = ven.validateVendorApplication(app1);
 		
+		System.out.println(results);
 		
 		assertEquals("APPLICATION UPLOADED SUCCESSFULLY",results);
 		

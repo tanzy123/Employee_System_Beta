@@ -26,6 +26,8 @@ public interface JPADAO<E, K> {
 	    
 	    public void setEntityManager(EntityManager entityManager);
 	    
+	    public EntityManager getEntityManager();
+	    
 	    /**
 	     * Find using a named query.
 	     *
