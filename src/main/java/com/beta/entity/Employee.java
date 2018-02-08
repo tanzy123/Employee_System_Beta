@@ -3,38 +3,51 @@ package com.beta.entity;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Employee {
+public class Employee extends UserAccount {
 
-	@Id
-	private Long employeeId;
+	private String employeeId;
+	
+	private String employeeEmail;
+	
+	private String contactNumber;
 
-	private Long companyId;
-
-	private String userName;
-
-	private String password;
+	private String companyReferenceNumber;
 
 	@Enumerated(EnumType.STRING)
 	private LogInType logInType = LogInType.EMPLOYEE;
 
 	@OneToOne
-	@JoinColumn(name = "role")
+	@JoinColumn(name="role", referencedColumnName="role")
 	private Role role;
 
 	@OneToOne
-	@JoinColumn(name = "departmentName")
+	@JoinColumn(name="department", referencedColumnName="departmentName")
 	private Department department;
 
-	public Long getEmployeeId() {
+	
+	
+	public Employee(String userName, String password, String employeeId, String employeeEmail, String contactNumber,
+			String companyReferenceNumber, Role role, Department department) {
+		super(userName, password);
+		this.employeeId = employeeId;
+		this.employeeEmail = employeeEmail;
+		this.contactNumber = contactNumber;
+		this.companyReferenceNumber = companyReferenceNumber;
+		this.role = role;
+		this.department = department;
+	}
+
+	public Employee() {}
+
+	public String getEmployeeId() {
 		return employeeId;
 	}
 
-	public void setEmployeeId(Long employeeId) {
+	public void setEmployeeId(String employeeId) {
 		this.employeeId = employeeId;
 	}
 
@@ -54,32 +67,32 @@ public class Employee {
 		this.department = department;
 	}
 
-	public Long getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(Long companyId) {
-		this.companyId = companyId;
-	}
-
 	public LogInType getLogInType() {
 		return logInType;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getEmployeeEmail() {
+		return employeeEmail;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setEmployeeEmail(String employeeEmail) {
+		this.employeeEmail = employeeEmail;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getContactNumber() {
+		return contactNumber;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+
+	public String getCompanyReferenceNumber() {
+		return companyReferenceNumber;
+	}
+
+	public void setCompanyReferenceNumber(String companyReferenceNumber) {
+		this.companyReferenceNumber = companyReferenceNumber;
 	}
 
 }

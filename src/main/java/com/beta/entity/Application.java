@@ -1,11 +1,14 @@
 package com.beta.entity;
 
-import java.time.Period;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -15,50 +18,74 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Application {
-	
+public class Application implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7471758161505829102L;
+
 	@Id
 	@GeneratedValue
 	private Long applicationId;
-	
+
 	@Column(nullable = false, unique = true)
 	private String applicationRef;
 
-	@OneToMany
+	@OneToMany(mappedBy = "application", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<VendorReference> vendorReferences;
 
 	@ManyToOne
-	@JoinColumn(name="categoryName")
+	@JoinColumn(name = "categoryName", referencedColumnName="categoryName")
 	private Category category;
 
-	private String POC=" ";
+	private String companyReferenceNumber;
+
+	private String vendorReferenceNumber;
+
+	private String POC;
 
 	private String remarks;
-	
-	private Long companyId=0L;
-	
-	private Long vendorId=0L;
-	
-	private String currentStatus=" ";
 
-	private String approvalStatus=" ";
+	@Enumerated(EnumType.STRING)
+	private ApplicationStatus applicationStatus;
 
 	@Temporal(TemporalType.DATE)
 	private Date applicationDate;
 
-	private long vendorPeriod=0L;
-	
+	private Long vendorPeriod;
+
+	@Temporal(TemporalType.DATE)
 	private Date modifiedDate;
 
-	private String officialRemarks;
-
-	@OneToMany
-	@JoinColumn(name="documentId")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name="applicationRef", referencedColumnName="applicationRef")
 	private List<Documents> supportingDocument;
 
-	@OneToMany
-	@JoinColumn(name="requirementId")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name="applicationRef", referencedColumnName="applicationRef")
 	private List<Requirement> vetterRequirement;
+
+	public Application(String applicationRef, List<VendorReference> vendorReferences, Category category, String vendorReferenceNumber,
+			String pOC, String remarks, ApplicationStatus applicationStatus, Date applicationDate, Long vendorPeriod,
+			List<Documents> supportingDocument, List<Requirement> vetterRequirement) {
+		super();
+		this.applicationRef = applicationRef;
+		this.vendorReferences = vendorReferences;
+		this.category = category;
+		this.vendorReferenceNumber = vendorReferenceNumber;
+		POC = pOC;
+		this.remarks = remarks;
+		this.applicationStatus = applicationStatus;
+		this.applicationDate = applicationDate;
+		this.vendorPeriod = vendorPeriod;
+		this.supportingDocument = supportingDocument;
+		this.vetterRequirement = vetterRequirement;
+	}
+
+	public Application() {
+		super();
+	}
 
 	public Category getCategory() {
 		return category;
@@ -100,11 +127,11 @@ public class Application {
 		this.applicationId = applicationId;
 	}
 
-	public long getVendorPeriod() {
+	public Long getVendorPeriod() {
 		return vendorPeriod;
 	}
 
-	public void setVendorPeriod(long vendorPeriod) {
+	public void setVendorPeriod(Long vendorPeriod) {
 		this.vendorPeriod = vendorPeriod;
 	}
 
@@ -116,11 +143,11 @@ public class Application {
 		this.supportingDocument = supportingDocument;
 	}
 
-	public List<Requirement> getClientRequirement() {
+	public List<Requirement> getVettorRequirement() {
 		return vetterRequirement;
 	}
 
-	public void setClientRequirement(List<Requirement> clientRequirement) {
+	public void setVettorRequirement(List<Requirement> clientRequirement) {
 		this.vetterRequirement = clientRequirement;
 	}
 
@@ -130,46 +157,6 @@ public class Application {
 
 	public void setVendorReferences(List<VendorReference> vendorReferences) {
 		this.vendorReferences = vendorReferences;
-	}
-
-	public String getOfficialRemarks() {
-		return officialRemarks;
-	}
-
-	public void setOfficialRemarks(String officialRemarks) {
-		this.officialRemarks = officialRemarks;
-	}
-
-	public Long getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(Long companyId) {
-		this.companyId = companyId;
-	}
-
-	public Long getVendorId() {
-		return vendorId;
-	}
-
-	public void setVendorId(Long vendorId) {
-		this.vendorId = vendorId;
-	}
-
-	public String getCurrentStatus() {
-		return currentStatus;
-	}
-
-	public void setCurrentStatus(String currentStatus) {
-		this.currentStatus = currentStatus;
-	}
-
-	public String getApprovalStatus() {
-		return approvalStatus;
-	}
-
-	public void setApprovalStatus(String approvalStatus) {
-		this.approvalStatus = approvalStatus;
 	}
 
 	public Date getModifiedDate() {
@@ -188,15 +175,40 @@ public class Application {
 		this.applicationRef = applicationRef;
 	}
 
+	public ApplicationStatus getApplicationStatus() {
+		return applicationStatus;
+	}
+
+	public void setApplicationStatus(ApplicationStatus applicationStatus) {
+		this.applicationStatus = applicationStatus;
+	}
+
+	public String getCompanyReferenceNumber() {
+		return companyReferenceNumber;
+	}
+
+	public void setCompanyReferenceNumber(String companyReferenceNumber) {
+		this.companyReferenceNumber = companyReferenceNumber;
+	}
+
+	public String getVendorReferenceNumber() {
+		return vendorReferenceNumber;
+	}
+
+	public void setVendorReferenceNumber(String vendorReferenceNumber) {
+		this.vendorReferenceNumber = vendorReferenceNumber;
+	}
+
 	@Override
 	public String toString() {
 		return "Application [applicationId=" + applicationId + ", applicationRef=" + applicationRef
-				+ ", vendorReferences=" + vendorReferences + ", category=" + category + ", POC=" + POC + ", remarks="
-				+ remarks + ", companyId=" + companyId + ", vendorId=" + vendorId + ", currentStatus=" + currentStatus
-				+ ", approvalStatus=" + approvalStatus + ", applicationDate=" + applicationDate + ", vendorPeriod="
-				+ vendorPeriod + ", modifiedDate=" + modifiedDate + ", officialRemarks=" + officialRemarks
+				+ ", vendorReferences=" + vendorReferences + ", category=" + category + ", companyReferenceNumber="
+				+ companyReferenceNumber + ", vendorReferenceNumber=" + vendorReferenceNumber + ", POC=" + POC
+				+ ", remarks=" + remarks + ", applicationStatus=" + applicationStatus + ", applicationDate="
+				+ applicationDate + ", vendorPeriod=" + vendorPeriod + ", modifiedDate=" + modifiedDate
 				+ ", supportingDocument=" + supportingDocument + ", vetterRequirement=" + vetterRequirement + "]";
 	}
 	
 	
+
 }

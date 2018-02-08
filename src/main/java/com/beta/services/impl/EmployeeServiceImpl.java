@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.beta.dao.EmployeeDao;
 import com.beta.dao.JPADAO;
+import com.beta.entity.Application;
+import com.beta.entity.ApprovalStatus;
 import com.beta.entity.Employee;
 import com.beta.services.EmployeeService;
 

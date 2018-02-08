@@ -18,6 +18,7 @@ Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
 <class>com.beta.entity.Requirement</class>
 <class>com.beta.entity.Role</class>
 <class>com.beta.entity.VendorReference</class>
+<class>com.beta.entity.CompanyVendorRelationship</class>
 	<properties>
 	
 	<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />

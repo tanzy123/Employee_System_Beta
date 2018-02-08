@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+<<<<<<< HEAD:src/test/java/com/beta/VendorApplicationTests.java
 import com.beta.entity.Application;
 import com.beta.entity.Category;
 import com.beta.service.VendorApplication;
@@ -18,19 +19,27 @@ import com.beta.service.impl.VendorApplicationImpl;
 import com.beta.services.CategoryService;
 import com.beta.services.impl.CategoryServiceImpl;
 
+=======
+import com.beta.entity.Company;
+import com.beta.service.DefaultRegistrationVerificationByEmail;
+>>>>>>> c522fbff2913c959a8540d001f292fe57156e79e:src/test/java/com/beta/TestVerificationEmail.java
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:appContext.xml"})
 @Transactional
-public class VendorApplicationTests {
+public class TestVerificationEmail {
 
 	@Autowired
 	VendorApplication ven = new VendorApplicationImpl();
 	
 	@Test
-	public void contextLoads() {
+	public void testVerificationEmail()
+	{
+		DefaultRegistrationVerificationByEmail verificationEmail= new DefaultRegistrationVerificationByEmail();
 		
+		verificationEmail.SendVarificationEmail(Company company);
 	}
 	
+<<<<<<< HEAD:src/test/java/com/beta/VendorApplicationTests.java
 	@Test
 	public void testGenerator() throws ParseException {
 		// This test is incomplete because of the changes to be made by zhiyi
@@ -142,4 +151,6 @@ public class VendorApplicationTests {
 		
 	}
 
+=======
+>>>>>>> c522fbff2913c959a8540d001f292fe57156e79e:src/test/java/com/beta/TestVerificationEmail.java
 }
