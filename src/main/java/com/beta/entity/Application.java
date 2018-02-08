@@ -31,22 +31,22 @@ public class Application {
 	@JoinColumn(name="categoryName")
 	private Category category;
 
-	private String POC;
+	private String POC=" ";
 
 	private String remarks;
 	
-	private Long companyId;
+	private Long companyId=0L;
 	
-	private Long vendorId;
+	private Long vendorId=0L;
 	
-	private String currentStatus;
+	private String currentStatus=" ";
 
-	private String approvalStatus;
+	private String approvalStatus=" ";
 
 	@Temporal(TemporalType.DATE)
 	private Date applicationDate;
 
-	private Period vendorPeriod;
+	private long vendorPeriod=0L;
 	
 	private Date modifiedDate;
 
@@ -100,11 +100,11 @@ public class Application {
 		this.applicationId = applicationId;
 	}
 
-	public Period getVendorPeriod() {
+	public long getVendorPeriod() {
 		return vendorPeriod;
 	}
 
-	public void setVendorPeriod(Period vendorPeriod) {
+	public void setVendorPeriod(long vendorPeriod) {
 		this.vendorPeriod = vendorPeriod;
 	}
 
@@ -186,6 +186,16 @@ public class Application {
 
 	public void setApplicationRef(String applicationRef) {
 		this.applicationRef = applicationRef;
+	}
+
+	@Override
+	public String toString() {
+		return "Application [applicationId=" + applicationId + ", applicationRef=" + applicationRef
+				+ ", vendorReferences=" + vendorReferences + ", category=" + category + ", POC=" + POC + ", remarks="
+				+ remarks + ", companyId=" + companyId + ", vendorId=" + vendorId + ", currentStatus=" + currentStatus
+				+ ", approvalStatus=" + approvalStatus + ", applicationDate=" + applicationDate + ", vendorPeriod="
+				+ vendorPeriod + ", modifiedDate=" + modifiedDate + ", officialRemarks=" + officialRemarks
+				+ ", supportingDocument=" + supportingDocument + ", vetterRequirement=" + vetterRequirement + "]";
 	}
 	
 	
