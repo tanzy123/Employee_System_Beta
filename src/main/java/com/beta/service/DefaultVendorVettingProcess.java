@@ -34,7 +34,7 @@ public class DefaultVendorVettingProcess implements VendorVettingProcess {
 				sendApplicationToCompanyVendorManagement(application);
 			}
 		} finally {
-			applicationService.saveOrUpdate(requirementToUpdate);
+//			applicationService.saveOrUpdate(requirementToUpdate);
 		}
 	}
 

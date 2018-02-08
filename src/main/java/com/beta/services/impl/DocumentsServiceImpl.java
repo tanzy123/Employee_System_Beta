@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Propagation;
 import com.beta.dao.DocDao;
 import com.beta.dao.JPADAO;
 import com.beta.entity.Documents;
-import com.beta.entity.VendorReference;
+//<<<<<<< HEAD:src/main/java/com/beta/services/impl/DocServiceImpl.java
 import com.beta.exception.VendorMgmtException;
 import com.beta.services.DocumentsService;
 

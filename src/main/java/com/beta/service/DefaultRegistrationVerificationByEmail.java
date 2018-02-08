@@ -40,8 +40,8 @@ public class DefaultRegistrationVerificationByEmail implements RegistrationServi
 			
 			e.printStackTrace();
 		}
-		
-		return TokenComparison(tokenFromUI);
+		return false;
+//		return TokenComparison(tokenFromUI);
 	
 
 }
@@ -59,9 +59,11 @@ public class DefaultRegistrationVerificationByEmail implements RegistrationServi
 		//select p.token from company c join c.CompanyAdministor p where companyEmail=:companyEmail
 		CompanyAdministrator companyAdmin=new CompanyAdministrator();
 		
+		//@NamedQuery(name="findToken", query="select p.token from company c join c.CompanyAdministor p where companyEmail=:companyEmail") 
 		
 		
-		if(token==companyadministorToken.getToken) return true;
+		
+		if(token==companyadministorToken.getToken()) return true;
 		else return false;
 	}
 

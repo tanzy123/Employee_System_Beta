@@ -11,41 +11,36 @@ import org.springframework.stereotype.Repository;
 import com.beta.dao.ApplicationDao;
 import com.beta.entity.Application;
 
-
 @Repository("ApplicationDAO")
-public class ApplicationDaoImpl extends JpaDAOImpl<Long, Application> implements ApplicationDao  {
+public class ApplicationDaoImpl extends JpaDAOImpl<Long, Application> implements ApplicationDao {
 
-@Autowired
-EntityManagerFactory entityManagerFactory;
+	@Autowired
+	EntityManagerFactory entityManagerFactory;
 
-@PersistenceContext(unitName="VendorManagementPersistentUnit")
-private EntityManager entityManager;
+	@PersistenceContext(unitName = "VendorManagementPersistentUnit")
+	private EntityManager entityManager;
 
-public EntityManager getEntityManager() {
-	return entityManager;
-}
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
 
-public EntityManagerFactory getEntityManagerFactory() {
-	return entityManagerFactory;
-}
+	public EntityManagerFactory getEntityManagerFactory() {
+		return entityManagerFactory;
+	}
 
-@PostConstruct
-public void init()
-{
-	super.setEntityManager(entityManager);
-	super.setEntityManagerFactory(entityManagerFactory);
-}
+	@PostConstruct
+	public void init() {
+		super.setEntityManager(entityManager);
+		super.setEntityManagerFactory(entityManagerFactory);
+	}
 
-public void setEntityManager(EntityManager em) {
-	this.entityManager = em;
-	super.setEntityManager(entityManager);
-}
+	public void setEntityManager(EntityManager em) {
+		this.entityManager = em;
+		super.setEntityManager(entityManager);
+	}
 
-public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
-	this.entityManagerFactory = entityManagerFactory;
-}
+	public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
+		this.entityManagerFactory = entityManagerFactory;
+	}
 
-
-
-	
 }

@@ -9,10 +9,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name="Company.findByNameAndRefNo",
+                query="SELECT c FROM Company c where c.companyReferenceNumber = :companyReferenceNumber"
+                		+ " AND c.companyName = :companyName"),
+})
 public class Company implements Serializable{
+
 
 	/**
 	 * 
@@ -23,7 +31,7 @@ public class Company implements Serializable{
 	@GeneratedValue
 	private Long companyPrimaryId;
 
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String companyReferenceNumber;
 
 	@Column(nullable = false)
