@@ -55,6 +55,12 @@ public class Category {
 	public void setCompanyReferenceNumber(String companyReferenceNumber) {
 		this.companyReferenceNumber = companyReferenceNumber;
 	}
+
+	@Override
+	public String toString() {
+		return "Category [categoryId=" + categoryId + ", companyReferenceNumber=" + companyReferenceNumber
+				+ ", categoryName=" + categoryName + "]";
+	}
 	
 	
 }

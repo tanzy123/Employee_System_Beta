@@ -13,6 +13,7 @@ import com.beta.entity.Documents;
 
 @Repository("DocumentJPADAO")
 public class DocumentsDaoImpl  extends JpaDAOImpl<Long, Documents> implements DocDao{
+	
 	@Autowired
     EntityManagerFactory entityManagerFactory;
 	
@@ -29,8 +30,6 @@ public class DocumentsDaoImpl  extends JpaDAOImpl<Long, Documents> implements Do
         super.setEntityManagerFactory(entityManagerFactory);
         super.setEntityManager(entityManager);
     }
-
-    
 
 	public EntityManagerFactory getEntityManagerFactory() {
 		return entityManagerFactory;

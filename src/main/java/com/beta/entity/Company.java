@@ -33,7 +33,7 @@ public class Company implements Serializable{
 	@GeneratedValue
 	private Long companyPrimaryId;
 
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String companyReferenceNumber;
 
 	@Column(nullable = false)

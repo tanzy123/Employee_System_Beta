@@ -46,6 +46,7 @@ public class CategoryServiceImpl extends BaseServiceImpl<Long, Category> impleme
 
 	@Override
 	public void save(Category entity) throws VendorMgmtException {
+
 		validateCategory(entity);
 		if (entity.getCategoryId() == null)
 			dao.persist(entity);
@@ -55,14 +56,17 @@ public class CategoryServiceImpl extends BaseServiceImpl<Long, Category> impleme
 
 	@Override
 	public void update(Category entity) throws VendorMgmtException {
+
 		validateCategory(entity);
 		Category category = dao.findById(entity.getCategoryId());
 		category.setCategoryName(entity.getCategoryName());
 		dao.merge(category);
+
 	}
 
 	@Override
 	public void saveOrUpdate(Category entity) throws VendorMgmtException {
+
 		validateCategory(entity);
 		if (entity.getCategoryId() == null) {
 			Category category = findByNameAndCompanyRef(entity.getCategoryName(), entity.getCompanyReferenceNumber());
@@ -105,3 +109,4 @@ public class CategoryServiceImpl extends BaseServiceImpl<Long, Category> impleme
 			throw new VendorMgmtException("Invalid company entered while validating category");
 	}
 }
+		

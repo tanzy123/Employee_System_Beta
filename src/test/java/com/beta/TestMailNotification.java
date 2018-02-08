@@ -12,7 +12,7 @@ import com.beta.service.NotificationService;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:appContext.xml"})
 @Transactional
-public class TestNotification {
+public class TestMailNotification {
 	@Autowired
 	NotificationService notificationService;
 	
