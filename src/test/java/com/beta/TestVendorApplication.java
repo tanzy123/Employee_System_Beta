@@ -77,8 +77,8 @@ public class TestVendorApplication {
 		app1=ven.generateVendorApplication(app);
 		
 		assertEquals(ApplicationStatus.PENDING, app1.getApplicationStatus());
-		assertEquals(applicationDate,app1.getApplicationDate());
-		assertEquals(modifiedDate,app1.getModifiedDate());
+		assertEquals(sdf.format(applicationDate),sdf.format(app1.getApplicationDate()));
+		assertEquals(sdf.format(modifiedDate),sdf.format(app1.getModifiedDate()));
 	}
 	
 	@Test

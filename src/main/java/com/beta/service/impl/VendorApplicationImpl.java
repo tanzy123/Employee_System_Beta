@@ -38,14 +38,13 @@ public class VendorApplicationImpl implements VendorApplication {
 	@Override
 	public Application generateVendorApplication(Application application) throws ParseException {
 		// There are some fields not inserted by vendor or staff, hence this method will generate the rest
+		String uniqueKey = "";
+		do {
+		uniqueKey = UUID.randomUUID().toString();
+		} while (appservice.findByApplicationRefNo(uniqueKey)!=null);
 		
-		String uniqueKey = UUID.randomUUID().toString();
-	
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		
-		Date applicationDate = sdf.parse(sdf.format(new Date()));
-		Date modifiedDate = sdf.parse(sdf.format(new Date()));
-		
+		Date applicationDate = new Date();
+		Date modifiedDate = new Date();
 		application.setApplicationRef(uniqueKey);
 		application.setApplicationStatus(ApplicationStatus.PENDING);
 		application.setApplicationDate(applicationDate);
