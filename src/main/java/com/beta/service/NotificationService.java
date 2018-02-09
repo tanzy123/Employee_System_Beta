@@ -1,10 +1,19 @@
 package com.beta.service;
 
+import java.io.IOException;
+
+import com.beta.PurposeType;
+
 
 public interface NotificationService {
 	
-	public void sendMail(String to, String cc[], String subject,String msg) throws Exception;
+	public void sendMailCC(String to, String cc[], String subject,String msg) throws Exception;
 	
 	public void SmsService() throws Exception;
+
+	public void sendMail(String to, String subject,String msg) throws Exception;
+	
+	public void sendEmailWithPurposeCC(String to, String cc[], String subject,String msg,String msgFromPreviousVettor,PurposeType purpose) throws Exception;
+	
 
 }
