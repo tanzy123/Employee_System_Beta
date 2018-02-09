@@ -6,6 +6,7 @@ import java.util.Random;
 
 import javax.persistence.PersistenceContext;
 
+import com.beta.PurposeType;
 import com.beta.dao.CompanyDao;
 import com.beta.entity.Company;
 import com.beta.entity.CompanyAdministrator;
@@ -33,9 +34,11 @@ public class DefaultRegistrationVerificationByEmail implements RegistrationServi
 		String message="This is your OTP : "+token;
 		UserAccount userAccount= new UserAccount();
 		userAccount.setToken(token);
+		String cc[]={};
+		String vetter="";
 		try 
 		{
-			notificationService.sendMail(company.getCompanyEmail(), null, subject, message);
+			notificationService.sendEmailWithPurposeCC(company.getCompanyEmail(), cc, subject, message,vetter, PurposeType.CompanyRegistrationEmailVerification);
 		} catch (Exception e) {
 			
 			e.printStackTrace();
