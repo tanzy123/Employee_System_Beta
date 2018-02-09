@@ -5,7 +5,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -23,6 +25,9 @@ import com.beta.services.CompanyService;
 @Transactional
 public class JPACategoryServiceTest {
 
+	@Rule
+	public ExpectedException expectedEx = ExpectedException.none();
+	
 	@Autowired
 	CategoryService service;
 	
@@ -43,13 +48,19 @@ public class JPACategoryServiceTest {
 		assertThat(service.findAll().size(), is(listSize+1));
 	}
 	
-	@Test(expected=VendorMgmtException.class)
+	@Test
 	public void testAddWithoutCompanyRefInCategory() {
+		expectedEx.expect(VendorMgmtException.class);
+	    expectedEx.expectMessage("Category name or company reference number not found");
+		
 		service.save(SAMPLE_CATEGORY4);
 	}
 	
-	@Test(expected=VendorMgmtException.class)
+	@Test
 	public void testAddWithInvalidCompanyRefInCategory() {
+		expectedEx.expect(VendorMgmtException.class);
+	    expectedEx.expectMessage("Invalid company entered while validating category");
+		
 		SAMPLE_CATEGORY3.setCompanyReferenceNumber("asd");
 		service.save(SAMPLE_CATEGORY3);
 	}

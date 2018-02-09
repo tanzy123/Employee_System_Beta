@@ -5,7 +5,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -20,7 +22,10 @@ import com.beta.services.CompanyService;
 @ContextConfiguration(locations = {"classpath:appContext.xml"})
 @Transactional
 public class JPAApplicationServiceTest {
-
+	
+	@Rule
+	public ExpectedException expectedEx = ExpectedException.none();
+	
 	@Autowired
 	ApplicationService service;
 	

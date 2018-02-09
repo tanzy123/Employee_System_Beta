@@ -1,15 +1,18 @@
 package com.beta;
 
-import static com.beta.TestConstant.*;
 import static com.beta.TestConstant.SAMPLE_DOCUMENT_LIST;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -17,11 +20,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import com.beta.entity.Application;
 import com.beta.entity.ApplicationStatus;
 import com.beta.entity.Category;
 import com.beta.entity.Company;
+import com.beta.exception.VendorMgmtException;
 import com.beta.service.VendorApplication;
 import com.beta.services.CompanyService;
 
@@ -35,6 +38,9 @@ public class TestVendorApplication {
 	
 	@Autowired
 	CompanyService comService;
+	
+	@Rule
+	public ExpectedException expectedEx = ExpectedException.none();
 	
 	@Before
 	public void TestCOYPersist() {
@@ -82,7 +88,7 @@ public class TestVendorApplication {
 	}
 	
 	@Test
-	public void TestApplicationValidator() throws ParseException {
+	public void TestPassApplicationValidator() throws ParseException {
 	
 		Category cat = new Category();
 		
@@ -101,16 +107,19 @@ public class TestVendorApplication {
 		app.setVendorReferenceNumber("BB-12");
 		
 		app1=ven.generateVendorApplication(app);
-		String results = ven.validateVendorApplication(app1);
-		
-		System.out.println(results);
-		
-		assertEquals("APPLICATION UPLOADED SUCCESSFULLY",results);
+		assertThat(app1.getCategory(),is(cat));
+		assertThat(app1.getCompanyReferenceNumber(),is("AA-11"));
+		assertThat(app1.getPOC(),is("Yi Fan"));
+		assertThat(app1.getVendorReferenceNumber(),is("BB-12"));
 		
 	}
 	
 	@Test
-	public void TestApplicationValidator2() throws ParseException {
+	public void TestIncompleteApplication() throws Exception {
+		
+		expectedEx.expect(VendorMgmtException.class);
+	    expectedEx.expectMessage("MANDATORY FIELDS ARE NOT ALL FILLED UP");
+	    
 		//This test is supposed to fail because CompanyRefNo. is not inside
 		Category cat = new Category();
 		
@@ -119,7 +128,6 @@ public class TestVendorApplication {
 		cat.setCompanyReferenceNumber("AA-11");
 		
 		Application app = new Application();
-		Application app1 = new Application();
 		app.setApplicationId(1L);
 		app.setCategory(cat);
 	//	app.setCompanyReferenceNumber("AA-11");
@@ -128,17 +136,16 @@ public class TestVendorApplication {
 		app.setVendorPeriod(1L);
 		app.setVendorReferenceNumber("BB-12");
 		
-		app1=ven.generateVendorApplication(app);
-		String results = ven.validateVendorApplication(app1);
-		
-		
-		
-		assertEquals("MANDATORY FIELDS ARE NOT ALL FILLED UP",results);
+		ven.validateVendorApplication(app);
 		
 	}
 	
 	@Test
-	public void TestApplicationValidator3() throws ParseException {
+	public void TestInvalidCategory() throws Exception {
+		
+		expectedEx.expect(VendorMgmtException.class);
+	    expectedEx.expectMessage("VENDOR CATEGORY DO NOT FALL INTO COMPANY'S REQUESTED CATEGORY LIST");
+		
 		//This test is supposed to fail because Category don't match SQL records
 		Category cat = new Category();
 		
@@ -147,7 +154,6 @@ public class TestVendorApplication {
 		cat.setCompanyReferenceNumber("AA-11");
 		
 		Application app = new Application();
-		Application app1 = new Application();
 		app.setApplicationId(1L);
 		app.setCategory(cat);
 		app.setCompanyReferenceNumber("AA-11");
@@ -156,16 +162,16 @@ public class TestVendorApplication {
 		app.setVendorPeriod(1L);
 		app.setVendorReferenceNumber("BB-12");
 		
-		app1=ven.generateVendorApplication(app);
-		String results = ven.validateVendorApplication(app1);
-		
-		
-		assertEquals("VENDOR CATEGORY DO NOT FALL INTO COMPANY'S REQUESTED CATEGORY LIST",results);
+		ven.validateVendorApplication(app);
 		
 	}
 	
 	@Test
-	public void TestApplicationValidator4() throws ParseException {
+	public void TestInvalidVendorReference() throws Exception {
+		
+		expectedEx.expect(VendorMgmtException.class);
+	    expectedEx.expectMessage("VENDOR REFERENCE NUMBER CANNOT BE THE SAME AS COMPANY REFERENCE NUMBER");
+	    
 		//This test is supposed to fail because VENDORREF== COMPANYREF
 		Category cat = new Category();
 		
@@ -174,7 +180,6 @@ public class TestVendorApplication {
 		cat.setCompanyReferenceNumber("AA-11");
 		
 		Application app = new Application();
-		Application app1 = new Application();
 		app.setApplicationId(1L);
 		app.setCategory(cat);
 		app.setCompanyReferenceNumber("AA-11");
@@ -183,11 +188,7 @@ public class TestVendorApplication {
 		app.setVendorPeriod(1L);
 		app.setVendorReferenceNumber("AA-11");
 		
-		app1=ven.generateVendorApplication(app);
-		String results = ven.validateVendorApplication(app1);
-		
-		
-		assertEquals("VENDOR REFERENCE NUMBER CANNOT BE THE SAME AS COMPANY REFERENCE NUMBER",results);
+		ven.validateVendorApplication(app);
 		
 	}
 
