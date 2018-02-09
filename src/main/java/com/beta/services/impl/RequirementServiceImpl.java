@@ -19,7 +19,7 @@ import com.beta.entity.Requirement;
 import com.beta.exception.VendorMgmtException;
 import com.beta.services.RequirementService;
 
-@Service
+@Service("RequirementJPAService")
 @org.springframework.transaction.annotation.Transactional(propagation= Propagation.REQUIRED, rollbackFor=VendorMgmtException.class)
 public class RequirementServiceImpl extends BaseServiceImpl<Long, Requirement> implements RequirementService {
 
@@ -49,6 +49,24 @@ public class RequirementServiceImpl extends BaseServiceImpl<Long, Requirement> i
 		params.put("userName", userName);
 		params.put("status", status);
 		return dao.findByNamedQueryAndNamedParams("Requirement.findByStatusAndUsername", params);
+	}
+
+	@Override
+	public void save(Requirement entity) throws VendorMgmtException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(Requirement entity) throws VendorMgmtException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void saveOrUpdate(Requirement entity) throws VendorMgmtException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -15,7 +15,7 @@ import com.beta.exception.VendorMgmtException;
 import com.beta.services.CompanyAdminstratorService;
 
 
-@Service("CompanyAdminstratorService")
+@Service("CompanyAdminstratorJPAService")
 @org.springframework.transaction.annotation.Transactional(propagation= Propagation.REQUIRED, rollbackFor=VendorMgmtException.class)
 public class CompanyAdminstratorServiceImpl extends BaseServiceImpl<Long, CompanyAdministrator> implements CompanyAdminstratorService {
 
@@ -36,6 +36,24 @@ public class CompanyAdminstratorServiceImpl extends BaseServiceImpl<Long, Compan
     public void setEntityManagerOnDao(EntityManager entityManager){
     	dao.setEntityManager(entityManager);
     }
+
+	@Override
+	public void save(CompanyAdministrator entity) throws VendorMgmtException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(CompanyAdministrator entity) throws VendorMgmtException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void saveOrUpdate(CompanyAdministrator entity) throws VendorMgmtException {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

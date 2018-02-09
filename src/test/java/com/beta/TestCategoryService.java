@@ -1,37 +1,31 @@
 package com.beta;
 
-<<<<<<< HEAD
-=======
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 import java.util.ArrayList;
->>>>>>> c522fbff2913c959a8540d001f292fe57156e79e
 import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
-=======
+
 import org.springframework.test.annotation.Rollback;
->>>>>>> c522fbff2913c959a8540d001f292fe57156e79e
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.beta.entity.Category;
 import com.beta.services.CategoryService;
-<<<<<<< HEAD
 import com.beta.services.impl.CategoryServiceImpl;
-=======
->>>>>>> c522fbff2913c959a8540d001f292fe57156e79e
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:appContext.xml"})
 @Transactional
 public class TestCategoryService {
-<<<<<<< HEAD
+
 
 	@Autowired
 	CategoryService cat = new CategoryServiceImpl();
@@ -44,9 +38,6 @@ public class TestCategoryService {
 			System.out.println(c);
 		}
 	}
-	
-	
-=======
 	
 	@Autowired
 	CategoryService categoryService;
@@ -97,8 +88,5 @@ public class TestCategoryService {
 		assertNull(category);
 		
 	}
-
-
->>>>>>> c522fbff2913c959a8540d001f292fe57156e79e
 	
 }

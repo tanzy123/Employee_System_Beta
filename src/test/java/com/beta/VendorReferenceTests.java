@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.beta.entity.VendorReference;
-import com.beta.services.VendorService;
+import com.beta.services.VendorReferenceService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:appContext.xml"})
@@ -17,7 +17,7 @@ import com.beta.services.VendorService;
 public class VendorReferenceTests {
 
 	@Autowired
-	VendorService vendorService;
+	VendorReferenceService vendorService;
 	
 	@Test
 	@Rollback(value=false)

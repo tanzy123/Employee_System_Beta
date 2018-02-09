@@ -1,5 +1,7 @@
 package com.beta.services;
 
-public interface EmployeeService extends BaseService {
+import com.beta.entity.Employee;
+
+public interface EmployeeService extends BaseService<Long, Employee> {
 
 }

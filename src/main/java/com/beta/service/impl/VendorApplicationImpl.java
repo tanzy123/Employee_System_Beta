@@ -24,8 +24,6 @@ import com.beta.services.CompanyService;
 @org.springframework.transaction.annotation.Transactional(propagation= Propagation.REQUIRED, rollbackFor=VendorMgmtException.class)
 public class VendorApplicationImpl implements VendorApplication {
 
-	private static final ApplicationStatus Pending = null;
-
 	@Autowired
 	CategoryService categoryService;
 	
@@ -38,14 +36,13 @@ public class VendorApplicationImpl implements VendorApplication {
 	@Override
 	public Application generateVendorApplication(Application application) throws ParseException {
 		// There are some fields not inserted by vendor or staff, hence this method will generate the rest
+		String uniqueKey = "";
+		do {
+		uniqueKey = UUID.randomUUID().toString();
+		} while (appservice.findByApplicationRefNo(uniqueKey)!=null);
 		
-		String uniqueKey = UUID.randomUUID().toString();
-	
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		
-		Date applicationDate = sdf.parse(sdf.format(new Date()));
-		Date modifiedDate = sdf.parse(sdf.format(new Date()));
-		
+		Date applicationDate = new Date();
+		Date modifiedDate = new Date();
 		application.setApplicationRef(uniqueKey);
 		application.setApplicationStatus(ApplicationStatus.PENDING);
 		application.setApplicationDate(applicationDate);
@@ -54,9 +51,8 @@ public class VendorApplicationImpl implements VendorApplication {
 		return application;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public String validateVendorApplication(Application application) {
+	public void validateVendorApplication(Application application) throws VendorMgmtException{
 		
 		List <Category> category = categoryService.findAll();
 		
@@ -69,24 +65,24 @@ public class VendorApplicationImpl implements VendorApplication {
 		
 		try {
 			if (companyRef.equals(null)||vendorCategory.equals(null)||poc.equals(null)||vendorPeriod.equals(null)||vendorRef.equals(null)) {
-			return "MANDATORY FIELDS ARE NOT ALL FILLED UP";
+			throw new VendorMgmtException("MANDATORY FIELDS ARE NOT ALL FILLED UP");
 		}else {
 				if (vendorRef.equals(companyRef)) {
-					return "VENDOR REFERENCE NUMBER CANNOT BE THE SAME AS COMPANY REFERENCE NUMBER";
+					throw new VendorMgmtException("VENDOR REFERENCE NUMBER CANNOT BE THE SAME AS COMPANY REFERENCE NUMBER");
 				}
 			
 				else {
 				for (Category c: category) {
 				if (vendorCategory.getCategoryName().equals(c.getCategoryName()) && vendorCategory.getCompanyReferenceNumber().equals(application.getCompanyReferenceNumber())) { 
-					appservice.saveOrUpdate(application); //why cannot saveOrUpdate????
-					return "APPLICATION UPLOADED SUCCESSFULLY";
+					appservice.saveOrUpdate(application);
+//					APPLICATION UPLOADED SUCCESSFULLY
 				}
 				}
-				return "VENDOR CATEGORY DO NOT FALL INTO COMPANY'S REQUESTED CATEGORY LIST";
+				throw new VendorMgmtException("VENDOR CATEGORY DO NOT FALL INTO COMPANY'S REQUESTED CATEGORY LIST");
 			}
 		}
 		}catch (NullPointerException e) {
-			return "MANDATORY FIELDS ARE NOT ALL FILLED UP";
+			throw new VendorMgmtException("MANDATORY FIELDS ARE NOT ALL FILLED UP");
 		}
 	} 
 }

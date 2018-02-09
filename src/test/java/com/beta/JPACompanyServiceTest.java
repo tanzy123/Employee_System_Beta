@@ -4,7 +4,9 @@ import static com.beta.TestConstant.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,6 +21,9 @@ import com.beta.services.CompanyService;
 @Transactional
 public class JPACompanyServiceTest {
 
+	@Rule
+	public ExpectedException expectedEx = ExpectedException.none();
+	
 	@Autowired
 	CompanyService service;
 	

@@ -1,6 +1,6 @@
 package com.beta.services;
 
+import com.beta.entity.Documents;
 
-public interface DocumentsService extends BaseService {
-//	public void saveOrUpdate(Role role) throws VendorMgmtException;
+public interface DocumentsService extends BaseService<Long, Documents> {
 }

@@ -16,7 +16,7 @@ import com.beta.services.RoleService;
 
 
 
-@Service("roleService")
+@Service("RoleJPAService")
 @org.springframework.transaction.annotation.Transactional(propagation= Propagation.REQUIRED, rollbackFor=VendorMgmtException.class)
 public class RoleServiceImpl extends BaseServiceImpl<Long, Role> implements RoleService{
 	
@@ -45,6 +45,24 @@ public class RoleServiceImpl extends BaseServiceImpl<Long, Role> implements Role
 		// TODO Auto-generated method stub
 		dao.persist(role); 
 	}*/
+
+	@Override
+	public void save(Role entity) throws VendorMgmtException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(Role entity) throws VendorMgmtException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void saveOrUpdate(Role entity) throws VendorMgmtException {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 
