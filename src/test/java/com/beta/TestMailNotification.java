@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.beta.entity.EmailPurposeType;
 import com.beta.service.NotificationService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -33,49 +34,49 @@ public class TestMailNotification {
 	@Test
 	public void testSendEmailWithPurposeIsVendorRequestToCompanyWithCC() throws Exception{
 		String cc[] = {"Yin.Yifan@cognizant.com"};
-		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Test Mail", "Vendor Request To Company is generated!","Test", PurposeType.VendorRequestToCompany);
+		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Test Mail", "Vendor Request To Company is generated!","Test", EmailPurposeType.VendorRequestToCompany);
 		
 	}
 	
 	@Test
 	public void testSendEmailWithPurposeIsVendorApplicationStatusWithCC() throws Exception{
 		String cc[] = {"Yin.Yifan@cognizant.com"};
-		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Test Mail", "Vendor Application is generated!","Test", PurposeType.VendorApplicationStatus);
+		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Test Mail", "Vendor Application is generated!","Test", EmailPurposeType.VendorApplicationStatus);
 		
 	}
 	
 	@Test
 	public void testSendEmailWithPurposeIsVendorApplicationAcceptedWithCC() throws Exception{
 		String cc[] = {"Yin.Yifan@cognizant.com"};
-		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Test Mail", "Vendor Application acceptance is generated!","Test", PurposeType.VendorApplicationAccepted);
+		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Test Mail", "Vendor Application acceptance is generated!","Test", EmailPurposeType.VendorApplicationAccepted);
 		
 	}
 	
 	@Test
 	public void testSendEmailWithPurposeIsVendorApplicationRequestRejectedWithCC() throws Exception{
 		String cc[] = {"Yin.Yifan@cognizant.com"};
-		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Test Mail", "Vendor Application rejection is generated!","Test", PurposeType.VendorApplicationRejected);
+		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Test Mail", "Vendor Application rejection is generated!","Test", EmailPurposeType.VendorApplicationRejected);
 		
 	}
 	
 	@Test
 	public void testSendEmailWithPurposeIsCompanyRegistrationEmailVerificationWithCC() throws Exception{
 		String cc[] = {"Yin.Yifan@cognizant.com"};
-		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Company RegistrationEmail Verification", "Company Registration Email Verificationn is generated!","Test", PurposeType.CompanyRegistrationEmailVerification);
+		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Company RegistrationEmail Verification", "Company Registration Email Verificationn is generated!","Test", EmailPurposeType.CompanyRegistrationEmailVerification);
 		
 	}
 	
 	@Test
 	public void testSendEmailWithPurposeIsServiceRequestFromCompanyToVendorWithCC() throws Exception{
 		String cc[] = {"Yin.Yifan@cognizant.com"};
-		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Service Request From Company To Vendor", "Service Request From Company To Vendor!","Test", PurposeType.ServiceRequestFromCompanyToVendor);
+		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Service Request From Company To Vendor", "Service Request From Company To Vendor!","Test", EmailPurposeType.ServiceRequestFromCompanyToVendor);
 		
 	}
 	
 	@Test
-	public void testSendEmailWithPurposeIsSendToNextEmployeeVettorWithCC() throws Exception{
+	public void testSendEmailWithPurposeIsSendToNextEmployeeVettorWithoutCC() throws Exception{
 		String cc[] = {};
-		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Send To Next Employee Vettor", "Send To Next Employee Vettor!","Test", PurposeType.SendToNextEmployeeVettor);
+		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Send To Next Employee Vettor", "Send To Next Employee Vettor!","Test", EmailPurposeType.SendToNextEmployeeVettor);
 		
 	}
 	

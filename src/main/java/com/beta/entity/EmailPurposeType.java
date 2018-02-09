@@ -1,6 +1,6 @@
-package com.beta;
+package com.beta.entity;
 
-public enum PurposeType {
+public enum EmailPurposeType {
 
 	
 	VendorRequestToCompany , VendorApplicationStatus, VendorApplicationRejected, VendorApplicationAccepted,

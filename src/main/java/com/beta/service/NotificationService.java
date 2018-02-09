@@ -2,7 +2,7 @@ package com.beta.service;
 
 import java.io.IOException;
 
-import com.beta.PurposeType;
+import com.beta.entity.EmailPurposeType;
 
 
 public interface NotificationService {
@@ -13,7 +13,7 @@ public interface NotificationService {
 
 	public void sendMail(String to, String subject,String msg) throws Exception;
 	
-	public void sendEmailWithPurposeCC(String to, String cc[], String subject,String msg,String msgFromPreviousVettor,PurposeType purpose) throws Exception;
+	public void sendEmailWithPurposeCC(String to, String cc[], String subject,String msg,String msgFromPreviousVettor,EmailPurposeType purpose) throws Exception;
 	
 
 }
