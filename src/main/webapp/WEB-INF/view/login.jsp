@@ -4,14 +4,21 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Vendor Management System</title>
 </head>
 <body>
 <br>
 <form action="LoginController" method="post">
-Enter username :<input type="text" name="username"> <br>
-Enter password :<input type="password" name="password"><br>
+<select name="selectLoginType" id="selectLoginType">
+<option value="EMPLOYEE">EMPLOYEE</option>
+<option value="COMPANY_ADMINISTRATOR">COMPANY ADMINISTRATOR</option><br>
+</select>
+Enter username :<input type="text" id="username" name="username"> <br>
+Enter password :<input type="password" id="password" name="password"><br>
+
 <input type="submit" value="Login">
+<input type="submit" value="Register">
+
 </form>
 </body>
 </html>

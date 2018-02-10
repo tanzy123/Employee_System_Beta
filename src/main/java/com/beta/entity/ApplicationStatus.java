@@ -2,5 +2,5 @@ package com.beta.entity;
 
 public enum ApplicationStatus {
 
-	APPROVE,REJECT,PENDING;
+	APPROVE,REJECT,VETTING,PENDING
 }
