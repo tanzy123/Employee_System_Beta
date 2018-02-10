@@ -30,13 +30,13 @@ public class JPACompanyServiceTest {
 	@Test
 	public void testAddCompany() {
 		final int listSize = service.findAll().size();
-		service.save(SAMPLE_COMPANY);
+		service.saveOrUpdate(SAMPLE_COMPANY);
 		assertThat(service.findAll().size(), is(listSize+1));
 	}
 	
 	@Test
 	public void testAddAndRemoveCompany() {
-		service.save(SAMPLE_COMPANY);
+		service.saveOrUpdate(SAMPLE_COMPANY);
 		final int listSize = service.findAll().size();
 		Company company = (Company)service.find(SAMPLE_COMPANY.getCompanyPrimaryId());
 		service.delete(company.getCompanyPrimaryId());
@@ -45,6 +45,7 @@ public class JPACompanyServiceTest {
 
 	@Test
 	public void testAddAndUpdateCompany() {
+		int initialSize = service.findAll().size();
 		service.saveOrUpdate(SAMPLE_COMPANY);
 		Company company = new Company();
 		company.setCompanyName(SAMPLE_COMPANY.getCompanyName());
@@ -55,5 +56,6 @@ public class JPACompanyServiceTest {
 		System.out.println(updatedCompany);
 		assertThat(updatedCompany.getCompanyEmail(), is(SAMPLE_COMPANY.getCompanyEmail()));
 		assertThat(updatedCompany.getContactNumber(), is("123123"));
+		assertThat(service.findAll().size(), is(initialSize + 1));
 	}
 }

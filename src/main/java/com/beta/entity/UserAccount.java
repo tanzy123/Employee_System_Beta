@@ -17,11 +17,14 @@ public class UserAccount {
 
 	private String password;
 	
+	private String companyReferenceNumber;
+	
 	private Boolean isValidated;
 
-	public UserAccount(String userName, String password) {
+	public UserAccount(String userName, String password, String companyReferenceNumber) {
 		this.userName = userName;
 		this.password = password;
+		this.companyReferenceNumber = companyReferenceNumber;
 	}
 	
 	public UserAccount() {}
@@ -64,5 +67,13 @@ public class UserAccount {
 
 	public void setIsValidated(Boolean isValidated) {
 		this.isValidated = isValidated;
+	}
+
+	public String getCompanyReferenceNumber() {
+		return companyReferenceNumber;
+	}
+
+	public void setCompanyReferenceNumber(String companyReferenceNumber) {
+		this.companyReferenceNumber = companyReferenceNumber;
 	}
 }

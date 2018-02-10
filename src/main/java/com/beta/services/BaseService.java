@@ -26,8 +26,6 @@ public interface BaseService<Long,E> {
 	public List<E> findAll() throws VendorMgmtException;
     public List<E> find(int startFrom, int maxResults) throws VendorMgmtException;
 	
-    public void save(E entity) throws VendorMgmtException;
-    public void update(E entity) throws VendorMgmtException;
     public void saveOrUpdate(E entity) throws VendorMgmtException;
     
     /**

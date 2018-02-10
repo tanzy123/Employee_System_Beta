@@ -10,9 +10,10 @@ import com.beta.entity.ApplicationStatus;
 import com.beta.entity.ApprovalStatus;
 import com.beta.entity.Category;
 import com.beta.entity.Company;
+import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.Department;
 import com.beta.entity.Documents;
-import com.beta.entity.Employee;
+import com.beta.entity.EmployeeAccount;
 import com.beta.entity.Requirement;
 import com.beta.entity.Role;
 import com.beta.entity.VendorReference;
@@ -60,7 +61,9 @@ public class TestConstant {
 	
 	public static final Company SAMPLE_COMPANY;
 	
-	public static final Employee SAMPLE_EMPLOYEE;
+	public static final EmployeeAccount SAMPLE_EMPLOYEE;
+	
+	public static final CompanyAdministratorAccount SAMPLE_COMPANY_ADMINISTRATOR;
 	
 	static {
 		List<Role> roleList = new ArrayList<>();
@@ -132,9 +135,10 @@ public class TestConstant {
 				25000000L, SAMPLE_APPLICATION_LIST, 
 				SAMPLE_ROLE_LIST, SAMPLE_DEPARTMENT_LIST, SAMPLE_CATEGORY_LIST);
 		
-		SAMPLE_EMPLOYEE = new Employee("Employee123", "123123", 
+		SAMPLE_EMPLOYEE = new EmployeeAccount("Employee123", "123123", 
 				"645686", "hello@cognizant.com", "+54243325", 
 				"1231231", SAMPLE_ROLE1, SAMPLE_DEPARTMENT1);
 		
+		SAMPLE_COMPANY_ADMINISTRATOR = new CompanyAdministratorAccount("CTS222111", "asd", "CTS");
 	}
 }

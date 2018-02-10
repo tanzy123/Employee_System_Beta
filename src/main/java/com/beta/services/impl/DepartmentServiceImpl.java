@@ -39,18 +39,6 @@ public class DepartmentServiceImpl extends BaseServiceImpl<Long, Department> imp
     }
 
 	@Override
-	public void save(Department entity) throws VendorMgmtException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void update(Department entity) throws VendorMgmtException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void saveOrUpdate(Department entity) throws VendorMgmtException {
 		// TODO Auto-generated method stub
 		

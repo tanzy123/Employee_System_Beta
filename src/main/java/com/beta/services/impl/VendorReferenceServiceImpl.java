@@ -54,21 +54,4 @@ public class VendorReferenceServiceImpl extends BaseServiceImpl<Long, VendorRefe
 		
 		
 	}
-
-	@Override
-	public void save(VendorReference entity) throws VendorMgmtException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void update(VendorReference entity) throws VendorMgmtException {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	
-	
-	
 }

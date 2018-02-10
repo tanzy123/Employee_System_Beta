@@ -45,26 +45,6 @@ public class CategoryServiceImpl extends BaseServiceImpl<Long, Category> impleme
 	}
 
 	@Override
-	public void save(Category entity) throws VendorMgmtException {
-
-		validateCategory(entity);
-		if (entity.getCategoryId() == null)
-			dao.persist(entity);
-		else
-			dao.merge(entity);
-	}
-
-	@Override
-	public void update(Category entity) throws VendorMgmtException {
-
-		validateCategory(entity);
-		Category category = dao.findById(entity.getCategoryId());
-		category.setCategoryName(entity.getCategoryName());
-		dao.merge(category);
-
-	}
-
-	@Override
 	public void saveOrUpdate(Category entity) throws VendorMgmtException {
 
 		validateCategory(entity);

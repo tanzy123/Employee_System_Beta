@@ -67,7 +67,7 @@ public class Company implements Serializable{
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name="companyReferenceNumber", referencedColumnName="companyReferenceNumber")
-	private List<Employee> employees;
+	private List<EmployeeAccount> employees;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name="companyReferenceNumber", referencedColumnName="companyReferenceNumber")
@@ -75,7 +75,7 @@ public class Company implements Serializable{
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name="companyReferenceNumber", referencedColumnName="companyReferenceNumber")
-	private List<CompanyAdministrator> companyAdministrator;
+	private List<CompanyAdministratorAccount> companyAdministrator;
 
 	public Company(String companyReferenceNumber, String companyName, String companyAddress, String companyEmail,
 			String contactNumber, String companyWebsite, Long turnover,
@@ -205,11 +205,11 @@ public class Company implements Serializable{
 		this.companyEmail = companyEmail;
 	}
 
-	public List<Employee> getEmployees() {
+	public List<EmployeeAccount> getEmployees() {
 		return employees;
 	}
 
-	public void setEmployees(List<Employee> employees) {
+	public void setEmployees(List<EmployeeAccount> employees) {
 		this.employees = employees;
 	}
 
@@ -222,12 +222,12 @@ public class Company implements Serializable{
 	}
 
 
-	public List<CompanyAdministrator> getCompanyAdministrator() {
+	public List<CompanyAdministratorAccount> getCompanyAdministrator() {
 		return companyAdministrator;
 	}
 
 
-	public void setCompanyAdministrator(List<CompanyAdministrator> companyAdministrator) {
+	public void setCompanyAdministrator(List<CompanyAdministratorAccount> companyAdministrator) {
 		this.companyAdministrator = companyAdministrator;
 	}
 	
