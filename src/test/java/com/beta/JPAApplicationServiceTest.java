@@ -34,27 +34,28 @@ public class JPAApplicationServiceTest {
 	
 	@Before
 	public void initialize() {
-		companyService.save(SAMPLE_COMPANY);
+		companyService.saveOrUpdate(SAMPLE_COMPANY);
 	}
 	
 	@Test
 	public void testAddApplication() {
 		final int listSize = service.findAll().size();
-		service.save(SAMPLE_APPLICATION3);
+		service.saveOrUpdate(SAMPLE_APPLICATION3);
 		assertThat(service.findAll().size(), is(listSize+1));
 	}
 	
 	@Test
 	public void testAddAndRemoveApplication() {
-		service.save(SAMPLE_APPLICATION3);
+		service.saveOrUpdate(SAMPLE_APPLICATION3);
 		final int listSize = service.findAll().size();
-		Application application = (Application)service.find(SAMPLE_APPLICATION3.getApplicationId());
+		Application application = service.findByApplicationRefNo(SAMPLE_APPLICATION3.getApplicationRef());
 		service.delete(application.getApplicationId());
 		assertThat(service.findAll().size(), is(listSize-1));
 	}
 
 	@Test
 	public void testAddAndUpdateApplication() {
+		int initialSize = service.findAll().size();
 		service.saveOrUpdate(SAMPLE_APPLICATION3);
 		Application application = new Application();
 		application.setApplicationRef(SAMPLE_APPLICATION3.getApplicationRef());
@@ -63,5 +64,6 @@ public class JPAApplicationServiceTest {
 		Application updatedApplication = service.findByApplicationRefNo(SAMPLE_APPLICATION3.getApplicationRef());
 		assertThat(updatedApplication.getApplicationDate(), is(SAMPLE_APPLICATION3.getApplicationDate()));
 		assertThat(updatedApplication.getRemarks(), is("hello"));
+		assertThat(service.findAll().size(), is(initialSize + 1));
 	}
 }

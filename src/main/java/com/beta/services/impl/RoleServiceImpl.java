@@ -47,18 +47,6 @@ public class RoleServiceImpl extends BaseServiceImpl<Long, Role> implements Role
 	}*/
 
 	@Override
-	public void save(Role entity) throws VendorMgmtException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void update(Role entity) throws VendorMgmtException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void saveOrUpdate(Role entity) throws VendorMgmtException {
 		// TODO Auto-generated method stub
 		

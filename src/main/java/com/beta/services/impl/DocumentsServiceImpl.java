@@ -40,18 +40,6 @@ public class DocumentsServiceImpl extends BaseServiceImpl<Long, Documents> imple
     }
 
 	@Override
-	public void save(Documents entity) throws VendorMgmtException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void update(Documents entity) throws VendorMgmtException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void saveOrUpdate(Documents entity) throws VendorMgmtException {
 		// TODO Auto-generated method stub
 		

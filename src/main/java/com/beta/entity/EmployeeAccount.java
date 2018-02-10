@@ -7,15 +7,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Employee extends UserAccount {
+public class EmployeeAccount extends UserAccount {
 
 	private String employeeId;
 	
 	private String employeeEmail;
 	
 	private String contactNumber;
-
-	private String companyReferenceNumber;
 
 	@Enumerated(EnumType.STRING)
 	private LogInType logInType = LogInType.EMPLOYEE;
@@ -30,18 +28,17 @@ public class Employee extends UserAccount {
 
 	
 	
-	public Employee(String userName, String password, String employeeId, String employeeEmail, String contactNumber,
+	public EmployeeAccount(String userName, String password, String employeeId, String employeeEmail, String contactNumber,
 			String companyReferenceNumber, Role role, Department department) {
-		super(userName, password);
+		super(userName, password, companyReferenceNumber);
 		this.employeeId = employeeId;
 		this.employeeEmail = employeeEmail;
 		this.contactNumber = contactNumber;
-		this.companyReferenceNumber = companyReferenceNumber;
 		this.role = role;
 		this.department = department;
 	}
 
-	public Employee() {}
+	public EmployeeAccount() {}
 
 	public String getEmployeeId() {
 		return employeeId;
@@ -85,14 +82,6 @@ public class Employee extends UserAccount {
 
 	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
-	}
-
-	public String getCompanyReferenceNumber() {
-		return companyReferenceNumber;
-	}
-
-	public void setCompanyReferenceNumber(String companyReferenceNumber) {
-		this.companyReferenceNumber = companyReferenceNumber;
 	}
 
 }

@@ -8,12 +8,12 @@ import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.beta.dao.CompanyAdministratorDao;
-import com.beta.entity.CompanyAdministrator;
+import com.beta.dao.CompanyAdministratorAccountDao;
+import com.beta.entity.CompanyAdministratorAccount;
 
 
-@Repository("CompanyAdminstratorJPADAO")
-public class CompanyAdminstratorDaoImpl extends JpaDAOImpl<Long,CompanyAdministrator> implements CompanyAdministratorDao{
+@Repository("CompanyAdminstratorAccountJPADAO")
+public class CompanyAdminstratorAccountDaoImpl extends JpaDAOImpl<Long,CompanyAdministratorAccount> implements CompanyAdministratorAccountDao{
 
 	@Autowired
 	EntityManagerFactory entityManagerFactory;
