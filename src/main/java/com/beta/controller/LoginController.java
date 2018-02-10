@@ -25,20 +25,20 @@ public class LoginController {
     mav.addObject("login", new UserAccount());
     return mav;
   }
-  @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
-  public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response,
-  @ModelAttribute("login") UserAccount userAccount) {
-    ModelAndView mav = null;
-    //User user = userService.validateUser(login);
-    if (userAccount.getUserName().equalsIgnoreCase("yifan") && userAccount.getPassword().equalsIgnoreCase("123")) {
-    	String url = "dashboard";
-    mav = new ModelAndView(url);
-    mav.addObject("firstname", "John");
-    } else {
-    	String url = "error";
-    mav = new ModelAndView(url);
-    mav.addObject("message", "Username or Password is wrong!!");
-    }
-    return mav;
-  }
+//  @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
+//  public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response,
+//  @ModelAttribute("login") UserAccount userAccount) {
+//    ModelAndView mav = null;
+//    //User user = userService.validateUser(login);
+//    if (userAccount.getUserName().equalsIgnoreCase("yifan") && userAccount.getPassword().equalsIgnoreCase("123")) {
+//    	String url = "dashboard";
+//    mav = new ModelAndView(url);
+//    mav.addObject("firstname", "John");
+//    } else {
+//    	String url = "error";
+//    mav = new ModelAndView(url);
+//    mav.addObject("message", "Username or Password is wrong!!");
+//    }
+//    return mav;
+//  }
 }
