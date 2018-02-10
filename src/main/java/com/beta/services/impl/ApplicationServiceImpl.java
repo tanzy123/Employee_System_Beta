@@ -29,7 +29,6 @@ public class ApplicationServiceImpl extends BaseServiceImpl<Long, Application> i
 	@PostConstruct
 	public void init() throws Exception {
 		super.setDAO((JPADAO) dao);
-
 	}
 
 	@PreDestroy
