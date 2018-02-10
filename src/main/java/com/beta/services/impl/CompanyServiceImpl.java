@@ -40,22 +40,12 @@ public class CompanyServiceImpl extends BaseServiceImpl<Long, Company> implement
 		dao.setEntityManager(entityManager);
 	}
 
-	@Override
 	public void save(Company entity) throws VendorMgmtException {
 		if (entity.getCompanyPrimaryId() == null)
 			dao.persist(entity);
 		else
 			dao.merge(entity);
 
-	}
-
-	@Override
-	public void update(Company entity) throws VendorMgmtException {
-		Company company = findbyCompanyNameAndRefNo(entity.getCompanyReferenceNumber(), entity.getCompanyName());
-		if (company == null)
-			throw new VendorMgmtException("Company reference number or company name not found!");
-		else
-			updateCompanyDetails(entity, company);
 	}
 
 	@Override

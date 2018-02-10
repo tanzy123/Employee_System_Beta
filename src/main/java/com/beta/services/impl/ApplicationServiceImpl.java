@@ -29,7 +29,6 @@ public class ApplicationServiceImpl extends BaseServiceImpl<Long, Application> i
 	@PostConstruct
 	public void init() throws Exception {
 		super.setDAO((JPADAO) dao);
-
 	}
 
 	@PreDestroy
@@ -41,21 +40,11 @@ public class ApplicationServiceImpl extends BaseServiceImpl<Long, Application> i
 		dao.setEntityManager(entityManager);
 	}
 
-	@Override
 	public void save(Application entity) throws VendorMgmtException {
 		if (entity.getApplicationId() == null)
 			dao.persist(entity);
 		else
 			dao.merge(entity);
-	}
-
-	@Override
-	public void update(Application entity) throws VendorMgmtException {
-		Application application = findByApplicationRefNo(entity.getApplicationRef());
-		if (application == null)
-			throw new VendorMgmtException("Application reference number not found!");
-		else
-			updateApplicationDetails(entity, application);
 	}
 
 	public Application findByApplicationRefNo(String applicationRef) {

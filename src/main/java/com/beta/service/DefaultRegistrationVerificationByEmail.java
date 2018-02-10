@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import com.beta.PurposeType;
 import com.beta.dao.CompanyDao;
 import com.beta.entity.Company;
-import com.beta.entity.CompanyAdministrator;
+import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.UserAccount;
 import com.beta.services.CompanyService;
 import com.beta.services.impl.CompanyServiceImpl;
@@ -57,10 +57,10 @@ public class DefaultRegistrationVerificationByEmail implements RegistrationServi
 		params.put("companyEmail", companyEmail);
 		
 		
-		CompanyAdministrator companyadministorToken=(CompanyAdministrator) companyService.findByNamedQueryAndNamedParams("findToken", params);
+		CompanyAdministratorAccount companyadministorToken=(CompanyAdministratorAccount) companyService.findByNamedQueryAndNamedParams("findToken", params);
 
 		//select p.token from company c join c.CompanyAdministor p where companyEmail=:companyEmail
-		CompanyAdministrator companyAdmin=new CompanyAdministrator();
+		CompanyAdministratorAccount companyAdmin=new CompanyAdministratorAccount();
 		
 		//@NamedQuery(name="findToken", query="select p.token from company c join c.CompanyAdministor p where companyEmail=:companyEmail") 
 		

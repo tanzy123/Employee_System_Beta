@@ -11,10 +11,10 @@ Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
 <class>com.beta.entity.Application</class>
 <class>com.beta.entity.Category</class>
 <class>com.beta.entity.Company</class>
-<class>com.beta.entity.CompanyAdministrator</class>
+<class>com.beta.entity.CompanyAdministratorAccount</class>
 <class>com.beta.entity.Department</class>
 <class>com.beta.entity.Documents</class>
-<class>com.beta.entity.Employee</class>
+<class>com.beta.entity.EmployeeAccount</class>
 <class>com.beta.entity.Requirement</class>
 <class>com.beta.entity.Role</class>
 <class>com.beta.entity.VendorReference</class>
