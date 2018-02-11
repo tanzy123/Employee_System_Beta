@@ -19,7 +19,7 @@ import javax.persistence.OneToMany;
                 query="SELECT c FROM Company c where c.companyReferenceNumber = :companyReferenceNumber"
                 		+ " AND c.companyName = :companyName"),
     @NamedQuery(name="Company.findByRefNo",
-    query="SELECT c FROM Company c where c.companyReferenceNumber = :companyReferenceNumber"),
+    			query="SELECT c FROM Company c where c.companyReferenceNumber = :companyReferenceNumber"),
 })
 public class Company implements Serializable{
 

@@ -39,12 +39,6 @@ public class RoleServiceImpl extends BaseServiceImpl<Long, Role> implements Role
     public void setEntityManagerOnDao(EntityManager entityManager){
     	dao.setEntityManager(entityManager);
     }
-/*
-	@Override
-	public void saveOrUpdate(Role role) throws VendorMgmtException {
-		// TODO Auto-generated method stub
-		dao.persist(role); 
-	}*/
 
 	@Override
 	public void saveOrUpdate(Role entity) throws VendorMgmtException {

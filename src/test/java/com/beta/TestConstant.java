@@ -131,7 +131,7 @@ public class TestConstant {
 		SAMPLE_APPLICATION_LIST = Collections.unmodifiableList(applicationList);
 		
 		SAMPLE_COMPANY = new Company("CTS123", "Cognizant", 
-				"India", "cognizant@cognizant.com", "+6122343243", "www.cognizant.com", 
+				"India", "ZhiYi.Tan@cognizant.com", "+6122343243", "www.cognizant.com", 
 				25000000L, SAMPLE_APPLICATION_LIST, 
 				SAMPLE_ROLE_LIST, SAMPLE_DEPARTMENT_LIST, SAMPLE_CATEGORY_LIST);
 		
