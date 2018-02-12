@@ -55,8 +55,10 @@ public class DefaultVendorVettingProcess implements VendorVettingProcess {
 	private void sendApplicationToCompanyVendorManagement(Application application) throws Exception {
 		Company company = companyService.findbyRefNo(application.getCompanyReferenceNumber());
 		String email = company.getCompanyEmail();
-		String msg = getRequirements(application.getVettorRequirement());
-		notificationService.sendEmailWithPurposeCC(email, null, "Vendor Acceptance", msg, application.getRemarks(), PurposeType.VendorApplicationAccepted);
+		List<Requirement> vetterRequirement = application.getVettorRequirement();
+		String msg = getRequirements(vetterRequirement);
+			String[] vettersEmail = {};
+		notificationService.sendEmailWithPurposeCC(email, vettersEmail , "Vendor Acceptance", msg, application.getRemarks(), PurposeType.VendorApplicationAccepted);
 	}
 
 	private String getRequirements(List<Requirement> vettorRequirement) {

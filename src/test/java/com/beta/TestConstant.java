@@ -139,6 +139,6 @@ public class TestConstant {
 				"645686", "hello@cognizant.com", "+54243325", 
 				"1231231", SAMPLE_ROLE1, SAMPLE_DEPARTMENT1);
 		
-		SAMPLE_COMPANY_ADMINISTRATOR = new CompanyAdministratorAccount("CTS222111", "asd", "CTS");
+		SAMPLE_COMPANY_ADMINISTRATOR = new CompanyAdministratorAccount("CTS222111", "asd", "CTS123");
 	}
 }

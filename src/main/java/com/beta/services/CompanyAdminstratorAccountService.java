@@ -8,4 +8,6 @@ public interface CompanyAdminstratorAccountService extends BaseService<Long, Com
 
 	void updatePassword(CompanyAdministratorAccount userAccount, String updatedPassword);
 	
+	CompanyAdministratorAccount findByUserName(String userName);
+	
 }

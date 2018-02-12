@@ -61,19 +61,23 @@ public class CompanyAdminstratorAccountServiceImpl extends BaseServiceImpl<Long,
 		
 	}
 
-	public CompanyAdministratorAccount validateAccount(UserAccount entity) {
+	public CompanyAdministratorAccount validateAccount(CompanyAdministratorAccount entity) {
+		
+		CompanyAdministratorAccount validatedAccount = findByUserName(entity.getUserName());
+		String password = entity.getPassword();
+		String databasePassword = validatedAccount.getPassword();
+		//validate if password is correct
+		return validatedAccount;
+	}
+	
+	public CompanyAdministratorAccount findByUserName(String userName) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("userName", entity.getUserName());
+		params.put("userName", userName);
 		List<CompanyAdministratorAccount> list = dao.findByNamedQueryAndNamedParams("CompanyAdministrator.findByUsername", params);
 		if (list.size() > 1)
 			throw new VendorMgmtException("More than one company found while validating account");
 		else if (list.isEmpty())
 			throw new VendorMgmtException("Invalid username entered while validating account");
-		
-		
-		String password = entity.getPassword();
-		String databasePassword = list.get(0).getPassword();
-		//validate if password is correct
 		return list.get(0);
 	}
 
@@ -101,6 +105,6 @@ public class CompanyAdminstratorAccountServiceImpl extends BaseServiceImpl<Long,
 	@Override
 	public void createNewAccount(CompanyAdministratorAccount userAccount) {
 		validateNewAccount(userAccount);
-		dao.persist(userAccount);
+		dao.merge(userAccount);
 	}
 }
