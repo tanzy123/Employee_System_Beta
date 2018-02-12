@@ -11,10 +11,12 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.beta.entity.Company;
 import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.exception.VendorMgmtException;
 import com.beta.services.CompanyAdminstratorAccountService;
@@ -34,12 +36,16 @@ public class JPACompanyAdministratorTest {
 	@Autowired
 	CompanyService companyService;
 	
+	@Autowired
+	Company company;
+	
 	@Before
 	public void initialize() {
 		companyService.saveOrUpdate(SAMPLE_COMPANY);
 	}
 	
 	@Test
+	@Rollback(value=false)
 	public void testAddCompanyAdministratorAccount() {
 		final int listSize = service.findAll().size();
 		service.createNewAccount(SAMPLE_COMPANY_ADMINISTRATOR);
