@@ -10,4 +10,6 @@ public interface CompanyAdminstratorAccountService extends BaseService<Long, Com
 	
 	CompanyAdministratorAccount findByUserName(String userName);
 	
+	CompanyAdministratorAccount validateAccount(CompanyAdministratorAccount entity);
+	
 }
