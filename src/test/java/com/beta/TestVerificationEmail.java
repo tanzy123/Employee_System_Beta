@@ -18,13 +18,14 @@ public class TestVerificationEmail {
 
 	@Autowired
 	VendorApplication ven = new VendorApplicationImpl();
+	@Autowired
+	Company company;
 	
 	@Test
 	public void testVerificationEmail()
 	{
 		DefaultRegistrationVerificationByEmail verificationEmail= new DefaultRegistrationVerificationByEmail();
 	
-		Company company =new Company();
 		company.setCompanyReferenceNumber("CTS");
 		company.setCompanyName("Cognizant");
 		company.setCompanyAddress("expo");
