@@ -51,7 +51,8 @@ public class RoleServiceImpl extends BaseServiceImpl<Long, Role> implements Role
     	dao.setEntityManager(entityManager);
     }
 
-    @Override
+
+	@Override
 	public void saveOrUpdate(Role entity) throws VendorMgmtException {
 
 		validateRole(entity);

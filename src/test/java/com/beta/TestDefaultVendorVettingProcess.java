@@ -6,54 +6,51 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.beta.entity.Application;
 import com.beta.entity.ApprovalStatus;
+import com.beta.entity.Company;
 import com.beta.entity.Requirement;
-import com.beta.service.DefaultVendorVettingProcess;
-import com.beta.services.ApplicationService;
+import com.beta.service.VendorVettingProcess;
+import com.beta.services.CompanyService;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:appContext.xml"})
+@Transactional
 public class TestDefaultVendorVettingProcess {
 
 	private static final String SAMPLE_USERNAME1 = "John";
 	private static final String SAMPLE_USERNAME2 = "Mary";
-	private Application application;
 	private List<Requirement> list = new ArrayList<>();
 	
 
-	@Mock
-	private ApplicationService applicationServiceMock;
+	@Autowired
+	private CompanyService companyService;
 	
-	@InjectMocks
-	private DefaultVendorVettingProcess vettingProcess;
+	@Autowired
+	private VendorVettingProcess vettingProcess;
 	
 	
 	@Before
 	public void initialize() {
-		MockitoAnnotations.initMocks(this);
-		Requirement requirement = new Requirement();
-		requirement.setRequirementId(1L);
-		requirement.setStatus(ApprovalStatus.PENDING);
-		requirement.setUserName(SAMPLE_USERNAME1);
-		list.add(requirement);
-		Requirement requirement2 = new Requirement();
-		requirement2.setRequirementId(2L);
-		requirement2.setStatus(ApprovalStatus.PENDING);
-		requirement2.setUserName(SAMPLE_USERNAME2);
-		list.add(requirement2);
-		application = new Application();
-		application.setVettorRequirement(list);
-		
+		Company company = TestConstant.SAMPLE_COMPANY;
+		company.setApplications(new ArrayList<>());
+		companyService.saveOrUpdate(company);
 	}
 	
 	@Test
-	public void testSucessfulVetVendor() {
-		vettingProcess.vetVendor(SAMPLE_USERNAME1, application, ApprovalStatus.APPROVE, "asd");
+	public void testSucessfulVetVendor() throws Exception {
 		
+		Application application = TestConstant.SAMPLE_APPLICATION1;
+		application.setCompanyReferenceNumber(TestConstant.SAMPLE_COMPANY.getCompanyReferenceNumber());
+		List<Requirement> list = new ArrayList<>();
+		Requirement r = new Requirement(SAMPLE_USERNAME1, "asd", ApprovalStatus.PENDING);
+		list.add(r);
+		application.setVettorRequirement(list);
+		vettingProcess.vetVendor(SAMPLE_USERNAME1, application, ApprovalStatus.APPROVE, "asd");
 	}
 }

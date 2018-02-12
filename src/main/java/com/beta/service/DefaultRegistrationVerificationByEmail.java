@@ -6,6 +6,8 @@ import java.util.Random;
 
 import javax.persistence.PersistenceContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.beta.PurposeType;
 import com.beta.dao.CompanyDao;
 import com.beta.entity.Company;
@@ -16,21 +18,25 @@ import com.beta.services.impl.CompanyServiceImpl;
 
 public class DefaultRegistrationVerificationByEmail implements RegistrationService{
 
+	@Autowired
+	CompanyService companyService;
+	@Autowired
+	NotificationService notificationService;
 	
 	String companyEmail;
 	@Override
 	public void RegisterCompany(Company company) {
-		CompanyService companyService=new CompanyServiceImpl();
+		
 		companyService.saveOrUpdate(company);
 		companyEmail=company.getCompanyEmail();
 		
 	}
 	@Override
 	public boolean SendVarificationEmail(Company company) {
-		NotificationService notificationService=new MailNotification();
+		
 		String subject="Email Verification";
 		Random rand = new Random();
-		String token=Integer.toString(rand.nextInt(10000));
+		String token=String.format("%04d", rand.nextInt(10000));
 		String message="This is your OTP : "+token;
 		UserAccount userAccount= new UserAccount();
 		userAccount.setToken(token);
@@ -52,7 +58,7 @@ public class DefaultRegistrationVerificationByEmail implements RegistrationServi
 	public boolean TokenComparison(String token)
 	{
 		UserAccount userAccount=new UserAccount();
-		CompanyService companyService=new CompanyServiceImpl();
+		
 		Map<String,Object> params = new HashMap<>();
 		params.put("companyEmail", companyEmail);
 		

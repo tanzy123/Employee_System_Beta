@@ -97,10 +97,10 @@ public class VendorReferenceServiceImpl extends BaseServiceImpl<Long, VendorRefe
 			return list.get(0);
 	}
 	
-	public void validateVendorReference(VendorReference entity) {
+	public void validateVendorReference(VendorReference entity) 
+{
 		if (entity.getCompanyName() == null || entity.getCompanyAddress() == null)
 			throw new VendorMgmtException("Company name or company address not found");
-
 		Map<String, Object> params = new HashMap<>();
 		params.put("applicationRef", entity.getApplicationRef());
 		List<Application> list = applicationDao.findByNamedQueryAndNamedParams("Application.findByRefNo", params);
@@ -108,12 +108,13 @@ public class VendorReferenceServiceImpl extends BaseServiceImpl<Long, VendorRefe
 			throw new VendorMgmtException("More than one application found with the same application reference");
 		else if (list.isEmpty())
 			throw new VendorMgmtException("No application found with the same application reference");
-	}
-	
+}	
+
 /*	
 	@Override
 	public void delete(VendorReference vendorReference) {
 		
 		
 	} */
+
 }

@@ -9,6 +9,7 @@ import javax.annotation.PreDestroy;
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 
@@ -19,13 +20,13 @@ import com.beta.entity.Company;
 import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.UserAccount;
 import com.beta.exception.VendorMgmtException;
+import com.beta.service.FieldCopyUtil;
 import com.beta.services.CompanyAdminstratorAccountService;
-import com.beta.services.UserAccountService;
 
 
 @Service("CompanyAdminstratorAccountJPAService")
 @org.springframework.transaction.annotation.Transactional(propagation= Propagation.REQUIRED, rollbackFor=VendorMgmtException.class)
-public class CompanyAdminstratorAccountServiceImpl extends BaseServiceImpl<Long, CompanyAdministratorAccount> implements CompanyAdminstratorAccountService, UserAccountService {
+public class CompanyAdminstratorAccountServiceImpl extends BaseServiceImpl<Long, CompanyAdministratorAccount> implements CompanyAdminstratorAccountService {
 
 	@Autowired
 	protected CompanyAdministratorAccountDao dao;
@@ -50,18 +51,38 @@ public class CompanyAdminstratorAccountServiceImpl extends BaseServiceImpl<Long,
 
 	@Override
 	public void saveOrUpdate(CompanyAdministratorAccount entity) throws VendorMgmtException {
-		throw new UnsupportedOperationException();
+		CompanyAdministratorAccount validatedAccount = validateAccount(entity);
+		updateAccountDetails(entity, validatedAccount);
 	}
 	
-	public void validateAccount(UserAccount entity) {
+	private void updateAccountDetails(CompanyAdministratorAccount entity, CompanyAdministratorAccount validatedAccount) {
+		entity.setPassword(null);
+		FieldCopyUtil.setFields(entity, validatedAccount);
+		
+	}
+
+	public CompanyAdministratorAccount validateAccount(CompanyAdministratorAccount entity) {
+		
+		CompanyAdministratorAccount validatedAccount = findByUserName(entity.getUserName());
+		String password = entity.getPassword();
+		String databasePassword = validatedAccount.getPassword();
+		
+		//validate if password is correct
+		if(BCrypt.checkpw(password, databasePassword))
+			return validatedAccount;
+		else
+			throw new VendorMgmtException("Invalid Username or Password"); 
+	}
+	
+	public CompanyAdministratorAccount findByUserName(String userName) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("password", entity.getPassword());
-		params.put("userName", entity.getUserName());
-		List<CompanyAdministratorAccount> list = dao.findByNamedQueryAndNamedParams("CompanyAdministratorAccount.validateAccount", params);
+		params.put("userName", userName);
+		List<CompanyAdministratorAccount> list = dao.findByNamedQueryAndNamedParams("CompanyAdministrator.findByUsername", params);
 		if (list.size() > 1)
 			throw new VendorMgmtException("More than one company found while validating account");
 		else if (list.isEmpty())
-			throw new VendorMgmtException("Invalid details entered while validating account");
+			throw new VendorMgmtException("Invalid username entered while validating account");
+		return list.get(0);
 	}
 
 	public void validateNewAccount(UserAccount entity) {
@@ -78,16 +99,19 @@ public class CompanyAdminstratorAccountServiceImpl extends BaseServiceImpl<Long,
 	}
 
 	@Override
-	public void updatePassword(UserAccount userAccount, String updatedPassword) {
-		validateAccount(userAccount);
-		
+	public void updatePassword(CompanyAdministratorAccount userAccount, String updatedPassword) {
+		CompanyAdministratorAccount validatedAccount = validateAccount(userAccount);
+		String updatedPW = BCrypt.hashpw(userAccount.getPassword(), BCrypt.gensalt());
+		//may need to hash password first
+		validatedAccount.setPassword(updatedPW);
+		dao.merge(validatedAccount);
 	}
 
 	@Override
-	public void createNewAccount(UserAccount userAccount) {
+	public void createNewAccount(CompanyAdministratorAccount userAccount) {
 		validateNewAccount(userAccount);
 		
+		userAccount.setPassword(BCrypt.hashpw(userAccount.getPassword(), BCrypt.gensalt()));
+		dao.merge(userAccount);
 	}
-	
-	
 }

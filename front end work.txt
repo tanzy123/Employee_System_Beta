@@ -1,0 +1,9 @@
+add the username and password to the registration page
+pending vetter management column ..
+add vetter page , add the column of sequence
+
+employee management: add show all columns of employee class, update at least username and respective updating attribute, delete: only ID
+
+only admin can apply to vendor
+
+request service from vendor UI, 
