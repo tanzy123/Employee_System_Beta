@@ -1,11 +1,16 @@
 package com.beta;
 
+import static com.beta.TestConstant.SAMPLE_COMPANY;
 import static org.junit.Assert.*;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -14,8 +19,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.beta.entity.Role;
+import com.beta.exception.VendorMgmtException;
+import com.beta.services.CompanyService;
 import com.beta.services.RoleService;
-
+import com.beta.TestConstant.*;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,54 +30,94 @@ import com.beta.services.RoleService;
 @Transactional
 public class TestRoleService {
 	
+	@Rule
+	public ExpectedException expectedEx = ExpectedException.none();
+	
 	@Autowired
 	RoleService roleService;
 	
-	@SuppressWarnings("unchecked") //create
+	@Autowired
+	CompanyService companyService;
+	
+	@Before
+	public void initialize() {
+		
+		companyService.saveOrUpdate(SAMPLE_COMPANY);
+		
+		
+	}
+	
+    //create
 	@Test
-	@Rollback //(value=false)
 	public void testRoleCreation(){
 		Role role = new Role();
 		role.setRole("Associate");
-		role.setRoleId((long) 100);
-		
+		role.setCompanyReferenceNumber("CTS123");
+		int startsize = roleService.findAll().size();
 		roleService.saveOrUpdate(role);
+		int endsize = roleService.findAll().size();
 		
-		role = (Role) roleService.find((long)100);
-		assertEquals("Associate",role.getRole());
+		assertEquals((startsize+1),endsize);
 	}
 	
-	@SuppressWarnings("unchecked") //read
 	@Test
-	@Rollback //(value=false)
-	public void testRoleSearchAll(){
-		List<Role> role = new ArrayList();
-		 role =  roleService.findAll();
+	public void testMissingRole(){
+		expectedEx.expect(VendorMgmtException.class);
+	    expectedEx.expectMessage("Role name or Reference Number not found");
 		
-		assertEquals(5,role.size()); // This one is for ZQ's SQL because already have 5 data set
-		//assertEquals(1,role.size()); 
-	}
-	
-	@SuppressWarnings("unchecked") //update
-	@Test
-	@Rollback //(value=false)
-	public void testRoleUpdate(){
 		Role role = new Role();
-		role.setRole("Associate1");
-		role.setRoleId((long) 100);
-		
+		role.setCompanyReferenceNumber("CTS123");
 		roleService.saveOrUpdate(role);
-		
-		role = (Role) roleService.find((long)100);
-		assertEquals("Associate1",role.getRole());
 	}
 	
 	@Test
-	@Rollback//(value=false) //delete
+	public void testInvalidCompanyRef(){
+		expectedEx.expect(VendorMgmtException.class);
+	    expectedEx.expectMessage("No company found with the same given reference");
+		
+	    Role role = new Role();
+		role.setRole("Associate");
+		role.setCompanyReferenceNumber("CTS124");
+		roleService.saveOrUpdate(role);
+		
+	}
+	
+	 //update
+	@Test
+	public void testRoleUpdate()
+	{
+		Role role1 = new Role();
+		role1.setRoleId(10L);
+		role1.setRole("Associate1");
+		role1.setCompanyReferenceNumber("CTS123");
+		
+		roleService.saveOrUpdate(role1);
+		
+		role1 = roleService.findByCompanyReferenceNumber("CTS123","Associate1");
+		Long id = role1.getRoleId();
+		role1.setRole("Staff");
+		
+		roleService.saveOrUpdate(role1);
+		role1 = roleService.find(id);
+		
+		assertEquals("Staff",role1.getRole());
+		
+	} 
+	
+	@Test
 	public void testRoleDelete() throws Exception{
 		Role role = new Role();
-		roleService.deleteIfExisting((long)100);
-		role =  (Role) roleService.find((long)100);
+		role.setRole("Associate");
+		role.setCompanyReferenceNumber("CTS123");
+		int startsize = roleService.findAll().size();
+		roleService.saveOrUpdate(role);
+		int endsize = roleService.findAll().size();
+		assertEquals((startsize+1),endsize);
+		role = roleService.findByCompanyReferenceNumber("CTS123","Associate");
+		Long id = role.getRoleId();
+		
+		roleService.delete(id);
+		role= roleService.find(id);
 		assertNull(role);
 		
 	}

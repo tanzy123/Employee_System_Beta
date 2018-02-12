@@ -1,5 +1,9 @@
 package com.beta.services.impl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.persistence.EntityManager;
@@ -8,9 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 
+import com.beta.dao.CompanyDao;
 import com.beta.dao.JPADAO;
 import com.beta.dao.RoleDao;
+import com.beta.entity.Application;
+import com.beta.entity.Company;
 import com.beta.entity.Role;
+import com.beta.entity.VendorReference;
 import com.beta.exception.VendorMgmtException;
 import com.beta.services.RoleService;
 
@@ -25,6 +33,9 @@ public class RoleServiceImpl extends BaseServiceImpl<Long, Role> implements Role
 	
 	@Autowired
     protected RoleDao dao;
+	
+	@Autowired
+	protected CompanyDao comDao;
 
 	@PostConstruct
     public void init() throws Exception {
@@ -39,17 +50,51 @@ public class RoleServiceImpl extends BaseServiceImpl<Long, Role> implements Role
     public void setEntityManagerOnDao(EntityManager entityManager){
     	dao.setEntityManager(entityManager);
     }
-/*
-	@Override
-	public void saveOrUpdate(Role role) throws VendorMgmtException {
-		// TODO Auto-generated method stub
-		dao.persist(role); 
-	}*/
 
-	@Override
+    @Override
 	public void saveOrUpdate(Role entity) throws VendorMgmtException {
-		// TODO Auto-generated method stub
-		
+
+		validateRole(entity);
+		if (entity.getRoleId() == null) {
+			Role role = findByCompanyReferenceNumber(entity.getCompanyReferenceNumber(), entity.getRole());
+			if (role == null)
+				dao.persist(entity);
+		}	
+		else {
+			Role role = dao.findById(entity.getRoleId());
+			if (role!=null) {
+				
+				role.setRole(entity.getRole());
+				dao.merge(role);
+			} else
+				dao.merge(entity);
+		}
+	}
+	
+	public Role findByCompanyReferenceNumber( String appReferenceNumber, String role) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("companyReferenceNumber", appReferenceNumber);
+		params.put("role", role);
+		List<Role> list = findByNamedQueryAndNamedParams("Role.findByCompanyRefNumber", params);
+		if (list.size() > 1) {
+			throw new VendorMgmtException("More than one Role found for given company reference number");}
+		else if (list.isEmpty())
+			return null;
+		else
+			return list.get(0);
+	}
+	
+	public void validateRole(Role entity) {
+		if (entity.getRole() == null || entity.getCompanyReferenceNumber() == null)
+			throw new VendorMgmtException("Role name or Reference Number not found");
+
+		Map<String, Object> params = new HashMap<>();
+		params.put("companyReferenceNumber", entity.getCompanyReferenceNumber());
+		List<Company> list = comDao.findByNamedQueryAndNamedParams("Company.findByRefNo", params);
+		if (list.size() > 1)
+			throw new VendorMgmtException("More than one company found with the same application reference");
+		else if (list.isEmpty())
+			throw new VendorMgmtException("No company found with the same given reference");
 	}
 	
 	
