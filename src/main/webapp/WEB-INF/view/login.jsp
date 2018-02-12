@@ -8,7 +8,7 @@
 </head>
 <body>
 <br>
-<form action="LoginController" method="post">
+<form action="Employee_System_Beta//loginVerification" method="post">
 
 Enter username :<input type="text" id="username" name="username"> <br>
 Enter password :<input type="password" id="password" name="password"><br>
@@ -16,8 +16,8 @@ Enter password :<input type="password" id="password" name="password"><br>
 <option value="EMPLOYEE">EMPLOYEE</option>
 <option value="COMPANY_ADMINISTRATOR">COMPANY ADMINISTRATOR</option>
 </select><br>
-<input type="submit" value="Login">
-<input type="submit" value="Register">
+<input type="submit" value="Login" id="login" name="login">
+<input type="submit" value="Register" id="register" name="register">
 
 </form>
 </body>

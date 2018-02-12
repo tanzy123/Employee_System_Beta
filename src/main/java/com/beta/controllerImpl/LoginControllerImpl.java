@@ -8,12 +8,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beta.controller.LoginController;
 import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.EmployeeAccount;
 import com.beta.entity.UserAccount;
+import com.beta.services.EmployeeAccountService;
+import com.beta.services.impl.EmployeeAccountServiceImpl;
 
 
 
@@ -31,17 +34,20 @@ public class LoginControllerImpl implements LoginController {
     mav.addObject("login", new UserAccount());
     return mav;
   }
-  @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
-  public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response,
-  @ModelAttribute("login") EmployeeAccount employeeAccount, CompanyAdministratorAccount companyAdministratorAccount) {
+  @RequestMapping(value = "/loginVerification", method = RequestMethod.POST)
+  public ModelAndView loginVerification(@RequestParam(value="username") String username, @RequestParam(value="password") String password, @RequestParam(value="selectLoginType") String loginType) 
+  {
     ModelAndView mav = null;
     //User user = userService.validateUser(login);
-    if (("$username").equalsIgnoreCase(employeeAccount.getUserName()) &&  ("$password").equalsIgnoreCase(employeeAccount.getPassword()))
+    if (loginType.equals("EMPLOYEE"))
     {
-    String url = "dashboard";
-    String role="Employee";
-    
-    mav = new ModelAndView(url);
+   
+//    EmployeeAccount employeeAccount;
+//    EmployeeAccountService employeeAccountService;
+//    employeeAccount.setUserName(username);
+//    employeeAccount.setPassword(password);
+    //if(username.equals(employeeAccountService.)&&password.equals(employeeAccountService).)
+    mav = new ModelAndView("admin");
     
     } 
     else
