@@ -345,6 +345,39 @@ public class MailNotification implements NotificationService{
 			System.out.println("Email Sent");
 		}
 		
+
+		if(purpose==EmailPurposeType.AccountCreated)
+		{
+			//Do something
+			HtmlEmail email = new HtmlEmail();
+			String path = ConfigUtil.getKey("AccountCreated");
+			String msg1 = FileUtils.readFileToString(new File(path));
+			
+			msg=msg1.replace("${AccountCreated_Message}", msg);
+			email.setMsg(msg);
+			email.addTo(to);
+			email.setSubject(subject);
+			for(String c : cc)
+			{
+				email.addCc(c);
+			}
+			String host = ConfigUtil.getKey("hostName");
+			String from = ConfigUtil.getKey("sendFrom");
+			String fromName = ConfigUtil.getKey("sendFromName");
+			String pass = ConfigUtil.getKey("sendFromPwd");
+			String smtpPort = ConfigUtil.getKey("smtpPort");
+			
+			email.setHostName(host);
+			email.setFrom(from, fromName);
+			email.setAuthenticator(new DefaultAuthenticator(from, pass));
+			email.setTLS(true);
+			System.out.println("smtp port configured  is "+smtpPort);
+			email.setSmtpPort(Integer.parseInt(smtpPort));
+			email.setSSL(true);
+			email.send();
+			System.out.println("Email Sent");
+		}
+		
 	}
 	@Override
 	public void SmsService() throws Exception {

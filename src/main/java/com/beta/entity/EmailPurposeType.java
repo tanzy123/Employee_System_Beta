@@ -4,7 +4,7 @@ public enum EmailPurposeType {
 
 	
 	VendorRequestToCompany , VendorApplicationStatus, VendorApplicationRejected, VendorApplicationAccepted,
-	SendToNextEmployeeVettor,CompanyRegistrationEmailVerification, ServiceRequestFromCompanyToVendor;
+	SendToNextEmployeeVettor,CompanyRegistrationEmailVerification, ServiceRequestFromCompanyToVendor,AccountCreated;
 	
 }
 

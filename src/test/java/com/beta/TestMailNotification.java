@@ -33,43 +33,52 @@ public class TestMailNotification {
 	//--------------------------------------Send Email With Purpose & CC Test Cases---------------------------------------------------------------------------------------------------------------------
 	@Test
 	public void testSendEmailWithPurposeIsVendorRequestToCompanyWithCC() throws Exception{
-		String cc[] = {"Yin.Yifan@cognizant.com"};
+		String cc[] = {};
 		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Test Mail", "Vendor Request To Company is generated!","Test", EmailPurposeType.VendorRequestToCompany);
 		
 	}
 	
 	@Test
 	public void testSendEmailWithPurposeIsVendorApplicationStatusWithCC() throws Exception{
-		String cc[] = {"Yin.Yifan@cognizant.com"};
+		String cc[] = {};
 		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Test Mail", "Vendor Application is generated!","Test", EmailPurposeType.VendorApplicationStatus);
 		
 	}
 	
 	@Test
 	public void testSendEmailWithPurposeIsVendorApplicationAcceptedWithCC() throws Exception{
-		String cc[] = {"Yin.Yifan@cognizant.com"};
+		String cc[] = {};
+		
 		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Test Mail", "Vendor Application acceptance is generated!","Test", EmailPurposeType.VendorApplicationAccepted);
 		
 	}
 	
 	@Test
 	public void testSendEmailWithPurposeIsVendorApplicationRequestRejectedWithCC() throws Exception{
-		String cc[] = {"Yin.Yifan@cognizant.com"};
+		String cc[] = {};
 		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Test Mail", "Vendor Application rejection is generated!","Test", EmailPurposeType.VendorApplicationRejected);
 		
 	}
 	
 	@Test
 	public void testSendEmailWithPurposeIsCompanyRegistrationEmailVerificationWithCC() throws Exception{
-		String cc[] = {"Yin.Yifan@cognizant.com"};
+		String cc[] = {};
 		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Company RegistrationEmail Verification", "Company Registration Email Verificationn is generated!","Test", EmailPurposeType.CompanyRegistrationEmailVerification);
 		
 	}
 	
 	@Test
 	public void testSendEmailWithPurposeIsServiceRequestFromCompanyToVendorWithCC() throws Exception{
-		String cc[] = {"Yin.Yifan@cognizant.com"};
+		String cc[] = {};
 		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Service Request From Company To Vendor", "Service Request From Company To Vendor!","Test", EmailPurposeType.ServiceRequestFromCompanyToVendor);
+		
+	}
+	
+	
+	@Test
+	public void testSendEmailWithPurposeAccountCreatedWithCC() throws Exception{
+		String cc[] = {};
+		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Account Created.", "Account Created!","Test", EmailPurposeType.AccountCreated);
 		
 	}
 	
