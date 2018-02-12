@@ -8,12 +8,8 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name="CompanyAdministrator.findByUsernameAndCompanyRef",
-                query="SELECT c FROM CompanyAdministratorAccount c where c.companyReferenceNumber = :companyReferenceNumber"
-                		+ " AND c.userName = :userName"),
-    @NamedQuery(name="CompanyAdministrator.validateAccount",
-    query="SELECT c FROM CompanyAdministratorAccount c where c.companyReferenceNumber = :companyReferenceNumber"
-    		+ " AND c.userName = :userName"),
+    @NamedQuery(name="CompanyAdministrator.findByUsername",
+                query="SELECT c FROM CompanyAdministratorAccount c WHERE c.userName = :userName"),
 })
 public class CompanyAdministratorAccount extends UserAccount{
 

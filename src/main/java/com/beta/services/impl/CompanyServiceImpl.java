@@ -71,7 +71,20 @@ public class CompanyServiceImpl extends BaseServiceImpl<Long, Company> implement
 		params.put("companyName", companyName);
 		List<Company> list = findByNamedQueryAndNamedParams("Company.findByNameAndRefNo", params);
 		if (list.size() > 1)
-			throw new VendorMgmtException("More than one company found for updating");
+			throw new VendorMgmtException("More than one company found");
+		else if (list.isEmpty())
+			return null;
+		else
+			return list.get(0);
+	}
+
+	@Override
+	public Company findbyRefNo(String companyReferenceNumber) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("companyReferenceNumber", companyReferenceNumber);
+		List<Company> list = findByNamedQueryAndNamedParams("Company.findByRefNo", params);
+		if (list.size() > 1)
+			throw new VendorMgmtException("More than one company found");
 		else if (list.isEmpty())
 			return null;
 		else

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 
+import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.exception.VendorMgmtException;
 
 
@@ -59,5 +60,6 @@ public interface BaseService<Long,E> {
 	    ); 
     
     public int recordCount(final String name,final Map<String, ?extends Object> params);
+
 
 }

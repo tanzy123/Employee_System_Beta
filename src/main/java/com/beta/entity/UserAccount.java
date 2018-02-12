@@ -20,6 +20,9 @@ public class UserAccount {
 	private String companyReferenceNumber;
 	
 	private Boolean isValidated;
+	
+	private Boolean isLogin;
+	
 
 	public UserAccount(String userName, String password, String companyReferenceNumber) {
 		this.userName = userName;
@@ -75,5 +78,13 @@ public class UserAccount {
 
 	public void setCompanyReferenceNumber(String companyReferenceNumber) {
 		this.companyReferenceNumber = companyReferenceNumber;
+	}
+
+	public Boolean getIsLogin() {
+		return isLogin;
+	}
+
+	public void setIsLogin(Boolean isLogin) {
+		this.isLogin = isLogin;
 	}
 }

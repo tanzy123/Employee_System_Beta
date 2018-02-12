@@ -53,8 +53,7 @@ public class RequirementServiceImpl extends BaseServiceImpl<Long, Requirement> i
 
 	@Override
 	public void saveOrUpdate(Requirement entity) throws VendorMgmtException {
-		// TODO Auto-generated method stub
-		
+		dao.persist(entity);
 	}
 
 }

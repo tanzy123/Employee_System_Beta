@@ -4,9 +4,15 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name="EmployeeAccount.findByUsername",
+                query="SELECT e FROM EmployeeAccount e WHERE e.userName = :userName"),
+})
 public class EmployeeAccount extends UserAccount {
 
 	private String employeeId;

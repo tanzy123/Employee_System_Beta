@@ -48,10 +48,4 @@ public class VendorReferenceServiceImpl extends BaseServiceImpl<Long, VendorRefe
 		vendorReferenceDao.persist(vendorReference);
 	}
 
-	
-	@Override
-	public void delete(VendorReference vendorReference) {
-		
-		
-	}
 }

@@ -17,10 +17,9 @@ import com.beta.entity.EmailPurposeType;
 public class MailNotification implements NotificationService{
 
 //	private MailSender mailSender;
+
+	String workingDirectory = System.getProperty("user.dir");
 	
-
-
-
 	HtmlEmail email = new HtmlEmail();
 
 	
@@ -32,9 +31,9 @@ public class MailNotification implements NotificationService{
 	{
 		//Create Message		
 		//SimpleMailMessage message = new SimpleMailMessage();
-		String path = ConfigUtil.getKey("htmlTemplateLocation");
+		String filename = ConfigUtil.getKey("htmlTemplateLocation");
 		//Resource resource = new ClassPathResource(path);
-		String msg1 = FileUtils.readFileToString(new File(path));
+		String msg1 = FileUtils.readFileToString(new File(workingDirectory, filename));
 		
 		msg = msg1.replace("${message}", msg);
 		
@@ -70,8 +69,8 @@ public class MailNotification implements NotificationService{
 	@Override
 	public void sendMail(String to, String subject, String msg) throws Exception {
 		
-				String path = ConfigUtil.getKey("htmlTemplateLocation");
-				String msg1 = FileUtils.readFileToString(new File(path));
+				String filename = ConfigUtil.getKey("htmlTemplateLocation");
+				String msg1 = FileUtils.readFileToString(new File(workingDirectory, filename));
 				
 				msg = msg1.replace("${message}", msg);
 				
@@ -118,8 +117,8 @@ public class MailNotification implements NotificationService{
 			//Mail notification logic
 			//tie to distinct .html template for display.
 			HtmlEmail email = new HtmlEmail();
-			String path = ConfigUtil.getKey("CompanyRegistrationEmailVerification");
-			String msg1 = FileUtils.readFileToString(new File(path));
+			String filename = ConfigUtil.getKey("CompanyRegistrationEmailVerification");
+			String msg1 = FileUtils.readFileToString(new File(workingDirectory, filename));
 			
 			msg=msg1.replace("${CompanyRegistrationEmailVerificationResult_Message}", msg);
 			email.setMsg(msg);
@@ -153,8 +152,8 @@ public class MailNotification implements NotificationService{
 			//Mail notification logic
 			//tie to distinct .html template for display.
 			HtmlEmail email = new HtmlEmail();
-			String path = ConfigUtil.getKey("VendorRequestToCompany");
-			String msg1 = FileUtils.readFileToString(new File(path));
+			String filename = ConfigUtil.getKey("VendorRequestToCompany");
+			String msg1 = FileUtils.readFileToString(new File(workingDirectory, filename));
 			
 			msg=msg1.replace("${vendorApplicationRequestToCompany_Message}", msg);
 			email.setMsg(msg);
@@ -187,8 +186,8 @@ public class MailNotification implements NotificationService{
 			
 			//Do something
 			HtmlEmail email = new HtmlEmail();
-			String path = ConfigUtil.getKey("SendToNextEmployeeVettor");
-			String msg1 = FileUtils.readFileToString(new File(path));
+			String filename = ConfigUtil.getKey("SendToNextEmployeeVettor");
+			String msg1 = FileUtils.readFileToString(new File(workingDirectory, filename));
 			
 			msg=msg1.replace("${messageFromVettorToNextVettor_Message}", msg);
 			msgFromPreviousVettor=msg1.replace("${messageFromPreviousVettor_Message}",msgFromPreviousVettor);
@@ -220,8 +219,8 @@ public class MailNotification implements NotificationService{
 			
 			//Do something
 			HtmlEmail email = new HtmlEmail();
-			String path = ConfigUtil.getKey("ServiceRequestFromCompanyToVendor");
-			String msg1 = FileUtils.readFileToString(new File(path));
+			String filename = ConfigUtil.getKey("ServiceRequestFromCompanyToVendor");
+			String msg1 = FileUtils.readFileToString(new File(workingDirectory, filename));
 			
 			msg=msg1.replace("${ServiceRequestFromCompanyToVendor_Message}", msg);
 			email.setMsg(msg);
@@ -252,8 +251,8 @@ public class MailNotification implements NotificationService{
 			
 			//DoSomething
 			HtmlEmail email = new HtmlEmail();
-			String path = ConfigUtil.getKey("VendorApplicationAccepted");
-			String msg1 = FileUtils.readFileToString(new File(path));
+			String filename = ConfigUtil.getKey("VendorApplicationAccepted");
+			String msg1 = FileUtils.readFileToString(new File(workingDirectory, filename));
 			
 			msg=msg1.replace("${vendorApplicationResultAccepted_Message}", msg);
 			email.setMsg(msg);
@@ -285,8 +284,8 @@ public class MailNotification implements NotificationService{
 		{
 			//Do something
 			HtmlEmail email = new HtmlEmail();
-			String path = ConfigUtil.getKey("VendorApplicationStatus");
-			String msg1 = FileUtils.readFileToString(new File(path));
+			String filename = ConfigUtil.getKey("VendorApplicationStatus");
+			String msg1 = FileUtils.readFileToString(new File(workingDirectory, filename));
 			
 			msg=msg1.replace("${vendorApplicationStatusPending_Message}", msg);
 			email.setMsg(msg);
@@ -317,8 +316,8 @@ public class MailNotification implements NotificationService{
 		{
 			//Do something
 			HtmlEmail email = new HtmlEmail();
-			String path = ConfigUtil.getKey("ServiceRequestFromCompanyToVendor");
-			String msg1 = FileUtils.readFileToString(new File(path));
+			String filename = ConfigUtil.getKey("ServiceRequestFromCompanyToVendor");
+			String msg1 = FileUtils.readFileToString(new File(workingDirectory, filename));
 			
 			msg=msg1.replace("${ServiceRequestFromCompanyToVendor_Message}", msg);
 			email.setMsg(msg);
