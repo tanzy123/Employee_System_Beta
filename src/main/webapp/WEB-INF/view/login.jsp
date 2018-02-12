@@ -9,13 +9,13 @@
 <body>
 <br>
 <form action="LoginController" method="post">
-<select name="selectLoginType" id="selectLoginType">
-<option value="EMPLOYEE">EMPLOYEE</option>
-<option value="COMPANY_ADMINISTRATOR">COMPANY ADMINISTRATOR</option><br>
-</select>
+
 Enter username :<input type="text" id="username" name="username"> <br>
 Enter password :<input type="password" id="password" name="password"><br>
-
+<select name="selectLoginType" id="selectLoginType">
+<option value="EMPLOYEE">EMPLOYEE</option>
+<option value="COMPANY_ADMINISTRATOR">COMPANY ADMINISTRATOR</option>
+</select><br>
 <input type="submit" value="Login">
 <input type="submit" value="Register">
 
