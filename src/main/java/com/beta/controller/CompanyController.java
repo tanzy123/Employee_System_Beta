@@ -4,69 +4,78 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.beta.entity.Company;
-
 
 
 
 
 @Controller
+@RequestMapping("/")
 public class CompanyController {
 
-	//Link to JSP : Add Company intending to be Vendor
-	@RequestMapping(value = "/pendingVendorApplication")
 	
-	public String pendingVendorApplication(@ModelAttribute("pendingVendorApplication") Company company)
+	@RequestMapping(value = "/pendingVendorApplication")
+	 public String pendingVendorApplication(@ModelAttribute("pendingVendorApplication") Companies company)
 	{
-		
-		
-		
+
 		return "pendingVendorApplication";
 	}
-	
-	
-@RequestMapping(value = "/addCompanyIntendingToBeVendor")
-	
-	public String addCompany(@ModelAttribute("company") Company company)
+
+	@RequestMapping(value = "/addCompanyIntendingToBeVendor")
+	public String addCompany(@ModelAttribute("company") Companies company)
 	{
-		
-		
-		
+
 		return "addCompanyIntendingToBeVendor";
 	}
 
-@RequestMapping(value = "/vendorApplicationHistory")
+	@RequestMapping(value = "/vendorApplicationHistory")
+	public String vendorApplicationHistory(
+			@ModelAttribute("company") Companies company) 
+	{
 
-public String vendorApplicationHistory(@ModelAttribute("company") Company company)
-{
-	
-	
-	
-	return "vendorApplicationHistory";
-}
+		return "vendorApplicationHistory";
+	}
 
-@RequestMapping(value = "/employeeManagement")
+	@RequestMapping(value = "/employeeManagement")
+	public String employeeManagement(@ModelAttribute("company") Companies company) {
 
-public String employeeManagement(@ModelAttribute("company") Company company)
-{
-	
-	
-	
-	return "employeeManagement";
-}
-	
+		return "employeeManagement";
+	}
 
-@RequestMapping(value = "/vetterManagement")
+	@RequestMapping(value = "/vetterManagement")
+	public String vetterManagement(@ModelAttribute("company") Companies company) {
 
-public String vetterManagement(@ModelAttribute("company") Company company)
-{
-	
-	
-	
-	return "vetterManagement";
-}
-	
+		return "vetterManagement";
+	}
 
+	@RequestMapping(value = "/companyManagementSys")
+	public String companyManagementSystem(
+			@ModelAttribute("company") Companies company) {
 
+		return "companyManagementSys";
+	}
 
+	@RequestMapping(value = "/requirementForVetterManagement")
+	public String requirement(@ModelAttribute("company") Companies company) {
+
+		return "requirementForVetterManagement";
+	}
+	
+	@RequestMapping(value = "/vetterNotificationService")
+	public String notificationService(@ModelAttribute("company") Companies company) {
+
+		return "vetterNotificationService";
+	}
+	
+	@RequestMapping(value = "/requestServiceFromAVendor")
+	public String requestServiceFromAVendor(@ModelAttribute("company") Companies company) {
+
+		return "requestServiceFromAVendor";
+	}
+	
+	@RequestMapping(value = "/applyToBeAVendor")
+	public String applyToBeAVendor(@ModelAttribute("company") Companies company) {
+
+		return "applyToBeAVendor";
+	}
+	
 }
