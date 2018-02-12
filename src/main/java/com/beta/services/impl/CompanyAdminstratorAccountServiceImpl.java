@@ -53,8 +53,6 @@ public class CompanyAdminstratorAccountServiceImpl extends BaseServiceImpl<Long,
 	public void saveOrUpdate(CompanyAdministratorAccount entity) throws VendorMgmtException {
 		CompanyAdministratorAccount validatedAccount = validateAccount(entity);
 		updateAccountDetails(entity, validatedAccount);
-		
-		
 	}
 	
 	private void updateAccountDetails(CompanyAdministratorAccount entity, CompanyAdministratorAccount validatedAccount) {
