@@ -7,4 +7,8 @@ public interface EmployeeAccountService extends BaseService<Long, EmployeeAccoun
 	void createNewAccount(EmployeeAccount userAccount);
 
 	void updatePassword(EmployeeAccount userAccount, String updatedPassword);
+	
+	EmployeeAccount findByUserName(String userName);
+	
+	EmployeeAccount validateAccount(EmployeeAccount entity);
 }

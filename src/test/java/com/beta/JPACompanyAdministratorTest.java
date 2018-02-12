@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.beta.entity.CompanyAdministratorAccount;
+import com.beta.exception.VendorMgmtException;
 import com.beta.services.CompanyAdminstratorAccountService;
 import com.beta.services.CompanyService;
 
@@ -52,5 +53,25 @@ public class JPACompanyAdministratorTest {
 		CompanyAdministratorAccount account = service.findByUserName(SAMPLE_COMPANY_ADMINISTRATOR.getUserName());
 		service.delete(account.getAccountId());
 		assertThat(service.findAll().size(), is(listSize-1));
+	}
+	
+	@Test
+	public void testValidCompanyAdministratorAccount() {
+		String password = SAMPLE_COMPANY_ADMINISTRATOR.getPassword();
+		service.createNewAccount(SAMPLE_COMPANY_ADMINISTRATOR);
+		CompanyAdministratorAccount accountToCheck = new 
+				CompanyAdministratorAccount(SAMPLE_COMPANY_ADMINISTRATOR.getUserName(), password, SAMPLE_COMPANY_ADMINISTRATOR.getCompanyReferenceNumber());
+		service.validateAccount(accountToCheck);
+	}
+	
+	@Test
+	public void testInvalidCompanyAdministratorAccount() {
+		expectedEx.expect(VendorMgmtException.class);
+	    expectedEx.expectMessage("Invalid Username or Password");
+		
+		service.createNewAccount(SAMPLE_COMPANY_ADMINISTRATOR);
+		CompanyAdministratorAccount accountToCheck = new 
+				CompanyAdministratorAccount(SAMPLE_COMPANY_ADMINISTRATOR.getUserName(), "sdfgsdf", SAMPLE_COMPANY_ADMINISTRATOR.getCompanyReferenceNumber());
+		service.validateAccount(accountToCheck);
 	}
 }

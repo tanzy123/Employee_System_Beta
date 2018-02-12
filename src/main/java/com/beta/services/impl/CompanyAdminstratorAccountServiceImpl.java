@@ -9,6 +9,7 @@ import javax.annotation.PreDestroy;
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 
@@ -57,6 +58,7 @@ public class CompanyAdminstratorAccountServiceImpl extends BaseServiceImpl<Long,
 	}
 	
 	private void updateAccountDetails(CompanyAdministratorAccount entity, CompanyAdministratorAccount validatedAccount) {
+		entity.setPassword(null);
 		FieldCopyUtil.setFields(entity, validatedAccount);
 		
 	}
@@ -66,8 +68,12 @@ public class CompanyAdminstratorAccountServiceImpl extends BaseServiceImpl<Long,
 		CompanyAdministratorAccount validatedAccount = findByUserName(entity.getUserName());
 		String password = entity.getPassword();
 		String databasePassword = validatedAccount.getPassword();
+		
 		//validate if password is correct
-		return validatedAccount;
+		if(BCrypt.checkpw(password, databasePassword))
+			return validatedAccount;
+		else
+			throw new VendorMgmtException("Invalid Username or Password"); 
 	}
 	
 	public CompanyAdministratorAccount findByUserName(String userName) {
@@ -97,14 +103,17 @@ public class CompanyAdminstratorAccountServiceImpl extends BaseServiceImpl<Long,
 	@Override
 	public void updatePassword(CompanyAdministratorAccount userAccount, String updatedPassword) {
 		CompanyAdministratorAccount validatedAccount = validateAccount(userAccount);
+		String updatedPW = BCrypt.hashpw(userAccount.getPassword(), BCrypt.gensalt());
 		//may need to hash password first
-		validatedAccount.setPassword(updatedPassword);
+		validatedAccount.setPassword(updatedPW);
 		dao.merge(validatedAccount);
 	}
 
 	@Override
 	public void createNewAccount(CompanyAdministratorAccount userAccount) {
 		validateNewAccount(userAccount);
+		
+		userAccount.setPassword(BCrypt.hashpw(userAccount.getPassword(), BCrypt.gensalt()));
 		dao.merge(userAccount);
 	}
 }
