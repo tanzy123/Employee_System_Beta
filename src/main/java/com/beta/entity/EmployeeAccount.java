@@ -46,6 +46,10 @@ public class EmployeeAccount extends UserAccount {
 
 	public EmployeeAccount() {}
 
+	public EmployeeAccount(String userName, String password, String companyReferenceNumber) {
+		super(userName, password, companyReferenceNumber);
+	}
+
 	public String getEmployeeId() {
 		return employeeId;
 	}

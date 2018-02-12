@@ -137,7 +137,7 @@ public class TestConstant {
 		
 		SAMPLE_EMPLOYEE = new EmployeeAccount("Employee123", "123123", 
 				"645686", "hello@cognizant.com", "+54243325", 
-				"1231231", SAMPLE_ROLE1, SAMPLE_DEPARTMENT1);
+				"CTS123", SAMPLE_ROLE1, SAMPLE_DEPARTMENT1);
 		
 		SAMPLE_COMPANY_ADMINISTRATOR = new CompanyAdministratorAccount("CTS222111", "asd", "CTS123");
 	}

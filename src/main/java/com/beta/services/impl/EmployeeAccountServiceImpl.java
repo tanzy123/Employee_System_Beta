@@ -55,6 +55,7 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 	}
 
 	private void updateAccountDetails(EmployeeAccount entity, EmployeeAccount validatedAccount) {
+		entity.setPassword(null);
 		FieldCopyUtil.setFields(entity, validatedAccount);
 	}
 
