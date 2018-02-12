@@ -27,7 +27,7 @@ public class DefaultRegistrationVerificationByEmail implements RegistrationServi
 		NotificationService notificationService=new MailNotification();
 		String subject="Email Verification";
 		Random rand = new Random();
-		String token=Integer.toString(rand.nextInt(10000));
+		String token=String.format("%04d", rand.nextInt(10000));
 		String message="This is your OTP : "+token;
 		UserAccount userAccount= new UserAccount();
 		userAccount.setToken(token);
