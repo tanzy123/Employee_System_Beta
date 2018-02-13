@@ -63,7 +63,7 @@ public class TestMailNotification {
 	@Test
 	public void testSendEmailWithPurposeIsCompanyRegistrationEmailVerificationWithCC() throws Exception{
 		String cc[] = {};
-		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Company RegistrationEmail Verification", "Company Registration Email Verificationn is generated!","Test", EmailPurposeType.CompanyRegistrationEmailVerification);
+		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Company RegistrationEmail Verification", "<p1>Company Registration Email Verificationn is generated!</p><p>vendor name: Vendor A</p><p>Status: Accepted</p>  ","Test", EmailPurposeType.CompanyRegistrationEmailVerification);
 		
 	}
 	

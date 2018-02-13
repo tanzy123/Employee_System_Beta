@@ -49,6 +49,7 @@ public class TestRoleService {
 	
     //create
 	@Test
+	@Rollback(value=false)
 	public void testRoleCreation(){
 		Role role = new Role();
 		role.setRole("Associate");

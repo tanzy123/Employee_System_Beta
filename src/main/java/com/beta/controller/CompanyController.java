@@ -14,6 +14,7 @@ public class CompanyController {
 
 	
 	@RequestMapping(value = "/pendingVendorApplication")
+	
 	 public String pendingVendorApplication(@ModelAttribute("pendingVendorApplication") Companies company)
 	{
 
@@ -21,6 +22,7 @@ public class CompanyController {
 	}
 
 	@RequestMapping(value = "/addCompanyIntendingToBeVendor")
+	
 	public String addCompany(@ModelAttribute("company") Companies company)
 	{
 
@@ -28,6 +30,7 @@ public class CompanyController {
 	}
 
 	@RequestMapping(value = "/vendorApplicationHistory")
+	
 	public String vendorApplicationHistory(
 			@ModelAttribute("company") Companies company) 
 	{
@@ -36,6 +39,7 @@ public class CompanyController {
 	}
 
 	@RequestMapping(value = "/employeeManagement")
+	
 	public String employeeManagement(@ModelAttribute("company") Companies company) {
 
 		return "employeeManagement";
@@ -55,24 +59,28 @@ public class CompanyController {
 	}
 
 	@RequestMapping(value = "/requirementForVetterManagement")
+	
 	public String requirement(@ModelAttribute("company") Companies company) {
 
 		return "requirementForVetterManagement";
 	}
 	
 	@RequestMapping(value = "/vetterNotificationService")
+	
 	public String notificationService(@ModelAttribute("company") Companies company) {
 
 		return "vetterNotificationService";
 	}
 	
 	@RequestMapping(value = "/requestServiceFromAVendor")
+	
 	public String requestServiceFromAVendor(@ModelAttribute("company") Companies company) {
 
 		return "requestServiceFromAVendor";
 	}
 	
 	@RequestMapping(value = "/applyToBeAVendor")
+	
 	public String applyToBeAVendor(@ModelAttribute("company") Companies company) {
 
 		return "applyToBeAVendor";
