@@ -38,7 +38,8 @@ public class Application implements Serializable {
 	@Column(nullable = false, unique = true)
 	private String applicationRef;
 
-	@OneToMany(mappedBy = "application", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name="applicationRef", referencedColumnName="applicationRef")
 	private List<VendorReference> vendorReferences;
 
 	@ManyToOne

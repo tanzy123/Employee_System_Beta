@@ -8,19 +8,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name="VendorReference.findByAppRef",
+                query="SELECT v FROM VendorReference v WHERE v.applicationRef = :applicationRef"),
+}) 
 public class VendorReference {
 	
 	@Id
 	@GeneratedValue
 	private Long referenceId;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "application_id")
-    private Application application;
+	private String applicationRef;
 
 	private String companyName;
 
@@ -48,9 +52,23 @@ public class VendorReference {
 		this.emailAddress = emailAddress;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.referenceId= referenceId;
 	}
 
 	
+	
+	public String getApplicationRef() {
+		return applicationRef;
+	}
+
+
+
+	public void setApplicationRef(String applicationRef) {
+		this.applicationRef = applicationRef;
+	}
+
+
+
 	public VendorReference() {
 		super();
 	}
@@ -120,6 +138,8 @@ public class VendorReference {
 		this.endDate = endDate;
 	}
 
+	
+	
 	@Override
 	public String toString() {
 		return "VendorReference [referenceId=" + referenceId + ", companyName="

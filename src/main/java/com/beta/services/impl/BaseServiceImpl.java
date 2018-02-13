@@ -12,7 +12,7 @@ import com.beta.services.BaseService;
 
 
 public abstract class BaseServiceImpl<K, E> implements BaseService<K, E> {
-	private JPADAO dao;
+	protected JPADAO dao;
 
 	protected Class<E> entityClass;
 

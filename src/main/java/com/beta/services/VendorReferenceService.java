@@ -6,4 +6,5 @@ import com.beta.exception.VendorMgmtException;
 
 public interface VendorReferenceService extends BaseService<Long, VendorReference>{
 	
+
 }
