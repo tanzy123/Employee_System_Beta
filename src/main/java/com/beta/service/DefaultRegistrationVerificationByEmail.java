@@ -4,14 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.beta.PurposeType;
+
 import com.beta.dao.CompanyDao;
 import com.beta.entity.Company;
 import com.beta.entity.CompanyAdministratorAccount;
+import com.beta.entity.EmailPurposeType;
 import com.beta.entity.UserAccount;
 import com.beta.services.CompanyService;
 import com.beta.services.impl.CompanyServiceImpl;
@@ -24,6 +26,7 @@ public class DefaultRegistrationVerificationByEmail implements RegistrationServi
 	NotificationService notificationService;
 	
 	String companyEmail;
+	
 	@Override
 	public void RegisterCompany(Company company) {
 		
@@ -44,7 +47,7 @@ public class DefaultRegistrationVerificationByEmail implements RegistrationServi
 		String vetter="";
 		try 
 		{
-			notificationService.sendEmailWithPurposeCC(company.getCompanyEmail(), cc, subject, message,vetter, PurposeType.CompanyRegistrationEmailVerification);
+			notificationService.sendEmailWithPurposeCC(company.getCompanyEmail(), cc, subject, message,vetter, EmailPurposeType.CompanyRegistrationEmailVerification);
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -68,7 +71,7 @@ public class DefaultRegistrationVerificationByEmail implements RegistrationServi
 		//select p.token from company c join c.CompanyAdministor p where companyEmail=:companyEmail
 		CompanyAdministratorAccount companyAdmin=new CompanyAdministratorAccount();
 		
-		//@NamedQuery(name="findToken", query="select p.token from company c join c.CompanyAdministor p where companyEmail=:companyEmail") 
+		
 		
 		
 		
