@@ -9,28 +9,28 @@
 
 <body>
 <h1>Company Registration</h1>
-<div class="ex">
+<div class="companyRegistration"  style="float: left;">
 		<form action="storeRegistration" method="post">
 			<table>
 				<tr>
 					<td>Company Reference Number</td>
-					<td><input type="text" name="companyReferenceNumber" /></td>
+					<td><input type="text" name="companyReferenceNumber" required /></td>
 				</tr>
 				<tr>
 					<td>Company Name</td>
-					<td><input type="text" name="companyName" /></td>
+					<td><input type="text" name="companyName" required /></td>
 				</tr>
 				<tr>
 					<td>Company Address</td>
-					<td><input type="text" name="companyAddress" /></td>
+					<td><input type="text" name="companyAddress" required /></td>
 				</tr>
 				<tr>
 					<td>Company Email</td>
-					<td><input type="text" name="companyEmail" /></td>
+					<td><input type="text" name="companyEmail" required/></td>
 				</tr>
 				<tr>
 					<td>Contact Number</td>
-					<td><input type="text" name="contactNumber" /></td>
+					<td><input type="text" name="contactNumber" required /></td>
 				</tr>
 				<tr>
 					<td>Company Website</td>
@@ -38,12 +38,33 @@
 				</tr>
 				<tr>
 					<td>Company Turnover</td>
-					<td><input type="text" name="companyTurnover" /></td>
+					<td><input type="text" name="turnover" required/></td>
+				</tr>
+				<tr>
+					<td>Vendor Category</td>
+					<td><input type="text" name="category" /></td>
 				</tr>
 				
 			</table>
-			<input type="submit" value="Submit" />
 		</form>
 	</div>
+	<div class="adminRegistration" style="float: right;">
+	<form action="storeRegistration" method="post">
+	            <tr>
+					<td>Administrator Username</td>
+					<td><input type="text" name="companyAdminUsername" required /></td>
+				</tr>
+				<br>
+				<tr>
+					<td>Administrator Password</td>
+					<td><input type="password" name="companyAdminPassword" required /></td>
+				</tr>
+	</form>
+	</div>
+	<div>
+<form action="emailToken" method="post">
+<<input type="submit" value="Submit" id="submitCompanyRegistration" name="submitCompanyRegistration">
+ </div>
+ </form>
 </body>
 </html>

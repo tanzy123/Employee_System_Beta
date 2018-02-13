@@ -1,26 +1,29 @@
 package com.beta.controllerImpl;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beta.controller.LoginController;
+import com.beta.entity.Category;
 import com.beta.entity.Company;
 import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.EmployeeAccount;
 import com.beta.entity.UserAccount;
 import com.beta.exception.VendorMgmtException;
+import com.beta.service.CompanyValidation;
 import com.beta.services.CompanyAdminstratorAccountService;
+import com.beta.services.CompanyService;
 import com.beta.services.EmployeeAccountService;
-import com.beta.services.impl.EmployeeAccountServiceImpl;
 
 @Controller
 @RequestMapping("/")
@@ -31,6 +34,11 @@ public class LoginControllerImpl implements LoginController {
 	
 	@Autowired
 	EmployeeAccountService employeeAccountService;
+	
+	@Autowired
+	CompanyService companyService;
+	@Autowired
+	CompanyValidation companyValicationService;
 	
 	@Autowired
 	CompanyAdminstratorAccountService companyAdminAccountService;
@@ -46,12 +54,13 @@ public class LoginControllerImpl implements LoginController {
 	}
 
 	@RequestMapping(value = "/loginVerification", method = RequestMethod.POST)
-	public ModelAndView loginVerification(
+	public ModelAndView loginVerification(HttpSession session,
 			@RequestParam(value = "username") String username,
 			@RequestParam(value = "password") String password,
 			@RequestParam(value = "selectLoginType") String loginType) 
 	{
 		ModelAndView mav = null;
+		session.setAttribute("username", username);
 		EmployeeAccount employeeAccount = new EmployeeAccount();
 		if (loginType.equals("EMPLOYEE")) {
 			
@@ -81,11 +90,5 @@ public class LoginControllerImpl implements LoginController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/registration", method = RequestMethod.GET)
-	public ModelAndView Registration(HttpServletRequest request,HttpServletResponse response)
-	{
-		ModelAndView mav = new ModelAndView("registration");
-		mav.addObject("registration", new Company());
-		return mav;
-	}
+	
 }
