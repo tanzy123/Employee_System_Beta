@@ -9,7 +9,7 @@ import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.stereotype.Service;
 
-import com.beta.PurposeType;
+import com.beta.entity.EmailPurposeType;
 
 
 
@@ -108,10 +108,10 @@ public class MailNotification implements NotificationService{
 	
 	@Override
 	public void sendEmailWithPurposeCC(String to, String[] cc, String subject,
-			String msg, String msgFromPreviousVettor, PurposeType purpose)
+			String msg, String msgFromPreviousVettor, EmailPurposeType purpose)
 			throws Exception {
 		// TODO Auto-generated method stub
-		if(purpose==PurposeType.CompanyRegistrationEmailVerification)
+		if(purpose==EmailPurposeType.CompanyRegistrationEmailVerification)
 		{
 			//Do something
 			//Mail notification logic
@@ -146,7 +146,7 @@ public class MailNotification implements NotificationService{
 			
 		}
 		
-		if(purpose==PurposeType.VendorRequestToCompany)
+		if(purpose==EmailPurposeType.VendorRequestToCompany)
 		{
 			//Do something
 			//Mail notification logic
@@ -181,7 +181,7 @@ public class MailNotification implements NotificationService{
 			
 		}
 		
-		if(purpose==PurposeType.SendToNextEmployeeVettor)
+		if(purpose==EmailPurposeType.SendToNextEmployeeVettor)
 		{
 			
 			//Do something
@@ -214,7 +214,7 @@ public class MailNotification implements NotificationService{
 			email.send();
 			System.out.println("Email Sent");
 		}
-		if(purpose==PurposeType.ServiceRequestFromCompanyToVendor)
+		if(purpose==EmailPurposeType.ServiceRequestFromCompanyToVendor)
 		{
 			
 			//Do something
@@ -246,7 +246,7 @@ public class MailNotification implements NotificationService{
 			email.send();
 			System.out.println("Email Sent");
 		}
-		if(purpose==PurposeType.VendorApplicationAccepted)
+		if(purpose==EmailPurposeType.VendorApplicationAccepted)
 		{
 			
 			//DoSomething
@@ -280,7 +280,7 @@ public class MailNotification implements NotificationService{
 		}
 		
 		
-		if(purpose==PurposeType.VendorApplicationStatus)
+		if(purpose==EmailPurposeType.VendorApplicationStatus)
 		{
 			//Do something
 			HtmlEmail email = new HtmlEmail();
@@ -312,7 +312,7 @@ public class MailNotification implements NotificationService{
 			System.out.println("Email Sent");
 		}
 		
-		if(purpose==PurposeType.ServiceRequestFromCompanyToVendor)
+		if(purpose==EmailPurposeType.ServiceRequestFromCompanyToVendor)
 		{
 			//Do something
 			HtmlEmail email = new HtmlEmail();
@@ -320,6 +320,39 @@ public class MailNotification implements NotificationService{
 			String msg1 = FileUtils.readFileToString(new File(workingDirectory, filename));
 			
 			msg=msg1.replace("${ServiceRequestFromCompanyToVendor_Message}", msg);
+			email.setMsg(msg);
+			email.addTo(to);
+			email.setSubject(subject);
+			for(String c : cc)
+			{
+				email.addCc(c);
+			}
+			String host = ConfigUtil.getKey("hostName");
+			String from = ConfigUtil.getKey("sendFrom");
+			String fromName = ConfigUtil.getKey("sendFromName");
+			String pass = ConfigUtil.getKey("sendFromPwd");
+			String smtpPort = ConfigUtil.getKey("smtpPort");
+			
+			email.setHostName(host);
+			email.setFrom(from, fromName);
+			email.setAuthenticator(new DefaultAuthenticator(from, pass));
+			email.setTLS(true);
+			System.out.println("smtp port configured  is "+smtpPort);
+			email.setSmtpPort(Integer.parseInt(smtpPort));
+			email.setSSL(true);
+			email.send();
+			System.out.println("Email Sent");
+		}
+		
+
+		if(purpose==EmailPurposeType.AccountCreated)
+		{
+			//Do something
+			HtmlEmail email = new HtmlEmail();
+			String path = ConfigUtil.getKey("AccountCreated");
+			String msg1 = FileUtils.readFileToString(new File(path));
+			
+			msg=msg1.replace("${AccountCreated_Message}", msg);
 			email.setMsg(msg);
 			email.addTo(to);
 			email.setSubject(subject);

@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 
-import com.beta.PurposeType;
 import com.beta.entity.Application;
 import com.beta.entity.ApprovalStatus;
 import com.beta.entity.Company;
+import com.beta.entity.EmailPurposeType;
 import com.beta.entity.Requirement;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.NotificationService;
@@ -58,7 +58,7 @@ public class DefaultVendorVettingProcess implements VendorVettingProcess {
 		List<Requirement> vetterRequirement = application.getVettorRequirement();
 		String msg = getRequirements(vetterRequirement);
 			String[] vettersEmail = {};
-		notificationService.sendEmailWithPurposeCC(email, vettersEmail , "Vendor Acceptance", msg, application.getRemarks(), PurposeType.VendorApplicationAccepted);
+		notificationService.sendEmailWithPurposeCC(email, vettersEmail , "Vendor Acceptance", msg, application.getRemarks(), EmailPurposeType.VendorApplicationAccepted);
 	}
 
 	private String getRequirements(List<Requirement> vettorRequirement) {
