@@ -24,6 +24,7 @@ public class DefaultRegistrationVerificationByEmail implements RegistrationServi
 	NotificationService notificationService;
 	
 	String companyEmail;
+	
 	@Override
 	public void RegisterCompany(Company company) {
 		
@@ -68,7 +69,7 @@ public class DefaultRegistrationVerificationByEmail implements RegistrationServi
 		//select p.token from company c join c.CompanyAdministor p where companyEmail=:companyEmail
 		CompanyAdministratorAccount companyAdmin=new CompanyAdministratorAccount();
 		
-		//@NamedQuery(name="findToken", query="select p.token from company c join c.CompanyAdministor p where companyEmail=:companyEmail") 
+		
 		
 		
 		
