@@ -114,11 +114,11 @@ public class TestConstant {
 		SAMPLE_CLIENT_LIST = Collections.unmodifiableList(clientList);
 		
 		SAMPLE_APPLICATION1 = new Application("ASD1111", SAMPLE_REFERENCE_LIST, SAMPLE_CATEGORY1,
-				"CS123213", "Johhny", "No remarks", ApplicationStatus.PENDING, new Date(1000000L), 
+				"CS123213", "Johhny", "No remarks", ApplicationStatus.VETTING, new Date(1000000L), 
 				1L, SAMPLE_DOCUMENT_LIST, SAMPLE_REQUIREMENT_LIST);
 		
 		SAMPLE_APPLICATION2 = new Application("YRS1231", SAMPLE_REFERENCE_LIST, SAMPLE_CATEGORY1,
-				"CS123213", "Mary", "No remarks", ApplicationStatus.REJECT, new Date(1000L), 
+				"CS123213", "Mary", "No remarks", ApplicationStatus.VETTING, new Date(1000L), 
 				1L, SAMPLE_DOCUMENT_LIST, SAMPLE_REQUIREMENT_LIST);
 		
 		SAMPLE_APPLICATION3 = new Application("ZZC123", SAMPLE_REFERENCE_LIST, SAMPLE_CATEGORY1,

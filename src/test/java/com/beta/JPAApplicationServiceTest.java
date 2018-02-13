@@ -1,6 +1,7 @@
 package com.beta;
 
-import static com.beta.TestConstant.*;
+import static com.beta.TestConstant.SAMPLE_APPLICATION3;
+import static com.beta.TestConstant.SAMPLE_COMPANY;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -10,6 +11,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +40,7 @@ public class JPAApplicationServiceTest {
 	}
 	
 	@Test
+	@Rollback(value=false)
 	public void testAddApplication() {
 		final int listSize = service.findAll().size();
 		service.saveOrUpdate(SAMPLE_APPLICATION3);
