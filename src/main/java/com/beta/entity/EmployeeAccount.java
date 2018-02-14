@@ -25,7 +25,7 @@ public class EmployeeAccount extends UserAccount {
 	private LogInType logInType = LogInType.EMPLOYEE;
 
 	@OneToOne
-	@JoinColumn(name="role", referencedColumnName="role")
+	@JoinColumn(name="roleId", referencedColumnName="roleId")
 	private Role role;
 
 	@OneToOne

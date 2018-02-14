@@ -4,7 +4,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-@MappedSuperclass
+@MappedSuperclass 
 public class UserAccount {
 
 	@Id

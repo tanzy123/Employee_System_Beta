@@ -23,6 +23,9 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name="Application.findByRefNo",
                 query="SELECT a FROM Application a where a.applicationRef = :applicationRef"),
+    @NamedQuery(name="Application.findByStatusAndCompRef",
+    			query="SELECT a FROM Application a where a.companyReferenceNumber = :companyReferenceNumber"
+    					+ " AND a.applicationStatus = :applicationStatus"),
 })
 public class Application implements Serializable {
 
