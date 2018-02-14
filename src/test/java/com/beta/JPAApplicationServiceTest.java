@@ -40,7 +40,7 @@ public class JPAApplicationServiceTest {
 	}
 	
 	@Test
-	@Rollback(value=false)
+//	@Rollback(value=false)
 	public void testAddApplication() {
 		final int listSize = service.findAll().size();
 		service.saveOrUpdate(SAMPLE_APPLICATION3);
