@@ -52,6 +52,10 @@ public class CategoryServiceImpl extends BaseServiceImpl<Long, Category> impleme
 			Category category = findByNameAndCompanyRef(entity.getCategoryName(), entity.getCompanyReferenceNumber());
 			if (category == null)
 				dao.persist(entity);
+			else {
+				category.setCategoryName(entity.getCategoryName());
+				dao.merge(category);
+			} 
 		}	
 		else {
 			Category category = dao.findById(entity.getCategoryId());

@@ -93,6 +93,7 @@ public class JPACategoryServiceTest {
 		assertThat(service.findAll().size(), is(initialSize + 1));
 	}
 	
+	// With or without changes also have failure
 	@Test(expected=org.springframework.dao.DataIntegrityViolationException.class)
 	public void testSaveAndUpdateExistingCategory() {
 		SAMPLE_CATEGORY1.setCompanyReferenceNumber(SAMPLE_COMPANY.getCompanyReferenceNumber());
