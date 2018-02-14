@@ -2,6 +2,7 @@ package com.beta.controllerImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,12 +50,13 @@ public class LoginControllerImpl implements LoginController {
 	}
 
 	@RequestMapping(value = "/loginVerification", method = RequestMethod.POST)
-	public ModelAndView loginVerification(
+	public ModelAndView loginVerification(HttpSession session,
 			@RequestParam(value = "username") String username,
 			@RequestParam(value = "password") String password,
 			@RequestParam(value = "selectLoginType") String loginType) 
 	{
 		ModelAndView mav = null;
+		session.setAttribute("username", username);
 		EmployeeAccount employeeAccount = new EmployeeAccount();
 		if (loginType.equals("EMPLOYEE")) {
 			
