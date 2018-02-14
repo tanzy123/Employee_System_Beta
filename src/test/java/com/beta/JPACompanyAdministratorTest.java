@@ -36,9 +36,6 @@ public class JPACompanyAdministratorTest {
 	@Autowired
 	CompanyService companyService;
 	
-	@Autowired
-	Company company;
-	
 	@Before
 	public void initialize() {
 		companyService.saveOrUpdate(SAMPLE_COMPANY);

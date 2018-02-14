@@ -8,16 +8,20 @@ import java.util.Random;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 
 import com.beta.dao.CompanyDao;
 import com.beta.entity.Company;
 import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.EmailPurposeType;
 import com.beta.entity.UserAccount;
+import com.beta.exception.VendorMgmtException;
 import com.beta.services.CompanyService;
 import com.beta.services.impl.CompanyServiceImpl;
 
+@Service("DefaultRegistrationVerificationByEmail")
+@org.springframework.transaction.annotation.Transactional(propagation = Propagation.REQUIRED, rollbackFor = VendorMgmtException.class)
 public class DefaultRegistrationVerificationByEmail implements RegistrationService{
 
 	@Autowired

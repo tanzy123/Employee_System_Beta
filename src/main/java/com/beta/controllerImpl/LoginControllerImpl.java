@@ -33,6 +33,7 @@ public class LoginControllerImpl implements LoginController {
 	
 	@Autowired
 	CompanyService companyService;
+	
 	@Autowired
 	CompanyValidation companyValicationService;
 	
@@ -77,7 +78,7 @@ public class LoginControllerImpl implements LoginController {
 			try {
 				companyAdminAccountService
 						.validateAccount(companyAdministratorAccount);
-				mav = new ModelAndView("admin");
+				mav = new ModelAndView("redirect:/dashboardcompany");
 			} catch (VendorMgmtException e) {
 				mav = new ModelAndView("error");
 				mav.addObject("message", e);
