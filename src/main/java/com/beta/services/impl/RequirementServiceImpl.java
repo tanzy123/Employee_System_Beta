@@ -12,10 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 
+import com.beta.dao.ApplicationDao;
 import com.beta.dao.JPADAO;
 import com.beta.dao.RequirementDao;
+import com.beta.entity.Application;
 import com.beta.entity.ApprovalStatus;
 import com.beta.entity.Requirement;
+import com.beta.entity.VendorReference;
 import com.beta.exception.VendorMgmtException;
 import com.beta.services.RequirementService;
 
@@ -23,6 +26,8 @@ import com.beta.services.RequirementService;
 @org.springframework.transaction.annotation.Transactional(propagation= Propagation.REQUIRED, rollbackFor=VendorMgmtException.class)
 public class RequirementServiceImpl extends BaseServiceImpl<Long, Requirement> implements RequirementService {
 
+	@Autowired
+	protected ApplicationDao applicationDao;
 	
 	@Autowired
 	protected RequirementDao dao;
@@ -53,7 +58,58 @@ public class RequirementServiceImpl extends BaseServiceImpl<Long, Requirement> i
 
 	@Override
 	public void saveOrUpdate(Requirement entity) throws VendorMgmtException {
-		dao.persist(entity);
-	}
 
+		validateRequirement(entity);
+		if (entity.getRequirementId() == null) {
+			Requirement requirement = findByAppRefAndUserName(entity.getApplicationRef(), entity.getUserName());
+			if (requirement == null) {
+				dao.persist(entity);}
+			else {
+				requirement.setRequirement(entity.getRequirement());
+				requirement.setSequence(entity.getSequence());
+				requirement.setStatus(entity.getStatus());
+				requirement.setStatusUpdateDate(entity.getStatusUpdateDate());
+				dao.merge(requirement); 
+			}
+		}	
+		else {
+			Requirement requirement = dao.findById(entity.getRequirementId());
+			if (requirement != null) {
+				requirement.setRequirement(entity.getRequirement());
+				requirement.setSequence(entity.getSequence());
+				requirement.setStatus(entity.getStatus());
+				requirement.setStatusUpdateDate(entity.getStatusUpdateDate());
+				dao.merge(requirement);
+			} else
+				dao.merge(entity);
+		}
+	}
+	
+	public Requirement findByAppRefAndUserName( String appReferenceNumber, String UserName) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("applicationRef", appReferenceNumber);
+		params.put("userName", UserName);
+		
+		List<Requirement> list = findByNamedQueryAndNamedParams("Requirement.findByApplicationRefAndUsername", params);
+		
+		if (list.size() > 1)
+			throw new VendorMgmtException("Multiple requirement is found with given application reference number and username");
+		else if (list.isEmpty())
+			return null;
+		else
+			return list.get(0);
+	} 
+	
+	public void validateRequirement(Requirement entity) {
+		if (entity.getRequirement() == null || entity.getUserName() == null)
+			throw new VendorMgmtException("Requirements or user name not found");
+		Map<String, Object> params = new HashMap<>();
+		params.put("applicationRef", entity.getApplicationRef());
+		List<Application> list = applicationDao.findByNamedQueryAndNamedParams("Application.findByRefNo", params);
+		if (list.size() > 1)
+			throw new VendorMgmtException("More than one application found with the same application reference");
+		else if (list.isEmpty())
+			throw new VendorMgmtException("No application found with the same application reference");
+	}
+	
 }

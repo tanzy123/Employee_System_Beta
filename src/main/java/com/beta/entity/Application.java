@@ -209,4 +209,15 @@ public class Application implements Serializable {
 		this.vendorReferenceNumber = vendorReferenceNumber;
 	}
 
+	@Override
+	public String toString() {
+		return "Application [applicationId=" + applicationId + ", applicationRef=" + applicationRef
+				+ ", vendorReferences=" + vendorReferences + ", category=" + category + ", companyReferenceNumber="
+				+ companyReferenceNumber + ", vendorReferenceNumber=" + vendorReferenceNumber + ", POC=" + POC
+				+ ", remarks=" + remarks + ", applicationStatus=" + applicationStatus + ", applicationDate="
+				+ applicationDate + ", vendorPeriod=" + vendorPeriod + ", modifiedDate=" + modifiedDate
+				+ ", supportingDocument=" + supportingDocument + ", vetterRequirement=" + vetterRequirement + "]";
+	}
+
+	
 }

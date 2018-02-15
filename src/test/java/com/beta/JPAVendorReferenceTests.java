@@ -32,7 +32,7 @@ import com.beta.services.VendorReferenceService;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:appContext.xml"})
 @Transactional
-public class VendorReferenceTests {
+public class JPAVendorReferenceTests {
 
 	@Autowired
 	VendorReferenceService vendorService;
@@ -75,6 +75,8 @@ public class VendorReferenceTests {
 	assertEquals((startsize+1), finalsize);
 	
 	}
+	
+	
 	
 	@Test
 	public void testVendorReferenceDelete() throws Exception {
