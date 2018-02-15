@@ -4,9 +4,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/x
 version="2.0">
  
 <persistence-unit name="VendorManagementPersistentUnit" transaction-type="RESOURCE_LOCAL">
-<description>
-Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
-</description>
+<description>Persistence unit for the Vendor Management</description>
 <!-- <provider>org.hibernate.ejb.HibernatePersistence</provider> -->
 <class>com.beta.entity.Application</class>
 <class>com.beta.entity.Category</class>
@@ -20,7 +18,6 @@ Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
 <class>com.beta.entity.VendorReference</class>
 <class>com.beta.entity.CompanyVendorRelationship</class>
 	<properties>
-	
 	<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 	<property name="hibernate.show_sql" value="true" />
 	<property name="hibernate.hbm2ddl.auto" value="update" />
@@ -35,6 +32,7 @@ Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
         <property name="hibernate.c3p0.idle_test_period" value="300" />
         <property name="hibernate.c3p0.max_statements" value="0" />
         <property name="hibernate.c3p0.timeout" value="100" />
+        <property name="javax.persistence.sql-load-script-source" value="META-INF/import.sql"/>
 	</properties>
  
 </persistence-unit>

@@ -46,7 +46,7 @@ public class Application implements Serializable {
 	private List<VendorReference> vendorReferences;
 
 	@ManyToOne
-	@JoinColumn(name = "categoryName", referencedColumnName="categoryName")
+	@JoinColumn(name = "categoryId", referencedColumnName="categoryId")
 	private Category category;
 
 	private String companyReferenceNumber;

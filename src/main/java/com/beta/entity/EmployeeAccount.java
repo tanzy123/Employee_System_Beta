@@ -29,7 +29,7 @@ public class EmployeeAccount extends UserAccount {
 	private Role role;
 
 	@OneToOne
-	@JoinColumn(name="department", referencedColumnName="departmentName")
+	@JoinColumn(name="departmentId", referencedColumnName="departmentId")
 	private Department department;
 
 	
