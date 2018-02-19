@@ -32,7 +32,7 @@ public class Application implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7471758161505829102L;
+	private static final long serialVersionUID = -7673945541108800665L;
 
 	@Id
 	@GeneratedValue
@@ -45,6 +45,7 @@ public class Application implements Serializable {
 	@JoinColumn(name="applicationRef", referencedColumnName="applicationRef")
 	private List<VendorReference> vendorReferences;
 
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "categoryId", referencedColumnName="categoryId")
 	private Category category;
 
