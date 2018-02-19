@@ -53,9 +53,6 @@ public class JPARequirementServiceTest {
 	@Autowired
 	RequirementService service;
 	
-	@Autowired
-	ApplicationDao dao;
-	
 	@Before
 	public void initialize() {
 		Category category = SAMPLE_CATEGORY1;
@@ -193,7 +190,7 @@ public class JPARequirementServiceTest {
 		Application a = new Application();
 		a.setVettorRequirement(reqList);
 		a.setApplicationRef("qqqaaa");
-		dao.persist(a);
+		appServ.saveOrUpdate(a);
 		List<Requirement> list = service.getRequirementByUsernameAndStatus("asd", ApprovalStatus.PENDING);
 		assertThat(list.size(), is(1));
 	}
@@ -208,7 +205,7 @@ public class JPARequirementServiceTest {
 		Application a = new Application();
 		a.setVettorRequirement(reqList);
 		a.setApplicationRef("qqqaaa");
-		dao.persist(a);
+		appServ.saveOrUpdate(a);
 		List<Requirement> list = service.getRequirementByUsernameAndStatus("a", ApprovalStatus.PENDING);
 		assertThat(list.size(), is(0));
 	}

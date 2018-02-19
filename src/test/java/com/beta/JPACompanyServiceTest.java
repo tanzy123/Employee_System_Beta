@@ -29,7 +29,6 @@ public class JPACompanyServiceTest {
 	CompanyService service;
 	
 	@Test
-	@Rollback(value=false)
 	public void testAddCompany() {
 		final int listSize = service.findAll().size();
 		service.saveOrUpdate(SAMPLE_COMPANY);
@@ -40,7 +39,7 @@ public class JPACompanyServiceTest {
 	public void testAddAndRemoveCompany() {
 		service.saveOrUpdate(SAMPLE_COMPANY);
 		final int listSize = service.findAll().size();
-		Company company = (Company)service.find(SAMPLE_COMPANY.getCompanyPrimaryId());
+		Company company = service.findbyRefNo(SAMPLE_COMPANY.getCompanyReferenceNumber());
 		service.delete(company.getCompanyPrimaryId());
 		assertThat(service.findAll().size(), is(listSize-1));
 	}

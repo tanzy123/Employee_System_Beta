@@ -1,12 +1,13 @@
 package com.beta.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 
 @Entity
 @NamedQueries({
@@ -24,16 +25,14 @@ public class EmployeeAccount extends UserAccount {
 	@Enumerated(EnumType.STRING)
 	private LogInType logInType = LogInType.EMPLOYEE;
 
-	@OneToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="roleId", referencedColumnName="roleId")
 	private Role role;
 
-	@OneToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="departmentId", referencedColumnName="departmentId")
 	private Department department;
 
-	
-	
 	public EmployeeAccount(String userName, String password, String employeeId, String employeeEmail, String contactNumber,
 			String companyReferenceNumber, Role role, Department department) {
 		super(userName, password, companyReferenceNumber);
