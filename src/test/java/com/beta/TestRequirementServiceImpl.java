@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,5 +59,9 @@ public class TestRequirementServiceImpl {
 		dao.persist(a);
 		List<Requirement> list = service.getRequirementByUsernameAndStatus("a", ApprovalStatus.PENDING);
 		assertThat(list.size(), is(0));
+		
+		
 	}
+	
+
 }

@@ -5,7 +5,7 @@
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          id="WebApp_ID" version="2.5">
 
-    <display-name>EmployeeManagement</display-name>
+    <display-name>Employee System Beta</display-name>
     
    <!--
 		- Location of the XML file that defines the root application context.
@@ -31,6 +31,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	</servlet-mapping>
 	
 
+     <error-page>
+	<error-code>404</error-code>
+	<location>/WEB-INF/pages/404.htm</location>
+  </error-page>
     
 
 </web-app>
