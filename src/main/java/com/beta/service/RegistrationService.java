@@ -6,9 +6,9 @@ import com.beta.entity.UserAccount;
 
 public interface RegistrationService {
 
-	void RegisterCompany(Company company);
+	public void RegisterCompany(Company company);
 	
-	boolean SendVarificationEmail (Company company);
+	public boolean SendVarificationEmail (Company company);
 
 	public boolean TokenComparison(String token);
 	
