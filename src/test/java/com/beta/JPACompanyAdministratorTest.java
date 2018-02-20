@@ -42,7 +42,6 @@ public class JPACompanyAdministratorTest {
 	}
 	
 	@Test
-	@Rollback(value=false)
 	public void testAddCompanyAdministratorAccount() {
 		final int listSize = service.findAll().size();
 		service.createNewAccount(SAMPLE_COMPANY_ADMINISTRATOR);

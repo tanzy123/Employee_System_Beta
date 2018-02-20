@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -94,7 +95,7 @@ public class JPACategoryServiceTest {
 	}
 	
 	// With or without changes also have failure
-	@Test(expected=org.springframework.dao.DataIntegrityViolationException.class)
+	@Test
 	public void testSaveAndUpdateExistingCategory() {
 		SAMPLE_CATEGORY1.setCompanyReferenceNumber(SAMPLE_COMPANY.getCompanyReferenceNumber());
 		service.saveOrUpdate(SAMPLE_CATEGORY1);
