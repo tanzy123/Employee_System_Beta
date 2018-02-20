@@ -1,6 +1,7 @@
 package com.beta;
 
 import static org.hamcrest.CoreMatchers.is;
+
 import static org.junit.Assert.*;
 
 import java.util.HashMap;
