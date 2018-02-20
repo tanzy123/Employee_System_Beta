@@ -1,7 +1,5 @@
 package com.beta.controllerImpl;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beta.controller.LoginController;
-import com.beta.entity.Category;
-import com.beta.entity.Company;
 import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.EmployeeAccount;
 import com.beta.entity.UserAccount;
@@ -37,6 +33,7 @@ public class LoginControllerImpl implements LoginController {
 	
 	@Autowired
 	CompanyService companyService;
+	
 	@Autowired
 	CompanyValidation companyValicationService;
 	
@@ -81,7 +78,7 @@ public class LoginControllerImpl implements LoginController {
 			try {
 				companyAdminAccountService
 						.validateAccount(companyAdministratorAccount);
-				mav = new ModelAndView("admin");
+				mav = new ModelAndView("redirect:/dashboardcompany");
 			} catch (VendorMgmtException e) {
 				mav = new ModelAndView("error");
 				mav.addObject("message", e);

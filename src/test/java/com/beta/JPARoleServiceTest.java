@@ -28,7 +28,7 @@ import com.beta.TestConstant.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:appContext.xml"})
 @Transactional
-public class TestRoleService {
+public class JPARoleServiceTest {
 	
 	@Rule
 	public ExpectedException expectedEx = ExpectedException.none();

@@ -3,10 +3,8 @@ package com.beta.entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.NamedQuery;
 
-@MappedSuperclass
-@NamedQuery(name="findToken", query="select p.token from company c join c.CompanyAdministor p where companyEmail=:companyEmail") 
+@MappedSuperclass 
 public class UserAccount {
 
 	@Id

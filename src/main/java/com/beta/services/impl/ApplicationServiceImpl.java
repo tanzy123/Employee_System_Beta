@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Propagation;
 import com.beta.dao.ApplicationDao;
 import com.beta.dao.JPADAO;
 import com.beta.entity.Application;
+import com.beta.entity.ApplicationStatus;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.FieldCopyUtil;
 import com.beta.services.ApplicationService;
@@ -73,5 +74,15 @@ public class ApplicationServiceImpl extends BaseServiceImpl<Long, Application> i
 			save(entity);
 		else
 			updateApplicationDetails(entity, application);
+	}
+
+	@Override
+	public List<Application> findByStatusAndCompRef(ApplicationStatus applicationStatus, String companyReferenceNumber) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("companyReferenceNumber", companyReferenceNumber);
+		params.put("applicationStatus", applicationStatus);
+		List<Application> list = dao.findByNamedQueryAndNamedParams("Application.findByStatusAndCompRef", params);
+			return list;
+		
 	}
 }

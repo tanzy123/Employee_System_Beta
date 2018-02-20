@@ -58,8 +58,14 @@ public class RoleServiceImpl extends BaseServiceImpl<Long, Role> implements Role
 		validateRole(entity);
 		if (entity.getRoleId() == null) {
 			Role role = findByCompanyReferenceNumber(entity.getCompanyReferenceNumber(), entity.getRole());
-			if (role == null)
+			if (role == null) {
 				dao.persist(entity);
+			}
+			else
+			{
+				role.setRole(entity.getRole());
+				dao.merge(role);
+			}
 		}	
 		else {
 			Role role = dao.findById(entity.getRoleId());

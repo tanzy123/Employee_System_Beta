@@ -54,6 +54,10 @@ public class DocumentsServiceImpl extends BaseServiceImpl<Long, Documents> imple
 			Documents Documents = findByApplicationRef(entity.getApplicationRef());
 			if (Documents == null)
 				dao.persist(entity);
+			else {
+				Documents.setDocuments(entity.getDocuments());
+				dao.merge(Documents);
+			}
 		}	
 		else {
 			Documents Documents = dao.findById(entity.getDocumentId());
