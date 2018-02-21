@@ -2,8 +2,7 @@ package com.beta;
 
 import static com.beta.TestConstant.SAMPLE_DOCUMENT_LIST;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,18 +25,26 @@ import com.beta.entity.Category;
 import com.beta.entity.Company;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.VendorApplication;
+import com.beta.services.ApplicationService;
+import com.beta.services.CategoryService;
 import com.beta.services.CompanyService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:appContext.xml"})
 @Transactional
-public class TestVendorApplication {
+public class JPAVendorApplicationTest {
 
+	@Autowired
+	ApplicationService appServ;
+	
 	@Autowired
 	VendorApplication ven;
 	
 	@Autowired
 	CompanyService comService;
+	
+	@Autowired
+	CategoryService catServ;
 	
 	@Rule
 	public ExpectedException expectedEx = ExpectedException.none();
@@ -95,10 +102,12 @@ public class TestVendorApplication {
 		cat.setCategoryId(3L);
 		cat.setCategoryName("Tech");
 		cat.setCompanyReferenceNumber("AA-11");
+		catServ.saveOrUpdate(cat);
 		
 		Application app = new Application();
 		Application app1 = new Application();
-		app.setApplicationId(1L);
+			//app.setApplicationId(1L);
+		app.setApplicationRef("BB-11");
 		app.setCategory(cat);
 		app.setCompanyReferenceNumber("AA-11");
 		app.setPOC("Yi Fan");
@@ -106,11 +115,14 @@ public class TestVendorApplication {
 		app.setVendorPeriod(1L);
 		app.setVendorReferenceNumber("BB-12");
 		
-		app1=ven.generateVendorApplication(app);
-		assertThat(app1.getCategory(),is(cat));
-		assertThat(app1.getCompanyReferenceNumber(),is("AA-11"));
-		assertThat(app1.getPOC(),is("Yi Fan"));
-		assertThat(app1.getVendorReferenceNumber(),is("BB-12"));
+		ven.validateVendorApplication(app);
+		Long id = app.getApplicationId();
+		Application app2=appServ.find(id);
+		
+		assertEquals(app2.getPOC(),"Yi Fan");
+		assertEquals(app2.getVendorReferenceNumber(),"BB-12");
+		assertEquals(app2.getCompanyReferenceNumber(),"AA-11");
+		assertEquals(app2.getApplicationRef(),"BB-11");
 		
 	}
 	

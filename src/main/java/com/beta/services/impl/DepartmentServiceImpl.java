@@ -52,6 +52,10 @@ public class DepartmentServiceImpl extends BaseServiceImpl<Long, Department> imp
 			Department department = findByNameAndCompanyRef(entity.getDepartmentName(), entity.getCompanyReferenceNumber());
 			if (department == null)
 				dao.persist(entity);
+			else {
+				department.setDepartmentName(entity.getDepartmentName());
+				dao.merge(department);
+			}
 		}	
 		else {
 			Department department = dao.findById(entity.getDepartmentId());

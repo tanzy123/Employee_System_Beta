@@ -20,7 +20,6 @@ import com.beta.services.CategoryService;
 import com.beta.services.CompanyService;
 
 @Service("VendorApplication")
-
 @org.springframework.transaction.annotation.Transactional(propagation= Propagation.REQUIRED, rollbackFor=VendorMgmtException.class)
 public class VendorApplicationImpl implements VendorApplication {
 
@@ -53,7 +52,7 @@ public class VendorApplicationImpl implements VendorApplication {
 
 	@Override
 	public void validateVendorApplication(Application application) throws VendorMgmtException{
-		
+		int counter=0;
 		List <Category> category = categoryService.findAll();
 		
 		String vendorRef = application.getVendorReferenceNumber();
@@ -65,20 +64,23 @@ public class VendorApplicationImpl implements VendorApplication {
 		
 		try {
 			if (companyRef.equals(null)||vendorCategory.equals(null)||poc.equals(null)||vendorPeriod.equals(null)||vendorRef.equals(null)) {
-			throw new VendorMgmtException("MANDATORY FIELDS ARE NOT ALL FILLED UP");
-		}else {
+				throw new NullPointerException() ;
+			}else {
 				if (vendorRef.equals(companyRef)) {
 					throw new VendorMgmtException("VENDOR REFERENCE NUMBER CANNOT BE THE SAME AS COMPANY REFERENCE NUMBER");
 				}
 			
 				else {
 				for (Category c: category) {
-				if (vendorCategory.getCategoryName().equals(c.getCategoryName()) && vendorCategory.getCompanyReferenceNumber().equals(application.getCompanyReferenceNumber())) { 
+				if (vendorCategory.getCategoryName().equals(c.getCategoryName()) && c.getCompanyReferenceNumber().equals(application.getCompanyReferenceNumber())) { 
 					appservice.saveOrUpdate(application);
+					counter=1;
 //					APPLICATION UPLOADED SUCCESSFULLY
 				}
 				}
+				if (counter != 1) {
 				throw new VendorMgmtException("VENDOR CATEGORY DO NOT FALL INTO COMPANY'S REQUESTED CATEGORY LIST");
+				}
 			}
 		}
 		}catch (NullPointerException e) {

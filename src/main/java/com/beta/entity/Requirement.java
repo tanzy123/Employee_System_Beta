@@ -16,6 +16,9 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name="Requirement.findByStatusAndUsername",
                 query="SELECT r FROM Requirement r where r.userName = :userName AND r.status = :status"),
+    
+    @NamedQuery(name="Requirement.findByApplicationRefAndUsername",
+    query="SELECT r FROM Requirement r where r.userName = :userName AND r.applicationRef = :applicationRef"),
 })
 public class Requirement {
 	
@@ -102,6 +105,13 @@ public class Requirement {
 
 	public void setSequence(Integer sequence) {
 		this.sequence = sequence;
+	}
+
+	@Override
+	public String toString() {
+		return "Requirement [requirementId=" + requirementId + ", applicationRef=" + applicationRef + ", userName="
+				+ userName + ", requirement=" + requirement + ", statusUpdateDate=" + statusUpdateDate + ", sequence="
+				+ sequence + ", status=" + status + "]";
 	}
 	
 	

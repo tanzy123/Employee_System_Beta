@@ -52,6 +52,10 @@ public class CategoryServiceImpl extends BaseServiceImpl<Long, Category> impleme
 			Category category = findByNameAndCompanyRef(entity.getCategoryName(), entity.getCompanyReferenceNumber());
 			if (category == null)
 				dao.persist(entity);
+			else {
+				category.setCategoryName(entity.getCategoryName());
+				dao.merge(category);
+			} 
 		}	
 		else {
 			Category category = dao.findById(entity.getCategoryId());
@@ -67,7 +71,7 @@ public class CategoryServiceImpl extends BaseServiceImpl<Long, Category> impleme
 		Map<String, Object> params = new HashMap<>();
 		params.put("companyReferenceNumber", companyReferenceNumber);
 		params.put("categoryName", categoryName);
-		List<Category> list = findByNamedQueryAndNamedParams("Category.findByNameAndRefNo", params);
+		List<Category> list = dao.findByNamedQueryAndNamedParams("Category.findByNameAndRefNo", params);
 		if (list.size() > 1)
 			throw new VendorMgmtException("More than one category per company found for updating");
 		else if (list.isEmpty())

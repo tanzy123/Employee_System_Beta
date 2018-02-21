@@ -63,9 +63,20 @@ public class VendorReferenceServiceImpl extends BaseServiceImpl<Long, VendorRefe
 
 		validateVendorReference(entity);
 		if (entity.getReferenceId() == null) {
-			VendorReference venRef = findByCompanyNameAndAppRef(entity.getApplicationRef());
-			if (venRef == null)
+			VendorReference venRef = findByAppRef(entity.getApplicationRef());
+			if (venRef == null) {
 				dao.persist(entity);
+			}
+			else {
+				venRef.setCompanyAddress(entity.getCompanyAddress());
+				venRef.setCompanyName(entity.getCompanyName());
+				venRef.setContactPerson(entity.getContactPerson());
+				venRef.setEmailAddress(entity.getEmailAddress());
+				venRef.setEndDate(entity.getEndDate());
+				venRef.setPhoneNumber(entity.getPhoneNumber());
+				venRef.setStartDate(entity.getStartDate());
+				dao.merge(venRef);
+			}
 		}	
 		else {
 		Map<String, Object> params = new HashMap<>();
@@ -85,7 +96,7 @@ public class VendorReferenceServiceImpl extends BaseServiceImpl<Long, VendorRefe
 		}
 	}
 	
-	public VendorReference findByCompanyNameAndAppRef( String appReferenceNumber) {
+	public VendorReference findByAppRef( String appReferenceNumber) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("applicationRef", appReferenceNumber);
 		List<VendorReference> list = findByNamedQueryAndNamedParams("VendorReference.findByAppRef", params);

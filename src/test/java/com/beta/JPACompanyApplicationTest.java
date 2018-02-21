@@ -24,7 +24,7 @@ import com.beta.services.CompanyService;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:appContext.xml"})
 @Transactional
-public class TestCompanyApplication {
+public class JPACompanyApplicationTest {
 	
 	@Autowired
 	CompanyValidation comValid;

@@ -1,5 +1,7 @@
 package com.beta.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,7 +14,12 @@ import javax.persistence.NamedQuery;
                 query="SELECT c FROM Category c where c.companyReferenceNumber = :companyReferenceNumber"
                 		+ " AND c.categoryName = :categoryName"),
 })
-public class Category {
+public class Category implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7810775852751032088L;
 
 	@Id
 	@GeneratedValue

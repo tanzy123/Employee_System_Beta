@@ -23,13 +23,16 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name="Application.findByRefNo",
                 query="SELECT a FROM Application a where a.applicationRef = :applicationRef"),
+    @NamedQuery(name="Application.findByStatusAndCompRef",
+    			query="SELECT a FROM Application a where a.companyReferenceNumber = :companyReferenceNumber"
+    					+ " AND a.applicationStatus = :applicationStatus"),
 })
 public class Application implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7471758161505829102L;
+	private static final long serialVersionUID = -7673945541108800665L;
 
 	@Id
 	@GeneratedValue
@@ -42,8 +45,8 @@ public class Application implements Serializable {
 	@JoinColumn(name="applicationRef", referencedColumnName="applicationRef")
 	private List<VendorReference> vendorReferences;
 
-	@ManyToOne
-	@JoinColumn(name = "categoryName", referencedColumnName="categoryName")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "categoryId", referencedColumnName="categoryId")
 	private Category category;
 
 	private String companyReferenceNumber;
@@ -206,4 +209,15 @@ public class Application implements Serializable {
 		this.vendorReferenceNumber = vendorReferenceNumber;
 	}
 
+	@Override
+	public String toString() {
+		return "Application [applicationId=" + applicationId + ", applicationRef=" + applicationRef
+				+ ", vendorReferences=" + vendorReferences + ", category=" + category + ", companyReferenceNumber="
+				+ companyReferenceNumber + ", vendorReferenceNumber=" + vendorReferenceNumber + ", POC=" + POC
+				+ ", remarks=" + remarks + ", applicationStatus=" + applicationStatus + ", applicationDate="
+				+ applicationDate + ", vendorPeriod=" + vendorPeriod + ", modifiedDate=" + modifiedDate
+				+ ", supportingDocument=" + supportingDocument + ", vetterRequirement=" + vetterRequirement + "]";
+	}
+
+	
 }

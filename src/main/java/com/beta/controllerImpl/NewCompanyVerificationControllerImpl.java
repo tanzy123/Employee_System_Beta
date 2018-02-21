@@ -1,5 +1,6 @@
 package com.beta.controllerImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +20,10 @@ import com.beta.exception.VendorMgmtException;
 import com.beta.service.CompanyValidation;
 import com.beta.service.RegistrationService;
 import com.beta.services.CompanyService;
+
+
 @Controller
-@RequestMapping("/")
+
 public class NewCompanyVerificationControllerImpl implements NewCompanyVerificationController{
 
 	@Autowired
@@ -60,7 +63,7 @@ public class NewCompanyVerificationControllerImpl implements NewCompanyVerificat
 		company.setTurnover(Long.parseLong(turnover));
 		Category categoryAll= new Category();
 		String []categoryList=category.split(",");
-		List<Category> categoryAtRegistration = null;
+		List<Category> categoryAtRegistration = new ArrayList<>();
 		for(String cat: categoryList)
 		{
 			categoryAll.setCategoryName(cat);
@@ -100,7 +103,7 @@ public class NewCompanyVerificationControllerImpl implements NewCompanyVerificat
 		ModelAndView mav=null;
 		if(registrationService.TokenComparison(token))
 		{
-			mav=new ModelAndView("dashboard");
+			mav=new ModelAndView("redirect:/dashboardcompany");
 		}
 		else
 		{

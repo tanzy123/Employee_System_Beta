@@ -22,7 +22,7 @@ Enter password :<input type="password" id="password" name="password"><br>
 <br>
 
 <form action="registration" method="get">
-<<input type="submit" value="RegisterCompany" id="register" name="register">
+<input type="submit" value="RegisterCompany" id="register" name="register">
  </form>
 
 </body>

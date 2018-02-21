@@ -3,9 +3,11 @@ package com.beta.entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.NamedQuery;
 
 @MappedSuperclass
+
+
+
 public class UserAccount {
 
 	@Id
