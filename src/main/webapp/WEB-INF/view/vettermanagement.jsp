@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Pending Applications</title>
+<title>Pending Applications to be Vet</title>
 </head>
 <body>
 
@@ -18,8 +19,8 @@
 		<c:forEach var="companyApplication" items="${companyApplicationlist}"><tr>
 			<td>${companyApplication.company.companyName}</td>
 			<td>${companyApplication.application.category.categoryName}</td>
-			<td>details</td>
-			<td>Assign Vetters</td>
+			<td><a href="/VendorApplication/vendorApplication/${companyApplication.application.applicationRef}" >Details</a></td>
+			<td><a href="/VendorApplication/assignVetter/${companyApplication.application.applicationRef}" >Assign Vetters</a></td>
 		</c:forEach>
 	</table>
 </body>

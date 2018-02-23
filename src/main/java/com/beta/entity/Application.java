@@ -26,6 +26,9 @@ import javax.persistence.TemporalType;
     @NamedQuery(name="Application.findByStatusAndCompRef",
     			query="SELECT a FROM Application a where a.companyReferenceNumber = :companyReferenceNumber"
     					+ " AND a.applicationStatus = :applicationStatus"),
+    @NamedQuery(name="Application.findByStatusAndVendorRef",
+	query="SELECT a FROM Application a where a.vendorReferenceNumber = :vendorReferenceNumber"
+			+ " AND a.applicationStatus = :applicationStatus"),
 })
 public class Application implements Serializable {
 
@@ -45,7 +48,7 @@ public class Application implements Serializable {
 	@JoinColumn(name="applicationRef", referencedColumnName="applicationRef")
 	private List<VendorReference> vendorReferences;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
 	@JoinColumn(name = "categoryId", referencedColumnName="categoryId")
 	private Category category;
 
