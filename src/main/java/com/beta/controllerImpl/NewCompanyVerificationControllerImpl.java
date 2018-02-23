@@ -21,7 +21,9 @@ import com.beta.service.CompanyValidation;
 import com.beta.service.RegistrationService;
 import com.beta.services.CompanyService;
 
+
 @Controller
+
 public class NewCompanyVerificationControllerImpl implements NewCompanyVerificationController{
 
 	@Autowired
@@ -83,7 +85,7 @@ public class NewCompanyVerificationControllerImpl implements NewCompanyVerificat
 		
 		registrationService.SendVarificationEmail(company);
 		
-		return null;
+		return mav;
 		
 	}
 	
@@ -101,7 +103,7 @@ public class NewCompanyVerificationControllerImpl implements NewCompanyVerificat
 		ModelAndView mav=null;
 		if(registrationService.TokenComparison(token))
 		{
-			mav=new ModelAndView("dashboard");
+			mav=new ModelAndView("redirect:/dashboardcompany");
 		}
 		else
 		{

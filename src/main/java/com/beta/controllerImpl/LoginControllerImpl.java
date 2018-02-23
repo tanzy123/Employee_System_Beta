@@ -65,7 +65,7 @@ public class LoginControllerImpl implements LoginController {
 			employeeAccount.setPassword(password);
 			try {
 				employeeAccountService.validateAccount(employeeAccount);
-				mav = new ModelAndView("admin");
+				mav = new ModelAndView("dashboardcompany");
 			} catch (VendorMgmtException e) {
 				mav = new ModelAndView("error");
 				mav.addObject("message", e);
@@ -78,7 +78,11 @@ public class LoginControllerImpl implements LoginController {
 			try {
 				companyAdminAccountService
 						.validateAccount(companyAdministratorAccount);
+
+				
+
 				mav = new ModelAndView("redirect:/dashboardcompany");
+
 			} catch (VendorMgmtException e) {
 				mav = new ModelAndView("error");
 				mav.addObject("message", e);
