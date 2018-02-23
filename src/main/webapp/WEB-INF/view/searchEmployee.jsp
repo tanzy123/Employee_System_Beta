@@ -16,17 +16,28 @@
 
 		Employee UserName <input type="text" name="employeeUserName" required />
 		<input type="submit" value="Search" id="search" name="search">
-<table><tr>
-			<td>${employee.employeeId}</td>
-			<td>${employee.employeeEmail}</td>
-			<td>${employee.contactNumber}</td>
-			<td>${employee.role.role}</td>
-			<td>${employee.logInType}</td>
-			<td>${employee.department.department}</td>
-			<td>${employee.userName}</td>
-			<td>${employee.password}</td>
+		<table>
+			<tr>
+				<td>Employee Id</td>
+				<td>Employee Email</td>
+				<td>Contact Number</td>
+				<td>Role</td>
+				<td>log In Type</td>
+				<td>Department</td>
+				<td>UserName</td>
+			</tr>
+
+			<tr>
+				<td>${employee.employeeId}</td>
+				<td>${employee.employeeEmail}</td>
+				<td>${employee.contactNumber}</td>
+				<td>${employee.role.role}</td>
+				<td>${employee.logInType}</td>
+				<td>${employee.department.departmentName}</td>
+				<td>${employee.userName}</td>
+			</tr>
 		</table>
-	 
+
 
 
 	</form>
