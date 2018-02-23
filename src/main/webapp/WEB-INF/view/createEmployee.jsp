@@ -27,8 +27,16 @@
 					<td><input type="text" name="role" required/></td>
 				</tr>
 				<tr>
-					<td>Department</td>
-					<td><input type="text" name="department" required /></td>
+					<td>Department Name</td>
+					<td><input type="text" name="departmentName" required /></td>
+				</tr>
+				<tr>
+					<td>UserName</td>
+					<td><input type="text" name="userName" required /></td>
+				</tr>
+				<tr>
+					<td>Password</td>
+					<td><input type="text" name="password" required /></td>
 				</tr>
 			</table>
 		</form>

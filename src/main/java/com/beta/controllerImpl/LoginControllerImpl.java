@@ -58,6 +58,7 @@ public class LoginControllerImpl implements LoginController {
 	{
 		ModelAndView mav = null;
 		session.setAttribute("username", username);
+		session.setAttribute("companyRefNumber", companyAdminAccountService.findByUserName(username).getCompanyReferenceNumber());
 		EmployeeAccount employeeAccount = new EmployeeAccount();
 		if (loginType.equals("EMPLOYEE")) {
 			
