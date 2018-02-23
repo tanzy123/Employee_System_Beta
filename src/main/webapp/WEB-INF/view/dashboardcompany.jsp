@@ -20,13 +20,13 @@
 <form action="/VendorApplication/vendorApplicationForm">
     <input type="submit" value="Vendor Application Form" />
 </form>
-<form action="/VendorApplication/vettermanagement">
+<form action="employeeManagement">
     <input type="submit" value="Employee Management" />
 </form>
 <form action="/VendorApplication/requestService">
     <input type="submit" value="Request Services from Vendor" />
 </form>
-<form action="/VendorApplication/vettermanagement">
+<form action="serviceRequestFromVendor" method="get">
     <input type="submit" value="Service Requests from Vendor" />
 </form>
 </body>

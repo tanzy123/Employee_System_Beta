@@ -10,7 +10,7 @@
 <body>
 <h1>Company Registration</h1>
 <div class="companyRegistration"  style="float: left;">
-		<form action="storeRegistration" method="post">
+		<form action="registration" method="post">
 			<table>
 				<tr>
 					<td>Company Reference Number</td>
@@ -49,7 +49,7 @@
 		</form>
 	</div>
 	<div class="adminRegistration" style="float: right;">
-	<form action="storeRegistration" method="post">
+	<form action="registration" method="post">
 	            <tr>
 					<td>Administrator Username</td>
 					<td><input type="text" name="companyAdminUsername" required /></td>
