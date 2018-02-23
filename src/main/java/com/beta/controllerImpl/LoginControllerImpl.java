@@ -65,7 +65,7 @@ public class LoginControllerImpl implements LoginController {
 			employeeAccount.setPassword(password);
 			try {
 				employeeAccountService.validateAccount(employeeAccount);
-				mav = new ModelAndView("dashboard");
+				mav = new ModelAndView("dashboardcompany");
 			} catch (VendorMgmtException e) {
 				mav = new ModelAndView("error");
 				mav.addObject("message", e);

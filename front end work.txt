@@ -7,3 +7,13 @@ employee management: add show all columns of employee class, update at least use
 only admin can apply to vendor
 
 request service from vendor UI, 
+
+
+
+.addObject()----dynamic replace webpage with data from back end
+
+
+@pathVariable use whatever in url as data
+
+@requestMapping("/{name}")
+PV methodName(@pathVariable("name") String name)
