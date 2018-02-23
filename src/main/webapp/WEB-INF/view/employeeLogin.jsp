@@ -23,10 +23,14 @@
 							</td>
 							
 </h1>
+<h1>
 <td><button type="button" name="back2" 
 							onclick="location.href='vendorapplicationhistory'">Vendor Application History</button>
 							
 							</td>
 </h1>
+
+
+
 
 </html>

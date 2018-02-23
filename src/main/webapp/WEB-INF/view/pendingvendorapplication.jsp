@@ -8,5 +8,17 @@
 </head>
 <body>
 <h1>Pending Vendor Application View</h1>
+
+
+<table id="table" border=1>
+
+<tr> <th> Company Name </th> <th> Category </th> <th> Details </th> <th> Approve </th> <th> Reject </th>
+     
+   
+     
+</tr>
+</table>
+
+
 </body>
 </html>

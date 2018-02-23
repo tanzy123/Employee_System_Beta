@@ -23,7 +23,7 @@
 
 
 <h1>
-<td><button type="button" name="back" 
+<td><button type="button" name="back2" 
 							onclick="location.href='vendorapplicationhistory'">Vendor Application History</button>
 							
 							</td>							
@@ -31,10 +31,14 @@
 
 
 <h1>
-<form action="/VendorApplication/vettermanagement">
-    <input type="submit" value="Vendor Application" />
-</form>
+<td><button type="button" name="back3" 
+							onclick="location.href='vettermanagement'">Vetter Management</button>
+							
+							</td>							
 </h1>
+
+
+
 
 <h1>
 <form action="/VendorApplication/vettermanagement">
