@@ -6,7 +6,7 @@
         <title>Seems to be a problem while login in</title>
     </head>
     <body>
-        <a href="login">Go back la la la</a>
+        <a href="assignVetter">THE VETTER NOMINATED IS NOT A REGISTERED EMPLOYEE. PLEASE CLICK HERE TO RETURN</a>
         
     </body>
     </html>
