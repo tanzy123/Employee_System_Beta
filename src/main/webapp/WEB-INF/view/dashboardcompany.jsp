@@ -11,14 +11,14 @@
 <form action="/VendorApplication/vetterManagement">
     <input type="submit" value="Vetter Management" />
 </form>
-<form action="/VendorApplication/vettermanagement">
+<form action="/VendorApplication/pendingVendorApplication">
     <input type="submit" value="Pending Vendor Applications" />
 </form>
-<form action="/VendorApplication/vettermanagement">
+<form action="/VendorApplication/vendorApplication">
     <input type="submit" value="Vendor Application History" />
 </form>
-<form action="/VendorApplication/vettermanagement">
-    <input type="submit" value="Vendor Application" />
+<form action="/VendorApplication/vendorApplicationForm">
+    <input type="submit" value="Vendor Application Form" />
 </form>
 <form action="/VendorApplication/vettermanagement">
     <input type="submit" value="Employee Management" />
