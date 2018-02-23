@@ -13,6 +13,8 @@ import javax.persistence.NamedQuery;
     @NamedQuery(name="Category.findByNameAndRefNo",
                 query="SELECT c FROM Category c where c.companyReferenceNumber = :companyReferenceNumber"
                 		+ " AND c.categoryName = :categoryName"),
+    @NamedQuery(name="Category.findByCompRefNo",
+    query="SELECT c FROM Category c where c.companyReferenceNumber = :companyReferenceNumber"),
 })
 public class Category implements Serializable {
 

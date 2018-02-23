@@ -7,7 +7,7 @@ import com.beta.exception.VendorMgmtException;
 
 public interface VendorApplication {
 
-	public Application generateVendorApplication(Application application) throws ParseException;
+	public Application generateVendorApplication(Application application);
 	public void validateVendorApplication(Application application) throws VendorMgmtException;
 	 
 }

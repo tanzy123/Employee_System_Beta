@@ -32,48 +32,4 @@
 	<br />
 	<input id="saveRequirement" type="button" value="Save" />
 </body>
-<script type="text/javascript">
-	$(document).ready(function() {
-		var currSeq = 2;
-		$('#addNewVetter').click(function() {
-			$('#sequenceTable')
-				.append("<tr id='row"+currSeq+"'><td>"+ currSeq +"</td><td><input id='text"+currSeq+"' type='text'/></td></tr>");
-			currSeq++;
-		});	
-		$('#deleteVetter').click(function() {
-			if (currSeq>1) {
-				currSeq--;
-			$('#row'+currSeq).remove();
-			}
-		});
-		$('#saveRequirement').click(function(){
-			var requirements = [];
-			var rows = $('#sequenceTable tbody tr');
-		    var columns;
-		    for (var i = 0; i < rows.length; i++) {
-		        columns = $(rows[i]).find('td');
-		        var sequence = parseInt($(columns[0]).html());
-		        var userName = $("#text"+(i+1)).val();
-		        var applicationRef = $('#applicationRef').text();
-		        var requirement= {"sequence":sequence,"userName":userName,"applicationRef":applicationRef};
-		        console.log(requirement);
-		        requirements.push(requirement);
-		    }
-		    requirements = JSON.stringify({
-	            'requirementList' : requirements 
-	        });    
-	 $.ajax({
-	            url:"/VendorApplication/setVetters/",
-	            type: 'POST',
-	            data:  requirements,             
-	            dataType: "html",          
-	            contentType: 'application/json',
-	            success: function(data){ 
-	            	
-	                return false;      
-	            } 
-	        });
-		});		
-	});
-</script>
 </html>

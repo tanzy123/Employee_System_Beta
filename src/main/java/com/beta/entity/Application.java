@@ -21,15 +21,14 @@ import javax.persistence.TemporalType;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name="Application.findByRefNo",
-                query="SELECT a FROM Application a where a.applicationRef = :applicationRef"),
-    @NamedQuery(name="Application.findByStatusAndCompRef",
-    			query="SELECT a FROM Application a where a.companyReferenceNumber = :companyReferenceNumber"
-    					+ " AND a.applicationStatus = :applicationStatus"),
-    @NamedQuery(name="Application.findByStatusAndVendorRef",
-	query="SELECT a FROM Application a where a.vendorReferenceNumber = :vendorReferenceNumber"
-			+ " AND a.applicationStatus = :applicationStatus"),
-})
+		@NamedQuery(name = "Application.findByRefNo", query = "SELECT a FROM Application a where a.applicationRef = :applicationRef"),
+		@NamedQuery(name = "Application.findByStatusAndCompRef", query = "SELECT a FROM Application a where a.companyReferenceNumber = :companyReferenceNumber"
+				+ " AND a.applicationStatus = :applicationStatus"),
+		@NamedQuery(name = "Application.findByStatusAndVendorRef", query = "SELECT a FROM Application a where a.vendorReferenceNumber = :vendorReferenceNumber"
+				+ " AND a.applicationStatus = :applicationStatus"), 
+		@NamedQuery(name = "Application.findByCompRef", query = "SELECT a FROM Application a where a.companyReferenceNumber = :companyReferenceNumber"), 
+		@NamedQuery(name = "Application.findByVendorRef", query = "SELECT a FROM Application a where a.vendorReferenceNumber = :vendorReferenceNumber"), 
+		})
 public class Application implements Serializable {
 
 	/**
@@ -45,11 +44,11 @@ public class Application implements Serializable {
 	private String applicationRef;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name="applicationRef", referencedColumnName="applicationRef")
+	@JoinColumn(name = "applicationRef", referencedColumnName = "applicationRef")
 	private List<VendorReference> vendorReferences;
 
-	@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
-	@JoinColumn(name = "categoryId", referencedColumnName="categoryId")
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name = "categoryId", referencedColumnName = "categoryId")
 	private Category category;
 
 	private String companyReferenceNumber;
@@ -72,16 +71,17 @@ public class Application implements Serializable {
 	private Date modifiedDate;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name="applicationRef", referencedColumnName="applicationRef")
+	@JoinColumn(name = "applicationRef", referencedColumnName = "applicationRef")
 	private List<Documents> supportingDocument;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name="applicationRef", referencedColumnName="applicationRef")
+	@JoinColumn(name = "applicationRef", referencedColumnName = "applicationRef")
 	private List<Requirement> vetterRequirement;
 
-	public Application(String applicationRef, List<VendorReference> vendorReferences, Category category, String vendorReferenceNumber,
-			String pOC, String remarks, ApplicationStatus applicationStatus, Date applicationDate, Long vendorPeriod,
-			List<Documents> supportingDocument, List<Requirement> vetterRequirement) {
+	public Application(String applicationRef, List<VendorReference> vendorReferences, Category category,
+			String vendorReferenceNumber, String pOC, String remarks, ApplicationStatus applicationStatus,
+			Date applicationDate, Long vendorPeriod, List<Documents> supportingDocument,
+			List<Requirement> vetterRequirement) {
 		super();
 		this.applicationRef = applicationRef;
 		this.vendorReferences = vendorReferences;
@@ -222,5 +222,4 @@ public class Application implements Serializable {
 				+ ", supportingDocument=" + supportingDocument + ", vetterRequirement=" + vetterRequirement + "]";
 	}
 
-	
 }

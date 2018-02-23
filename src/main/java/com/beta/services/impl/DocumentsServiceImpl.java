@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.persistence.EntityManager;
 
+import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -18,6 +19,7 @@ import com.beta.dao.JPADAO;
 import com.beta.entity.Application;
 import com.beta.entity.Documents;
 import com.beta.exception.VendorMgmtException;
+import com.beta.service.FieldCopyUtil;
 import com.beta.services.DocumentsService;
 
 @Service("DocumentJPAService")
@@ -50,36 +52,52 @@ public class DocumentsServiceImpl extends BaseServiceImpl<Long, Documents> imple
 	@Override
 	public void saveOrUpdate(Documents entity) throws VendorMgmtException {
 		validateDocuments(entity);
-		if (entity.getDocumentId() == null) {
-			Documents Documents = findByApplicationRef(entity.getApplicationRef());
-			if (Documents == null)
+		
+		if (entity.getFilePath() == null) 
+			dao.persist(entity);
+		else if (entity.getDocumentId() == null) {
+			Documents documents = findByApplicationRefAndFilePath(entity.getApplicationRef(), entity.getFilePath());
+			if (documents == null)
 				dao.persist(entity);
 			else {
-				Documents.setDocuments(entity.getDocuments());
-				dao.merge(Documents);
+				updateDocuments(entity, documents);
 			}
 		}	
 		else {
-			Documents Documents = dao.findById(entity.getDocumentId());
-			if (Documents != null) {
-				Documents.setDocuments(entity.getDocuments());
-				dao.merge(Documents);
+			Documents documents = dao.findById(entity.getDocumentId());
+			if (documents != null) {
+				updateDocuments(entity, documents);
+				dao.merge(documents);
 			} else
 				dao.merge(entity);
 		}
 		
 	}
 
-	public Documents findByApplicationRef(String applicationRef) {
+	private void updateDocuments(Documents entity, Documents documents) {
+		FieldCopyUtil.setFields(entity, documents);
+		
+	}
+
+	public Documents findByApplicationRefAndFilePath(String applicationRef, String filePath) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("applicationRef", applicationRef);
-		List<Documents> list = dao.findByNamedQueryAndNamedParams("Documents.findByApplicationRef", params);
-		if (list.size() > 1)
-			throw new VendorMgmtException("More than one applicationRef found for updating");
-		else if (list.isEmpty())
+		params.put("filePath", filePath);
+		
+		List<Documents> documents = dao.findByNamedQueryAndNamedParams("Documents.findByApplicationRefAndFilePath", params);
+		if (documents.size()>1)
+			throw new VendorMgmtException("More than one document of the same file path found!");
+		else if (documents.isEmpty())
 			return null;
 		else
-			return list.get(0);
+			return documents.get(0);
+	}
+
+	public List<Documents> findByApplicationRef(String applicationRef) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("applicationRef", applicationRef);
+		return dao.findByNamedQueryAndNamedParams("Documents.findByApplicationRef", params);
+		
 	}
 
 	public void validateDocuments(Documents entity) {

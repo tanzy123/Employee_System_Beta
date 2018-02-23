@@ -40,8 +40,8 @@ public class TestConstant {
 	public static final Category SAMPLE_CATEGORY4 = new Category("IT");
 	public static final List<Category> SAMPLE_CATEGORY_LIST;
 	
-	public static final Documents SAMPLE_DOCUMENT1 = new Documents("asd".getBytes());
-	public static final Documents SAMPLE_DOCUMENT2 = new Documents("asd11".getBytes());
+	public static final Documents SAMPLE_DOCUMENT1 = new Documents();
+	public static final Documents SAMPLE_DOCUMENT2 = new Documents();
 	public static final List<Documents> SAMPLE_DOCUMENT_LIST;
 	
 	public static final Requirement SAMPLE_REQUIREMENT1 = new Requirement("E102023", "onboard ASAP", ApprovalStatus.PENDING);

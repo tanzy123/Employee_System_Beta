@@ -95,4 +95,20 @@ public class ApplicationServiceImpl extends BaseServiceImpl<Long, Application> i
 			return list;
 		
 	}
+
+	@Override
+	public List<Application> findByCompRef(String companyReferenceNumber) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("companyReferenceNumber", companyReferenceNumber);
+		List<Application> list = dao.findByNamedQueryAndNamedParams("Application.findByCompRef", params);
+			return list;
+	}
+
+	@Override
+	public List<Application> findByVendorRef(String vendorReferenceNumber) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("vendorReferenceNumber", vendorReferenceNumber);
+		List<Application> list = dao.findByNamedQueryAndNamedParams("Application.findByVendorRef", params);
+			return list;
+	}
 }
