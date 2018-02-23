@@ -18,7 +18,6 @@ import com.beta.dao.RequirementDao;
 import com.beta.entity.Application;
 import com.beta.entity.ApprovalStatus;
 import com.beta.entity.Requirement;
-import com.beta.entity.VendorReference;
 import com.beta.exception.VendorMgmtException;
 import com.beta.services.RequirementService;
 
@@ -90,7 +89,7 @@ public class RequirementServiceImpl extends BaseServiceImpl<Long, Requirement> i
 		params.put("applicationRef", appReferenceNumber);
 		params.put("userName", UserName);
 		
-		List<Requirement> list = findByNamedQueryAndNamedParams("Requirement.findByApplicationRefAndUsername", params);
+		List<Requirement> list = dao.findByNamedQueryAndNamedParams("Requirement.findByApplicationRefAndUsername", params);
 		
 		if (list.size() > 1)
 			throw new VendorMgmtException("Multiple requirement is found with given application reference number and username");
@@ -101,8 +100,8 @@ public class RequirementServiceImpl extends BaseServiceImpl<Long, Requirement> i
 	} 
 	
 	public void validateRequirement(Requirement entity) {
-		if (entity.getRequirement() == null || entity.getUserName() == null)
-			throw new VendorMgmtException("Requirements or user name not found");
+		if (entity.getUserName() == null)
+			throw new VendorMgmtException("User name not found");
 		Map<String, Object> params = new HashMap<>();
 		params.put("applicationRef", entity.getApplicationRef());
 		List<Application> list = applicationDao.findByNamedQueryAndNamedParams("Application.findByRefNo", params);

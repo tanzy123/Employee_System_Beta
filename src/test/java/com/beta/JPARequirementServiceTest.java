@@ -55,10 +55,13 @@ public class JPARequirementServiceTest {
 	
 	@Before
 	public void initialize() {
-		Category category = SAMPLE_CATEGORY1;
+		
+		Category category = new Category();
+		category.setCategoryName(SAMPLE_CATEGORY1.getCategoryName());
 		category.setCompanyReferenceNumber(SAMPLE_COMPANY.getCompanyReferenceNumber());
+												
 		comServ.saveOrUpdate(SAMPLE_COMPANY);
-		catServ.saveOrUpdate(category);
+	//	catServ.saveOrUpdate(category);
 		appServ.saveOrUpdate(SAMPLE_APPLICATION1);
 		
 	}
@@ -66,6 +69,7 @@ public class JPARequirementServiceTest {
 	@Test
 	public void testRequirementCreateSuccess() {
 	//create
+		
 	int startsize = service.findAll().size();	
 	
 	Calendar cal = Calendar.getInstance();
@@ -86,7 +90,7 @@ public class JPARequirementServiceTest {
 	
 	@Test
 	public void testRequirementUpdate() {
-	
+		
 	
 	Calendar cal = Calendar.getInstance();
 	
@@ -120,6 +124,7 @@ public class JPARequirementServiceTest {
 	
 	@Test
 	public void testRequirementDelete() {	
+		
 	Calendar cal = Calendar.getInstance();
 	
 	Requirement req = new Requirement();
@@ -144,6 +149,7 @@ public class JPARequirementServiceTest {
 	@Test
 	public void testRequirementCreateFail() {
 	//create fail because user name is not inserted
+		
 		Calendar cal = Calendar.getInstance();
 	expectedEx.expect(VendorMgmtException.class);
 	expectedEx.expectMessage("Requirements or user name not found");
@@ -164,6 +170,7 @@ public class JPARequirementServiceTest {
 	@Test
 	public void testNoApplicationRefFail() {
 	// will fail because of multiple requirement to one appRef
+		
 		expectedEx.expect(VendorMgmtException.class);
 		expectedEx.expectMessage("No application found with the same application reference");
 	
@@ -182,6 +189,7 @@ public class JPARequirementServiceTest {
 	
 	@Test
 	public void testGetRequirementByUsernameAndStatusSuccess(){
+		
 		Requirement r = new Requirement();
 		r.setStatus(ApprovalStatus.PENDING);
 		r.setUserName("asd");
@@ -197,6 +205,7 @@ public class JPARequirementServiceTest {
 	
 	@Test
 	public void testGetRequirementByUsernameAndStatusFail(){
+		
 		Requirement r = new Requirement();
 		r.setStatus(ApprovalStatus.PENDING);
 		r.setUserName("asd");

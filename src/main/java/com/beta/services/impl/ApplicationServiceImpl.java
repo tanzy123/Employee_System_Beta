@@ -85,4 +85,14 @@ public class ApplicationServiceImpl extends BaseServiceImpl<Long, Application> i
 			return list;
 		
 	}
+
+	@Override
+	public List<Application> findByStatusAndVendorRef(ApplicationStatus applicationStatus, String vendorReferenceNumber) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("vendorReferenceNumber", vendorReferenceNumber);
+		params.put("applicationStatus", applicationStatus);
+		List<Application> list = dao.findByNamedQueryAndNamedParams("Application.findByStatusAndVendorRef", params);
+			return list;
+		
+	}
 }

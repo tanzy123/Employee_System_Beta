@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.beta.entity.Application;
 import com.beta.entity.Category;
+import com.beta.entity.Company;
 import com.beta.entity.VendorReference;
 import com.beta.exception.VendorMgmtException;
 import com.beta.services.ApplicationService;
@@ -58,6 +59,7 @@ public class JPAVendorReferenceTests {
 		catServ.saveOrUpdate(category);
 		appServ.saveOrUpdate(SAMPLE_APPLICATION1);
 		
+		
 	}
 	
 	@Test
@@ -70,10 +72,11 @@ public class JPAVendorReferenceTests {
 	vendorReference.setCompanyAddress("Company Address 3");
 	vendorReference.setCompanyName("CompanyName3");
 	vendorService.saveOrUpdate(vendorReference);
-	
+	Long id = vendorReference.getReferenceId();
 	int finalsize = vendorService.findAll().size();
 	
 	assertEquals((startsize+1), finalsize);
+	vendorService.delete(id);
 	
 	}
 	
@@ -82,30 +85,18 @@ public class JPAVendorReferenceTests {
 	@Test
 	public void testVendorReferenceDelete() throws Exception {
 	
-		
-	
 	VendorReference vendorReference = new VendorReference();
-	vendorReference.setReferenceId(33l);
+
 	vendorReference.setApplicationRef("ASD1111");
-	vendorReference.setCompanyAddress("Company Address 3");
-	vendorReference.setCompanyName("CompanyName3");
+	vendorReference.setCompanyAddress("Company Address 1000");
+	vendorReference.setCompanyName("HELLO WORLD");
 	vendorService.saveOrUpdate(vendorReference);
-	
-	Map<String, Object> params = new HashMap<>();
-	params.put("applicationRef", vendorReference.getApplicationRef());
-	List<VendorReference> list = vendorService.findByNamedQueryAndNamedParams("VendorReference.findByAppRef", params);
-	Long venId = null;
-	if (list.size()==1) {
-		for (VendorReference v:list) {
-			venId=v.getReferenceId();
-		}
-	}
+	Long id = vendorReference.getReferenceId();
 	
 	int size1 = vendorService.findAll().size();
-	vendorService.deleteIfExisting(venId);
+	vendorService.deleteIfExisting(id);
 	int size2 = vendorService.findAll().size();
-	System.out.println(size1);
-	System.out.println(size2);
+	
 	assertThat(size1,is(size2+1));
 	}
 	
@@ -118,7 +109,7 @@ public class JPAVendorReferenceTests {
     expectedEx.expectMessage("Company name or company address not found");
 	
 	VendorReference vendorReference = new VendorReference();
-	vendorReference.setReferenceId(33l);
+//	vendorReference.setReferenceId(33l);
 	vendorReference.setApplicationRef("ASD1111");
 	vendorReference.setCompanyAddress("Company Address 3");
 	vendorService.saveOrUpdate(vendorReference);
@@ -132,8 +123,8 @@ public class JPAVendorReferenceTests {
     expectedEx.expectMessage("Company name or company address not found");
 	
 	VendorReference vendorReference = new VendorReference();
-	vendorReference.setReferenceId(33l);
-	vendorReference.setApplicationRef("ASD1111");
+//	vendorReference.setReferenceId(33l);
+	vendorReference.setApplicationRef("AAA9999");
 	vendorReference.setCompanyName("CompanyName3");
 	vendorService.saveOrUpdate(vendorReference);
 	
@@ -145,12 +136,12 @@ public class JPAVendorReferenceTests {
 	expectedEx.expect(VendorMgmtException.class);
 	expectedEx.expectMessage("No application found with the same application reference");
 
-	VendorReference vendorReference = new VendorReference();
-	vendorReference.setReferenceId(33l);
-	vendorReference.setApplicationRef("ASD1110");
-	vendorReference.setCompanyName("CompanyName3");
-	vendorReference.setCompanyAddress("Company Address 3");
-	vendorService.saveOrUpdate(vendorReference);
+	VendorReference vendorReference1 = new VendorReference();
+
+	vendorReference1.setApplicationRef("BBB5000");
+	vendorReference1.setCompanyName("CompanyCompany");
+	vendorReference1.setCompanyAddress("Sunset Rd");
+	vendorService.saveOrUpdate(vendorReference1);
 	
 	}
 	

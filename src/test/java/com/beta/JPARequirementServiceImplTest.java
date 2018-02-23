@@ -30,6 +30,13 @@ import com.beta.services.CategoryService;
 import com.beta.services.CompanyService;
 import com.beta.services.RequirementService;
 
+/*
+
+	VERY MUCH JUST A DUPLICATE OF THE OTHER ONE
+	JPARequirementServiceTest.java
+
+
+*/
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:appContext.xml"})
 @Transactional
