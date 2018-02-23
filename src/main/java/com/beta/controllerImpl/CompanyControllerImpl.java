@@ -24,6 +24,7 @@ import com.beta.services.CompanyService;
 @Controller
 public class CompanyControllerImpl {
 	
+	
 	@Autowired
 	ApplicationService applicationService;
 	

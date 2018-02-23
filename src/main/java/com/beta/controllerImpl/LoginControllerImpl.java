@@ -65,7 +65,8 @@ public class LoginControllerImpl implements LoginController {
 			employeeAccount.setPassword(password);
 			try {
 				employeeAccountService.validateAccount(employeeAccount);
-				mav = new ModelAndView("admin");
+				//mav = new ModelAndView("admin");
+				mav = new ModelAndView("redirect:/employeeLogin");
 			} catch (VendorMgmtException e) {
 				mav = new ModelAndView("error");
 				mav.addObject("message", e);

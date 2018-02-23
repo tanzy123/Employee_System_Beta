@@ -4,9 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>pending Vendor Applications</title>
+<title>Vendor Applicaiton History View</title>
 </head>
 <body>
-<h1>Pending Vendor Application View</h1>
+
+
+<h1>Employee Login Vendor Application History View</h1>
+
 </body>
 </html>

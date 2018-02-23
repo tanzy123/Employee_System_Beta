@@ -8,26 +8,45 @@
 </head>
 <body>
 
+<h1>
 <form action="/VendorApplication/vetterManagement">
     <input type="submit" value="Vetter Management" />
 </form>
-<form action="/VendorApplication/vettermanagement">
-    <input type="submit" value="Pending Vendor Applications" />
-</form>
-<form action="/VendorApplication/vettermanagement">
-    <input type="submit" value="Vendor Application History" />
-</form>
+</h1>
+
+<h1>
+<td><button type="button" name="back" 
+							onclick="location.href='pendingvendorapplication'">Pending Vendor Application</button>
+							
+							</td>							
+</h1>
+
+
+<h1>
+<td><button type="button" name="back" 
+							onclick="location.href='vendorapplicationhistory'">Vendor Application History</button>
+							
+							</td>							
+</h1>
+
+
+<h1>
 <form action="/VendorApplication/vettermanagement">
     <input type="submit" value="Vendor Application" />
 </form>
+</h1>
+
+<h1>
 <form action="/VendorApplication/vettermanagement">
     <input type="submit" value="Employee Management" />
 </form>
+</h1>
+
+<h1>
 <form action="/VendorApplication/requestService">
-    <input type="submit" value="Request Services from Vendor" />
+    <input type="submit" value="Request Services from a Vendor" />
 </form>
-<form action="/VendorApplication/vettermanagement">
-    <input type="submit" value="Service Requests from Vendor" />
-</form>
+</h1>
+
 </body>
 </html>
