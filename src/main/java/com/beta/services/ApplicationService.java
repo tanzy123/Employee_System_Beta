@@ -11,4 +11,8 @@ public interface ApplicationService extends BaseService<Long, Application> {
 	List<Application> findByStatusAndCompRef(ApplicationStatus status, String companyReferenceNumber);
 
 	List<Application> findByStatusAndVendorRef(ApplicationStatus applicationStatus, String vendorReferenceNumber);
+
+	List<Application> findByCompRef(String companyReferenceNumber);
+
+	List<Application> findByVendorRef(String vendorReferenceNumber);
 }

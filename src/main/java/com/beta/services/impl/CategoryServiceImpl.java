@@ -92,5 +92,12 @@ public class CategoryServiceImpl extends BaseServiceImpl<Long, Category> impleme
 		else if (list.isEmpty())
 			throw new VendorMgmtException("Invalid company entered while validating category");
 	}
+
+	@Override
+	public List<Category> findByCompanyRef(String companyReferenceNumber) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("companyReferenceNumber", companyReferenceNumber);
+		return dao.findByNamedQueryAndNamedParams("Category.findByCompRefNo", params);
+	}
 }
 		

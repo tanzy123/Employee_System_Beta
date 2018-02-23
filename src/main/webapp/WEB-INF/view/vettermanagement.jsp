@@ -13,7 +13,7 @@
 <h2>Pending Applications to be Vet</h2>
 	<table>
 	<tr>
-		<th>Company Name</th>
+		<th>Vendor Name</th>
 		<th>Category</th>
 	</tr>
 		<c:forEach var="companyApplication" items="${companyApplicationlist}"><tr>

@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Service Request From Vendor</title>
 </head>
 <body>
-<h1>Vendor Application History</h1>
+<h1>Service Request From Vendor</h1>
 </body>
 </html>

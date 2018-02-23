@@ -19,14 +19,34 @@ public class Documents {
 	
 	private String applicationRef;
 	
-	private byte[] documents;
+	private String filePath;
+	
+	private String originalFileName;
+	
+	private String remarks;
 
-	public byte[] getDocuments() {
-		return documents;
+	public String getFilePath() {
+		return filePath;
 	}
 
-	public void setDocuments(byte[] documents) {
-		this.documents = documents;
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	public String getOriginalFileName() {
+		return originalFileName;
+	}
+
+	public void setOriginalFileName(String originalFileName) {
+		this.originalFileName = originalFileName;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 
 	public Long getDocumentId() {
@@ -35,15 +55,6 @@ public class Documents {
 
 	public void setDocumentId(Long documentId) {
 		this.documentId = documentId;
-	}
-
-	public Documents(byte[] bs) {
-		super();
-		this.documents = bs;
-	}
-
-	public Documents() {
-		super();
 	}
 
 	public String getApplicationRef() {
