@@ -13,7 +13,7 @@
 <h2>Pending Applications to be Vet</h2>
 	<table>
 	<tr>
-		<th>Company Name</th>
+		<th>Vendor Name</th>
 		<th>Category</th>
 	</tr>
 		<c:forEach var="companyApplication" items="${companyApplicationlist}"><tr>
@@ -22,6 +22,10 @@
 			<td><a href="/VendorApplication/vendorApplication/${companyApplication.application.applicationRef}" >Details</a></td>
 			<td><a href="/VendorApplication/assignVetter/${companyApplication.application.applicationRef}" >Assign Vetters</a></td>
 		</c:forEach>
+		
+		<form action="/VendorApplication-0.0.1-SNAPSHOT/dashboardcompany">
+    <input type="submit" value="Go Back" />
+    	
 	</table>
 </body>
 </html>

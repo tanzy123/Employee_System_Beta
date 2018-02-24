@@ -8,17 +8,17 @@
 </head>
 <body>
 
-<form action="/VendorApplication/vetterManagement">
+<form action="/VendorApplication-0.0.1-SNAPSHOT/vetterManagement">
     <input type="submit" value="Vetter Management" />
 </form>
-<form action="/VendorApplication/vettermanagement">
+<form action="/VendorApplication-0.0.1-SNAPSHOT/pendingVendorApplication">
     <input type="submit" value="Pending Vendor Applications" />
 </form>
-<form action="/VendorApplication/vettermanagement">
+<form action="/VendorApplication-0.0.1-SNAPSHOT/vendorApplication">
     <input type="submit" value="Vendor Application History" />
 </form>
-<form action="/VendorApplication/vettermanagement">
-    <input type="submit" value="Vendor Application" />
+<form action="/VendorApplication-0.0.1-SNAPSHOT/vendorApplicationForm">
+    <input type="submit" value="Vendor Application Form" />
 </form>
 <form action="employeeManagement">
     <input type="submit" value="Employee Management" />
@@ -29,5 +29,8 @@
 <form action="serviceRequestFromVendor" method="get">
     <input type="submit" value="Service Requests from Vendor" />
 </form>
+
+<form action="/VendorApplication-0.0.1-SNAPSHOT/login">
+    <input type="submit" value="Log Out" />
 </body>
 </html>

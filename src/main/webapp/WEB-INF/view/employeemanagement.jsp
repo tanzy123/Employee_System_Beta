@@ -14,5 +14,7 @@
 	<button id="readEmployee" name="readEmployee" onclick="location.href='pendingvendorapplication">Search For Existing Employee</button>
 	<button id="updateEmployee" name="updateEmployee" onclick="location.href='updateEmployee'">Update Employee</button>
 	<button id="deleteEmployee" name="deleteEmployee" onclick="location.href='deleteEmployee'">Delete Employee</button>
+	<form action="/VendorApplication-0.0.1-SNAPSHOT/dashboardcompany">
+    <input type="submit" value="Go Back" />
 </body>
 </html>

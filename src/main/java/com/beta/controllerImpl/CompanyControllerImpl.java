@@ -107,19 +107,19 @@ public class CompanyControllerImpl {
 	
 	private CompanyApplication getCompanyApplication(String companyReferenceNumber, String applicationRef) {
 		Application application = applicationService.findByApplicationRefNo(applicationRef);
-		if (!application.getVendorReferenceNumber().equals(companyReferenceNumber))
-			throw new VendorMgmtException("Company Reference number does not match application's vendor reference number");
+		if (!application.getCompanyReferenceNumber().equals(companyReferenceNumber))
+			throw new VendorMgmtException("Company Reference number does not match application's company reference number");
 		else {
-			Company company = companyService.findbyRefNo(companyReferenceNumber);
+			Company company = companyService.findbyRefNo(application.getVendorReferenceNumber());
 			return new CompanyApplication(company, application);
 		}
 	}
 
 	private List<CompanyApplication> getListOfApplicationsToBeVetted(String companyReferenceNumber) {
 		List<CompanyApplication> list = new ArrayList<>();
-		List<Application> applicationList = applicationService.findByStatusAndVendorRef(ApplicationStatus.VETTING, companyReferenceNumber);
+		List<Application> applicationList = applicationService.findByStatusAndCompRef(ApplicationStatus.VETTING, companyReferenceNumber);
 		for (Application a: applicationList) {
-			Company c = companyService.findbyRefNo(a.getCompanyReferenceNumber());
+			Company c = companyService.findbyRefNo(a.getVendorReferenceNumber());
 			CompanyApplication companyApplication = new CompanyApplication(c, a);
 			list.add(companyApplication);
 		}
