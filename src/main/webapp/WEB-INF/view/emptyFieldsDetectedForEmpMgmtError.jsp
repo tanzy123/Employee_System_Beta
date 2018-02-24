@@ -6,7 +6,7 @@
         <title>Seems to be a problem while login in</title>
     </head>
     <body>
-        <a href="login">Go back la la la</a>
+        <a href="employeemanagement">THERE ARE MISSING FIELDS FOR EMPLOYEE ADD/UPDATE. PLEASE CLICK HERE TO RETURN</a>
         
     </body>
     </html>

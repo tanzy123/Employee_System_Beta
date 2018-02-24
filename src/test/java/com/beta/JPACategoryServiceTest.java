@@ -45,9 +45,13 @@ public class JPACategoryServiceTest {
 	@Test
 	public void testAddCategory() {
 		final int listSize = service.findAll().size();
-		Category category = SAMPLE_CATEGORY3;
+		
+	//	Category category = SAMPLE_CATEGORY3;
+		Category category = new Category();
+		category.setCategoryName(SAMPLE_CATEGORY3.getCategoryName());
 		category.setCompanyReferenceNumber(SAMPLE_COMPANY.getCompanyReferenceNumber());
-		service.saveOrUpdate(SAMPLE_CATEGORY3);
+	//	service.saveOrUpdate(SAMPLE_CATEGORY3);
+		service.saveOrUpdate(category);
 		assertThat(service.findAll().size(), is(listSize+1));
 	}
 	

@@ -25,5 +25,9 @@
 		<button id="deleteEmployee" name="deleteEmployee"
 			onclick="location.href='deleteEmployee'">Delete Employee</button>
 	</form>
+	<form action="/VendorApplication-0.0.1-SNAPSHOT/dashboardcompany">
+    <input type="submit" value="Go Back" />
+    </form>
+
 </body>
 </html>

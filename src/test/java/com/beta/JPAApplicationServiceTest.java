@@ -41,7 +41,8 @@ public class JPAApplicationServiceTest {
 	
 	@Test
 	public void testAddApplication() {
-		final int listSize = service.findAll().size();
+	//	final int listSize = service.findAll().size();
+		int listSize = service.findAll().size();
 		service.saveOrUpdate(SAMPLE_APPLICATION3);
 		assertThat(service.findAll().size(), is(listSize+1));
 	}

@@ -22,6 +22,10 @@
 			<td><a href="/VendorApplication/vendorApplication/${companyApplication.application.applicationRef}" >Details</a></td>
 			<td><a href="/VendorApplication/assignVetter/${companyApplication.application.applicationRef}" >Assign Vetters</a></td>
 		</c:forEach>
+		
+		<form action="/VendorApplication-0.0.1-SNAPSHOT/dashboardcompany">
+    <input type="submit" value="Go Back" />
+    	
 	</table>
 </body>
 </html>
