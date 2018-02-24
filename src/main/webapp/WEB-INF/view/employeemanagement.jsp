@@ -11,7 +11,9 @@
 	<form action="showCreateEmployee">
 	<button id="createEmployee" name="createEmployee" onclick="location.href='createEmployee'">Create New Employee</button> 
 	</form>
-	<button id="readEmployee" name="readEmployee" onclick="location.href='pendingvendorapplication">Search For Existing Employee</button>
+	<form action="showSearchEmployee">
+	<button id="SeacherEmployee" name="SeacherEmployee" onclick="location.href='searchEmployee">Search For Existing Employee</button>
+	</form>
 	<button id="updateEmployee" name="updateEmployee" onclick="location.href='updateEmployee'">Update Employee</button>
 	<button id="deleteEmployee" name="deleteEmployee" onclick="location.href='deleteEmployee'">Delete Employee</button>
 	<form action="/VendorApplication-0.0.1-SNAPSHOT/dashboardcompany">

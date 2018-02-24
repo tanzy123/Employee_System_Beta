@@ -63,8 +63,9 @@
 	</div>
 	<div>
 <form action="emailToken" method="post">
-<<input type="submit" value="Submit" id="submitCompanyRegistration" name="submitCompanyRegistration">
+<input type="submit" value="Submit" id="submitCompanyRegistration" name="submitCompanyRegistration">
+</form>
  </div>
- </form>
+ 
 </body>
 </html>
