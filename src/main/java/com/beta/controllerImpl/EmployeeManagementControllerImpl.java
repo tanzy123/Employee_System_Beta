@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beta.entity.Department;
@@ -21,6 +22,7 @@ import com.beta.services.EmployeeAccountService;
 import com.beta.services.RoleService;
 @Controller
 @RequestMapping("/")
+@SessionAttributes
 public class EmployeeManagementControllerImpl {
 	
 	@Autowired
@@ -40,6 +42,7 @@ public class EmployeeManagementControllerImpl {
 		mav.addObject("employeeManagement", new EmployeeAccount());
 		return mav;
 	}
+	
 	@RequestMapping(value = "/showCreateEmployee", method = RequestMethod.GET)
 	public ModelAndView showCreaeteEmployee(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -58,8 +61,8 @@ public class EmployeeManagementControllerImpl {
 			@RequestParam(value = "contactNumber") String contactNumber,
 			@RequestParam(value = "role") String role,
 			@RequestParam(value = "departmentName") String departmentName,
-			@RequestParam(value = "userName") String userName,
-			@RequestParam(value = "password") String password)
+			@RequestParam(value = "userName") String userName
+			)
 	{
 		ModelAndView mav=new ModelAndView();
 		EmployeeAccount employeeAccount =new EmployeeAccount();
@@ -83,7 +86,7 @@ public class EmployeeManagementControllerImpl {
 		employeeAccount.setEmployeeEmail(employeeEmail);
 		employeeAccount.setEmployeeId(employeeId);
 		employeeAccount.setUserName(userName);
-		employeeAccount.setPassword(password);
+		
 		
 		try{
 		employeeAcoountService.validateAccount(employeeAccount);
@@ -106,6 +109,7 @@ public class EmployeeManagementControllerImpl {
 		mav.addObject("employeeManagement", new EmployeeAccount());
 		return mav;
 	}
+	
 	@RequestMapping(value = "/searchEmployee", method = RequestMethod.GET)
 	public ModelAndView searchEmployee(@RequestParam(value = "employeeUserName") String employeeUserName) {
 
@@ -115,5 +119,88 @@ public class EmployeeManagementControllerImpl {
 		mav.addObject("employee", employeeAcoountService.findByUserName(employeeUserName));
 		
 		return mav;
+	}
+	
+	
+	@RequestMapping(value = "/showDeleteEmployee", method = RequestMethod.GET)
+	public ModelAndView showDeleteEmployee(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ModelAndView mav = new ModelAndView("deleteEmployee");
+		mav.addObject("employeeManagement", new EmployeeAccount());
+		return mav;
+	}
+	@RequestMapping(value = "/deleteEmployee", method = RequestMethod.POST)
+	public ModelAndView deleteEmployee(@RequestParam(value = "employeeId") String employeeId) throws NumberFormatException, Exception {
+
+		
+		
+		try {
+			
+			employeeAcoountService.deleteIfExisting(Long.parseLong(employeeId));
+		} catch (VendorMgmtException e) {
+			
+		}
+		
+		
+		return null;
+	}
+	@RequestMapping(value = "/showUpdateEmployee", method = RequestMethod.GET)
+	public ModelAndView showUpdateEmployee(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ModelAndView mav = new ModelAndView("updateEmployee");
+		mav.addObject("employeeManagement", new EmployeeAccount());
+		return mav;
+	}
+//	@RequestMapping(value = "/searchEmployeeToUpdate", method = RequestMethod.GET)
+//	public ModelAndView searchEmployeeToUpdate(@RequestParam(value = "employeeUserName") String employeeUserName) {
+//
+//		
+//		
+//		ModelAndView mav=new ModelAndView();
+//		mav.addObject("employee", employeeAcoountService.findByUserName(employeeUserName));
+//		
+//		return mav;
+//	}
+	@RequestMapping(value = "/updateEmployee", method = RequestMethod.POST)
+	public ModelAndView updateEmployee(HttpSession session,@RequestParam(value = "employeeUserName") String employeeUserName,
+			@RequestParam(value = "employeeUserName") String employeeId,
+			@RequestParam(value = "employeeEmail") String employeeEmail,
+			@RequestParam(value = "contactNumber") String contactNumber,
+			@RequestParam(value = "role") String role,
+			@RequestParam(value = "departmentName") String departmentName,
+			@RequestParam(value = "userName") String userName) {
+
+		
+//		ModelAndView mav=new ModelAndView();
+//		mav.addObject("employee", employeeAcoountService.findByUserName(employeeUserName));
+//		
+		EmployeeAccount employeeAccount =new EmployeeAccount();
+		Department employeeDepartment = new Department();
+		Role employeeRole=new Role();
+		String companyReferenceNumber=session.getAttribute("companyRefNumber").toString();
+		
+		employeeAccount.setContactNumber(contactNumber);
+		employeeAccount.setCompanyReferenceNumber(companyReferenceNumber);
+		
+		employeeDepartment.setCompanyReferenceNumber(session.getAttribute("companyRefNumber").toString());
+		employeeDepartment.setDepartmentName(departmentName);
+		employeeDepartment.setDepartmentId(departmentService.findByNameAndCompanyRef(departmentName, companyReferenceNumber).getDepartmentId());
+		employeeAccount.setDepartment(employeeDepartment);
+		
+		employeeRole.setCompanyReferenceNumber(companyReferenceNumber);
+		employeeRole.setRole(role);
+		employeeRole.setRoleId(roleService.findByCompanyReferenceNumber(companyReferenceNumber, role).getRoleId());
+		employeeAccount.setRole(employeeRole);
+		
+		employeeAccount.setEmployeeEmail(employeeEmail);
+		employeeAccount.setEmployeeId(employeeId);
+		employeeAccount.setUserName(userName);
+		
+		employeeAcoountService.validateAccount(employeeAccount);
+		employeeAcoountService.saveOrUpdate(employeeAccount);
+		
+		return null;
 	}
 }
