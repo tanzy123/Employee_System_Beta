@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beta.controller.LoginController;
@@ -23,6 +24,7 @@ import com.beta.services.EmployeeAccountService;
 
 @Controller
 @RequestMapping("/")
+@SessionAttributes
 public class LoginControllerImpl implements LoginController {
 
 	// private final String prefixURL = "views";
@@ -58,6 +60,7 @@ public class LoginControllerImpl implements LoginController {
 	{
 		ModelAndView mav = null;
 		session.setAttribute("username", username);
+		session.setAttribute("companyRefNumber", companyAdminAccountService.findByUserName(username).getCompanyReferenceNumber());
 		EmployeeAccount employeeAccount = new EmployeeAccount();
 		if (loginType.equals("EMPLOYEE")) {
 			
@@ -67,7 +70,7 @@ public class LoginControllerImpl implements LoginController {
 				employeeAccountService.validateAccount(employeeAccount);
 				mav = new ModelAndView("dashboardcompany");
 			} catch (VendorMgmtException e) {
-				mav = new ModelAndView("error");
+				mav = new ModelAndView("loginError");
 				mav.addObject("message", e);
 			}
 
@@ -84,7 +87,7 @@ public class LoginControllerImpl implements LoginController {
 				mav = new ModelAndView("redirect:/dashboardcompany");
 
 			} catch (VendorMgmtException e) {
-				mav = new ModelAndView("error");
+				mav = new ModelAndView("loginError"); // originally is error, changed to loginError for experiment
 				mav.addObject("message", e);
 			}
 		}

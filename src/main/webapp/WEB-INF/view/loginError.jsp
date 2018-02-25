@@ -6,7 +6,6 @@
         <title>Seems to be a problem while login in</title>
     </head>
     <body>
-        <a href="login">Go back la la la</a>
-        
+        <a href="login">The Username/Password that you provided is not valid. Please click on this link to return to login page</a>
     </body>
     </html>

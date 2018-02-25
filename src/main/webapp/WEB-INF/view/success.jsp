@@ -6,7 +6,7 @@
         <title>Seems to be a problem while login in</title>
     </head>
     <body>
-        <a href="login">Go back la la la</a>
+        <a href="dashboardcompany">YOUR APPLICATION/REQUEST IS SUCCESSFUL! CLICK HERE TO RETURN TO DASHBOARD.</a>
         
     </body>
     </html>
