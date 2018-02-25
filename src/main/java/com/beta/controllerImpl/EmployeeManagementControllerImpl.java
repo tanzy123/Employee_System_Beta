@@ -73,15 +73,17 @@ public class EmployeeManagementControllerImpl {
 		employeeAccount.setContactNumber(contactNumber);
 		employeeAccount.setCompanyReferenceNumber(companyReferenceNumber);
 		
-		employeeDepartment.setCompanyReferenceNumber(session.getAttribute("companyRefNumber").toString());
-		employeeDepartment.setDepartmentName(departmentName);
-		employeeDepartment.setDepartmentId(departmentService.findByNameAndCompanyRef(departmentName, companyReferenceNumber).getDepartmentId());
+		//employeeDepartment.setCompanyReferenceNumber(session.getAttribute("companyRefNumber").toString());
+		employeeDepartment.setDepartmentId(Long.parseLong(departmentName));
+		//employeeDepartment.setDepartmentId(departmentService.findByNameAndCompanyRef(departmentName, companyReferenceNumber).getDepartmentId());
 		employeeAccount.setDepartment(employeeDepartment);
 		
-		employeeRole.setCompanyReferenceNumber(companyReferenceNumber);
-		employeeRole.setRole(role);
-		employeeRole.setRoleId(roleService.findByCompanyReferenceNumber(companyReferenceNumber, role).getRoleId());
+		//employeeRole.setCompanyReferenceNumber(companyReferenceNumber);
+		employeeRole.setRoleId(Long.parseLong(role));
+		//employeeRole.setRoleId(roleService.findByCompanyReferenceNumber(companyReferenceNumber, role).getRoleId());
 		employeeAccount.setRole(employeeRole);
+		
+		
 		
 		employeeAccount.setEmployeeEmail(employeeEmail);
 		employeeAccount.setEmployeeId(employeeId);
@@ -130,7 +132,7 @@ public class EmployeeManagementControllerImpl {
 		mav.addObject("employeeManagement", new EmployeeAccount());
 		return mav;
 	}
-	@RequestMapping(value = "/deleteEmployee", method = RequestMethod.POST)
+	@RequestMapping(value = "/deleteEmployee", method = {RequestMethod.DELETE,RequestMethod.GET})
 	public ModelAndView deleteEmployee(@RequestParam(value = "employeeId") String employeeId) throws NumberFormatException, Exception {
 
 		

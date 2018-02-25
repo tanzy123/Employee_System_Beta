@@ -14,8 +14,8 @@
 
 		<!-- Employee UserName <input type="text" name="employeeUserName" required />
 		<input type="submit" value="Search" id="search" name="search">
-		 -->
-
+		
+ -->
 			<table>
 				<tr>
 					<td>Employee ID</td>

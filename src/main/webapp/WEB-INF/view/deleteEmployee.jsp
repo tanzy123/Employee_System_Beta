@@ -7,16 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Search For Existing Employee</h1>
-	<form action="deleteEmployee" method="get">
-
-
+<h1>Delete Existing Employee</h1>
+	<form action="deleteEmployee">
 
 		Please key in the Employee ID to delete <input type="text" name="employeeId" required />
 		<input type="submit" value="delete" id="delete" name="delete">
-	
-
-
 
 	</form>
 </body>
