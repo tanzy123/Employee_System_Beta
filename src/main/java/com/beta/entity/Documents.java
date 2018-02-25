@@ -10,6 +10,8 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     @NamedQuery(name="Documents.findByApplicationRef",
                 query="SELECT d FROM Documents d where d.applicationRef = :applicationRef"),
+    @NamedQuery(name="Documents.findByApplicationRefAndFilePath",
+    query="SELECT d FROM Documents d where d.applicationRef = :applicationRef AND d.filePath = :filePath"),
 })
 public class Documents {
 	

@@ -47,7 +47,7 @@ public class Application implements Serializable {
 	@JoinColumn(name = "applicationRef", referencedColumnName = "applicationRef")
 	private List<VendorReference> vendorReferences;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToOne(cascade = { CascadeType.MERGE })
 	@JoinColumn(name = "categoryId", referencedColumnName = "categoryId")
 	private Category category;
 

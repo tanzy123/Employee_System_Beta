@@ -35,7 +35,7 @@ public class TestDropBox {
 	
 	@Test
 	public void testUploadAndDeleteFile() throws IOException, DbxException{
-		service.uploadFile("C:\\Users\\645686\\Desktop\\Hydrangeas.jpg", "/applicationRef/Hydrangeas.jpg");
+		service.uploadFile("C:\\Users\\645686\\Desktop\\Hydrangeas.jpg", "/applicationRef/Desert.jpg");
 	}
 	
 	@Test
