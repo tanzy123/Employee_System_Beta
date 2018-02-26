@@ -60,30 +60,28 @@ public class LoginControllerImpl implements LoginController {
 	{
 		ModelAndView mav = null;
 		session.setAttribute("username", username);
-		session.setAttribute("companyRefNumber", companyAdminAccountService.findByUserName(username).getCompanyReferenceNumber());
-		EmployeeAccount employeeAccount = new EmployeeAccount();
+		
 		if (loginType.equals("EMPLOYEE")) {
-			
+			EmployeeAccount employeeAccount = new EmployeeAccount();
+			session.setAttribute("companyRefNumber", employeeAccountService.findByUserName(username).getCompanyReferenceNumber());
 			employeeAccount.setUserName(username);
 			employeeAccount.setPassword(password);
 			try {
 				employeeAccountService.validateAccount(employeeAccount);
-				mav = new ModelAndView("dashboardcompany");
+				mav = new ModelAndView("employeeDashboard");
 			} catch (VendorMgmtException e) {
 				mav = new ModelAndView("error");
 				mav.addObject("message", e.getMessage());
 			}
 
 		} else if (loginType.equals("COMPANY_ADMINISTRATOR")) {
+			session.setAttribute("companyRefNumber", companyAdminAccountService.findByUserName(username).getCompanyReferenceNumber());
 			CompanyAdministratorAccount companyAdministratorAccount = new CompanyAdministratorAccount();
 			companyAdministratorAccount.setUserName(username);
 			companyAdministratorAccount.setPassword(password);
 			try {
 				companyAdminAccountService
 						.validateAccount(companyAdministratorAccount);
-
-				
-
 				mav = new ModelAndView("redirect:/dashboardcompany");
 
 			} catch (VendorMgmtException e) {
