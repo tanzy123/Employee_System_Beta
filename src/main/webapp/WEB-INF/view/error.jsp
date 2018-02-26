@@ -6,7 +6,8 @@
         <title>Seems to be a problem while login in</title>
     </head>
     <body>
-        <a href="login">${message}</a>
+    	<h1>${message}</h1>
+       <button> <a href=${header.referer}>CLICK TO RETURN</a></button>
         
     </body>
     </html>

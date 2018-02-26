@@ -12,7 +12,11 @@
 
 		Please key in the Employee ID to delete <input type="text" name="employeeId" required />
 		<input type="submit" value="delete" id="delete" name="delete">
+		
 
 	</form>
+	<form action="employeeManagement">
+    			<input type="submit" value="Return to employee management" />
+    			</form>
 </body>
 </html>

@@ -40,8 +40,11 @@
 				</tr>
 			</table>
 			<input type="submit" value="Create" id="create" name="create">
+				
 		</form>
-
+				<form action="employeeManagement">
+    			<input type="submit" value="Return to employee management" />
+    			</form>
 
 
 </body>

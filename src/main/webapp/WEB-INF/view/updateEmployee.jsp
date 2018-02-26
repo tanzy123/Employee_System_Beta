@@ -43,8 +43,11 @@
 				</tr>
 			</table>
 			<input type="submit" value="Update" id="update" name="update">
+			
 		</form>
-
+			<form action="employeeManagement">
+    			<input type="submit" value="Return to employee management" />
+    			</form>
 
 
 </body>
