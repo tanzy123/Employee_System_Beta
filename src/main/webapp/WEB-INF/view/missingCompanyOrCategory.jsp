@@ -6,7 +6,7 @@
         <title>Seems to be a problem while login in</title>
     </head>
     <body>
-        <a href="login">${message}</a>
+        <a href="vettermanagement">THE COMPANY/CATEGORY NAME IS NOT PROVIDED. PLEASE CLICK HERE TO RETURN</a>
         
     </body>
     </html>

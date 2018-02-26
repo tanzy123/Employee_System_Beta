@@ -27,14 +27,14 @@ public class TestMailNotification {
 	@Test
 	public void testSendEmail() throws Exception{
 		
-		notificationService.sendMail("Richard.Ong@cognizant.com", "Test Mail", "Lets get started guys!");
+		notificationService.sendMail("ZhiYi.Tan@cognizant.com", "Test Mail", "Lets get started guys!");
 	}
 	
 	//--------------------------------------Send Email With Purpose & CC Test Cases---------------------------------------------------------------------------------------------------------------------
 	@Test
 	public void testSendEmailWithPurposeIsVendorRequestToCompanyWithCC() throws Exception{
 		String cc[] = {};
-		notificationService.sendEmailWithPurposeCC("Richard.Ong@cognizant.com", cc, "Test Mail", "Vendor Request To Company is generated!","Test", EmailPurposeType.VendorRequestToCompany);
+		notificationService.sendEmailWithPurposeCC("ZhiYi.Tan@cognizant.com", cc, "Test Mail", "Vendor Request To Company is generated!","Test", EmailPurposeType.VendorRequestToCompany);
 		
 	}
 	

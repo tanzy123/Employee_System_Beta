@@ -57,7 +57,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Long, Role> implements Role
 
 		validateRole(entity);
 		if (entity.getRoleId() == null) {
-			Role role = findByCompanyReferenceNumber(entity.getCompanyReferenceNumber(), entity.getRole());
+			Role role = findByCompanyReferenceNumberAndRole(entity.getCompanyReferenceNumber(), entity.getRole());
 			if (role == null) {
 				dao.persist(entity);
 			}
@@ -78,11 +78,11 @@ public class RoleServiceImpl extends BaseServiceImpl<Long, Role> implements Role
 		}
 	}
 	
-	public Role findByCompanyReferenceNumber( String appReferenceNumber, String role) {
+	public Role findByCompanyReferenceNumberAndRole( String companyReferenceNumber, String role) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("companyReferenceNumber", appReferenceNumber);
+		params.put("companyReferenceNumber", companyReferenceNumber);
 		params.put("role", role);
-		List<Role> list = findByNamedQueryAndNamedParams("Role.findByCompanyRefNumber", params);
+		List<Role> list = dao.findByNamedQueryAndNamedParams("Role.findByCompanyRefNumberAndRole", params);
 		if (list.size() > 1) {
 			throw new VendorMgmtException("More than one Role found for given company reference number");}
 		else if (list.isEmpty())

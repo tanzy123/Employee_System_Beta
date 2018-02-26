@@ -6,7 +6,7 @@
         <title>Seems to be a problem while login in</title>
     </head>
     <body>
-        <a href="login">${message}</a>
+        <a href="assignVetter">THE VETTER/REMARKS FIELD IS FOUND TO BE EMPTY. PLEASE CLICK HERE TO RETURN</a>
         
     </body>
     </html>

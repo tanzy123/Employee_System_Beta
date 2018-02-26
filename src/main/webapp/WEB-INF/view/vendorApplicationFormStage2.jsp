@@ -35,8 +35,8 @@
 			<tr>
 				<td><form:label path="category">Category</form:label></td>
 				<td><form:select path="category">
-						<c:forEach var="category" items="${categoryList}">
-							<option value="${category}">${category.categoryName}</option>
+						<c:forEach var="category" items="${categoryNames}">
+							<option>${category}</option>
 						</c:forEach>
 					</form:select></td>
 			</tr>

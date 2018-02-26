@@ -9,10 +9,25 @@
 <body>
 	<h1>Employee Management</h1>
 	<form action="showCreateEmployee">
-	<button id="createEmployee" name="createEmployee" onclick="location.href='createEmployee'">Create New Employee</button> 
+		<button id="createEmployee" name="createEmployee"
+			onclick="location.href='createEmployee'">Create New Employee</button>
 	</form>
-	<button id="readEmployee" name="readEmployee" onclick="location.href='pendingvendorapplication">Search For Existing Employee</button>
-	<button id="updateEmployee" name="updateEmployee" onclick="location.href='updateEmployee'">Update Employee</button>
-	<button id="deleteEmployee" name="deleteEmployee" onclick="location.href='deleteEmployee'">Delete Employee</button>
+	<form action="showSearchEmployee">
+		<button id="SeacherEmployee" name="SeacherEmployee"
+			onclick="location.href='searchEmployee">Search For Existing
+			Employee</button>
+	</form>
+	<form action="showUpdateEmployee">
+		<button id="updateEmployee" name="updateEmployee"
+			onclick="location.href='updateEmployee'">Update Employee</button>
+	</form>
+	<form action="showDeleteEmployee">
+		<button id="deleteEmployee" name="deleteEmployee"
+			onclick="location.href='deleteEmployee'">Delete Employee</button>
+	</form>
+	<form action="dashboardcompany">
+    <input type="submit" value="Go Back" />
+    </form>
+
 </body>
 </html>

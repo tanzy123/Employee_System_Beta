@@ -99,7 +99,7 @@ public class JPAVendorApplicationTest {
 	
 		Category cat = new Category();
 		
-		cat.setCategoryId(3L);
+	//	cat.setCategoryId(3L);
 		cat.setCategoryName("Tech");
 		cat.setCompanyReferenceNumber("AA-11");
 		catServ.saveOrUpdate(cat);
@@ -111,7 +111,7 @@ public class JPAVendorApplicationTest {
 		app.setCategory(cat);
 		app.setCompanyReferenceNumber("AA-11");
 		app.setPOC("Yi Fan");
-		app.setSupportingDocument(SAMPLE_DOCUMENT_LIST);
+	//	app.setSupportingDocument(SAMPLE_DOCUMENT_LIST);
 		app.setVendorPeriod(1L);
 		app.setVendorReferenceNumber("BB-12");
 		

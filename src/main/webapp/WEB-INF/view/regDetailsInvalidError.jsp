@@ -3,10 +3,9 @@
     <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>Seems to be a problem while login in</title>
+        <title>Incomplete registration</title>
     </head>
     <body>
-        <a href="login">${message}</a>
-        
+        <a href="registration">REGISTRATION DETAILS PROVIDED ARE FOUND TO BE INVALID, PLEASE CLICK HERE TO RETURN TO REGISTRATION PAGE</a>
     </body>
     </html>

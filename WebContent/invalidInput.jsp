@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<<<<<<< HEAD:src/main/webapp/WEB-INF/view/pendingvendorapplication.jsp
 <title>pending Vendor Applications</title>
 </head>
 <body>
@@ -75,5 +76,11 @@ e.printStackTrace();
 }
 %>
 </table>
+=======
+<title>Infomation provided for registration not valid</title>
+</head>
+<body>
+	 <a href="registration">SOME OF THE REGISTRATION DETAILS GIVEN ARE FOUND TO BE INVALID. PLEASE CLICK HERE TO RETURN TO REGISTRATION PAGE</a>
+>>>>>>> a6ea12f22fe5926ae0c34be56dcfee6e154b6fce:WebContent/invalidInput.jsp
 </body>
 </html>

@@ -1,23 +1,19 @@
 package com.beta.controllerImpl;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.beta.entity.Application;
 import com.beta.entity.Category;
@@ -61,18 +57,21 @@ public class CompanyVendorApplicationFormImpl {
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount) session.getAttribute("account");
 		if (companyService.findbyRefNo(application.getCompanyReferenceNumber())==null)
 			throw new VendorMgmtException("Company Reference Number does not exist");
-		List<Category> categoryList = categoryService.findByCompanyRef(application.getCompanyReferenceNumber());
+		
+		List<String> categoryNames = generateListOfCategoriesOfCompany(application.getCompanyReferenceNumber());
 		ModelAndView mav = new ModelAndView("vendorApplicationFormStage2", "application", application);
-		mav.addObject("categoryList", categoryList);
+		mav.addObject("categoryNames", categoryNames);
 		mav.addObject("account", account);
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/applyApplicationStage3", method = RequestMethod.POST)
 	public ModelAndView applyApplicationStage3(HttpSession session,
 			@ModelAttribute("application") Application application) {
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount) session.getAttribute("account");
-		
+		Category category = categoryService.findByNameAndCompanyRef
+				(application.getCategory().getCategoryName(), application.getCompanyReferenceNumber());
+		application.setCategory(category);
 //		vendorApplicationService.validateVendorApplication(application);
 		ModelAndView mav = new ModelAndView("vendorApplicationFormStage3");
 		mav.addObject("application", application);
@@ -84,23 +83,20 @@ public class CompanyVendorApplicationFormImpl {
 	@RequestMapping(value = "/uploadDocumentsAndSubmit", method = RequestMethod.POST)
 	   public String documentsUpload(@RequestParam("file") MultipartFile[] files, 
 			   @ModelAttribute("application") Application application) throws IOException {
+		Category category = categoryService.findByNameAndCompanyRef
+				(application.getCategory().getCategoryName(), application.getCompanyReferenceNumber());
+		application.setCategory(category);
 		Application generatedApplication = vendorApplicationService.generateVendorApplication(application);
-		System.out.println(generatedApplication);
-		// Save file on system
-		
-	      for (MultipartFile file : files) {
-	         if (!file.getOriginalFilename().isEmpty()) {
-	            BufferedOutputStream outputStream = new BufferedOutputStream(
-	                  new FileOutputStream(
-	                        new File("D:/MultipleFileUpload", file.getOriginalFilename())));
-
-	            outputStream.write(file.getBytes());
-	            outputStream.flush();
-	            outputStream.close();
-	         } else {
-	            return "dashboardcompany";
-	         }
-	      }
+		vendorApplicationService.uploadApplicationAndDocuments(generatedApplication, files);
+//		return to dashboard
 	      return "dashboardcompany";
+	}
+	
+	private List<String> generateListOfCategoriesOfCompany(String companyReferenceNumber) {
+		List<Category> categoryList = categoryService.findByCompanyRef(companyReferenceNumber);
+		List<String> categoryNames = new ArrayList<>();
+		for (Category c: categoryList)
+			categoryNames.add(c.getCategoryName());
+		return categoryNames;
 	}
 }

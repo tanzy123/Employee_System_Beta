@@ -6,7 +6,7 @@
         <title>Seems to be a problem while login in</title>
     </head>
     <body>
-        <a href="login">${message}</a>
+        <a href="employeemanagement">INVALID DETAILS GIVEN FOR EMPLOYEE ADD/UPDATE. PLEASE CLICK HERE TO RETURN</a>
         
     </body>
     </html>

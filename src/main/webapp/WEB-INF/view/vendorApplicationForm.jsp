@@ -22,8 +22,13 @@
                 </tr>
                 <tr>
                     <td><input type="submit" value="Next"/></td>
+                 
+                    
                 </tr>
             </table>
         </form:form>
+        <form action="/VendorApplication-0.0.1-SNAPSHOT/dashboardcompany">
+   					 <input type="submit" value="Go Back" />
+        
 </body>
 </html>
