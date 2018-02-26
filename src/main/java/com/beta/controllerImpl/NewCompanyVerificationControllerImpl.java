@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,9 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.beta.controller.NewCompanyVerificationController;
 import com.beta.entity.Category;
 import com.beta.entity.Company;
+import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.CompanyValidation;
 import com.beta.service.RegistrationService;
+import com.beta.services.CompanyAdminstratorAccountService;
 import com.beta.services.CompanyService;
 
 
@@ -35,6 +38,9 @@ public class NewCompanyVerificationControllerImpl implements NewCompanyVerificat
 	@Autowired
 	CompanyService companyService;
 	
+	@Autowired
+	CompanyAdminstratorAccountService companyAdministratorAccountService;
+	
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public ModelAndView Registration(HttpServletRequest request,HttpServletResponse response)
 	{
@@ -50,11 +56,13 @@ public class NewCompanyVerificationControllerImpl implements NewCompanyVerificat
 			@RequestParam(value = "contactNumber") String contactNumber,
 			@RequestParam(value = "companyWebsite") String companyWebsite,
 			@RequestParam(value = "turnover") String turnover,
-			@RequestParam(value = "category") String category)
+			@RequestParam(value = "category") String category,
+			HttpSession session)
 	{
 		ModelAndView mav = null;
 		Company company = new Company();
 		company.setCompanyReferenceNumber(companyReferenceNumber);
+		session.setAttribute("newcompanyRefNo", companyReferenceNumber);
 		company.setCompanyName(companyName);
 		company.setCompanyAddress(companyAddress);
 		company.setCompanyEmail(companyEmail);
@@ -88,7 +96,16 @@ public class NewCompanyVerificationControllerImpl implements NewCompanyVerificat
 		return mav;
 		
 	}
-	
+	@RequestMapping(value = "/storeNewCompanyAdminAccount", method= RequestMethod.POST)
+	public void createCompanyAdminAccount(@RequestParam(value = "companyAdminUsername") String companyAdminUsername,
+			@RequestParam(value = "companyAdminPassword") String companyAdminPassword,HttpSession session)
+			{
+		CompanyAdministratorAccount compnayAdminAccount=new CompanyAdministratorAccount();
+		compnayAdminAccount.setUserName(companyAdminUsername);
+		compnayAdminAccount.setPassword(companyAdminPassword);
+		compnayAdminAccount.setCompanyReferenceNumber(session.getAttribute("newcompanyRefNo").toString());
+		companyAdministratorAccountService.createNewAccount(compnayAdminAccount);
+			}
 	@Override
 	@RequestMapping(value = "/emailToken", method = RequestMethod.GET)
 	public ModelAndView tokenPage(HttpServletRequest request,
@@ -103,7 +120,9 @@ public class NewCompanyVerificationControllerImpl implements NewCompanyVerificat
 		ModelAndView mav=null;
 		if(registrationService.TokenComparison(token))
 		{
-			mav=new ModelAndView("redirect:/dashboardcompany");
+			//mav=new ModelAndView("redirect:/dashboardcompany");
+			mav=new ModelAndView("redirect:/login");
+		
 		}
 		else
 		{

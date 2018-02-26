@@ -36,7 +36,7 @@
 				</tr>
 				<tr>
 					<td>Password</td>
-					<td><input type="text" name="password" required /></td>
+					<td><input type="password" name="password" required /></td>
 				</tr>
 			</table>
 			<input type="submit" value="Create" id="create" name="create">

@@ -61,7 +61,8 @@ public class EmployeeManagementControllerImpl {
 			@RequestParam(value = "contactNumber") String contactNumber,
 			@RequestParam(value = "role") String role,
 			@RequestParam(value = "departmentName") String departmentName,
-			@RequestParam(value = "userName") String userName
+			@RequestParam(value = "userName") String userName,
+			@RequestParam(value = "password") String password
 			)
 	{
 		ModelAndView mav=new ModelAndView();
@@ -88,6 +89,7 @@ public class EmployeeManagementControllerImpl {
 		employeeAccount.setEmployeeEmail(employeeEmail);
 		employeeAccount.setEmployeeId(employeeId);
 		employeeAccount.setUserName(userName);
+		employeeAccount.setPassword(password);
 		
 		
 		try{
@@ -99,7 +101,7 @@ public class EmployeeManagementControllerImpl {
 		}
 		
 		
-		return null;
+		return mav;
 		
 	}
 	
