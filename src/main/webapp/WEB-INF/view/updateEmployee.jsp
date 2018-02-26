@@ -14,6 +14,7 @@
 	
 		Employee UserName <input type="text" name="employeeUserName" required />
 		<input type="submit" value="Search" id="search" name="search">
+
 		<table>
 			<tr>
 				<td>Employee Id</td>
@@ -23,13 +24,16 @@
 				
 			</tr>
 			<tr>
-				<td><input type="text" value="${employee.employeeId}"></td>
-				<td><input type="text" value="${employee.employeeEmail}"></td>
-				<td><input type="text" value="${employee.role.role}"></td>
-				<td><input type="text" value="${employee.department.departmentName}"></td>
+				<td><input type="text" name="employeeId" value="${employee.employeeId}"></td>
+				<td><input type="text" name="employeeEmail" value="${employee.employeeEmail}"></td>
+				<td><input type="text" name="departmentName" value="${employee.role.role}"></td>
+				<td><input type="text" name="role" value="${employee.department.departmentName}"></td>
 				
 			</tr>
 		</table>
+
+		
+			<input type="submit" value="Update" id="update" name="update">
 
 	</form>
 	<form action="BackToEmployeemanagementPage"><button name="back">Back</button></form>

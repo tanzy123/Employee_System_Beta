@@ -6,7 +6,10 @@
         <title>Seems to be a problem while login in</title>
     </head>
     <body>
-        <a href="assignVetter">THE VETTER NOMINATED IS NOT A REGISTERED EMPLOYEE. PLEASE CLICK HERE TO RETURN</a>
-        
+    	<h1>${message}</h1>
+       
+   		<button><form action="emailToken">
+		<input type="submit" value="CLICK TO VALIDATE YOUR ACCOUNT" />
+		</form></button>
     </body>
     </html>

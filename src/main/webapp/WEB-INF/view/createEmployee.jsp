@@ -9,6 +9,7 @@
 <title>Create New Employee Profile</title>
 </head>
 <body>
+
 	<h1>Create New Employee Profile</h1>
 	<form action="createEmployee" method="post">
 		<table>
@@ -54,6 +55,7 @@
 	</form>
 
 <form action="BackToEmployeemanagementPage"><button name="back">Back</button></form>
+
 
 
 </body>
