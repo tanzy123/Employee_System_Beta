@@ -85,8 +85,14 @@ public class LoginControllerImpl implements LoginController {
 				mav = new ModelAndView("redirect:/dashboardcompany");
 
 			} catch (VendorMgmtException e) {
-				mav = new ModelAndView("error"); // originally is error, changed to dynamicError for experiment
+				if (e.getMessage().equals("Account has not been validated yet")) {
+					mav = new ModelAndView("missingToken"); 
+					mav.addObject("message", e.getMessage());
+				}
+				else {
+				mav = new ModelAndView("error"); 
 				mav.addObject("message", e.getMessage());
+				}
 			}
 		}
 		return mav;
