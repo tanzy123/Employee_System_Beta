@@ -1,7 +1,5 @@
 package com.beta.service;
 
-import java.io.IOException;
-
 import com.beta.entity.EmailPurposeType;
 
 

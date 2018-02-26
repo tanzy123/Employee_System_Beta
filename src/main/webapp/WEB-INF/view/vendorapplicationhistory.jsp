@@ -18,7 +18,7 @@
 		<c:forEach var="vendorApplication" items="${vendorApplicationDetails}"><tr>
 			<td>${vendorApplication.company.companyName}</td>
 			<td>${vendorApplication.application.category.categoryName}</td>
-			<td><a href="/VendorApplication/vendorApplication/${vendorApplication.application.applicationRef}" >Details</a></td>
+			<td><a href="companyApplicationHistory/${vendorApplication.application.applicationRef}" >Details</a></td>
 		</c:forEach>
 	</table>
 </body>

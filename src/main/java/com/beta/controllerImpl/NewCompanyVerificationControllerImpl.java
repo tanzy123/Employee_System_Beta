@@ -17,11 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.beta.controller.NewCompanyVerificationController;
 import com.beta.entity.Category;
 import com.beta.entity.Company;
-import com.beta.entity.CompanyAdministratorAccount;
+import com.beta.entity.Department;
+import com.beta.entity.Role;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.CompanyValidation;
 import com.beta.service.RegistrationService;
-import com.beta.services.CompanyAdminstratorAccountService;
 import com.beta.services.CompanyService;
 
 
@@ -33,13 +33,10 @@ public class NewCompanyVerificationControllerImpl implements NewCompanyVerificat
 	RegistrationService registrationService;
 	
 	@Autowired
-	CompanyValidation companyValicationService;
+	CompanyValidation companyValidationService;
 	
 	@Autowired
 	CompanyService companyService;
-	
-	@Autowired
-	CompanyAdminstratorAccountService companyAdministratorAccountService;
 	
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public ModelAndView Registration(HttpServletRequest request,HttpServletResponse response)
@@ -49,7 +46,8 @@ public class NewCompanyVerificationControllerImpl implements NewCompanyVerificat
 		return mav;
 	}
 	@RequestMapping(value = "/storeRegistration", method= RequestMethod.POST)
-	public ModelAndView StoreRegistration(@RequestParam(value = "companyReferenceNumber") String companyReferenceNumber,
+	public ModelAndView StoreRegistration(
+			@RequestParam(value = "companyReferenceNumber") String companyReferenceNumber,
 			@RequestParam(value = "companyName") String companyName,
 			@RequestParam(value = "companyAddress") String companyAddress,
 			@RequestParam(value = "companyEmail") String companyEmail,
@@ -57,55 +55,71 @@ public class NewCompanyVerificationControllerImpl implements NewCompanyVerificat
 			@RequestParam(value = "companyWebsite") String companyWebsite,
 			@RequestParam(value = "turnover") String turnover,
 			@RequestParam(value = "category") String category,
-			HttpSession session)
+			@RequestParam(value = "username") String userName,
+			@RequestParam(value = "password") String password,
+			@RequestParam(value = "department") String department,
+			@RequestParam(value = "role") String role)
 	{
 		ModelAndView mav = null;
 		Company company = new Company();
 		company.setCompanyReferenceNumber(companyReferenceNumber);
-		session.setAttribute("newcompanyRefNo", companyReferenceNumber);
 		company.setCompanyName(companyName);
 		company.setCompanyAddress(companyAddress);
 		company.setCompanyEmail(companyEmail);
 		company.setCompanyWebsite(companyWebsite);
 		company.setContactNumber(contactNumber);
 		company.setTurnover(Long.parseLong(turnover));
-		Category categoryAll= new Category();
+		
 		String []categoryList=category.split(",");
 		List<Category> categoryAtRegistration = new ArrayList<>();
 		for(String cat: categoryList)
 		{
-			categoryAll.setCategoryName(cat);
-			categoryAll.setCompanyReferenceNumber(companyReferenceNumber);
-			categoryAtRegistration.add(categoryAll);
+			Category newCategory= new Category();
+			newCategory.setCategoryName(cat);
+			newCategory.setCompanyReferenceNumber(companyReferenceNumber);
+			categoryAtRegistration.add(newCategory);
 		
 		}
 		company.setCategory(categoryAtRegistration);
+		
+		String[] departmentList = department.split(",");
+		List<Department> departmentAtRegistration = new ArrayList<>();
+		for (String dept: departmentList) {
+			Department newDepartment = new Department();
+			newDepartment.setCompanyReferenceNumber(companyReferenceNumber);
+			newDepartment.setDepartmentName(dept);
+			departmentAtRegistration.add(newDepartment);
+		}
+		company.setDepartment(departmentAtRegistration);
+		
+		String[] roleList = role.split(",");
+		List<Role> roleAtRegistration = new ArrayList<>();
+		for (String r: roleList) {
+			Role newRole = new Role();
+			newRole.setCompanyReferenceNumber(companyReferenceNumber);
+			newRole.setRole(r);
+			roleAtRegistration.add(newRole);
+		}
+		company.setRoles(roleAtRegistration);
+		
 		try
 		{
-		companyValicationService.validateCommpanyApplication(company);
+		companyValidationService.validateCommpanyApplication(company);
 		}catch(VendorMgmtException e)
 		{
 			mav = new ModelAndView("error");
-			mav.addObject("message", e);
+			mav.addObject("message", e.getMessage());
+			return mav;
 		}
 		companyService.saveOrUpdate(company);
-		
-		
-		registrationService.SendVarificationEmail(company);
-		
-		return mav;
+		registrationService.registerCompanyAccount(company, userName, password);
+		registrationService.sendVerificationEmail(company, userName);
+		ModelAndView successMAV = new ModelAndView("token");
+		successMAV.addObject("username", userName);
+		return successMAV;
 		
 	}
-	@RequestMapping(value = "/storeNewCompanyAdminAccount", method= RequestMethod.POST)
-	public void createCompanyAdminAccount(@RequestParam(value = "companyAdminUsername") String companyAdminUsername,
-			@RequestParam(value = "companyAdminPassword") String companyAdminPassword,HttpSession session)
-			{
-		CompanyAdministratorAccount compnayAdminAccount=new CompanyAdministratorAccount();
-		compnayAdminAccount.setUserName(companyAdminUsername);
-		compnayAdminAccount.setPassword(companyAdminPassword);
-		compnayAdminAccount.setCompanyReferenceNumber(session.getAttribute("newcompanyRefNo").toString());
-		companyAdministratorAccountService.createNewAccount(compnayAdminAccount);
-			}
+	
 	@Override
 	@RequestMapping(value = "/emailToken", method = RequestMethod.GET)
 	public ModelAndView tokenPage(HttpServletRequest request,
@@ -115,14 +129,14 @@ public class NewCompanyVerificationControllerImpl implements NewCompanyVerificat
 	}
 
 	@RequestMapping(value="/verifyToken", method=RequestMethod.POST)
-	public ModelAndView tokenVarification(@RequestParam(value = "token") String token) 
+	public ModelAndView tokenVarification(HttpSession session,
+			@RequestParam(value = "token") String token,
+			@RequestParam(value = "username") String username) 
 	{
 		ModelAndView mav=null;
-		if(registrationService.TokenComparison(token))
+		if(registrationService.tokenComparison(token, username))
 		{
-			//mav=new ModelAndView("redirect:/dashboardcompany");
 			mav=new ModelAndView("redirect:/login");
-		
 		}
 		else
 		{
@@ -130,7 +144,6 @@ public class NewCompanyVerificationControllerImpl implements NewCompanyVerificat
 			mav.addObject("message", "Wrong token entered!");
 			
 		}
-		return null;
-		
+		return mav;
 	}
 }

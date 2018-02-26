@@ -1,11 +1,9 @@
 package com.beta.service;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.mail.DefaultAuthenticator;
-import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +11,11 @@ import com.beta.entity.EmailPurposeType;
 
 
 
+
 @Service
 public class MailNotification implements NotificationService{
 
 //	private MailSender mailSender;
-
-	String workingDirectory = System.getProperty("user.dir");
 	
 	HtmlEmail email = new HtmlEmail();
 
@@ -33,7 +30,7 @@ public class MailNotification implements NotificationService{
 		//SimpleMailMessage message = new SimpleMailMessage();
 		String filename = ConfigUtil.getKey("htmlTemplateLocation");
 		//Resource resource = new ClassPathResource(path);
-		String msg1 = FileUtils.readFileToString(new File(workingDirectory, filename));
+		String msg1 = FileUtils.readFileToString(new File(filename));
 		
 		msg = msg1.replace("${message}", msg);
 		
@@ -69,8 +66,9 @@ public class MailNotification implements NotificationService{
 	@Override
 	public void sendMail(String to, String subject, String msg) throws Exception {
 		
+		
 				String filename = ConfigUtil.getKey("htmlTemplateLocation");
-				String msg1 = FileUtils.readFileToString(new File(workingDirectory, filename));
+				String msg1 = FileUtils.readFileToString(new File(filename));
 				
 				msg = msg1.replace("${message}", msg);
 				
@@ -118,7 +116,7 @@ public class MailNotification implements NotificationService{
 			//tie to distinct .html template for display.
 			HtmlEmail email = new HtmlEmail();
 			String filename = ConfigUtil.getKey("CompanyRegistrationEmailVerification");
-			String msg1 = FileUtils.readFileToString(new File(workingDirectory, filename));
+			String msg1 = FileUtils.readFileToString(new File(filename));
 			
 			msg=msg1.replace("${CompanyRegistrationEmailVerificationResult_Message}", msg);
 			email.setMsg(msg);
@@ -153,7 +151,7 @@ public class MailNotification implements NotificationService{
 			//tie to distinct .html template for display.
 			HtmlEmail email = new HtmlEmail();
 			String filename = ConfigUtil.getKey("VendorRequestToCompany");
-			String msg1 = FileUtils.readFileToString(new File(workingDirectory, filename));
+			String msg1 = FileUtils.readFileToString(new File(filename));
 			
 			msg=msg1.replace("${vendorApplicationRequestToCompany_Message}", msg);
 			email.setMsg(msg);
@@ -187,7 +185,7 @@ public class MailNotification implements NotificationService{
 			//Do something
 			HtmlEmail email = new HtmlEmail();
 			String filename = ConfigUtil.getKey("SendToNextEmployeeVettor");
-			String msg1 = FileUtils.readFileToString(new File(workingDirectory, filename));
+			String msg1 = FileUtils.readFileToString(new File(filename));
 			
 			msg=msg1.replace("${messageFromVettorToNextVettor_Message}", msg);
 			msgFromPreviousVettor=msg1.replace("${messageFromPreviousVettor_Message}",msgFromPreviousVettor);
@@ -220,7 +218,7 @@ public class MailNotification implements NotificationService{
 			//Do something
 			HtmlEmail email = new HtmlEmail();
 			String filename = ConfigUtil.getKey("ServiceRequestFromCompanyToVendor");
-			String msg1 = FileUtils.readFileToString(new File(workingDirectory, filename));
+			String msg1 = FileUtils.readFileToString(new File(filename));
 			
 			msg=msg1.replace("${ServiceRequestFromCompanyToVendor_Message}", msg);
 			email.setMsg(msg);
@@ -252,7 +250,7 @@ public class MailNotification implements NotificationService{
 			//DoSomething
 			HtmlEmail email = new HtmlEmail();
 			String filename = ConfigUtil.getKey("VendorApplicationAccepted");
-			String msg1 = FileUtils.readFileToString(new File(workingDirectory, filename));
+			String msg1 = FileUtils.readFileToString(new File(filename));
 			
 			msg=msg1.replace("${vendorApplicationResultAccepted_Message}", msg);
 			email.setMsg(msg);
@@ -285,7 +283,7 @@ public class MailNotification implements NotificationService{
 			//Do something
 			HtmlEmail email = new HtmlEmail();
 			String filename = ConfigUtil.getKey("VendorApplicationStatus");
-			String msg1 = FileUtils.readFileToString(new File(workingDirectory, filename));
+			String msg1 = FileUtils.readFileToString(new File(filename));
 			
 			msg=msg1.replace("${vendorApplicationStatusPending_Message}", msg);
 			email.setMsg(msg);
@@ -317,7 +315,7 @@ public class MailNotification implements NotificationService{
 			//Do something
 			HtmlEmail email = new HtmlEmail();
 			String filename = ConfigUtil.getKey("ServiceRequestFromCompanyToVendor");
-			String msg1 = FileUtils.readFileToString(new File(workingDirectory, filename));
+			String msg1 = FileUtils.readFileToString(new File(filename));
 			
 			msg=msg1.replace("${ServiceRequestFromCompanyToVendor_Message}", msg);
 			email.setMsg(msg);

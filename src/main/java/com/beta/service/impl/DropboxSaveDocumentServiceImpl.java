@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Propagation;
 
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.SaveDocumentService;
-import com.dropbox.core.DbxDownloader;
 import com.dropbox.core.DbxException;
+import com.dropbox.core.DbxHost;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.CreateFolderErrorException;
@@ -24,16 +24,17 @@ import com.dropbox.core.v2.files.Metadata;
 @org.springframework.transaction.annotation.Transactional(propagation = Propagation.REQUIRED, rollbackFor = VendorMgmtException.class)
 public class DropboxSaveDocumentServiceImpl implements SaveDocumentService {
 
-	private static final String ACCESS_TOKEN = "I66zWXoReFAAAAAAAAAAEvRdbDAcNBankNQuL71_b-lzY7GM1dPN1ydL2_NRi4TI";
+	private static final String ACCESS_TOKEN = "I66zWXoReFAAAAAAAAAAGkStTcEm2olgXLiCTYGvzhKq87QBc0bkO9Sl9GivDNMM";
 	
 	DbxRequestConfig config = new DbxRequestConfig("dropbox/java-tutorial", "en_US");
-	
+
+	DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
     
 	@Override
 	public void createFolder(String folderName) throws DbxException {
 		
 		 try {
-			 DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
+			 
 	            FolderMetadata folder = client.files().createFolder(folderName);
 	            System.out.println(folder.getName());
 	        } catch (CreateFolderErrorException err) {
@@ -53,7 +54,7 @@ public class DropboxSaveDocumentServiceImpl implements SaveDocumentService {
 	public void uploadFile(String path, String foldername) {
 		
 		 try {
-			 DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
+		
 	            InputStream in = new FileInputStream(path);
 	            FileMetadata metadata = client.files().uploadBuilder(foldername).uploadAndFinish(in);
 	        }
@@ -77,7 +78,6 @@ public class DropboxSaveDocumentServiceImpl implements SaveDocumentService {
 		 
 		 try
 	        {
-			 DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
 			 //output file for download --> storage location on local system to download file
 	            FileOutputStream downloadFile = new FileOutputStream("C:\\Users\\645686\\Desktop\\DropBox\\" + filename);
 	            try {
@@ -103,7 +103,6 @@ public class DropboxSaveDocumentServiceImpl implements SaveDocumentService {
 	public void deleteFile(String path) {
 		try
         {
-			DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
             Metadata metadata = client.files().delete(path);
         }
         catch (DbxException dbxe)

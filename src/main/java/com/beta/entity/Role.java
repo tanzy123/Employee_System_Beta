@@ -8,7 +8,7 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name="Role.findByCompanyRefNumber",
+    @NamedQuery(name="Role.findByCompanyRefNumberAndRole",
                 query="SELECT r FROM Role r WHERE r.companyReferenceNumber = :companyReferenceNumber and r.role = :role"),
 }) 
 public class Role {
@@ -57,6 +57,37 @@ public class Role {
 
 	public void setCompanyReferenceNumber(String companyReferenceNumber) {
 		this.companyReferenceNumber = companyReferenceNumber;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((companyReferenceNumber == null) ? 0 : companyReferenceNumber.hashCode());
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Role other = (Role) obj;
+		if (companyReferenceNumber == null) {
+			if (other.companyReferenceNumber != null)
+				return false;
+		} else if (!companyReferenceNumber.equals(other.companyReferenceNumber))
+			return false;
+		if (role == null) {
+			if (other.role != null)
+				return false;
+		} else if (!role.equals(other.role))
+			return false;
+		return true;
 	}
 	
 	

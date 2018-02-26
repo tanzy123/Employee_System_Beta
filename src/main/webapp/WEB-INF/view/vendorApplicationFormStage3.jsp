@@ -41,8 +41,8 @@
 				<td><form:input path="remarks" readonly="true" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="category">Category</form:label></td>
-				<td><form:input path="category" readonly="true" />${application.category.categoryName}</td>
+				<td><form:label path="category.categoryName">Category</form:label></td>
+				<td><form:input path="category.categoryName" readonly="true" /></td>
 			</tr>
 			<tr>
 				<td><form:label path="vendorPeriod">Vendor Period</form:label></td>

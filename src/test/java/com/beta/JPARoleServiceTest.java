@@ -93,7 +93,7 @@ public class JPARoleServiceTest {
 		
 		roleService.saveOrUpdate(role1);
 		
-		role1 = roleService.findByCompanyReferenceNumber("CTS123","Associate1");
+		role1 = roleService.findByCompanyReferenceNumberAndRole("CTS123","Associate1");
 		Long id = role1.getRoleId();
 		role1.setRole("Staff");
 		
@@ -113,7 +113,7 @@ public class JPARoleServiceTest {
 		roleService.saveOrUpdate(role);
 		int endsize = roleService.findAll().size();
 		assertEquals((startsize+1),endsize);
-		role = roleService.findByCompanyReferenceNumber("CTS123","Associate");
+		role = roleService.findByCompanyReferenceNumberAndRole("CTS123","Associate");
 		Long id = role.getRoleId();
 		
 		roleService.delete(id);

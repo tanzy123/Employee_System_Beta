@@ -66,7 +66,8 @@ public class CompanyAdminstratorAccountServiceImpl extends BaseServiceImpl<Long,
 		CompanyAdministratorAccount validatedAccount = findByUserName(entity.getUserName());
 		String password = entity.getPassword();
 		String databasePassword = validatedAccount.getPassword();
-		
+		if(validatedAccount.getIsValidated()==false)
+			throw new VendorMgmtException("Account has not been validated yet");
 		//validate if password is correct
 		if(BCrypt.checkpw(password, databasePassword))
 			return validatedAccount;

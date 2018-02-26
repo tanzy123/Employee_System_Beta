@@ -157,6 +157,47 @@ public class VendorReference {
 				+ getEndDate() + ", getClass()=" + getClass() + ", hashCode()="
 				+ hashCode() + ", toString()=" + super.toString() + "]";
 	}
+
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((applicationRef == null) ? 0 : applicationRef.hashCode());
+		result = prime * result + ((companyName == null) ? 0 : companyName.hashCode());
+		result = prime * result + ((contactPerson == null) ? 0 : contactPerson.hashCode());
+		return result;
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		VendorReference other = (VendorReference) obj;
+		if (applicationRef == null) {
+			if (other.applicationRef != null)
+				return false;
+		} else if (!applicationRef.equals(other.applicationRef))
+			return false;
+		if (companyName == null) {
+			if (other.companyName != null)
+				return false;
+		} else if (!companyName.equals(other.companyName))
+			return false;
+		if (contactPerson == null) {
+			if (other.contactPerson != null)
+				return false;
+		} else if (!contactPerson.equals(other.contactPerson))
+			return false;
+		return true;
+	}
 	
 	
 
