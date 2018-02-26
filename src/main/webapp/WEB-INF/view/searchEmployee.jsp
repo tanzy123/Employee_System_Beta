@@ -11,9 +11,7 @@
 <body>
 	<h1>Search For Existing Employee</h1>
 	<form action="searchEmployee" method="get">
-
-
-
+	
 		Employee UserName <input type="text" name="employeeUserName" required />
 		<input type="submit" value="Search" id="search" name="search">
 		<table>
@@ -26,9 +24,8 @@
 				<td>Department</td>
 				<td>UserName</td>
 			</tr>
-
 			<tr>
-				<td>${employee.employeeId}</td>
+				<td><input type="text" value="${employee.employeeId}"></td>
 				<td>${employee.employeeEmail}</td>
 				<td>${employee.contactNumber}</td>
 				<td>${employee.role.role}</td>
@@ -38,8 +35,7 @@
 			</tr>
 		</table>
 
-
-
 	</form>
+	<form action="BackToEmployeemanagementPage"><button name="back">Back</button></form>
 </body>
 </html>

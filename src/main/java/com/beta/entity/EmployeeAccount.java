@@ -13,6 +13,8 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     @NamedQuery(name="EmployeeAccount.findByUsername",
                 query="SELECT e FROM EmployeeAccount e WHERE e.userName = :userName"),
+                @NamedQuery(name="EmployeeAccount.checkEmpIdDuplicate",
+                query="SELECT e FROM EmployeeAccount e WHERE e.companyReferenceNumber = :companyReferenceNumber and e.employeeId = :employeeId"),
 })
 public class EmployeeAccount extends UserAccount {
 

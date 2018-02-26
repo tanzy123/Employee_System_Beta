@@ -14,5 +14,7 @@
 		<input type="submit" value="delete" id="delete" name="delete">
 
 	</form>
+	
+	<form action="BackToEmployeemanagementPage"><button name="back">Back</button></form>
 </body>
 </html>

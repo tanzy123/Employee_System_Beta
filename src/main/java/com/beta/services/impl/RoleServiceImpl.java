@@ -17,6 +17,7 @@ import com.beta.dao.JPADAO;
 import com.beta.dao.RoleDao;
 import com.beta.entity.Application;
 import com.beta.entity.Company;
+import com.beta.entity.Department;
 import com.beta.entity.Role;
 import com.beta.entity.VendorReference;
 import com.beta.exception.VendorMgmtException;
@@ -103,7 +104,13 @@ public class RoleServiceImpl extends BaseServiceImpl<Long, Role> implements Role
 		else if (list.isEmpty())
 			throw new VendorMgmtException("No company found with the same given reference");
 	}
-	
+	@Override
+	public List<Role> findByCompanyRef(String companyReferenceNumber) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("companyReferenceNumber", companyReferenceNumber);
+		return dao.findByNamedQueryAndNamedParams("Role.findByCompRefNo", params);
+		
+	}
 	
 
 	
