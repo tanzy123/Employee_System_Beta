@@ -32,7 +32,7 @@ public class EmployeeManagementControllerImpl {
 	RoleService roleService;
 	
 	@Autowired
-	EmployeeAccountService employeeAcoountService;
+	EmployeeAccountService employeeAccountService;
 
 	@RequestMapping(value = "/employeeManagement", method = RequestMethod.GET)
 	public ModelAndView showLogin(HttpServletRequest request,
@@ -61,10 +61,10 @@ public class EmployeeManagementControllerImpl {
 			@RequestParam(value = "contactNumber") String contactNumber,
 			@RequestParam(value = "role") String role,
 			@RequestParam(value = "departmentName") String departmentName,
-			@RequestParam(value = "userName") String userName
+			@RequestParam(value = "userName") String userName,
+			@RequestParam(value = "password") String password
 			)
 	{
-		ModelAndView mav=new ModelAndView();
 		EmployeeAccount employeeAccount =new EmployeeAccount();
 		Department employeeDepartment = new Department();
 		Role employeeRole=new Role();
@@ -73,33 +73,29 @@ public class EmployeeManagementControllerImpl {
 		employeeAccount.setContactNumber(contactNumber);
 		employeeAccount.setCompanyReferenceNumber(companyReferenceNumber);
 		
-		//employeeDepartment.setCompanyReferenceNumber(session.getAttribute("companyRefNumber").toString());
-		employeeDepartment.setDepartmentId(Long.parseLong(departmentName));
-		//employeeDepartment.setDepartmentId(departmentService.findByNameAndCompanyRef(departmentName, companyReferenceNumber).getDepartmentId());
+		//need to check if department doesn't exist, haven't done yet
+		employeeDepartment = departmentService.findByNameAndCompanyRef(departmentName, companyReferenceNumber);
 		employeeAccount.setDepartment(employeeDepartment);
 		
-		//employeeRole.setCompanyReferenceNumber(companyReferenceNumber);
-		employeeRole.setRoleId(Long.parseLong(role));
-		//employeeRole.setRoleId(roleService.findByCompanyReferenceNumber(companyReferenceNumber, role).getRoleId());
+		//need to check if role doesn't exist, haven't done yet
+		employeeRole = roleService.findByCompanyReferenceNumberAndRole(companyReferenceNumber, role);
 		employeeAccount.setRole(employeeRole);
-		
-		
-		
 		employeeAccount.setEmployeeEmail(employeeEmail);
 		employeeAccount.setEmployeeId(employeeId);
 		employeeAccount.setUserName(userName);
-		
+		employeeAccount.setPassword(password);
 		
 		try{
-		employeeAcoountService.validateAccount(employeeAccount);
-		employeeAcoountService.createNewAccount(employeeAccount);
+		employeeAccountService.createNewAccount(employeeAccount);
 		}catch(VendorMgmtException e)
 		{
-			mav=new ModelAndView("error");
+			ModelAndView mav=new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+			return mav;
 		}
 		
-		
-		return null;
+		ModelAndView mav = new ModelAndView("employeemanagement");
+		return mav;
 		
 	}
 	
@@ -118,7 +114,7 @@ public class EmployeeManagementControllerImpl {
 		
 		
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("employee", employeeAcoountService.findByUserName(employeeUserName));
+		mav.addObject("employee", employeeAccountService.findByUserName(employeeUserName));
 		
 		return mav;
 	}
@@ -139,7 +135,7 @@ public class EmployeeManagementControllerImpl {
 		
 		try {
 			
-			employeeAcoountService.deleteIfExisting(Long.parseLong(employeeId));
+			employeeAccountService.deleteIfExisting(Long.parseLong(employeeId));
 		} catch (VendorMgmtException e) {
 			
 		}
@@ -193,15 +189,15 @@ public class EmployeeManagementControllerImpl {
 		
 		employeeRole.setCompanyReferenceNumber(companyReferenceNumber);
 		employeeRole.setRole(role);
-		employeeRole.setRoleId(roleService.findByCompanyReferenceNumber(companyReferenceNumber, role).getRoleId());
+		employeeRole.setRoleId(roleService.findByCompanyReferenceNumberAndRole(companyReferenceNumber, role).getRoleId());
 		employeeAccount.setRole(employeeRole);
 		
 		employeeAccount.setEmployeeEmail(employeeEmail);
 		employeeAccount.setEmployeeId(employeeId);
 		employeeAccount.setUserName(userName);
 		
-		employeeAcoountService.validateAccount(employeeAccount);
-		employeeAcoountService.saveOrUpdate(employeeAccount);
+		employeeAccountService.validateAccount(employeeAccount);
+		employeeAccountService.saveOrUpdate(employeeAccount);
 		
 		return null;
 	}

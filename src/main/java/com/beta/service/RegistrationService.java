@@ -5,12 +5,14 @@ import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.UserAccount;
 
 public interface RegistrationService {
-
-	public void RegisterCompany(Company company);
 	
-	public boolean SendVarificationEmail (Company company);
+	void registerCompanyAccount(Company company, String userName, String password);
+	
+	boolean sendVerificationEmail(Company company, String userName);
 
-	public boolean TokenComparison(String token);
+	boolean tokenComparison(String token, String username);
+
+	
 	
 	
 	

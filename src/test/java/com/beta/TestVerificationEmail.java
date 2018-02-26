@@ -33,7 +33,7 @@ public class TestVerificationEmail {
 		company.setContactNumber("61234567");
 		company.setCompanyWebsite("www.cognizant.com");
 		company.setTurnover(9999999L);
-		verificationEmail.SendVarificationEmail(company);
+		verificationEmail.sendVerificationEmail(company, "asd");
 
 	}
 }

@@ -54,7 +54,7 @@ public class VendorApplicationImpl implements VendorApplication {
 		Date applicationDate = new Date();
 		Date modifiedDate = new Date();
 		application.setApplicationRef(uniqueKey);
-		application.setApplicationStatus(ApplicationStatus.PENDING);
+		application.setApplicationStatus(ApplicationStatus.VETTING);
 		application.setApplicationDate(applicationDate);
 		application.setModifiedDate(modifiedDate);
 

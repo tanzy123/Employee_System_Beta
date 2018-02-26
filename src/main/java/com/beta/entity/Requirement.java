@@ -113,6 +113,37 @@ public class Requirement {
 				+ userName + ", requirement=" + requirement + ", statusUpdateDate=" + statusUpdateDate + ", sequence="
 				+ sequence + ", status=" + status + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((applicationRef == null) ? 0 : applicationRef.hashCode());
+		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Requirement other = (Requirement) obj;
+		if (applicationRef == null) {
+			if (other.applicationRef != null)
+				return false;
+		} else if (!applicationRef.equals(other.applicationRef))
+			return false;
+		if (userName == null) {
+			if (other.userName != null)
+				return false;
+		} else if (!userName.equals(other.userName))
+			return false;
+		return true;
+	}
 	
 	
 }

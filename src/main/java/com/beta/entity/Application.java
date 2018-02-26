@@ -221,5 +221,30 @@ public class Application implements Serializable {
 				+ applicationDate + ", vendorPeriod=" + vendorPeriod + ", modifiedDate=" + modifiedDate
 				+ ", supportingDocument=" + supportingDocument + ", vetterRequirement=" + vetterRequirement + "]";
 	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((applicationRef == null) ? 0 : applicationRef.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Application other = (Application) obj;
+		if (applicationRef == null) {
+			if (other.applicationRef != null)
+				return false;
+		} else if (!applicationRef.equals(other.applicationRef))
+			return false;
+		return true;
+	}
 
 }
