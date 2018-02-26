@@ -9,16 +9,71 @@
 <body>
 <h1>Pending Vendor Application View</h1>
 
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%
+String id = request.getParameter("userid");
+String driver = "com.mysql.jdbc.Driver";
+String connectionUrl = "jdbc:mysql://localhost:3306/";
+String database = "vendormanagement";
+String userid = "root";
+String password = "training123";
+try {
+Class.forName(driver);
+} catch (ClassNotFoundException e) {
+e.printStackTrace();
+}
+Connection connection = null;
+Statement statement = null;
+ResultSet resultSet = null;
+%>
+<!DOCTYPE html>
+<html>
+<body>
 
-<table id="table" border=1>
+<h1>Retrieve data from database in jsp</h1>
+<table border="1">
+<tr>
+<td>POC</td>
+<td>applicationRef</td>
+<td>applicationStatus</td>
+<td>companyReferenceNumber</td>
+<td>Accept</td>
+<td>Reject</td>
 
-<tr> <th> Company Name </th> <th> Category </th> <th> Details </th> <th> Approve </th> <th> Reject </th>
-     
-   
-     
 </tr>
+<%
+try{
+connection = DriverManager.getConnection(connectionUrl+database, userid, password);
+statement=connection.createStatement();
+String sql ="select * from application";
+resultSet = statement.executeQuery(sql);
+while(resultSet.next())
+{
+%>
+
+<tr>
+<td><%=resultSet.getString("POC") %></td>
+<td><%=resultSet.getString("applicationRef") %></td>
+<td><%=resultSet.getString("applicationStatus") %></td>
+<td><%=resultSet.getString("companyReferenceNumber") %></td>
+<td><button type="submit" value="Accept">Accept</button></td>
+<td><button type="submit" value="Reject">Reject</button></td>
+</tr>
+<%
+}
+
+
+
+
+
+connection.close();
+} catch (Exception e) {
+e.printStackTrace();
+}
+%>
 </table>
-
-
 </body>
 </html>
