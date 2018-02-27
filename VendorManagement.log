@@ -2703,3 +2703,438 @@ Caused by: javax.persistence.RollbackException: Transaction marked as rollbackOn
 2018-02-26 17:56:35 INFO  TransactionContext:136 - Committed transaction for test context [DefaultTestContext@22d9ca63 testClass = TestImport, testInstance = com.beta.TestImport@484149eb, testMethod = asd@TestImport, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@124dac75 testClass = TestImport, locations = '{classpath:appContext.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]].
 2018-02-26 17:56:35 INFO  GenericApplicationContext:984 - Closing org.springframework.context.support.GenericApplicationContext@49fc609f: startup date [Mon Feb 26 17:56:29 SGT 2018]; root of context hierarchy
 2018-02-26 17:56:35 INFO  LocalContainerEntityManagerFactoryBean:548 - Closing JPA EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 14:40:11 INFO  DefaultTestContextBootstrapper:260 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-02-27 14:40:11 INFO  DefaultTestContextBootstrapper:187 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@4566e5bd, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1ed4004b, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@ff5b51f, org.springframework.test.context.support.DirtiesContextTestExecutionListener@25bbe1b6, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5702b3b1, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@69ea3742]
+2018-02-27 14:40:11 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [appContext.xml]
+2018-02-27 14:40:11 INFO  GenericApplicationContext:583 - Refreshing org.springframework.context.support.GenericApplicationContext@49fc609f: startup date [Tue Feb 27 14:40:11 SGT 2018]; root of context hierarchy
+2018-02-27 14:40:12 INFO  MLog:212 - MLog clients using slf4j logging.
+2018-02-27 14:40:12 INFO  C3P0Registry:212 - Initializing c3p0-0.9.5.2 [built 08-December-2015 22:06:04 -0800; debug? true; trace: 10]
+2018-02-27 14:40:12 INFO  LocalContainerEntityManagerFactoryBean:349 - Building JPA container EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 14:40:12 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: VendorManagementPersistentUnit
+	...]
+2018-02-27 14:40:12 INFO  Version:37 - HHH000412: Hibernate Core {5.1.3.Final}
+2018-02-27 14:40:12 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2018-02-27 14:40:12 INFO  Environment:317 - HHH000021: Bytecode provider name : javassist
+2018-02-27 14:40:12 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-02-27 14:40:13 INFO  AbstractPoolBackedDataSource:212 - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 5000, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, contextClassLoaderSource -> caller, dataSourceName -> z8kflt9t1ndhiofsafxic|4d5650ae, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, extensions -> {}, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, forceSynchronousCheckins -> false, forceUseNamedDriverClass -> false, identityToken -> z8kflt9t1ndhiofsafxic|4d5650ae, idleConnectionTestPeriod -> 60, initialPoolSize -> 3, jdbcUrl -> jdbc:mysql://localhost:3306/vendormanagement, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 10, maxIdleTime -> 180, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 25, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 6, numHelperThreads -> 3, preferredTestQuery -> SELECT 1, privilegeSpawnedThreads -> false, properties -> {user=******, password=******}, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, testConnectionOnCheckin -> true, testConnectionOnCheckout -> true, unreturnedConnectionTimeout -> 0, userOverrides -> {}, usesTraditionalReflectiveProxies -> false ]
+2018-02-27 14:40:13 WARN  BasicResourcePool:220 - Bad pool size config, start 3 < min 6. Using 6 as start.
+2018-02-27 14:40:13 INFO  Dialect:156 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2018-02-27 14:40:14 INFO  Version:30 - HV000001: Hibernate Validator 5.4.0.Final
+2018-02-27 14:40:14 INFO  Version:26 - HSEARCH000034: Hibernate Search 5.6.0.Final
+2018-02-27 14:40:14 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Application
+2018-02-27 14:40:14 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Application
+2018-02-27 14:40:14 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Category
+2018-02-27 14:40:14 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Category
+2018-02-27 14:40:14 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Company
+2018-02-27 14:40:14 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Company
+2018-02-27 14:40:15 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyAdministratorAccount
+2018-02-27 14:40:15 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyAdministratorAccount
+2018-02-27 14:40:15 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyVendorRelationship
+2018-02-27 14:40:15 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyVendorRelationship
+2018-02-27 14:40:15 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Department
+2018-02-27 14:40:15 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Department
+2018-02-27 14:40:15 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Documents
+2018-02-27 14:40:15 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Documents
+2018-02-27 14:40:15 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: EmployeeAccount
+2018-02-27 14:40:15 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: EmployeeAccount
+2018-02-27 14:40:15 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: hibernate_sequence
+2018-02-27 14:40:15 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: hibernate_sequence
+2018-02-27 14:40:15 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Requirement
+2018-02-27 14:40:15 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Requirement
+2018-02-27 14:40:16 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Role
+2018-02-27 14:40:16 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Role
+2018-02-27 14:40:16 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: VendorReference
+2018-02-27 14:40:16 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: VendorReference
+2018-02-27 14:40:17 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2018-02-27 14:40:17 INFO  LocalContainerEntityManagerFactoryBean:379 - Initialized JPA EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 14:40:18 INFO  TransactionContext:101 - Began transaction (1) for test context [DefaultTestContext@51fc862e testClass = TestImport, testInstance = com.beta.TestImport@a7cf42f, testMethod = asd@TestImport, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@62a68bcb testClass = TestImport, locations = '{classpath:appContext.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@3610f277]; rollback [false]
+2018-02-27 14:40:18 INFO  ScriptUtils:441 - Executing SQL script from class path resource [import.sql]
+2018-02-27 14:40:18 INFO  ScriptUtils:507 - Executed SQL script from class path resource [import.sql] in 63 ms.
+2018-02-27 14:40:18 INFO  TransactionContext:136 - Committed transaction for test context [DefaultTestContext@51fc862e testClass = TestImport, testInstance = com.beta.TestImport@a7cf42f, testMethod = asd@TestImport, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@62a68bcb testClass = TestImport, locations = '{classpath:appContext.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]].
+2018-02-27 14:40:18 INFO  GenericApplicationContext:984 - Closing org.springframework.context.support.GenericApplicationContext@49fc609f: startup date [Tue Feb 27 14:40:11 SGT 2018]; root of context hierarchy
+2018-02-27 14:40:18 INFO  LocalContainerEntityManagerFactoryBean:548 - Closing JPA EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 14:41:30 INFO  DefaultTestContextBootstrapper:260 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-02-27 14:41:30 INFO  DefaultTestContextBootstrapper:187 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@4566e5bd, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1ed4004b, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@ff5b51f, org.springframework.test.context.support.DirtiesContextTestExecutionListener@25bbe1b6, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5702b3b1, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@69ea3742]
+2018-02-27 14:41:30 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [appContext.xml]
+2018-02-27 14:41:31 INFO  GenericApplicationContext:583 - Refreshing org.springframework.context.support.GenericApplicationContext@49fc609f: startup date [Tue Feb 27 14:41:31 SGT 2018]; root of context hierarchy
+2018-02-27 14:41:31 INFO  MLog:212 - MLog clients using slf4j logging.
+2018-02-27 14:41:31 INFO  C3P0Registry:212 - Initializing c3p0-0.9.5.2 [built 08-December-2015 22:06:04 -0800; debug? true; trace: 10]
+2018-02-27 14:41:32 INFO  LocalContainerEntityManagerFactoryBean:349 - Building JPA container EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 14:41:32 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: VendorManagementPersistentUnit
+	...]
+2018-02-27 14:41:32 INFO  Version:37 - HHH000412: Hibernate Core {5.1.3.Final}
+2018-02-27 14:41:32 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2018-02-27 14:41:32 INFO  Environment:317 - HHH000021: Bytecode provider name : javassist
+2018-02-27 14:41:32 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-02-27 14:41:32 INFO  AbstractPoolBackedDataSource:212 - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 5000, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, contextClassLoaderSource -> caller, dataSourceName -> z8kflt9t1ndj7ylybusrw|4d5650ae, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, extensions -> {}, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, forceSynchronousCheckins -> false, forceUseNamedDriverClass -> false, identityToken -> z8kflt9t1ndj7ylybusrw|4d5650ae, idleConnectionTestPeriod -> 60, initialPoolSize -> 3, jdbcUrl -> jdbc:mysql://localhost:3306/vendormanagement, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 10, maxIdleTime -> 180, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 25, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 6, numHelperThreads -> 3, preferredTestQuery -> SELECT 1, privilegeSpawnedThreads -> false, properties -> {user=******, password=******}, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, testConnectionOnCheckin -> true, testConnectionOnCheckout -> true, unreturnedConnectionTimeout -> 0, userOverrides -> {}, usesTraditionalReflectiveProxies -> false ]
+2018-02-27 14:41:32 WARN  BasicResourcePool:220 - Bad pool size config, start 3 < min 6. Using 6 as start.
+2018-02-27 14:41:32 INFO  Dialect:156 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2018-02-27 14:41:33 INFO  Version:30 - HV000001: Hibernate Validator 5.4.0.Final
+2018-02-27 14:41:33 INFO  Version:26 - HSEARCH000034: Hibernate Search 5.6.0.Final
+2018-02-27 14:41:33 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Application
+2018-02-27 14:41:33 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Application
+2018-02-27 14:41:34 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Category
+2018-02-27 14:41:34 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Category
+2018-02-27 14:41:34 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Company
+2018-02-27 14:41:34 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Company
+2018-02-27 14:41:34 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyAdministratorAccount
+2018-02-27 14:41:34 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyAdministratorAccount
+2018-02-27 14:41:34 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyVendorRelationship
+2018-02-27 14:41:34 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyVendorRelationship
+2018-02-27 14:41:34 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Department
+2018-02-27 14:41:34 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Department
+2018-02-27 14:41:34 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Documents
+2018-02-27 14:41:34 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Documents
+2018-02-27 14:41:34 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: EmployeeAccount
+2018-02-27 14:41:34 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: EmployeeAccount
+2018-02-27 14:41:34 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: hibernate_sequence
+2018-02-27 14:41:34 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: hibernate_sequence
+2018-02-27 14:41:35 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Requirement
+2018-02-27 14:41:35 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Requirement
+2018-02-27 14:41:35 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Role
+2018-02-27 14:41:35 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Role
+2018-02-27 14:41:35 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: VendorReference
+2018-02-27 14:41:35 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: VendorReference
+2018-02-27 14:41:36 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2018-02-27 14:41:36 INFO  LocalContainerEntityManagerFactoryBean:379 - Initialized JPA EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 14:41:37 INFO  TransactionContext:101 - Began transaction (1) for test context [DefaultTestContext@51fc862e testClass = TestImport, testInstance = com.beta.TestImport@a7cf42f, testMethod = asd@TestImport, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@62a68bcb testClass = TestImport, locations = '{classpath:appContext.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@3610f277]; rollback [false]
+2018-02-27 14:41:37 INFO  ScriptUtils:441 - Executing SQL script from class path resource [import.sql]
+2018-02-27 14:41:37 INFO  ScriptUtils:507 - Executed SQL script from class path resource [import.sql] in 32 ms.
+2018-02-27 14:41:37 INFO  TransactionContext:136 - Committed transaction for test context [DefaultTestContext@51fc862e testClass = TestImport, testInstance = com.beta.TestImport@a7cf42f, testMethod = asd@TestImport, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@62a68bcb testClass = TestImport, locations = '{classpath:appContext.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]].
+2018-02-27 14:41:37 INFO  GenericApplicationContext:984 - Closing org.springframework.context.support.GenericApplicationContext@49fc609f: startup date [Tue Feb 27 14:41:31 SGT 2018]; root of context hierarchy
+2018-02-27 14:41:37 INFO  LocalContainerEntityManagerFactoryBean:548 - Closing JPA EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 14:46:27 INFO  DefaultTestContextBootstrapper:260 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-02-27 14:46:27 INFO  DefaultTestContextBootstrapper:187 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@4566e5bd, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1ed4004b, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@ff5b51f, org.springframework.test.context.support.DirtiesContextTestExecutionListener@25bbe1b6, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5702b3b1, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@69ea3742]
+2018-02-27 14:46:27 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [appContext.xml]
+2018-02-27 14:46:27 INFO  GenericApplicationContext:583 - Refreshing org.springframework.context.support.GenericApplicationContext@49fc609f: startup date [Tue Feb 27 14:46:27 SGT 2018]; root of context hierarchy
+2018-02-27 14:46:28 INFO  MLog:212 - MLog clients using slf4j logging.
+2018-02-27 14:46:28 INFO  C3P0Registry:212 - Initializing c3p0-0.9.5.2 [built 08-December-2015 22:06:04 -0800; debug? true; trace: 10]
+2018-02-27 14:46:28 INFO  LocalContainerEntityManagerFactoryBean:349 - Building JPA container EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 14:46:28 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: VendorManagementPersistentUnit
+	...]
+2018-02-27 14:46:29 INFO  Version:37 - HHH000412: Hibernate Core {5.1.3.Final}
+2018-02-27 14:46:29 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2018-02-27 14:46:29 INFO  Environment:317 - HHH000021: Bytecode provider name : javassist
+2018-02-27 14:46:29 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-02-27 14:46:29 INFO  AbstractPoolBackedDataSource:212 - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 5000, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, contextClassLoaderSource -> caller, dataSourceName -> z8kflt9t1ndpkxylewrgz|4d5650ae, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, extensions -> {}, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, forceSynchronousCheckins -> false, forceUseNamedDriverClass -> false, identityToken -> z8kflt9t1ndpkxylewrgz|4d5650ae, idleConnectionTestPeriod -> 60, initialPoolSize -> 3, jdbcUrl -> jdbc:mysql://localhost:3306/vendormanagement, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 10, maxIdleTime -> 180, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 25, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 6, numHelperThreads -> 3, preferredTestQuery -> SELECT 1, privilegeSpawnedThreads -> false, properties -> {user=******, password=******}, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, testConnectionOnCheckin -> true, testConnectionOnCheckout -> true, unreturnedConnectionTimeout -> 0, userOverrides -> {}, usesTraditionalReflectiveProxies -> false ]
+2018-02-27 14:46:29 WARN  BasicResourcePool:220 - Bad pool size config, start 3 < min 6. Using 6 as start.
+2018-02-27 14:46:29 INFO  Dialect:156 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2018-02-27 14:46:30 INFO  Version:30 - HV000001: Hibernate Validator 5.4.0.Final
+2018-02-27 14:46:30 INFO  Version:26 - HSEARCH000034: Hibernate Search 5.6.0.Final
+2018-02-27 14:46:32 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2018-02-27 14:46:33 INFO  LocalContainerEntityManagerFactoryBean:379 - Initialized JPA EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 14:46:33 INFO  TransactionContext:101 - Began transaction (1) for test context [DefaultTestContext@7fedb795 testClass = TestImport, testInstance = com.beta.TestImport@10850d17, testMethod = asd@TestImport, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@62f11ebb testClass = TestImport, locations = '{classpath:appContext.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@1084ac45]; rollback [false]
+2018-02-27 14:46:33 INFO  ScriptUtils:441 - Executing SQL script from class path resource [import.sql]
+2018-02-27 14:46:33 INFO  ScriptUtils:507 - Executed SQL script from class path resource [import.sql] in 16 ms.
+2018-02-27 14:46:33 INFO  TransactionContext:136 - Committed transaction for test context [DefaultTestContext@7fedb795 testClass = TestImport, testInstance = com.beta.TestImport@10850d17, testMethod = asd@TestImport, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@62f11ebb testClass = TestImport, locations = '{classpath:appContext.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]].
+2018-02-27 14:46:33 INFO  GenericApplicationContext:984 - Closing org.springframework.context.support.GenericApplicationContext@49fc609f: startup date [Tue Feb 27 14:46:27 SGT 2018]; root of context hierarchy
+2018-02-27 14:46:33 INFO  LocalContainerEntityManagerFactoryBean:548 - Closing JPA EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 15:41:05 INFO  DefaultTestContextBootstrapper:260 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-02-27 15:41:05 INFO  DefaultTestContextBootstrapper:187 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@4566e5bd, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1ed4004b, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@ff5b51f, org.springframework.test.context.support.DirtiesContextTestExecutionListener@25bbe1b6, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5702b3b1, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@69ea3742]
+2018-02-27 15:41:05 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [appContext.xml]
+2018-02-27 15:41:05 INFO  GenericApplicationContext:583 - Refreshing org.springframework.context.support.GenericApplicationContext@49fc609f: startup date [Tue Feb 27 15:41:05 SGT 2018]; root of context hierarchy
+2018-02-27 15:41:06 INFO  MLog:212 - MLog clients using slf4j logging.
+2018-02-27 15:41:06 INFO  C3P0Registry:212 - Initializing c3p0-0.9.5.2 [built 08-December-2015 22:06:04 -0800; debug? true; trace: 10]
+2018-02-27 15:41:06 INFO  LocalContainerEntityManagerFactoryBean:349 - Building JPA container EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 15:41:06 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: VendorManagementPersistentUnit
+	...]
+2018-02-27 15:41:06 INFO  Version:37 - HHH000412: Hibernate Core {5.1.3.Final}
+2018-02-27 15:41:06 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2018-02-27 15:41:06 INFO  Environment:317 - HHH000021: Bytecode provider name : javassist
+2018-02-27 15:41:06 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-02-27 15:41:07 INFO  AbstractPoolBackedDataSource:212 - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 5000, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, contextClassLoaderSource -> caller, dataSourceName -> z8kflt9t1nfnu611kruw90|4d5650ae, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, extensions -> {}, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, forceSynchronousCheckins -> false, forceUseNamedDriverClass -> false, identityToken -> z8kflt9t1nfnu611kruw90|4d5650ae, idleConnectionTestPeriod -> 60, initialPoolSize -> 3, jdbcUrl -> jdbc:mysql://localhost:3306/vendormanagement, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 10, maxIdleTime -> 180, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 25, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 6, numHelperThreads -> 3, preferredTestQuery -> SELECT 1, privilegeSpawnedThreads -> false, properties -> {user=******, password=******}, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, testConnectionOnCheckin -> true, testConnectionOnCheckout -> true, unreturnedConnectionTimeout -> 0, userOverrides -> {}, usesTraditionalReflectiveProxies -> false ]
+2018-02-27 15:41:07 WARN  BasicResourcePool:220 - Bad pool size config, start 3 < min 6. Using 6 as start.
+2018-02-27 15:41:07 INFO  Dialect:156 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2018-02-27 15:41:07 INFO  Version:30 - HV000001: Hibernate Validator 5.4.0.Final
+2018-02-27 15:41:08 INFO  Version:26 - HSEARCH000034: Hibernate Search 5.6.0.Final
+2018-02-27 15:41:08 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Application
+2018-02-27 15:41:08 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Application
+2018-02-27 15:41:08 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Category
+2018-02-27 15:41:08 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Category
+2018-02-27 15:41:08 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Company
+2018-02-27 15:41:08 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Company
+2018-02-27 15:41:08 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyAdministratorAccount
+2018-02-27 15:41:08 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyAdministratorAccount
+2018-02-27 15:41:09 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyVendorRelationship
+2018-02-27 15:41:09 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyVendorRelationship
+2018-02-27 15:41:09 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Department
+2018-02-27 15:41:09 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Department
+2018-02-27 15:41:09 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Documents
+2018-02-27 15:41:09 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Documents
+2018-02-27 15:41:09 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: EmployeeAccount
+2018-02-27 15:41:09 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: EmployeeAccount
+2018-02-27 15:41:09 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: hibernate_sequence
+2018-02-27 15:41:09 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: hibernate_sequence
+2018-02-27 15:41:09 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Requirement
+2018-02-27 15:41:09 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Requirement
+2018-02-27 15:41:09 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Role
+2018-02-27 15:41:09 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Role
+2018-02-27 15:41:09 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: VendorReference
+2018-02-27 15:41:09 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: VendorReference
+2018-02-27 15:41:11 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2018-02-27 15:41:11 INFO  LocalContainerEntityManagerFactoryBean:379 - Initialized JPA EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 15:41:11 INFO  TransactionContext:101 - Began transaction (1) for test context [DefaultTestContext@51fc862e testClass = TestImport, testInstance = com.beta.TestImport@a7cf42f, testMethod = asd@TestImport, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@62a68bcb testClass = TestImport, locations = '{classpath:appContext.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@3610f277]; rollback [false]
+2018-02-27 15:41:11 INFO  ScriptUtils:441 - Executing SQL script from class path resource [import.sql]
+2018-02-27 15:41:11 INFO  ScriptUtils:507 - Executed SQL script from class path resource [import.sql] in 16 ms.
+2018-02-27 15:41:12 INFO  TransactionContext:136 - Committed transaction for test context [DefaultTestContext@51fc862e testClass = TestImport, testInstance = com.beta.TestImport@a7cf42f, testMethod = asd@TestImport, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@62a68bcb testClass = TestImport, locations = '{classpath:appContext.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]].
+2018-02-27 15:41:12 INFO  GenericApplicationContext:984 - Closing org.springframework.context.support.GenericApplicationContext@49fc609f: startup date [Tue Feb 27 15:41:05 SGT 2018]; root of context hierarchy
+2018-02-27 15:41:12 INFO  LocalContainerEntityManagerFactoryBean:548 - Closing JPA EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 15:48:40 INFO  DefaultTestContextBootstrapper:260 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-02-27 15:48:40 INFO  DefaultTestContextBootstrapper:187 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@4566e5bd, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1ed4004b, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@ff5b51f, org.springframework.test.context.support.DirtiesContextTestExecutionListener@25bbe1b6, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5702b3b1, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@69ea3742]
+2018-02-27 15:48:40 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [appContext.xml]
+2018-02-27 15:48:40 INFO  GenericApplicationContext:583 - Refreshing org.springframework.context.support.GenericApplicationContext@49fc609f: startup date [Tue Feb 27 15:48:40 SGT 2018]; root of context hierarchy
+2018-02-27 15:48:41 INFO  MLog:212 - MLog clients using slf4j logging.
+2018-02-27 15:48:41 INFO  C3P0Registry:212 - Initializing c3p0-0.9.5.2 [built 08-December-2015 22:06:04 -0800; debug? true; trace: 10]
+2018-02-27 15:48:41 INFO  LocalContainerEntityManagerFactoryBean:349 - Building JPA container EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 15:48:41 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: VendorManagementPersistentUnit
+	...]
+2018-02-27 15:48:41 INFO  Version:37 - HHH000412: Hibernate Core {5.1.3.Final}
+2018-02-27 15:48:41 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2018-02-27 15:48:41 INFO  Environment:317 - HHH000021: Bytecode provider name : javassist
+2018-02-27 15:48:41 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-02-27 15:48:42 INFO  AbstractPoolBackedDataSource:212 - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 5000, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, contextClassLoaderSource -> caller, dataSourceName -> z8kflt9t1nfxl67nn28mr|4d5650ae, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, extensions -> {}, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, forceSynchronousCheckins -> false, forceUseNamedDriverClass -> false, identityToken -> z8kflt9t1nfxl67nn28mr|4d5650ae, idleConnectionTestPeriod -> 60, initialPoolSize -> 3, jdbcUrl -> jdbc:mysql://localhost:3306/vendormanagement, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 10, maxIdleTime -> 180, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 25, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 6, numHelperThreads -> 3, preferredTestQuery -> SELECT 1, privilegeSpawnedThreads -> false, properties -> {user=******, password=******}, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, testConnectionOnCheckin -> true, testConnectionOnCheckout -> true, unreturnedConnectionTimeout -> 0, userOverrides -> {}, usesTraditionalReflectiveProxies -> false ]
+2018-02-27 15:48:42 WARN  BasicResourcePool:220 - Bad pool size config, start 3 < min 6. Using 6 as start.
+2018-02-27 15:48:42 INFO  Dialect:156 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2018-02-27 15:48:42 INFO  Version:30 - HV000001: Hibernate Validator 5.4.0.Final
+2018-02-27 15:48:43 INFO  Version:26 - HSEARCH000034: Hibernate Search 5.6.0.Final
+2018-02-27 15:48:43 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Application
+2018-02-27 15:48:43 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Application
+2018-02-27 15:48:43 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Category
+2018-02-27 15:48:43 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Category
+2018-02-27 15:48:43 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Company
+2018-02-27 15:48:43 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Company
+2018-02-27 15:48:43 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyAdministratorAccount
+2018-02-27 15:48:43 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyAdministratorAccount
+2018-02-27 15:48:43 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyVendorRelationship
+2018-02-27 15:48:43 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyVendorRelationship
+2018-02-27 15:48:43 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Department
+2018-02-27 15:48:43 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Department
+2018-02-27 15:48:43 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Documents
+2018-02-27 15:48:43 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Documents
+2018-02-27 15:48:44 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: EmployeeAccount
+2018-02-27 15:48:44 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: EmployeeAccount
+2018-02-27 15:48:44 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: hibernate_sequence
+2018-02-27 15:48:44 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: hibernate_sequence
+2018-02-27 15:48:44 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Requirement
+2018-02-27 15:48:44 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Requirement
+2018-02-27 15:48:44 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Role
+2018-02-27 15:48:44 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Role
+2018-02-27 15:48:44 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: VendorReference
+2018-02-27 15:48:44 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: VendorReference
+2018-02-27 15:48:45 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2018-02-27 15:48:46 INFO  LocalContainerEntityManagerFactoryBean:379 - Initialized JPA EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 15:48:46 INFO  TransactionContext:101 - Began transaction (1) for test context [DefaultTestContext@a7cf42f testClass = TestImport, testInstance = com.beta.TestImport@fe09383, testMethod = asd@TestImport, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@18b74ea testClass = TestImport, locations = '{classpath:appContext.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@c689973]; rollback [false]
+2018-02-27 15:48:46 INFO  ScriptUtils:441 - Executing SQL script from class path resource [import.sql]
+2018-02-27 15:48:46 INFO  ScriptUtils:507 - Executed SQL script from class path resource [import.sql] in 31 ms.
+2018-02-27 15:48:46 INFO  TransactionContext:136 - Committed transaction for test context [DefaultTestContext@a7cf42f testClass = TestImport, testInstance = com.beta.TestImport@fe09383, testMethod = asd@TestImport, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@18b74ea testClass = TestImport, locations = '{classpath:appContext.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]].
+2018-02-27 15:48:46 INFO  GenericApplicationContext:984 - Closing org.springframework.context.support.GenericApplicationContext@49fc609f: startup date [Tue Feb 27 15:48:40 SGT 2018]; root of context hierarchy
+2018-02-27 15:48:46 INFO  LocalContainerEntityManagerFactoryBean:548 - Closing JPA EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 15:55:33 INFO  DefaultTestContextBootstrapper:260 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-02-27 15:55:33 INFO  DefaultTestContextBootstrapper:187 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@4566e5bd, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1ed4004b, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@ff5b51f, org.springframework.test.context.support.DirtiesContextTestExecutionListener@25bbe1b6, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5702b3b1, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@69ea3742]
+2018-02-27 15:55:33 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [appContext.xml]
+2018-02-27 15:55:34 INFO  GenericApplicationContext:583 - Refreshing org.springframework.context.support.GenericApplicationContext@49fc609f: startup date [Tue Feb 27 15:55:34 SGT 2018]; root of context hierarchy
+2018-02-27 15:55:34 INFO  MLog:212 - MLog clients using slf4j logging.
+2018-02-27 15:55:34 INFO  C3P0Registry:212 - Initializing c3p0-0.9.5.2 [built 08-December-2015 22:06:04 -0800; debug? true; trace: 10]
+2018-02-27 15:55:34 INFO  LocalContainerEntityManagerFactoryBean:349 - Building JPA container EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 15:55:34 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: VendorManagementPersistentUnit
+	...]
+2018-02-27 15:55:35 INFO  Version:37 - HHH000412: Hibernate Core {5.1.3.Final}
+2018-02-27 15:55:35 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2018-02-27 15:55:35 INFO  Environment:317 - HHH000021: Bytecode provider name : javassist
+2018-02-27 15:55:35 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-02-27 15:55:35 INFO  AbstractPoolBackedDataSource:212 - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 5000, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, contextClassLoaderSource -> caller, dataSourceName -> z8kflt9t1ng6g3qlz73r3|4d5650ae, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, extensions -> {}, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, forceSynchronousCheckins -> false, forceUseNamedDriverClass -> false, identityToken -> z8kflt9t1ng6g3qlz73r3|4d5650ae, idleConnectionTestPeriod -> 60, initialPoolSize -> 3, jdbcUrl -> jdbc:mysql://localhost:3306/vendormanagement, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 10, maxIdleTime -> 180, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 25, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 6, numHelperThreads -> 3, preferredTestQuery -> SELECT 1, privilegeSpawnedThreads -> false, properties -> {user=******, password=******}, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, testConnectionOnCheckin -> true, testConnectionOnCheckout -> true, unreturnedConnectionTimeout -> 0, userOverrides -> {}, usesTraditionalReflectiveProxies -> false ]
+2018-02-27 15:55:35 WARN  BasicResourcePool:220 - Bad pool size config, start 3 < min 6. Using 6 as start.
+2018-02-27 15:55:35 INFO  Dialect:156 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2018-02-27 15:55:36 INFO  Version:30 - HV000001: Hibernate Validator 5.4.0.Final
+2018-02-27 15:55:36 INFO  Version:26 - HSEARCH000034: Hibernate Search 5.6.0.Final
+2018-02-27 15:55:36 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Application
+2018-02-27 15:55:36 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Application
+2018-02-27 15:55:37 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Category
+2018-02-27 15:55:37 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Category
+2018-02-27 15:55:37 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Company
+2018-02-27 15:55:37 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Company
+2018-02-27 15:55:37 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyAdministratorAccount
+2018-02-27 15:55:37 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyAdministratorAccount
+2018-02-27 15:55:37 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyVendorRelationship
+2018-02-27 15:55:37 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyVendorRelationship
+2018-02-27 15:55:37 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Department
+2018-02-27 15:55:37 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Department
+2018-02-27 15:55:37 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Documents
+2018-02-27 15:55:37 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Documents
+2018-02-27 15:55:37 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: EmployeeAccount
+2018-02-27 15:55:37 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: EmployeeAccount
+2018-02-27 15:55:37 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: hibernate_sequence
+2018-02-27 15:55:37 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: hibernate_sequence
+2018-02-27 15:55:37 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Requirement
+2018-02-27 15:55:37 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Requirement
+2018-02-27 15:55:37 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Role
+2018-02-27 15:55:37 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Role
+2018-02-27 15:55:38 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: VendorReference
+2018-02-27 15:55:38 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: VendorReference
+2018-02-27 15:55:39 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2018-02-27 15:55:39 INFO  LocalContainerEntityManagerFactoryBean:379 - Initialized JPA EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 15:55:39 INFO  TransactionContext:101 - Began transaction (1) for test context [DefaultTestContext@a7cf42f testClass = TestImport, testInstance = com.beta.TestImport@fe09383, testMethod = asd@TestImport, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@18b74ea testClass = TestImport, locations = '{classpath:appContext.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@c689973]; rollback [false]
+2018-02-27 15:55:39 INFO  ScriptUtils:441 - Executing SQL script from class path resource [import.sql]
+2018-02-27 15:55:39 INFO  ScriptUtils:507 - Executed SQL script from class path resource [import.sql] in 31 ms.
+2018-02-27 15:55:40 INFO  TransactionContext:136 - Committed transaction for test context [DefaultTestContext@a7cf42f testClass = TestImport, testInstance = com.beta.TestImport@fe09383, testMethod = asd@TestImport, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@18b74ea testClass = TestImport, locations = '{classpath:appContext.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]].
+2018-02-27 15:55:40 INFO  GenericApplicationContext:984 - Closing org.springframework.context.support.GenericApplicationContext@49fc609f: startup date [Tue Feb 27 15:55:34 SGT 2018]; root of context hierarchy
+2018-02-27 15:55:40 INFO  LocalContainerEntityManagerFactoryBean:548 - Closing JPA EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 16:51:08 INFO  DefaultTestContextBootstrapper:260 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-02-27 16:51:08 INFO  DefaultTestContextBootstrapper:187 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@4566e5bd, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1ed4004b, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@ff5b51f, org.springframework.test.context.support.DirtiesContextTestExecutionListener@25bbe1b6, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5702b3b1, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@69ea3742]
+2018-02-27 16:51:08 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [appContext.xml]
+2018-02-27 16:51:08 INFO  GenericApplicationContext:583 - Refreshing org.springframework.context.support.GenericApplicationContext@49fc609f: startup date [Tue Feb 27 16:51:08 SGT 2018]; root of context hierarchy
+2018-02-27 16:51:08 INFO  MLog:212 - MLog clients using slf4j logging.
+2018-02-27 16:51:09 INFO  C3P0Registry:212 - Initializing c3p0-0.9.5.2 [built 08-December-2015 22:06:04 -0800; debug? true; trace: 10]
+2018-02-27 16:51:09 INFO  LocalContainerEntityManagerFactoryBean:349 - Building JPA container EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 16:51:09 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: VendorManagementPersistentUnit
+	...]
+2018-02-27 16:51:09 INFO  Version:37 - HHH000412: Hibernate Core {5.1.3.Final}
+2018-02-27 16:51:09 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2018-02-27 16:51:09 INFO  Environment:317 - HHH000021: Bytecode provider name : javassist
+2018-02-27 16:51:09 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-02-27 16:51:09 INFO  AbstractPoolBackedDataSource:212 - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 5000, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, contextClassLoaderSource -> caller, dataSourceName -> z8kflt9t1ni5x0ivluv2f|4d5650ae, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, extensions -> {}, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, forceSynchronousCheckins -> false, forceUseNamedDriverClass -> false, identityToken -> z8kflt9t1ni5x0ivluv2f|4d5650ae, idleConnectionTestPeriod -> 60, initialPoolSize -> 3, jdbcUrl -> jdbc:mysql://localhost:3306/vendormanagement, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 10, maxIdleTime -> 180, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 25, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 6, numHelperThreads -> 3, preferredTestQuery -> SELECT 1, privilegeSpawnedThreads -> false, properties -> {user=******, password=******}, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, testConnectionOnCheckin -> true, testConnectionOnCheckout -> true, unreturnedConnectionTimeout -> 0, userOverrides -> {}, usesTraditionalReflectiveProxies -> false ]
+2018-02-27 16:51:09 WARN  BasicResourcePool:220 - Bad pool size config, start 3 < min 6. Using 6 as start.
+2018-02-27 16:51:10 INFO  Dialect:156 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2018-02-27 16:51:10 INFO  Version:30 - HV000001: Hibernate Validator 5.4.0.Final
+2018-02-27 16:51:11 INFO  Version:26 - HSEARCH000034: Hibernate Search 5.6.0.Final
+2018-02-27 16:51:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Application
+2018-02-27 16:51:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Application
+2018-02-27 16:51:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Category
+2018-02-27 16:51:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Category
+2018-02-27 16:51:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Company
+2018-02-27 16:51:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Company
+2018-02-27 16:51:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyAdministratorAccount
+2018-02-27 16:51:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyAdministratorAccount
+2018-02-27 16:51:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyVendorRelationship
+2018-02-27 16:51:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyVendorRelationship
+2018-02-27 16:51:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Department
+2018-02-27 16:51:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Department
+2018-02-27 16:51:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Documents
+2018-02-27 16:51:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Documents
+2018-02-27 16:51:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: EmployeeAccount
+2018-02-27 16:51:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: EmployeeAccount
+2018-02-27 16:51:12 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: hibernate_sequence
+2018-02-27 16:51:12 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: hibernate_sequence
+2018-02-27 16:51:12 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Requirement
+2018-02-27 16:51:12 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Requirement
+2018-02-27 16:51:12 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Role
+2018-02-27 16:51:12 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Role
+2018-02-27 16:51:12 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: VendorReference
+2018-02-27 16:51:12 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: VendorReference
+2018-02-27 16:51:13 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2018-02-27 16:51:14 INFO  LocalContainerEntityManagerFactoryBean:379 - Initialized JPA EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 16:51:14 INFO  TransactionContext:101 - Began transaction (1) for test context [DefaultTestContext@51fc862e testClass = TestImport, testInstance = com.beta.TestImport@a7cf42f, testMethod = asd@TestImport, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@62a68bcb testClass = TestImport, locations = '{classpath:appContext.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@3610f277]; rollback [false]
+2018-02-27 16:51:14 INFO  ScriptUtils:441 - Executing SQL script from class path resource [import.sql]
+2018-02-27 16:51:14 INFO  ScriptUtils:507 - Executed SQL script from class path resource [import.sql] in 25 ms.
+2018-02-27 16:51:14 INFO  TransactionContext:136 - Committed transaction for test context [DefaultTestContext@51fc862e testClass = TestImport, testInstance = com.beta.TestImport@a7cf42f, testMethod = asd@TestImport, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@62a68bcb testClass = TestImport, locations = '{classpath:appContext.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]].
+2018-02-27 16:51:14 INFO  GenericApplicationContext:984 - Closing org.springframework.context.support.GenericApplicationContext@49fc609f: startup date [Tue Feb 27 16:51:08 SGT 2018]; root of context hierarchy
+2018-02-27 16:51:14 INFO  LocalContainerEntityManagerFactoryBean:548 - Closing JPA EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 17:05:53 INFO  DefaultTestContextBootstrapper:260 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-02-27 17:05:53 INFO  DefaultTestContextBootstrapper:187 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@4566e5bd, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1ed4004b, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@ff5b51f, org.springframework.test.context.support.DirtiesContextTestExecutionListener@25bbe1b6, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5702b3b1, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@69ea3742]
+2018-02-27 17:05:53 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [appContext.xml]
+2018-02-27 17:05:53 INFO  GenericApplicationContext:583 - Refreshing org.springframework.context.support.GenericApplicationContext@49fc609f: startup date [Tue Feb 27 17:05:53 SGT 2018]; root of context hierarchy
+2018-02-27 17:05:54 INFO  MLog:212 - MLog clients using slf4j logging.
+2018-02-27 17:05:54 INFO  C3P0Registry:212 - Initializing c3p0-0.9.5.2 [built 08-December-2015 22:06:04 -0800; debug? true; trace: 10]
+2018-02-27 17:05:54 INFO  LocalContainerEntityManagerFactoryBean:349 - Building JPA container EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 17:05:54 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: VendorManagementPersistentUnit
+	...]
+2018-02-27 17:05:54 INFO  Version:37 - HHH000412: Hibernate Core {5.1.3.Final}
+2018-02-27 17:05:54 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2018-02-27 17:05:54 INFO  Environment:317 - HHH000021: Bytecode provider name : javassist
+2018-02-27 17:05:54 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-02-27 17:05:55 INFO  AbstractPoolBackedDataSource:212 - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 5000, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, contextClassLoaderSource -> caller, dataSourceName -> z8kflt9t1niow1w1of3mwm|4d5650ae, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, extensions -> {}, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, forceSynchronousCheckins -> false, forceUseNamedDriverClass -> false, identityToken -> z8kflt9t1niow1w1of3mwm|4d5650ae, idleConnectionTestPeriod -> 60, initialPoolSize -> 3, jdbcUrl -> jdbc:mysql://localhost:3306/vendormanagement, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 10, maxIdleTime -> 180, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 25, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 6, numHelperThreads -> 3, preferredTestQuery -> SELECT 1, privilegeSpawnedThreads -> false, properties -> {user=******, password=******}, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, testConnectionOnCheckin -> true, testConnectionOnCheckout -> true, unreturnedConnectionTimeout -> 0, userOverrides -> {}, usesTraditionalReflectiveProxies -> false ]
+2018-02-27 17:05:55 WARN  BasicResourcePool:220 - Bad pool size config, start 3 < min 6. Using 6 as start.
+2018-02-27 17:05:55 INFO  Dialect:156 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2018-02-27 17:05:56 INFO  Version:30 - HV000001: Hibernate Validator 5.4.0.Final
+2018-02-27 17:05:56 INFO  Version:26 - HSEARCH000034: Hibernate Search 5.6.0.Final
+2018-02-27 17:05:56 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Application
+2018-02-27 17:05:56 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Application
+2018-02-27 17:05:56 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Category
+2018-02-27 17:05:56 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Category
+2018-02-27 17:05:56 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Company
+2018-02-27 17:05:56 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Company
+2018-02-27 17:05:56 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyAdministratorAccount
+2018-02-27 17:05:56 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyAdministratorAccount
+2018-02-27 17:05:56 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyVendorRelationship
+2018-02-27 17:05:56 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyVendorRelationship
+2018-02-27 17:05:57 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Department
+2018-02-27 17:05:57 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Department
+2018-02-27 17:05:57 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Documents
+2018-02-27 17:05:57 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Documents
+2018-02-27 17:05:57 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: EmployeeAccount
+2018-02-27 17:05:57 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: EmployeeAccount
+2018-02-27 17:05:57 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: hibernate_sequence
+2018-02-27 17:05:57 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: hibernate_sequence
+2018-02-27 17:05:57 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Requirement
+2018-02-27 17:05:57 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Requirement
+2018-02-27 17:05:57 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Role
+2018-02-27 17:05:57 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Role
+2018-02-27 17:05:57 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: VendorReference
+2018-02-27 17:05:57 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: VendorReference
+2018-02-27 17:05:59 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2018-02-27 17:05:59 INFO  LocalContainerEntityManagerFactoryBean:379 - Initialized JPA EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 17:06:00 INFO  TransactionContext:101 - Began transaction (1) for test context [DefaultTestContext@51fc862e testClass = TestImport, testInstance = com.beta.TestImport@a7cf42f, testMethod = asd@TestImport, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@62a68bcb testClass = TestImport, locations = '{classpath:appContext.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@3610f277]; rollback [false]
+2018-02-27 17:06:00 INFO  ScriptUtils:441 - Executing SQL script from class path resource [import.sql]
+2018-02-27 17:06:00 INFO  ScriptUtils:507 - Executed SQL script from class path resource [import.sql] in 31 ms.
+2018-02-27 17:06:00 INFO  TransactionContext:136 - Committed transaction for test context [DefaultTestContext@51fc862e testClass = TestImport, testInstance = com.beta.TestImport@a7cf42f, testMethod = asd@TestImport, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@62a68bcb testClass = TestImport, locations = '{classpath:appContext.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]].
+2018-02-27 17:06:00 INFO  GenericApplicationContext:984 - Closing org.springframework.context.support.GenericApplicationContext@49fc609f: startup date [Tue Feb 27 17:05:53 SGT 2018]; root of context hierarchy
+2018-02-27 17:06:00 INFO  LocalContainerEntityManagerFactoryBean:548 - Closing JPA EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 17:15:08 INFO  DefaultTestContextBootstrapper:260 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-02-27 17:15:08 INFO  DefaultTestContextBootstrapper:187 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@4566e5bd, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1ed4004b, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@ff5b51f, org.springframework.test.context.support.DirtiesContextTestExecutionListener@25bbe1b6, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5702b3b1, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@69ea3742]
+2018-02-27 17:15:08 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [appContext.xml]
+2018-02-27 17:15:08 INFO  GenericApplicationContext:583 - Refreshing org.springframework.context.support.GenericApplicationContext@49fc609f: startup date [Tue Feb 27 17:15:08 SGT 2018]; root of context hierarchy
+2018-02-27 17:15:09 INFO  MLog:212 - MLog clients using slf4j logging.
+2018-02-27 17:15:09 INFO  C3P0Registry:212 - Initializing c3p0-0.9.5.2 [built 08-December-2015 22:06:04 -0800; debug? true; trace: 10]
+2018-02-27 17:15:09 INFO  LocalContainerEntityManagerFactoryBean:349 - Building JPA container EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 17:15:09 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: VendorManagementPersistentUnit
+	...]
+2018-02-27 17:15:09 INFO  Version:37 - HHH000412: Hibernate Core {5.1.3.Final}
+2018-02-27 17:15:09 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2018-02-27 17:15:09 INFO  Environment:317 - HHH000021: Bytecode provider name : javassist
+2018-02-27 17:15:09 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-02-27 17:15:10 INFO  AbstractPoolBackedDataSource:212 - Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 5000, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, contextClassLoaderSource -> caller, dataSourceName -> 2xg0969t1nj0s6y1ywje63|4d5650ae, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, extensions -> {}, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, forceSynchronousCheckins -> false, forceUseNamedDriverClass -> false, identityToken -> 2xg0969t1nj0s6y1ywje63|4d5650ae, idleConnectionTestPeriod -> 60, initialPoolSize -> 3, jdbcUrl -> jdbc:mysql://localhost:3306/vendormanagement, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 10, maxIdleTime -> 180, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 25, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 6, numHelperThreads -> 3, preferredTestQuery -> SELECT 1, privilegeSpawnedThreads -> false, properties -> {user=******, password=******}, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, testConnectionOnCheckin -> true, testConnectionOnCheckout -> true, unreturnedConnectionTimeout -> 0, userOverrides -> {}, usesTraditionalReflectiveProxies -> false ]
+2018-02-27 17:15:10 WARN  BasicResourcePool:220 - Bad pool size config, start 3 < min 6. Using 6 as start.
+2018-02-27 17:15:10 INFO  Dialect:156 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2018-02-27 17:15:10 INFO  Version:30 - HV000001: Hibernate Validator 5.4.0.Final
+2018-02-27 17:15:11 INFO  Version:26 - HSEARCH000034: Hibernate Search 5.6.0.Final
+2018-02-27 17:15:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Application
+2018-02-27 17:15:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Application
+2018-02-27 17:15:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Category
+2018-02-27 17:15:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Category
+2018-02-27 17:15:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Company
+2018-02-27 17:15:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Company
+2018-02-27 17:15:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyAdministratorAccount
+2018-02-27 17:15:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyAdministratorAccount
+2018-02-27 17:15:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyVendorRelationship
+2018-02-27 17:15:11 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: CompanyVendorRelationship
+2018-02-27 17:15:12 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Department
+2018-02-27 17:15:12 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Department
+2018-02-27 17:15:12 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Documents
+2018-02-27 17:15:12 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Documents
+2018-02-27 17:15:12 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: EmployeeAccount
+2018-02-27 17:15:12 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: EmployeeAccount
+2018-02-27 17:15:12 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: hibernate_sequence
+2018-02-27 17:15:12 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: hibernate_sequence
+2018-02-27 17:15:12 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Requirement
+2018-02-27 17:15:12 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Requirement
+2018-02-27 17:15:12 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Role
+2018-02-27 17:15:12 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: Role
+2018-02-27 17:15:12 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: VendorReference
+2018-02-27 17:15:12 INFO  InformationExtractorJdbcDatabaseMetaDataImpl:395 - HHH000262: Table not found: VendorReference
+2018-02-27 17:15:14 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2018-02-27 17:15:14 INFO  LocalContainerEntityManagerFactoryBean:379 - Initialized JPA EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
+2018-02-27 17:15:15 INFO  TransactionContext:101 - Began transaction (1) for test context [DefaultTestContext@a7cf42f testClass = TestImport, testInstance = com.beta.TestImport@fe09383, testMethod = asd@TestImport, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@18b74ea testClass = TestImport, locations = '{classpath:appContext.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@c689973]; rollback [false]
+2018-02-27 17:15:15 INFO  ScriptUtils:441 - Executing SQL script from class path resource [import.sql]
+2018-02-27 17:15:15 INFO  ScriptUtils:507 - Executed SQL script from class path resource [import.sql] in 18 ms.
+2018-02-27 17:15:15 INFO  TransactionContext:136 - Committed transaction for test context [DefaultTestContext@a7cf42f testClass = TestImport, testInstance = com.beta.TestImport@fe09383, testMethod = asd@TestImport, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@18b74ea testClass = TestImport, locations = '{classpath:appContext.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]].
+2018-02-27 17:15:15 INFO  GenericApplicationContext:984 - Closing org.springframework.context.support.GenericApplicationContext@49fc609f: startup date [Tue Feb 27 17:15:08 SGT 2018]; root of context hierarchy
+2018-02-27 17:15:15 INFO  LocalContainerEntityManagerFactoryBean:548 - Closing JPA EntityManagerFactory for persistence unit 'VendorManagementPersistentUnit'
