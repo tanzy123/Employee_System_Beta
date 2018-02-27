@@ -8,21 +8,19 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name="Department.findByNameAndRefNo",
-                query="SELECT d FROM Department d where d.companyReferenceNumber = :companyReferenceNumber"
-                		+ " AND d.departmentName = :departmentName"),
-})
+		@NamedQuery(name = "Department.findByNameAndRefNo", query = "SELECT d FROM Department d where d.companyReferenceNumber = :companyReferenceNumber"
+				+ " AND d.departmentName = :departmentName"),
+		@NamedQuery(name = "Department.findByCompRefNo", query = "SELECT d FROM Department d where d.companyReferenceNumber = :companyReferenceNumber") })
 public class Department {
 
 	@Id
 	@GeneratedValue
 	private Long departmentId;
-	
+
 	private String departmentName;
-	
+
 	private String companyReferenceNumber;
 
-	
 	public Department() {
 		super();
 	}
@@ -60,8 +58,12 @@ public class Department {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((companyReferenceNumber == null) ? 0 : companyReferenceNumber.hashCode());
-		result = prime * result + ((departmentName == null) ? 0 : departmentName.hashCode());
+		result = prime
+				* result
+				+ ((companyReferenceNumber == null) ? 0
+						: companyReferenceNumber.hashCode());
+		result = prime * result
+				+ ((departmentName == null) ? 0 : departmentName.hashCode());
 		return result;
 	}
 
@@ -86,6 +88,5 @@ public class Department {
 			return false;
 		return true;
 	}
-	
-	
+
 }

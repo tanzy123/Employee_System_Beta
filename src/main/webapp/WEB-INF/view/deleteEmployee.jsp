@@ -15,8 +15,9 @@
 		
 
 	</form>
-	<form action="employeeManagement">
-    			<input type="submit" value="Return to employee management" />
-    			</form>
+
+	
+	<form action="BackToEmployeemanagementPage"><button name="back">Back</button></form>
+
 </body>
 </html>
