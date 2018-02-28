@@ -13,5 +13,6 @@ public interface VendorApplication {
 	public Application generateVendorApplication(Application application);
 	public void validateVendorApplication(Application application) throws VendorMgmtException;
 	public void uploadApplicationAndDocuments(Application generatedApplication, MultipartFile[] files) throws IOException;
+	public String obtainUniqueFoldername(String string, String string2);
 	 
 }

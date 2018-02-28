@@ -3,7 +3,7 @@
     <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>Seems to be a problem while login in</title>
+        <title>Update Success</title>
     </head>
     <body>
     	<h1>Your update was a success</h1>

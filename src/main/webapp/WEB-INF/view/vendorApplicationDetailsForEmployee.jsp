@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%> 
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,7 +19,16 @@
 <tr><td>Category of Application: ${companyApplication.application.category.categoryName}</td></tr>
 <tr><td>Point of Contact: ${companyApplication.application.POC}</td></tr>
 <tr><td>Application Date: ${companyApplication.application.applicationDate}</td></tr>
-<td><a href="/VendorApplication/assignVetter/${companyApplication.application.applicationRef}" >Assign Vetters</a></td></tr>
 			</table>
+<form:form action="vetApplication/${companyApplication.application.applicationRef}" method="post" modelAttribute="requirementApproval">
+<form:label path="requirements">Requirements to be sent to Vendor</form:label>
+    <form:input path="requirements" type="text" />
+    <form:select path="approvalStatus">
+    	<form:option value="APPROVE"/>
+    	<form:option value="REJECT"/>
+    </form:select>
+    <input type="submit" value="Submit"/>
+</form:form>
+
 </body>
 </html>

@@ -114,20 +114,35 @@ public class VendorApplicationImpl implements VendorApplication {
 		
 	}
 
-	private void saveDocumentsToDatabase(String applicationRef, MultipartFile[] files) throws IOException {
+	public void saveDocumentsToDatabase(String applicationRef, MultipartFile[] files) throws IOException {
 		final String workingDirectory = System.getProperty("user.dir") + "/";
 		for (MultipartFile file : files) {
 			if (!file.getOriginalFilename().isEmpty()) {
 				File tempFile = getTempFile(file, workingDirectory);
-				String folderName = "/" + applicationRef + "/" + file.getOriginalFilename();
-				saveDocumentService.uploadFile(tempFile.getAbsolutePath(), folderName);
-				createDocumentToStoreInDB(folderName, applicationRef, file.getOriginalFilename());
-				
+				String foldername = obtainUniqueFoldername(applicationRef, file.getOriginalFilename());
+				saveDocumentService.uploadFile(tempFile.getAbsolutePath(), foldername);
+				createDocumentToStoreInDropBox(foldername, applicationRef, file.getOriginalFilename());
+				tempFile.delete();
 			}
 		}
 	}
 
-	private void createDocumentToStoreInDB(String filePath, String applicationRef, String originalFileName) {
+	public String obtainUniqueFoldername(String applicationRef, String originalFilename) {
+		String originalFoldername = "/" + applicationRef + "/" + originalFilename;
+		String foldername = originalFoldername;
+		int i = 1;
+		while (saveDocumentService.checkFileExists(foldername)) {
+			int lastDotIndex = originalFoldername.lastIndexOf('.');
+			String version = String.format("(%d)", i);
+			foldername = originalFoldername.substring(0, lastDotIndex) 
+					+ version
+					+ originalFoldername.substring(lastDotIndex, originalFoldername.length());
+			i++;
+		}
+		return foldername;
+	}
+
+	public void createDocumentToStoreInDropBox(String filePath, String applicationRef, String originalFileName) {
 		Documents document = new Documents();
 		document.setApplicationRef(applicationRef);
 		document.setFilePath(filePath);
@@ -135,7 +150,7 @@ public class VendorApplicationImpl implements VendorApplication {
 		documentsService.saveOrUpdate(document);		
 	}
 
-	private File getTempFile(MultipartFile file, String workingDirectory) throws IOException {
+	public File getTempFile(MultipartFile file, String workingDirectory) throws IOException {
 		String originalFileName = file.getOriginalFilename();
 		File tempFile = new File(workingDirectory + originalFileName);
 		file.transferTo(tempFile);

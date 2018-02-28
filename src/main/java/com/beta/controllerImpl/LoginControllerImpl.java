@@ -63,12 +63,12 @@ public class LoginControllerImpl implements LoginController {
 		
 		if (loginType.equals("EMPLOYEE")) {
 			EmployeeAccount employeeAccount = new EmployeeAccount();
-			session.setAttribute("companyRefNumber", employeeAccountService.findByUserName(username).getCompanyReferenceNumber());
+			session.setAttribute("employeeRefNumber", employeeAccountService.findByUserName(username).getCompanyReferenceNumber());
 			employeeAccount.setUserName(username);
 			employeeAccount.setPassword(password);
 			try {
 				employeeAccountService.validateAccount(employeeAccount);
-				mav = new ModelAndView("employeeDashboard");
+				mav = new ModelAndView("redirect:/employeeDashboard");
 			} catch (VendorMgmtException e) {
 				mav = new ModelAndView("error");
 				mav.addObject("message", e.getMessage());

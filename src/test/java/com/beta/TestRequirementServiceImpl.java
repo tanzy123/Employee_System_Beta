@@ -9,7 +9,6 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,10 +38,10 @@ public class TestRequirementServiceImpl {
 		List<Requirement> reqList = new ArrayList<>();
 		reqList.add(r);
 		Application a = new Application();
-		a.setVettorRequirement(reqList);
+		a.setVetterRequirement(reqList);
 		a.setApplicationRef("qqqaaa");
 		dao.persist(a);
-		List<Requirement> list = service.getRequirementByUsernameAndStatus("asd", ApprovalStatus.PENDING);
+		List<Requirement> list = service.findByUsernameAndStatus("asd", ApprovalStatus.PENDING);
 		assertThat(list.size(), is(1));
 	}
 	
@@ -54,10 +53,10 @@ public class TestRequirementServiceImpl {
 		List<Requirement> reqList = new ArrayList<>();
 		reqList.add(r);
 		Application a = new Application();
-		a.setVettorRequirement(reqList);
+		a.setVetterRequirement(reqList);
 		a.setApplicationRef("qqqaaa");
 		dao.persist(a);
-		List<Requirement> list = service.getRequirementByUsernameAndStatus("a", ApprovalStatus.PENDING);
+		List<Requirement> list = service.findByUsernameAndStatus("a", ApprovalStatus.PENDING);
 		assertThat(list.size(), is(0));
 		
 		

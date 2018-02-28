@@ -8,7 +8,9 @@ public interface SaveDocumentService {
 	
 	void uploadFile(String path, String foldername);
 	
-	void readFile(String foldername, String filename);
+	void readAndDownloadFile(String foldername, String filename);
 	
 	void deleteFile(String path);
+	
+	boolean checkFileExists(String foldername);
 }

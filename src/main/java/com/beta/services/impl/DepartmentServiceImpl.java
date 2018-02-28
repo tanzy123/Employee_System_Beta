@@ -87,7 +87,7 @@ public class DepartmentServiceImpl extends BaseServiceImpl<Long, Department> imp
 		Map<String, Object> params = new HashMap<>();
 		params.put("companyReferenceNumber", companyReferenceNumber);
 		params.put("departmentName", departmentName);
-		List<Department> list = findByNamedQueryAndNamedParams("Department.findByNameAndRefNo", params);
+		List<Department> list = dao.findByNamedQueryAndNamedParams("Department.findByNameAndRefNo", params);
 		if (list.size() > 1)
 			throw new VendorMgmtException("More than one department per company found for updating");
 		else if (list.isEmpty())

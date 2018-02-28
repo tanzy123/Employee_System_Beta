@@ -1,11 +1,8 @@
 package com.beta;
 
 import static com.beta.TestConstant.SAMPLE_COMPANY;
-import static org.junit.Assert.*;
-
-
-import java.util.ArrayList;
-import java.util.List;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -22,7 +19,6 @@ import com.beta.entity.Role;
 import com.beta.exception.VendorMgmtException;
 import com.beta.services.CompanyService;
 import com.beta.services.RoleService;
-import com.beta.TestConstant.*;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -49,7 +45,7 @@ public class JPARoleServiceTest {
 	
     //create
 	@Test
-	@Rollback(value=false)
+	@Rollback()
 	public void testRoleCreation(){
 		Role role = new Role();
 		role.setRole("Associate");

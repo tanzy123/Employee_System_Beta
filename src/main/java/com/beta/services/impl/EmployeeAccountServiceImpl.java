@@ -95,7 +95,8 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 
 	public EmployeeAccount validateAccount(EmployeeAccount entity) {
 		EmployeeAccount validatedAccount = findByUserName(entity.getUserName());
-
+		if(validatedAccount.getIsValidated()==false)
+			throw new VendorMgmtException("Account has not been validated yet");
 		String password = entity.getPassword();
 		String databasePassword = validatedAccount.getPassword();
 		// validate if password is correct

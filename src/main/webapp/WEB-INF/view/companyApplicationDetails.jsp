@@ -11,7 +11,7 @@
 <tr><td>Company Reference Number: ${companyApplication.company.companyReferenceNumber}</td></tr>
 <tr><td>Company Address: ${companyApplication.company.companyAddress}</td></tr>
 <tr><td>Company Email: ${companyApplication.company.companyEmail}</td></tr>
-<tr><td>Company Contact Email: ${companyApplication.company.contactNumber}</td></tr>
+<tr><td>Company Contact Number: ${companyApplication.company.contactNumber}</td></tr>
 <tr><td>Company Turnover: ${companyApplication.company.turnover}</td></tr>
 <tr><td>Application Reference Number: ${companyApplication.application.applicationRef}</td></tr>
 <tr><td>Category of Application: ${companyApplication.application.category.categoryName}</td></tr>
