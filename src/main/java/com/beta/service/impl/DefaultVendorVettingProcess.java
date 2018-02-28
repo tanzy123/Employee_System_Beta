@@ -159,7 +159,7 @@ public class DefaultVendorVettingProcess implements VendorVettingProcess {
 		if (application.getApplicationStatus() != ApplicationStatus.VETTING) {
 			throw new VendorMgmtException("Attempting to set vetters when application status is no longer VETTING!");
 		}
-		if (application.getCompanyReferenceNumber().equals(companyReferenceNumber))
+		if (!application.getCompanyReferenceNumber().equals(companyReferenceNumber))
 			throw new VendorMgmtException("Company Reference Number doesn't match Application's Company Reference Number");
 		generateRequirements(listOfVetters, applicationRef);
 		application.setApplicationStatus(ApplicationStatus.PENDING);

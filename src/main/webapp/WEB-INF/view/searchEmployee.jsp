@@ -25,14 +25,23 @@
 				<td>UserName</td>
 			</tr>
 			<tr>
-				<td><input type="text" value="${employee.employeeId}"></td>
+			<td><input type="text" value="${employee.employeeId}"></td>
+			<td><input type="text" value="${employee.employeeEmail}"></td>
+			<td><input type="text" value="${employee.contactNumber}"></td>
+			<td><input type="text" value="${employee.role.role}"></td>
+			<td><input type="text" value="${employee.logInType}"></td>
+			<td><input type="text" value="${employee.department.departmentName}"></td>
+			<td><input type="text" value="${employee.userName}"></td>
+			</tr>
+			<%-- <tr>
+				<td>${employee.employeeId}</td>
 				<td>${employee.employeeEmail}</td>
 				<td>${employee.contactNumber}</td>
 				<td>${employee.role.role}</td>
 				<td>${employee.logInType}</td>
 				<td>${employee.department.departmentName}</td>
 				<td>${employee.userName}</td>
-			</tr>
+			</tr> --%>
 		</table>
 
 	</form>

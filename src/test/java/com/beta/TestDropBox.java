@@ -1,3 +1,4 @@
+
 package com.beta;
 
 import static org.junit.Assert.assertFalse;
@@ -51,5 +52,4 @@ public class TestDropBox {
 	public void testCheckIfFileDoesNotExist() {
 		assertFalse(service.checkFileExists("/applicationRef/Hydrangeaas.jpg"));
 	}
-
 }

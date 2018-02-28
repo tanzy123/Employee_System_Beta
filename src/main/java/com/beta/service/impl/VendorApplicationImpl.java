@@ -23,6 +23,7 @@ import com.beta.services.CategoryService;
 import com.beta.services.CompanyService;
 import com.beta.services.DocumentsService;
 
+
 @Service("VendorApplication")
 @org.springframework.transaction.annotation.Transactional(propagation = Propagation.REQUIRED, rollbackFor = VendorMgmtException.class)
 public class VendorApplicationImpl implements VendorApplication {
@@ -35,12 +36,13 @@ public class VendorApplicationImpl implements VendorApplication {
 
 	@Autowired
 	CompanyService companyService;
+
+	@Autowired
+	DocumentsService documentsService;
 	
 	@Autowired
 	SaveDocumentService saveDocumentService;
 	
-	@Autowired
-	DocumentsService documentsService;
 
 	@Override
 	public Application generateVendorApplication(Application application) {
@@ -153,4 +155,6 @@ public class VendorApplicationImpl implements VendorApplication {
 		file.transferTo(tempFile);
 		return tempFile;
 	}
+
+
 }

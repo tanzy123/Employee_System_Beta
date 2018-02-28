@@ -30,6 +30,7 @@ import com.beta.services.RequirementService;
 @Controller
 public class CompanyDashboardAndVetterAssignmentControllerImpl {
 	
+	
 	@Autowired
 	ApplicationService applicationService;
 	

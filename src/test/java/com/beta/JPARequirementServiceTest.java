@@ -199,7 +199,7 @@ public class JPARequirementServiceTest {
 		a.setVetterRequirement(reqList);
 		a.setApplicationRef("qqqaaa");
 		appServ.saveOrUpdate(a);
-		List<Requirement> list = service.findRequirementByUsernameAndStatus("asd", ApprovalStatus.WAITING);
+		List<Requirement> list = service.findByUsernameAndStatus("asd", ApprovalStatus.WAITING);
 		assertThat(list.size(), is(1));
 	}
 	
@@ -215,7 +215,7 @@ public class JPARequirementServiceTest {
 		a.setVetterRequirement(reqList);
 		a.setApplicationRef("qqqaaa");
 		appServ.saveOrUpdate(a);
-		List<Requirement> list = service.findRequirementByUsernameAndStatus("a", ApprovalStatus.WAITING);
+		List<Requirement> list = service.findByUsernameAndStatus("a", ApprovalStatus.WAITING);
 		assertThat(list.size(), is(0));
 	}
 }

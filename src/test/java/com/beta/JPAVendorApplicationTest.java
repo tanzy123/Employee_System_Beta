@@ -65,7 +65,7 @@ public class JPAVendorApplicationTest {
 	}
 	
 	@Test
-	@Rollback
+	@Rollback(value=false)
 	public void TestApplicationGenerator() throws ParseException {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // This would only work if test and object creation happen on the same time

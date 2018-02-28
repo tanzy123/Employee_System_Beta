@@ -8,7 +8,7 @@ import com.beta.entity.Requirement;
 
 public interface RequirementService extends BaseService<Long, Requirement> {
 
-	List<Requirement> findRequirementByUsernameAndStatus(final String userName, final ApprovalStatus status);
+	List<Requirement> findByUsernameAndStatus(final String userName, final ApprovalStatus status);
 
 	List<Requirement> findByApplicationRef(String applicationRef);
 

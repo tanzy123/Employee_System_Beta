@@ -48,7 +48,7 @@ public class RequirementServiceImpl extends BaseServiceImpl<Long, Requirement> i
     }
 
 	@Override
-	public List<Requirement> findRequirementByUsernameAndStatus(String userName, ApprovalStatus status) {
+	public List<Requirement> findByUsernameAndStatus(String userName, ApprovalStatus status) {
 		
 		Map<String,Object> params = new HashMap<>();
 		params.put("userName", userName);

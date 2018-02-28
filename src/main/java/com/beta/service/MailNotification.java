@@ -110,7 +110,7 @@ public class MailNotification implements NotificationService{
 		{
 			HtmlEmail email = new HtmlEmail();
 			String filename = ConfigUtil.getKey("CompanyRegistrationEmailVerification");
-			String msg1 = FileUtils.readFileToString(new File(filename));
+			String msg1 = FileUtils.readFileToString(new File(msg, filename));
 			
 			msg=msg1.replace("${CompanyRegistrationEmailVerificationResult_Message}", msg);
 			configureEmail(to, cc, subject, msg, email);
