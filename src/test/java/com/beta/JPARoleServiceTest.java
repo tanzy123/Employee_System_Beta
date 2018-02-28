@@ -1,11 +1,8 @@
 package com.beta;
 
 import static com.beta.TestConstant.SAMPLE_COMPANY;
-import static org.junit.Assert.*;
-
-
-import java.util.ArrayList;
-import java.util.List;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -13,7 +10,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +18,6 @@ import com.beta.entity.Role;
 import com.beta.exception.VendorMgmtException;
 import com.beta.services.CompanyService;
 import com.beta.services.RoleService;
-import com.beta.TestConstant.*;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)

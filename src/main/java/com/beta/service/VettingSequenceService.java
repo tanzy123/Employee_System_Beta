@@ -6,6 +6,5 @@ import com.beta.entity.Requirement;
 
 public interface VettingSequenceService {
 
-	List<Requirement> VetterSequenceGenerator(Requirement requirement);
-
+	void validateVetterSequence(List<Requirement> requirementList);
 }

@@ -16,9 +16,12 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name="Requirement.findByStatusAndUsername",
                 query="SELECT r FROM Requirement r where r.userName = :userName AND r.status = :status"),
-    
     @NamedQuery(name="Requirement.findByApplicationRefAndUsername",
     query="SELECT r FROM Requirement r where r.userName = :userName AND r.applicationRef = :applicationRef"),
+    @NamedQuery(name="Requirement.findByApplicationRef",
+    query="SELECT r FROM Requirement r where r.applicationRef = :applicationRef"),
+    @NamedQuery(name="Requirement.findByApplicationRefAndStatus",
+    query="SELECT r FROM Requirement r where r.applicationRef = :applicationRef AND r.status = :status"),
 })
 public class Requirement {
 	

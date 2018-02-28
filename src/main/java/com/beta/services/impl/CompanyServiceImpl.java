@@ -69,7 +69,7 @@ public class CompanyServiceImpl extends BaseServiceImpl<Long, Company> implement
 		Map<String, Object> params = new HashMap<>();
 		params.put("companyReferenceNumber", companyReferenceNumber);
 		params.put("companyName", companyName);
-		List<Company> list = findByNamedQueryAndNamedParams("Company.findByNameAndRefNo", params);
+		List<Company> list = dao.findByNamedQueryAndNamedParams("Company.findByNameAndRefNo", params);
 		if (list.size() > 1)
 			throw new VendorMgmtException("More than one company found");
 		else if (list.isEmpty())
@@ -82,7 +82,7 @@ public class CompanyServiceImpl extends BaseServiceImpl<Long, Company> implement
 	public Company findbyRefNo(String companyReferenceNumber) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("companyReferenceNumber", companyReferenceNumber);
-		List<Company> list = findByNamedQueryAndNamedParams("Company.findByRefNo", params);
+		List<Company> list = dao.findByNamedQueryAndNamedParams("Company.findByRefNo", params);
 		if (list.size() > 1)
 			throw new VendorMgmtException("More than one company found");
 		else if (list.isEmpty())

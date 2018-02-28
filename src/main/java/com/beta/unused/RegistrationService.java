@@ -1,8 +1,6 @@
-package com.beta.service;
+package com.beta.unused;
 
 import com.beta.entity.Company;
-import com.beta.entity.CompanyAdministratorAccount;
-import com.beta.entity.UserAccount;
 
 public interface RegistrationService {
 	

@@ -1,4 +1,4 @@
-package com.beta.service;
+package com.beta.unused;
 
 import com.beta.entity.Application;
 

@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +21,7 @@ import com.beta.entity.ApplicationStatus;
 import com.beta.entity.Company;
 import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.exception.VendorMgmtException;
-import com.beta.service.VetterAssignmentService;
+import com.beta.service.VendorVettingProcess;
 import com.beta.services.ApplicationService;
 import com.beta.services.CompanyAdminstratorAccountService;
 import com.beta.services.CompanyService;
@@ -44,7 +43,7 @@ public class CompanyControllerImpl {
 	RequirementService requirementService;
 	
 	@Autowired
-	VetterAssignmentService vetterAssignmentService;
+	VendorVettingProcess vendorVettingProcess;
 	
 	@RequestMapping(value = "/dashboardcompany", method = RequestMethod.GET)
 	public ModelAndView showDashboard(HttpSession session) {
@@ -103,7 +102,7 @@ public class CompanyControllerImpl {
     public String setVetters(@RequestBody RequirementList requirementList, HttpSession session){
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount)session.getAttribute("account");
 		try {
-		vetterAssignmentService.assignVettersByApplicationRef(account.getCompanyReferenceNumber(), requirementList.getRequirementList());
+		vendorVettingProcess.initialVettersAssignmentByApplicationRef(account.getCompanyReferenceNumber(), requirementList.getRequirementList());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return "error";

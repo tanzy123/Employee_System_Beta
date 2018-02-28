@@ -1,8 +1,9 @@
 package com.beta;
 
-import java.io.FileInputStream;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.io.IOException;
-import java.io.InputStream;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,13 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.beta.service.SaveDocumentService;
 import com.dropbox.core.DbxException;
-import com.dropbox.core.DbxRequestConfig;
-import com.dropbox.core.v2.DbxClientV2;
-import com.dropbox.core.v2.files.FileMetadata;
-import com.dropbox.core.v2.files.ListFolderResult;
-import com.dropbox.core.v2.files.Metadata;
-import com.dropbox.core.v2.users.FullAccount;
+/*
+Do not run this test all at once
 
+*/
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:appContext.xml"})
 @Transactional
@@ -34,13 +32,24 @@ public class TestDropBox {
 	}
 	
 	@Test
-	public void testUploadAndDeleteFile() throws IOException, DbxException{
-		service.uploadFile("C:\\Users\\645686\\Desktop\\Hydrangeas.jpg", "/applicationRef/Hydrangeas.jpg");
+	public void testUploadFile() throws IOException, DbxException{
+		service.uploadFile("C:\\Users\\645686\\Desktop\\Desert.jpg", "/applicationRef/Hydrangeas.jpg");
+		service.uploadFile("C:\\Users\\645686\\Desktop\\Koala.jpg", "/applicationRef/Hydrangeas.jpg");
 	}
 	
 	@Test
-	public void testReadFile() throws IOException, DbxException{
-		service.readFile("/applicationRef/Hydrangeas.jpg","dafdsfsd.txt");
+	public void testReadAndDownloadFile() throws IOException, DbxException{
+		service.readAndDownloadFile("/applicationRef/Hydrangeas.jpg","dafdsfsd.txt");
+	}
+	
+	@Test
+	public void testCheckIfFileExists() {
+		assertTrue(service.checkFileExists("/applicationRef/Hydrangeas.jpg"));
+	}
+	
+	@Test
+	public void testCheckIfFileDoesNotExist() {
+		assertFalse(service.checkFileExists("/applicationRef/Hydrangeaas.jpg"));
 	}
 
 }

@@ -2,5 +2,5 @@ package com.beta.entity;
 
 public enum ApprovalStatus {
 
-	APPROVE,REJECT,PENDING;
+	APPROVE,REJECT,WAITING,PENDING;
 }

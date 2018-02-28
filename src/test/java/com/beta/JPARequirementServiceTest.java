@@ -78,7 +78,7 @@ public class JPARequirementServiceTest {
 	req.setApplicationRef("ASD1111");
 	req.setRequirement("Must be a listed company");
 	req.setSequence(10);
-	req.setStatus(ApprovalStatus.PENDING);
+	req.setStatus(ApprovalStatus.WAITING);
 	req.setStatusUpdateDate(cal.getTime());
 	req.setUserName("Mr Lee");
 	service.saveOrUpdate(req);
@@ -98,7 +98,7 @@ public class JPARequirementServiceTest {
 	req.setApplicationRef("ASD1111");
 	req.setRequirement("Must be a listed company");
 	req.setSequence(10);
-	req.setStatus(ApprovalStatus.PENDING);
+	req.setStatus(ApprovalStatus.WAITING);
 	req.setStatusUpdateDate(cal.getTime());
 	req.setUserName("Mr Lee");
 	service.saveOrUpdate(req);
@@ -108,7 +108,7 @@ public class JPARequirementServiceTest {
 	req1.setApplicationRef("ASD1111");
 	req1.setRequirement("Must be a SMALL company");
 	req1.setSequence(10);
-	req1.setStatus(ApprovalStatus.PENDING);
+	req1.setStatus(ApprovalStatus.WAITING);
 	req1.setStatusUpdateDate(cal.getTime());
 	req1.setUserName("Mr Lee");
 	service.saveOrUpdate(req1);
@@ -131,7 +131,7 @@ public class JPARequirementServiceTest {
 	req.setApplicationRef("ASD1111");
 	req.setRequirement("Must be a listed company");
 	req.setSequence(10);
-	req.setStatus(ApprovalStatus.PENDING);
+	req.setStatus(ApprovalStatus.WAITING);
 	req.setStatusUpdateDate(cal.getTime());
 	req.setUserName("Mr Lee");
 	service.saveOrUpdate(req);
@@ -160,7 +160,7 @@ public class JPARequirementServiceTest {
 	req.setApplicationRef("ASD1111");
 	req.setRequirement("Must be a listed company");
 	req.setSequence(10);
-	req.setStatus(ApprovalStatus.PENDING);
+	req.setStatus(ApprovalStatus.WAITING);
 	req.setStatusUpdateDate(cal.getTime());
 	service.saveOrUpdate(req);
 	int finalsize = service.findAll().size();
@@ -180,7 +180,7 @@ public class JPARequirementServiceTest {
 		req.setApplicationRef("ASD1110");
 		req.setRequirement("Must be a listed company");
 		req.setSequence(10);
-		req.setStatus(ApprovalStatus.PENDING);
+		req.setStatus(ApprovalStatus.WAITING);
 		req.setStatusUpdateDate(cal.getTime());
 		req.setUserName("Mr Lee");
 		service.saveOrUpdate(req);
@@ -191,15 +191,15 @@ public class JPARequirementServiceTest {
 	public void testGetRequirementByUsernameAndStatusSuccess(){
 		
 		Requirement r = new Requirement();
-		r.setStatus(ApprovalStatus.PENDING);
+		r.setStatus(ApprovalStatus.WAITING);
 		r.setUserName("asd");
 		List<Requirement> reqList = new ArrayList<>();
 		reqList.add(r);
 		Application a = new Application();
-		a.setVettorRequirement(reqList);
+		a.setVetterRequirement(reqList);
 		a.setApplicationRef("qqqaaa");
 		appServ.saveOrUpdate(a);
-		List<Requirement> list = service.getRequirementByUsernameAndStatus("asd", ApprovalStatus.PENDING);
+		List<Requirement> list = service.findRequirementByUsernameAndStatus("asd", ApprovalStatus.WAITING);
 		assertThat(list.size(), is(1));
 	}
 	
@@ -207,15 +207,15 @@ public class JPARequirementServiceTest {
 	public void testGetRequirementByUsernameAndStatusFail(){
 		
 		Requirement r = new Requirement();
-		r.setStatus(ApprovalStatus.PENDING);
+		r.setStatus(ApprovalStatus.WAITING);
 		r.setUserName("asd");
 		List<Requirement> reqList = new ArrayList<>();
 		reqList.add(r);
 		Application a = new Application();
-		a.setVettorRequirement(reqList);
+		a.setVetterRequirement(reqList);
 		a.setApplicationRef("qqqaaa");
 		appServ.saveOrUpdate(a);
-		List<Requirement> list = service.getRequirementByUsernameAndStatus("a", ApprovalStatus.PENDING);
+		List<Requirement> list = service.findRequirementByUsernameAndStatus("a", ApprovalStatus.WAITING);
 		assertThat(list.size(), is(0));
 	}
 }

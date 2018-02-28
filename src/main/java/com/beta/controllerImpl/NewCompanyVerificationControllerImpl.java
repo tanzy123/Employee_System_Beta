@@ -21,8 +21,8 @@ import com.beta.entity.Department;
 import com.beta.entity.Role;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.CompanyValidation;
-import com.beta.service.RegistrationService;
 import com.beta.services.CompanyService;
+import com.beta.unused.RegistrationService;
 
 
 @Controller

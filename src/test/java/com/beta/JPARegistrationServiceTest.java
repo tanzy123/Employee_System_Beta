@@ -26,11 +26,11 @@ import com.beta.entity.Department;
 import com.beta.entity.Role;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.CompanyValidation;
-import com.beta.service.RegistrationAndApplication;
 import com.beta.service.VendorApplication;
 import com.beta.services.ApplicationService;
 import com.beta.services.CategoryService;
 import com.beta.services.CompanyService;
+import com.beta.unused.RegistrationAndApplication;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:appContext.xml"})
@@ -84,7 +84,7 @@ public class JPARegistrationServiceTest {
 		app.setPOC("Mr Lee");
 		app.setVendorPeriod(1L);
 		
-		String appRef=RegApp.applyVendorShip(app);
+		String appRef=RegApp.applyVendorship(app);
 		
 		Application app3=appServ.findByApplicationRefNo(appRef);
 		
@@ -116,7 +116,7 @@ public class JPARegistrationServiceTest {
 		app.setPOC("Mr Lee");
 		app.setVendorPeriod(1L);
 		
-		String appRef=RegApp.applyVendorShip(app);
+		String appRef=RegApp.applyVendorship(app);
 		
 		Application app3=appServ.findByApplicationRefNo(appRef);
 		
@@ -145,7 +145,7 @@ public class JPARegistrationServiceTest {
 		app.setPOC("Mr Lee");
 		app.setVendorPeriod(1L);
 		
-		String appRef=RegApp.applyVendorShip(app);
+		String appRef=RegApp.applyVendorship(app);
 	
 		
 	}
