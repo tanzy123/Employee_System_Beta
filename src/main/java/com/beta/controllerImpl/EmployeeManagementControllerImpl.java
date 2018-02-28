@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.beta.entity.Department;
 import com.beta.entity.EmployeeAccount;
 import com.beta.entity.Role;
+import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.services.DepartmentService;
 import com.beta.services.EmployeeAccountService;
@@ -88,7 +89,6 @@ public class EmployeeManagementControllerImpl {
 	@RequestMapping(value = "/showDeleteEmployee", method = RequestMethod.GET)
 	public ModelAndView showDeleteEmployee(HttpServletRequest request,
 			HttpServletResponse response) {
-
 		ModelAndView mav = new ModelAndView("deleteEmployee");
 		mav.addObject("employeeManagement", new EmployeeAccount());
 		return mav;
@@ -139,10 +139,18 @@ public class EmployeeManagementControllerImpl {
 		
 		try{
 		employeeAccountService.createNewAccount(employeeAccount);
-		}catch(VendorMgmtException e)
+		}catch(UserException e)
 		{
 			mav=new ModelAndView("error");
 			mav.addObject("message", e.getMessage());
+			return mav;
+		} catch (VendorMgmtException e) {
+			mav=new ModelAndView("error");
+			mav.addObject("message", "System error");
+			return mav;
+		} catch (Exception e) {
+			mav=new ModelAndView("error");
+			mav.addObject("message", "System error, please contact System administrator");
 			return mav;
 		}
 		
