@@ -80,7 +80,7 @@ public class JPARequirementServiceImplTest {
 		Requirement req = new Requirement();
 		req.setRequirement("LALALA");
 		req.setUserName("TOM");
-		req.setStatus(ApprovalStatus.PENDING);
+		req.setStatus(ApprovalStatus.WAITING);
 		req.setSequence(133);
 		req.setApplicationRef("ASD1111");
 		int size1 = service.findAll().size();
@@ -96,7 +96,7 @@ public class JPARequirementServiceImplTest {
 		Requirement req = new Requirement();
 		req.setRequirement("LALALA");
 		req.setUserName("TOM");
-		req.setStatus(ApprovalStatus.PENDING);
+		req.setStatus(ApprovalStatus.WAITING);
 		req.setSequence(133);
 		req.setApplicationRef("ASD1111");
 		
@@ -106,7 +106,7 @@ public class JPARequirementServiceImplTest {
 		Requirement req1 = new Requirement();
 		req1.setRequirement("HEHEHE");
 		req1.setUserName("TOM");
-		req1.setStatus(ApprovalStatus.PENDING);
+		req1.setStatus(ApprovalStatus.WAITING);
 		req1.setSequence(133);
 		req1.setApplicationRef("ASD1111");
 		service.saveOrUpdate(req1);
@@ -122,7 +122,7 @@ public class JPARequirementServiceImplTest {
 		Requirement req = new Requirement();
 		req.setRequirement("LALALA");
 		req.setUserName("TOM");
-		req.setStatus(ApprovalStatus.PENDING);
+		req.setStatus(ApprovalStatus.WAITING);
 		req.setSequence(133);
 		req.setApplicationRef("ASD1111");
 		service.saveOrUpdate(req);
@@ -144,7 +144,7 @@ public class JPARequirementServiceImplTest {
 		Requirement req = new Requirement();
 		req.setRequirement("LALALA");
 		req.setUserName("TOM");
-		req.setStatus(ApprovalStatus.PENDING);
+		req.setStatus(ApprovalStatus.WAITING);
 		req.setSequence(133);
 		req.setApplicationRef("ASD1112");	
 		service.saveOrUpdate(req);
@@ -161,7 +161,7 @@ public class JPARequirementServiceImplTest {
 		
 		Requirement req = new Requirement();
 		req.setRequirement("LALALA");
-		req.setStatus(ApprovalStatus.PENDING);
+		req.setStatus(ApprovalStatus.WAITING);
 		req.setSequence(133);
 		req.setApplicationRef("ASD1111");
 		service.saveOrUpdate(req);
@@ -172,15 +172,15 @@ public class JPARequirementServiceImplTest {
 	@Rollback
 	public void testGetRequirementByUsernameAndStatusSuccess(){
 		Requirement r = new Requirement();
-		r.setStatus(ApprovalStatus.PENDING);
+		r.setStatus(ApprovalStatus.WAITING);
 		r.setUserName("asd");
 		List<Requirement> reqList = new ArrayList<>();
 		reqList.add(r);
 		Application a = new Application();
-		a.setVettorRequirement(reqList);
+		a.setVetterRequirement(reqList);
 		a.setApplicationRef("qqqaaa");
 		dao.persist(a);
-		List<Requirement> list = service.getRequirementByUsernameAndStatus("asd", ApprovalStatus.PENDING);
+		List<Requirement> list = service.findByUsernameAndStatus("asd", ApprovalStatus.WAITING);
 		assertThat(list.size(), is(1));
 	}
 	
@@ -188,15 +188,15 @@ public class JPARequirementServiceImplTest {
 	@Rollback
 	public void testGetRequirementByUsernameAndStatusFail(){
 		Requirement r = new Requirement();
-		r.setStatus(ApprovalStatus.PENDING);
+		r.setStatus(ApprovalStatus.WAITING);
 		r.setUserName("asd");
 		List<Requirement> reqList = new ArrayList<>();
 		reqList.add(r);
 		Application a = new Application();
-		a.setVettorRequirement(reqList);
+		a.setVetterRequirement(reqList);
 		a.setApplicationRef("qqqaaa");
 		dao.persist(a);
-		List<Requirement> list = service.getRequirementByUsernameAndStatus("a", ApprovalStatus.PENDING);
+		List<Requirement> list = service.findByUsernameAndStatus("a", ApprovalStatus.WAITING);
 		assertThat(list.size(), is(0));
 	}
 }

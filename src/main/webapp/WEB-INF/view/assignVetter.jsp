@@ -34,27 +34,20 @@
 	<input id="saveRequirement" type="button" value="Save" />
 </body>
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						var currSeq = 2;
-						$('#addNewVetter')
-								.click(
-										function() {
-											$('#sequenceTable')
-													.append(
-															"<tr id='row"+currSeq+"'><td>"
-																	+ currSeq
-																	+ "</td><td><input id='text"+currSeq+"' type='text'/></td></tr>");
-											currSeq++;
-										});
-						$('#deleteVetter').click(function() {
-							if (currSeq > 1) {
-								currSeq--;
-								$('#row' + currSeq).remove();
-							}
-						});
-						$('#saveRequirement').click(
+	$(document).ready(
+		function() {
+			var currSeq = 2;
+			$('#addNewVetter').click(function() {
+				$('#sequenceTable').append("<tr id='row"+currSeq+"'><td>"+ currSeq+ "</td><td><input id='text"+currSeq+"' type='text'/></td></tr>");
+					currSeq++;
+				});
+			$('#deleteVetter').click(function() {
+				if (currSeq > 1) {
+					currSeq--;
+				$('#row' + currSeq).remove();
+				}
+			});
+			$('#saveRequirement').click(
 								function() {
 									var requirements = [];
 									var rows = $('#sequenceTable tbody tr');

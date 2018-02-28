@@ -19,6 +19,7 @@ import com.beta.dao.JPADAO;
 import com.beta.entity.Company;
 import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.UserAccount;
+import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.FieldCopyUtil;
 import com.beta.services.CompanyAdminstratorAccountService;
@@ -67,12 +68,12 @@ public class CompanyAdminstratorAccountServiceImpl extends BaseServiceImpl<Long,
 		String password = entity.getPassword();
 		String databasePassword = validatedAccount.getPassword();
 		if(validatedAccount.getIsValidated()==false)
-			throw new VendorMgmtException("Account has not been validated yet");
+			throw new UserException("Account has not been validated yet");
 		//validate if password is correct
 		if(BCrypt.checkpw(password, databasePassword))
 			return validatedAccount;
 		else
-			throw new VendorMgmtException("Invalid Username or Password"); 
+			throw new UserException("Invalid Username or Password"); 
 	}
 	
 	public CompanyAdministratorAccount findByUserName(String userName) {
@@ -82,13 +83,13 @@ public class CompanyAdminstratorAccountServiceImpl extends BaseServiceImpl<Long,
 		if (list.size() > 1)
 			throw new VendorMgmtException("More than one company found while validating account");
 		else if (list.isEmpty())
-			throw new VendorMgmtException("Invalid username entered while validating account");
+			throw new UserException("Invalid username entered while validating account");
 		return list.get(0);
 	}
 
 	public void validateNewAccount(UserAccount entity) {
 		if (entity.getUserName() == null || entity.getPassword() == null || entity.getCompanyReferenceNumber() == null)
-			throw new VendorMgmtException("Username/Password or company reference number not found");
+			throw new UserException("Username/Password or company reference number not found");
 		
 		Map<String, Object> params = new HashMap<>();
 		params.put("companyReferenceNumber", entity.getCompanyReferenceNumber());
@@ -96,7 +97,7 @@ public class CompanyAdminstratorAccountServiceImpl extends BaseServiceImpl<Long,
 		if (list.size() > 1)
 			throw new VendorMgmtException("More than one company found while validating account");
 		else if (list.isEmpty())
-			throw new VendorMgmtException("Invalid company entered while validating account");
+			throw new UserException("Invalid company entered while validating account");
 	}
 
 	@Override

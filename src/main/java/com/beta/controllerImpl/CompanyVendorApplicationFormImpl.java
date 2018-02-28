@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.xml.crypto.KeySelector.Purpose;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,8 +18,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.beta.entity.Application;
 import com.beta.entity.Category;
+import com.beta.entity.Company;
 import com.beta.entity.CompanyAdministratorAccount;
+import com.beta.entity.EmailPurposeType;
 import com.beta.exception.VendorMgmtException;
+import com.beta.service.MailNotification;
 import com.beta.service.VendorApplication;
 import com.beta.services.ApplicationService;
 import com.beta.services.CategoryService;
@@ -42,6 +46,9 @@ public class CompanyVendorApplicationFormImpl {
 	
 	@Autowired
 	VendorApplication vendorApplicationService;
+	
+	@Autowired
+	MailNotification mailNotification;
 	
 	@RequestMapping(value = "/vendorApplicationForm", method = RequestMethod.GET)
 	public ModelAndView getAllPendingAndVettingApplications(HttpSession session) {
@@ -82,16 +89,28 @@ public class CompanyVendorApplicationFormImpl {
 	
 	@RequestMapping(value = "/uploadDocumentsAndSubmit", method = RequestMethod.POST)
 	   public String documentsUpload(@RequestParam("file") MultipartFile[] files, 
-			   @ModelAttribute("application") Application application) throws IOException {
+			   @ModelAttribute("application") Application application) throws Exception {
 		Category category = categoryService.findByNameAndCompanyRef
 				(application.getCategory().getCategoryName(), application.getCompanyReferenceNumber());
 		application.setCategory(category);
 		Application generatedApplication = vendorApplicationService.generateVendorApplication(application);
 		vendorApplicationService.uploadApplicationAndDocuments(generatedApplication, files);
+		sendEmailNotificationToCompany(generatedApplication);
+		
 //		return to dashboard
 	      return "dashboardcompany";
 	}
 	
+	private void sendEmailNotificationToCompany(Application application) throws Exception {
+		Company company = companyService.findbyRefNo(application.getCompanyReferenceNumber());
+		String to = company.getCompanyEmail();
+		Company vendor = companyService.findbyRefNo(application.getVendorReferenceNumber());
+		String[] cc = {vendor.getCompanyEmail()};
+		String subject = "Vendor Application Request";
+		String msg = vendor.getCompanyName() + " wishes to apply as a " + application.getCategory().getCategoryName() + " vendor";
+		mailNotification.sendEmailWithPurposeCC(to, cc, subject, msg, "", EmailPurposeType.VendorRequestToCompany);
+	}
+
 	private List<String> generateListOfCategoriesOfCompany(String companyReferenceNumber) {
 		List<Category> categoryList = categoryService.findByCompanyRef(companyReferenceNumber);
 		List<String> categoryNames = new ArrayList<>();

@@ -17,6 +17,7 @@ import com.beta.dao.DepartmentDao;
 import com.beta.dao.JPADAO;
 import com.beta.entity.Company;
 import com.beta.entity.Department;
+import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.services.DepartmentService;
 
@@ -78,7 +79,7 @@ public class DepartmentServiceImpl extends BaseServiceImpl<Long, Department> imp
 		if (list.size() > 1)
 			throw new VendorMgmtException("More than one company found while validating department");
 		else if (list.isEmpty())
-			throw new VendorMgmtException("Invalid company entered while validating department");
+			throw new UserException("Invalid company entered while validating department");
 		
 	}
 
@@ -86,7 +87,7 @@ public class DepartmentServiceImpl extends BaseServiceImpl<Long, Department> imp
 		Map<String, Object> params = new HashMap<>();
 		params.put("companyReferenceNumber", companyReferenceNumber);
 		params.put("departmentName", departmentName);
-		List<Department> list = findByNamedQueryAndNamedParams("Department.findByNameAndRefNo", params);
+		List<Department> list = dao.findByNamedQueryAndNamedParams("Department.findByNameAndRefNo", params);
 		if (list.size() > 1)
 			throw new VendorMgmtException("More than one department per company found for updating");
 		else if (list.isEmpty())

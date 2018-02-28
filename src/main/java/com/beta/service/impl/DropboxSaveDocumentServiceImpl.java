@@ -1,3 +1,5 @@
+
+
 package com.beta.service.impl;
 
 import java.io.FileInputStream;
@@ -12,12 +14,12 @@ import org.springframework.transaction.annotation.Propagation;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.SaveDocumentService;
 import com.dropbox.core.DbxException;
-import com.dropbox.core.DbxHost;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.CreateFolderErrorException;
 import com.dropbox.core.v2.files.FileMetadata;
 import com.dropbox.core.v2.files.FolderMetadata;
+import com.dropbox.core.v2.files.GetMetadataErrorException;
 import com.dropbox.core.v2.files.Metadata;
 
 @Service
@@ -33,20 +35,16 @@ public class DropboxSaveDocumentServiceImpl implements SaveDocumentService {
 	@Override
 	public void createFolder(String folderName) throws DbxException {
 		
-		 try {
-			 
+		 try {		 
 	            FolderMetadata folder = client.files().createFolder(folderName);
-	            System.out.println(folder.getName());
 	        } catch (CreateFolderErrorException err) {
 	            if (err.errorValue.isPath() && err.errorValue.getPathValue().isConflict()) {
-	                System.out.println("Something already exists at the path.");
+	            	throw new VendorMgmtException("Error in creating folder as something exists in the path", err);
 	            } else {
-	                System.out.print("Some other CreateFolderErrorException occurred...");
-	                System.out.print(err.toString());
+	            	throw new VendorMgmtException("Error in creating folder", err);
 	            }
 	        } catch (Exception err) {
-	            System.out.print("Some other Exception occurred...");
-	            System.out.print(err.toString());
+	        	throw new VendorMgmtException("Error in creating folder", err);
 	        }
 	}
 
@@ -60,26 +58,26 @@ public class DropboxSaveDocumentServiceImpl implements SaveDocumentService {
 	        }
 	        catch (FileNotFoundException fne)
 	        {
-	            fne.printStackTrace();
+	        	throw new VendorMgmtException("Error in uploading file to dropbox", fne);
 	        }
 	        catch (IOException ioe)
 	        {
-	            ioe.printStackTrace();
+	        	throw new VendorMgmtException("Error in uploading file to dropbox", ioe);
 	        }
 	        catch (DbxException dbxe)
 	        {
-	            dbxe.printStackTrace();
+	        	throw new VendorMgmtException("Error in uploading file to dropbox", dbxe);
 	        }
 
 	}
 
 	@Override
-	public void readFile(String foldername, String filename) {
+	public void readAndDownloadFile(String foldername, String filename) {
 		 
 		 try
 	        {
 			 //output file for download --> storage location on local system to download file
-	            FileOutputStream downloadFile = new FileOutputStream("C:\\Users\\645686\\Desktop\\DropBox\\" + filename);
+	            FileOutputStream downloadFile = new FileOutputStream(filename);
 	            try {
 	                FileMetadata metadata = client.files().downloadBuilder(foldername).download(downloadFile);
 	                } finally
@@ -90,11 +88,11 @@ public class DropboxSaveDocumentServiceImpl implements SaveDocumentService {
 	        //exception handled
 	        catch (DbxException e)
 	        {
-	            e.printStackTrace();
+	        	throw new VendorMgmtException("Error in reading file from dropbox", e);
 	        }
 	        catch (IOException e)
 	        {
-	            e.printStackTrace();
+	        	throw new VendorMgmtException("Error in reading file from dropbox", e);
 	        }
 
 	}
@@ -107,9 +105,25 @@ public class DropboxSaveDocumentServiceImpl implements SaveDocumentService {
         }
         catch (DbxException dbxe)
         {
-            dbxe.printStackTrace();
+            throw new VendorMgmtException("Error in deleting file from dropbox", dbxe);
         }
 
+	}
+
+	@Override
+	public boolean checkFileExists(String foldername) {
+		try {
+            client.files().getMetadata(foldername);
+            return true;
+        } catch (GetMetadataErrorException e){
+            if (e.errorValue.isPath() && e.errorValue.getPathValue().isNotFound()) {
+                return false;
+            } else {
+            	throw new VendorMgmtException("Error checking if file exists", e);
+            }
+        } catch (DbxException e) {
+        	throw new VendorMgmtException("Error checking if file exists", e);
+        } 
 	}
 
 }

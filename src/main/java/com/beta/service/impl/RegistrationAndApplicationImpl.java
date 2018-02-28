@@ -8,10 +8,11 @@ import org.springframework.transaction.annotation.Propagation;
 
 import com.beta.entity.Application;
 import com.beta.entity.Company;
+import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.CompanyValidation;
-import com.beta.service.RegistrationAndApplication;
 import com.beta.service.VendorApplication;
+import com.beta.unused.RegistrationAndApplication;
 
 @Service("RegistrationAndApplication")
 @org.springframework.transaction.annotation.Transactional(propagation = Propagation.REQUIRED, rollbackFor = VendorMgmtException.class)
@@ -24,12 +25,12 @@ public class RegistrationAndApplicationImpl implements RegistrationAndApplicatio
 	VendorApplication venApp;
 	
 	@Override
-	public void registerCompany(Company company) throws VendorMgmtException {
+	public void registerCompany(Company company) throws UserException {
 		comValid.validateCommpanyApplication(company);
 	}
 	
 	@Override
-	public String applyVendorShip(Application app) throws VendorMgmtException, ParseException {
+	public String applyVendorship(Application app) throws VendorMgmtException, ParseException {
 		Application completeApplication=venApp.generateVendorApplication(app); 
 		// The above step gives the completed application with the autogenrated fields
 		

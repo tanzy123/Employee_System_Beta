@@ -16,6 +16,7 @@ import com.beta.dao.ApplicationDao;
 import com.beta.dao.JPADAO;
 import com.beta.entity.Application;
 import com.beta.entity.ApplicationStatus;
+import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.FieldCopyUtil;
 import com.beta.services.ApplicationService;

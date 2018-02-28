@@ -18,6 +18,7 @@ import com.beta.dao.EmployeeAccountDao;
 import com.beta.dao.JPADAO;
 import com.beta.entity.Company;
 import com.beta.entity.EmployeeAccount;
+import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.FieldCopyUtil;
 import com.beta.services.EmployeeAccountService;
@@ -78,7 +79,7 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 		if (list.size() > 1)
 			throw new VendorMgmtException("More than one company found while validating account");
 		else if (list.isEmpty())
-			throw new VendorMgmtException("Invalid company entered while validating account");
+			throw new UserException("Invalid company entered while validating account");
 
 	}
 
@@ -94,14 +95,15 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 
 	public EmployeeAccount validateAccount(EmployeeAccount entity) {
 		EmployeeAccount validatedAccount = findByUserName(entity.getUserName());
-
+		if(validatedAccount.getIsValidated()==false)
+			throw new VendorMgmtException("Account has not been validated yet");
 		String password = entity.getPassword();
 		String databasePassword = validatedAccount.getPassword();
 		// validate if password is correct
 		if(BCrypt.checkpw(password, databasePassword))
 			return validatedAccount;
 		else
-			throw new VendorMgmtException("Invalid Username or Password"); 
+			throw new UserException("Invalid Username or Password"); 
 	}
 
 	public EmployeeAccount findByUserName(String userName) {
@@ -111,7 +113,7 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 		if (list.size() > 1)
 			throw new VendorMgmtException("More than one company found while validating account");
 		else if (list.isEmpty())
-			throw new VendorMgmtException("Invalid username entered while validating account");
+			throw new UserException("Invalid username entered while validating account");
 		return list.get(0);
 	}
 	public List<EmployeeAccount> checkDuplicateEmployeeIdInSameCompany(String companyReferencenumber, String employeeId)
