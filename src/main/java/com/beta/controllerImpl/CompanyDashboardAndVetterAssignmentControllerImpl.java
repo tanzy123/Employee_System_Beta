@@ -28,7 +28,7 @@ import com.beta.services.CompanyService;
 import com.beta.services.RequirementService;
 
 @Controller
-public class CompanyControllerImpl {
+public class CompanyDashboardAndVetterAssignmentControllerImpl {
 	
 	@Autowired
 	ApplicationService applicationService;
@@ -104,7 +104,6 @@ public class CompanyControllerImpl {
 		try {
 		vendorVettingProcess.initialVettersAssignmentByApplicationRef(account.getCompanyReferenceNumber(), requirementList.getRequirementList());
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 			return "error";
 		}
 		return "success";

@@ -8,17 +8,16 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name="Role.findByCompanyRefNumberAndRole",
-                query="SELECT r FROM Role r WHERE r.companyReferenceNumber = :companyReferenceNumber and r.role = :role"),
-}) 
+		@NamedQuery(name = "Role.findByCompanyRefNumberAndRole", query = "SELECT r FROM Role r WHERE r.companyReferenceNumber = :companyReferenceNumber and r.role = :role"),
+		@NamedQuery(name = "Role.findByCompRefNo", query = "SELECT r FROM Role r where r.companyReferenceNumber = :companyReferenceNumber") })
 public class Role {
 
 	@Id
 	@GeneratedValue
 	private Long roleId;
-	
+
 	private String role;
-	
+
 	private String companyReferenceNumber;
 
 	public Role() {
@@ -63,7 +62,10 @@ public class Role {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((companyReferenceNumber == null) ? 0 : companyReferenceNumber.hashCode());
+		result = prime
+				* result
+				+ ((companyReferenceNumber == null) ? 0
+						: companyReferenceNumber.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		return result;
 	}
@@ -89,6 +91,5 @@ public class Role {
 			return false;
 		return true;
 	}
-	
-	
+
 }

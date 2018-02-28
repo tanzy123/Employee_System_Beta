@@ -7,7 +7,9 @@
     </head>
     <body>
     	<h1>${message}</h1>
-       <button> <a href=${header.referer}>CLICK TO RETURN</a></button>
-        
+       
+   		<button><form action="emailToken">
+		<input type="submit" value="CLICK TO VALIDATE YOUR ACCOUNT" />
+		</form></button>
     </body>
     </html>

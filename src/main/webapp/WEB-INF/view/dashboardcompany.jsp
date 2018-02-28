@@ -33,5 +33,8 @@
 	<form action="login">
 		<input type="submit" value="Log Out" />
 	</form>
+	<form action="updateCompany">
+		<input type="submit" value="Edit Company Info" />
+	</form>
 </body>
 </html>

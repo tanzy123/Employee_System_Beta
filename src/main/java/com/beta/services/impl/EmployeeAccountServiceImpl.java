@@ -115,4 +115,12 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 			throw new VendorMgmtException("Invalid username entered while validating account");
 		return list.get(0);
 	}
+	public List<EmployeeAccount> checkDuplicateEmployeeIdInSameCompany(String companyReferencenumber, String employeeId)
+	{
+		Map<String, Object> params = new HashMap<>();
+		params.put("companyReferenceNumber", companyReferencenumber);
+		params.put("employeeId", employeeId);
+		return dao.findByNamedQueryAndNamedParams("EmployeeAccount.checkEmpIdDuplicate", params);
+		
+	}
 }

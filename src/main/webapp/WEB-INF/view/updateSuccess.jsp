@@ -3,9 +3,11 @@
     <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>Seems to be a problem while login in</title>
+        <title>Update Success</title>
     </head>
     <body>
-        <a href="login">The Username/Password that you provided is not valid. Please click on this link to return to login page</a>
+    	<h1>Your update was a success</h1>
+       <button> <a href="dashboardcompany">CLICK TO RETURN TO DASHBOARD</a></button>
+        
     </body>
     </html>

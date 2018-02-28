@@ -94,4 +94,13 @@ public class DepartmentServiceImpl extends BaseServiceImpl<Long, Department> imp
 		else
 			return list.get(0);
 	}
+
+	@Override
+	public List<Department> findByCompanyRef(String companyReferenceNumber) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("companyReferenceNumber", companyReferenceNumber);
+		return dao.findByNamedQueryAndNamedParams("Department.findByCompRefNo", params);
+		
+	}
+	
 }

@@ -57,7 +57,15 @@ public class CompanyServiceImpl extends BaseServiceImpl<Long, Company> implement
 		if (company == null)
 			save(entity);
 		else
-			updateCompanyDetails(entity, company);
+		//	updateCompanyDetails(entity, company);
+			company.setCompanyAddress(entity.getCompanyAddress());
+			company.setCompanyEmail(entity.getCompanyEmail());
+			company.setCompanyName(entity.getCompanyName());
+			company.setCompanyReferenceNumber(entity.getCompanyReferenceNumber());
+			company.setCompanyWebsite(entity.getCompanyWebsite());
+			company.setContactNumber(entity.getContactNumber());
+			company.setTurnover(entity.getTurnover());
+			dao.merge(company);
 
 	}
 
