@@ -21,6 +21,8 @@ import com.beta.entity.ApprovalStatus;
 import com.beta.entity.Company;
 import com.beta.entity.EmployeeAccount;
 import com.beta.entity.Requirement;
+import com.beta.exception.ExceptionHandler;
+import com.beta.exception.UserException;
 import com.beta.service.VendorVettingProcess;
 import com.beta.services.ApplicationService;
 import com.beta.services.CompanyService;
@@ -30,6 +32,10 @@ import com.beta.services.RequirementService;
 @Controller
 public class EmployeeControllerImpl {
 
+	
+	@Autowired
+	ExceptionHandler exceptionHandler;
+	
 	@Autowired
 	EmployeeAccountService employeeAccountService;
 
@@ -88,18 +94,19 @@ public class EmployeeControllerImpl {
 			@ModelAttribute("requirementApproval") RequirementApproval requirementApproval) {	
 		String userName = session.getAttribute("username").toString();
 		Application application = applicationService.findByApplicationRefNo(applicationRef);
-		
+	//<--	
 		try {
 			vendorVettingProcess.vetVendor(userName, application, requirementApproval.getStatus(), requirementApproval.getRequirements());
-		} catch (Exception e) {
-			ModelAndView mav = new ModelAndView("error");
-			mav.addObject("message", e.getMessage());
-			return mav;
+		} 
+		catch(Exception e)
+		{
+			exceptionHandler.handleException(e);
 		}
 
 		ModelAndView mav = new ModelAndView("success");
 		return mav;
 	}
+	//-->
 
 	private CompanyApplication getVendorApplication(String applicationRef) {
 		Application application = applicationService.findByApplicationRefNo(applicationRef);
