@@ -54,15 +54,13 @@
 					<td><input type="submit" value="Submit"
 						id="submitCompanyRegistration" name="submitCompanyRegistration" />
 					</td>
-					
-					
 				</tr>
 			</table>
 		</form>
 		
 		<form action="dashboardcompany">
-		<input type="submit" value="Go Back" />
-	</form>
+			<input type="submit" value="Go Back" />
+		</form>
 	</div>
 
 </body>

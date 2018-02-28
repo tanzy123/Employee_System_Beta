@@ -30,11 +30,15 @@
 	<form action="serviceRequestFromVendor" method="get">
 		<input type="submit" value="Service Requests from Vendor" />
 	</form>
-	<form action="login">
-		<input type="submit" value="Log Out" />
-	</form>
 	<form action="updateCompany">
 		<input type="submit" value="Edit Company Info" />
 	</form>
+	<form action="updateDepartment">
+		<input type="submit" value="Edit Department Info" />
+	</form>
+	<form action="login">
+		<input type="submit" value="Log Out" />
+	</form>
+	
 </body>
 </html>
