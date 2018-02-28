@@ -6,7 +6,8 @@
         <title>Seems to be a problem while login in</title>
     </head>
     <body>
-        <a href="assignVetter">THE VETTER NOMINATED IS NOT A REGISTERED EMPLOYEE. PLEASE CLICK HERE TO RETURN</a>
+    	<h1>Your update was a success</h1>
+       <button> <a href="dashboardcompany">CLICK TO RETURN TO DASHBOARD</a></button>
         
     </body>
     </html>

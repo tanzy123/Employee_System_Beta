@@ -70,8 +70,8 @@ public class LoginControllerImpl implements LoginController {
 				employeeAccountService.validateAccount(employeeAccount);
 				mav = new ModelAndView("employeeDashboard");
 			} catch (VendorMgmtException e) {
-				mav = new ModelAndView("loginError");
-				mav.addObject("message", e);
+				mav = new ModelAndView("error");
+				mav.addObject("message", e.getMessage());
 			}
 
 		} else if (loginType.equals("COMPANY_ADMINISTRATOR")) {
@@ -85,8 +85,14 @@ public class LoginControllerImpl implements LoginController {
 				mav = new ModelAndView("redirect:/dashboardcompany");
 
 			} catch (VendorMgmtException e) {
-				mav = new ModelAndView("loginError"); // originally is error, changed to loginError for experiment
-				mav.addObject("message", e);
+				if (e.getMessage().equals("Account has not been validated yet")) {
+					mav = new ModelAndView("missingToken"); 
+					mav.addObject("message", e.getMessage());
+				}
+				else {
+				mav = new ModelAndView("error"); 
+				mav.addObject("message", e.getMessage());
+				}
 			}
 		}
 		return mav;
