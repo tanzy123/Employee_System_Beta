@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 
 import com.beta.entity.Application;
 import com.beta.entity.Company;
+import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.CompanyValidation;
 import com.beta.service.RegistrationAndApplication;
@@ -24,7 +25,7 @@ public class RegistrationAndApplicationImpl implements RegistrationAndApplicatio
 	VendorApplication venApp;
 	
 	@Override
-	public void registerCompany(Company company) throws VendorMgmtException {
+	public void registerCompany(Company company) throws UserException {
 		comValid.validateCommpanyApplication(company);
 	}
 	

@@ -83,13 +83,13 @@ public class CompanyAdminstratorAccountServiceImpl extends BaseServiceImpl<Long,
 		if (list.size() > 1)
 			throw new VendorMgmtException("More than one company found while validating account");
 		else if (list.isEmpty())
-			throw new VendorMgmtException("Invalid username entered while validating account");
+			throw new UserException("Invalid username entered while validating account");
 		return list.get(0);
 	}
 
 	public void validateNewAccount(UserAccount entity) {
 		if (entity.getUserName() == null || entity.getPassword() == null || entity.getCompanyReferenceNumber() == null)
-			throw new VendorMgmtException("Username/Password or company reference number not found");
+			throw new UserException("Username/Password or company reference number not found");
 		
 		Map<String, Object> params = new HashMap<>();
 		params.put("companyReferenceNumber", entity.getCompanyReferenceNumber());
@@ -97,7 +97,7 @@ public class CompanyAdminstratorAccountServiceImpl extends BaseServiceImpl<Long,
 		if (list.size() > 1)
 			throw new VendorMgmtException("More than one company found while validating account");
 		else if (list.isEmpty())
-			throw new VendorMgmtException("Invalid company entered while validating account");
+			throw new UserException("Invalid company entered while validating account");
 	}
 
 	@Override
