@@ -15,6 +15,7 @@ import com.beta.entity.Application;
 import com.beta.entity.ApplicationStatus;
 import com.beta.entity.Category;
 import com.beta.entity.Documents;
+import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.SaveDocumentService;
 import com.beta.service.VendorApplication;
@@ -81,7 +82,7 @@ public class VendorApplicationImpl implements VendorApplication {
 				throw new NullPointerException();
 			}
 			if (vendorRef.equals(companyRef)) {
-				throw new VendorMgmtException("VENDOR REFERENCE NUMBER CANNOT BE THE SAME AS COMPANY REFERENCE NUMBER");
+				throw new UserException("VENDOR REFERENCE NUMBER CANNOT BE THE SAME AS COMPANY REFERENCE NUMBER");
 			}
 			{
 				for (Category c : category) {
@@ -93,13 +94,13 @@ public class VendorApplicationImpl implements VendorApplication {
 					}
 				}
 				if (counter != 1) {
-					throw new VendorMgmtException("VENDOR CATEGORY DO NOT FALL INTO COMPANY'S REQUESTED CATEGORY LIST");
+					throw new UserException("VENDOR CATEGORY DO NOT FALL INTO COMPANY'S REQUESTED CATEGORY LIST");
 				}
 			}
 		} catch (
 
 		NullPointerException e) {
-			throw new VendorMgmtException("MANDATORY FIELDS ARE NOT ALL FILLED UP");
+			throw new UserException("MANDATORY FIELDS ARE NOT ALL FILLED UP");
 		}
 	}
 

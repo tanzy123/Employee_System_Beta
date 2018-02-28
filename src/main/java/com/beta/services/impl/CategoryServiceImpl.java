@@ -17,6 +17,7 @@ import com.beta.dao.CompanyDao;
 import com.beta.dao.JPADAO;
 import com.beta.entity.Category;
 import com.beta.entity.Company;
+import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.services.CategoryService;
 
@@ -82,7 +83,7 @@ public class CategoryServiceImpl extends BaseServiceImpl<Long, Category> impleme
 
 	public void validateCategory(Category entity) {
 		if (entity.getCategoryName() == null || entity.getCompanyReferenceNumber() == null)
-			throw new VendorMgmtException("Category name or company reference number not found");
+			throw new UserException("Category name or company reference number not found");
 
 		Map<String, Object> params = new HashMap<>();
 		params.put("companyReferenceNumber", entity.getCompanyReferenceNumber());
@@ -90,7 +91,7 @@ public class CategoryServiceImpl extends BaseServiceImpl<Long, Category> impleme
 		if (list.size() > 1)
 			throw new VendorMgmtException("More than one company found while validating category");
 		else if (list.isEmpty())
-			throw new VendorMgmtException("Invalid company entered while validating category");
+			throw new UserException("Invalid company entered while validating category");
 	}
 
 	@Override

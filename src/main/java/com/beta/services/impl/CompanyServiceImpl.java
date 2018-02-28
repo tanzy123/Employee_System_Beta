@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Propagation;
 import com.beta.dao.CompanyDao;
 import com.beta.dao.JPADAO;
 import com.beta.entity.Company;
+import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.FieldCopyUtil;
 import com.beta.services.CompanyService;
@@ -49,9 +50,9 @@ public class CompanyServiceImpl extends BaseServiceImpl<Long, Company> implement
 	}
 
 	@Override
-	public void saveOrUpdate(Company entity) throws VendorMgmtException {
+	public void saveOrUpdate(Company entity) throws UserException {
 		if (entity.getCompanyReferenceNumber() == null || entity.getCompanyName() == null)
-			throw new VendorMgmtException("Company reference number or company name not found!");
+			throw new UserException("Company reference number or company name not found!");
 		Company company = findbyCompanyNameAndRefNo(entity.getCompanyReferenceNumber(), entity.getCompanyName());
 
 		if (company == null)
