@@ -19,6 +19,7 @@ import com.beta.dao.JPADAO;
 import com.beta.entity.Company;
 import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.UserAccount;
+import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.FieldCopyUtil;
 import com.beta.services.CompanyAdminstratorAccountService;
@@ -67,12 +68,12 @@ public class CompanyAdminstratorAccountServiceImpl extends BaseServiceImpl<Long,
 		String password = entity.getPassword();
 		String databasePassword = validatedAccount.getPassword();
 		if(validatedAccount.getIsValidated()==false)
-			throw new VendorMgmtException("Account has not been validated yet");
+			throw new UserException("Account has not been validated yet");
 		//validate if password is correct
 		if(BCrypt.checkpw(password, databasePassword))
 			return validatedAccount;
 		else
-			throw new VendorMgmtException("Invalid Username or Password"); 
+			throw new UserException("Invalid Username or Password"); 
 	}
 	
 	public CompanyAdministratorAccount findByUserName(String userName) {

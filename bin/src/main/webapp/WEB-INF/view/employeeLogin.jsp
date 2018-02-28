@@ -8,7 +8,7 @@
 
 </head>
 <body>
-<h1>Employee Log In View</h1>
+<h1>Employee Log In View *</h1>
 
 </body>
 
@@ -30,7 +30,19 @@
 							</td>
 </h1>
 
+<h1>
+<td><button type="button" name="back2" 
+							onclick="location.href='vendorapplicationhistory'">Apply To Be A Vendor</button>
+							
+							</td>
+</h1>
 
+<h1>
+<td><button type="button" name="back2" 
+							onclick="location.href='vendorapplicationhistory'">Edit Employee Information</button>
+							
+							</td>
+</h1>
 
 
 </html>

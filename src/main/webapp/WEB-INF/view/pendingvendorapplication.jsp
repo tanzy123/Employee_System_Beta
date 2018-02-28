@@ -4,10 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>pending Vendor Applications</title>
+<title>pending Vendor Application View** </title>
 </head>
 <body>
-<h1>Pending Vendor Application View</h1>
+	<h1>pending Vendor Application View** </h1>
+
 
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
@@ -33,14 +34,12 @@ ResultSet resultSet = null;
 <html>
 <body>
 
-<h1>Retrieve data from database in jsp</h1>
 <table border="1">
 <tr>
-<td>POC</td>
-<td>applicationRef</td>
-<td>applicationStatus</td>
-<td>companyReferenceNumber</td>
-<td>Accept</td>
+<td>Company Name</td>
+<td>Category</td>
+<td>Details</td>
+<td>Approve</td>
 <td>Reject</td>
 
 </tr>
@@ -48,17 +47,15 @@ ResultSet resultSet = null;
 try{
 connection = DriverManager.getConnection(connectionUrl+database, userid, password);
 statement=connection.createStatement();
-String sql ="select * from application";
+String sql ="select * from company";
 resultSet = statement.executeQuery(sql);
 while(resultSet.next())
 {
 %>
 
 <tr>
-<td><%=resultSet.getString("POC") %></td>
-<td><%=resultSet.getString("applicationRef") %></td>
-<td><%=resultSet.getString("applicationStatus") %></td>
-<td><%=resultSet.getString("companyReferenceNumber") %></td>
+<td><%=resultSet.getString("companyName") %></td>
+
 <td><button type="submit" value="Accept">Accept</button></td>
 <td><button type="submit" value="Reject">Reject</button></td>
 </tr>

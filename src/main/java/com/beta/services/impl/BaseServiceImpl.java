@@ -55,6 +55,8 @@ public abstract class BaseServiceImpl<K, E> implements BaseService<K, E> {
 			throw new VendorMgmtException(entityClass.getName() + " - ", e);
 		}
 	}
+	
+	
 
 //	public void save(Object entity) throws VendorMgmtException {
 //		try {

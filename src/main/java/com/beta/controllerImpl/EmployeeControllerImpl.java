@@ -1,14 +1,24 @@
 package com.beta.controllerImpl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.beta.entity.Company;
+import com.beta.services.ApplicationService;
+import com.beta.services.RequirementService;
 
 @Controller
 public class EmployeeControllerImpl {
 
+	
+	@Autowired
+	ApplicationService applicationService;
+	
+	@Autowired
+	RequirementService requirementService;
+	
 	@RequestMapping(value = "/employeeRequestServiceFromAVendor")
 	public String employeeRequestServiceFromAVendor(@ModelAttribute("company") Company company) {
 
@@ -19,6 +29,13 @@ public class EmployeeControllerImpl {
 	public String employeePendingVendorApplication(@ModelAttribute("company") Company company) {
 
 		return "pendingvendorapplication";
+	}
+	
+	//applytobeavendor
+	@RequestMapping(value = "/applytobeavendor")
+	public String applytobeavendor(@ModelAttribute("company") Company company) {
+
+		return "applytobeavendor";
 	}
 	 
 	@RequestMapping(value = "/vendorapplicationhistory")
@@ -33,10 +50,13 @@ public class EmployeeControllerImpl {
 		return "applyToBeAVendor";
 	}
 	
-	@RequestMapping(value = "/employeeLogin")
-	public String employeeLogIn(@ModelAttribute("company") Company company) {
+	@RequestMapping(value = "/editEmployeeInformation")
+	public String editEmployeeInformation(@ModelAttribute("company") Company company) {
 
-		return "employeeLogin";
+		return "editemployeeinformation";
 	}
+	
+	
+
 	
 }

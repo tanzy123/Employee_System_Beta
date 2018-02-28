@@ -12,7 +12,7 @@
 	<form action="vetterManagement">
 		<input type="submit" value="Vetter Management" />
 	</form>
-	<form action="pendingApplication">
+	<form action="pendingCompanyApplication">
 		<input type="submit" value="Pending Vendor Applications" />
 	</form>
 	<form action="companyApplication">
