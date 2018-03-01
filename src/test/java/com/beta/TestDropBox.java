@@ -4,6 +4,7 @@ package com.beta;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.junit.Test;
@@ -34,13 +35,12 @@ public class TestDropBox {
 	
 	@Test
 	public void testUploadFile() throws IOException, DbxException{
-		service.uploadFile("C:\\Users\\645686\\Desktop\\Desert.jpg", "/applicationRef/Hydrangeas.jpg");
-		service.uploadFile("C:\\Users\\645686\\Desktop\\Koala.jpg", "/applicationRef/Hydrangeas.jpg");
+		service.uploadFile("C:\\Users\\645686\\Desktop\\Update.txt", "/applicationRef/Hydraangeas.txt");
 	}
 	
 	@Test
 	public void testReadAndDownloadFile() throws IOException, DbxException{
-		service.readAndDownloadFile("/applicationRef/Hydrangeas.jpg","dafdsfsd.txt");
+		service.readAndDownloadFile("/applicationRef/Hydrangeas.jpg","src/main/resources/dafdsfsd.txt");
 	}
 	
 	@Test

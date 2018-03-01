@@ -15,16 +15,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beta.controller.object.CompanyApplication;
+import com.beta.controller.object.DocumentFiles;
 import com.beta.controller.object.RequirementList;
 import com.beta.entity.Application;
 import com.beta.entity.ApplicationStatus;
 import com.beta.entity.Company;
 import com.beta.entity.CompanyAdministratorAccount;
+import com.beta.entity.Documents;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.VendorVettingProcess;
 import com.beta.services.ApplicationService;
 import com.beta.services.CompanyAdminstratorAccountService;
 import com.beta.services.CompanyService;
+import com.beta.services.DocumentsService;
 import com.beta.services.RequirementService;
 
 @Controller
@@ -45,6 +48,9 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
 	
 	@Autowired
 	VendorVettingProcess vendorVettingProcess;
+	
+	@Autowired
+	DocumentsService documentsService;
 	
 	@RequestMapping(value = "/dashboardcompany", method = RequestMethod.GET)
 	public ModelAndView showDashboard(HttpSession session) {
@@ -80,10 +86,10 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
     public ModelAndView showDetailsOfApplication(@PathVariable String applicationRef, HttpSession session){
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount)session.getAttribute("account");
 		CompanyApplication companyApplication = getCompanyApplication(account.getCompanyReferenceNumber(), applicationRef);
-		
+		List<DocumentFiles> files = getApplicationDocumentsFromDropBox(applicationRef);
         ModelAndView mav = new ModelAndView("vendorApplicationDetails");
         mav.addObject("companyApplication", companyApplication);
-     
+        mav.addObject("files", files);
         return mav;
     }
 	
@@ -129,5 +135,15 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
 			list.add(companyApplication);
 		}
 		return list;
+	}
+	
+	private List<DocumentFiles> getApplicationDocumentsFromDropBox(String applicationRef) {
+		List<Documents> documents = documentsService.findByApplicationRef(applicationRef);
+		List<DocumentFiles> documentFiles = new ArrayList<>();
+		for (Documents d: documents) {
+			String oringalFilename = d.getOriginalFileName();
+			documentFiles.add(new DocumentFiles(d.getUrl(), oringalFilename));
+		}
+		return documentFiles;
 	}
 }

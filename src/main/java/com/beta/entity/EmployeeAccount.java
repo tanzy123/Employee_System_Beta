@@ -30,11 +30,11 @@ public class EmployeeAccount extends UserAccount {
 	@Enumerated(EnumType.STRING)
 	private LogInType logInType = LogInType.EMPLOYEE;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name="roleId", referencedColumnName="roleId")
 	private Role role;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name="departmentId", referencedColumnName="departmentId")
 	private Department department;
 

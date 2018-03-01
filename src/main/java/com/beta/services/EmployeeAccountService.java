@@ -3,6 +3,7 @@ package com.beta.services;
 import java.util.List;
 
 import com.beta.entity.EmployeeAccount;
+import com.beta.exception.VendorMgmtException;
 
 public interface EmployeeAccountService extends BaseService<Long, EmployeeAccount> {
 
@@ -16,5 +17,11 @@ public interface EmployeeAccountService extends BaseService<Long, EmployeeAccoun
 	
 	List<EmployeeAccount> checkDuplicateEmployeeIdInSameCompany(String companyReferencenumber, String employeeId);
 	
+
 	public List<EmployeeAccount> findByEmpNameAndCompany(String companyReferencenumber, String employeeName);
+
+
+	
+	void saveOrUpdateByCompAdmin(EmployeeAccount entity) throws VendorMgmtException;
+
 }

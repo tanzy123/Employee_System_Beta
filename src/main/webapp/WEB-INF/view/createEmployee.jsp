@@ -24,7 +24,7 @@
 			</tr>
 			<tr>
 				<td>Employee Name</td>
-				<td><input type="text" name="contactNumber" required /></td>
+				<td><input type="text" name="employeeName" required /></td>
 			</tr>
 			<tr>
 				<td><form:label path="department">Department</form:label></td>
