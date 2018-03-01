@@ -58,8 +58,9 @@ public class VetterMgmtControllerImpl {
     }
 
 	
-	@RequestMapping(value = "/vetterDisplay/findByEmpName/{comRef}/{appRef}", method = RequestMethod.POST)
-	public ModelAndView Registration(HttpSession session,@RequestParam(value = "empName") String empName,@PathVariable String comRef,@PathVariable String appRef)
+	@RequestMapping(value = "vetterDisplay/findByEmpName", method = RequestMethod.GET)
+	public ModelAndView Registration(HttpSession session,@RequestParam(value = "empName") String empName,@RequestParam(value = "comRef") String comRef,
+			@RequestParam(value = "appRef") String appRef)
 	{
 		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
 		
@@ -72,7 +73,8 @@ public class VetterMgmtControllerImpl {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/vetterDisplay/findByEmpName/111111/addVetInfo", method= RequestMethod.GET)
+
+	@RequestMapping(value = "vetterDisplay/addVetInfo", method= RequestMethod.GET)
 	public ModelAndView addVetterInfo(HttpSession session, HttpServletRequest request)
 			
 		
@@ -80,23 +82,54 @@ public class VetterMgmtControllerImpl {
 		
 		String id = request.getParameter("id");
 		String appRef = request.getParameter("appRef");
-		Long did = Long.parseLong(id);
+		String Sequence = request.getParameter("Sequence");
+		int seq = Integer.parseInt(Sequence);
 		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
-	
-		EmployeeAccount acct = empAcctServ.find(did); // This is the PROBLEM
 		
+		List<EmployeeAccount> list = empAcctServ.findByEmpId(id);
+		
+		EmployeeAccount ea = new EmployeeAccount();
+		
+		for (EmployeeAccount e:list) {
+			ea = e;
+		}
 		
 		Requirement req = new Requirement();
-		req.setUserName(acct.getUserName());
+		req.setUserName(ea.getUserName());
 		req.setApplicationRef(appRef);
+		
+		if (seq==1) {
 		req.setStatus(ApprovalStatus.PENDING);
+		}
+		else {
+			req.setStatus(ApprovalStatus.WAITING);	
+		}
+		req.setSequence(seq);
 		
 		reqService.saveOrUpdate(req);
 		
-		//ModelAndView successMAV = new ModelAndView("redirect:/vetterDisplay/"+appRef);
-		
-		//return successMAV;
 		return displayVetters(appRef, session);
+		
+	}
+	
+	@RequestMapping(value = "vetterDisplay/deleteVetInfo", method= RequestMethod.GET)
+	public ModelAndView DeleteCompanyInfo(HttpSession session, HttpServletRequest request)
+			
+		
+	{
+		
+		String userName = request.getParameter("userName");
+		String appRef = request.getParameter("appRef");
+	
+		Requirement req=reqService.findByApplicationRefAndUser(appRef, userName);
+		
+		Long id = req.getRequirementId();
+		
+		reqService.removeVet(id);
+		
+		return displayVetters(appRef, session);
+		
+		
 		
 	}
 }
