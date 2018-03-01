@@ -16,7 +16,7 @@
 	</h1>
 	<input type="button" value="Add New Vetter" id="addNewVetter" />
 	<input type="button" value="Delete Vetter" id="deleteVetter" />
-	<table id="sequenceTable">
+	<table id="sequenceTable" class="table">
 		<thead>
 			<tr>
 				<th>Sequence Number</th>
@@ -32,7 +32,7 @@
 	</table>
 	<br />
 	<input id="saveRequirement" type="button" value="Save" />
-</body>
+	</div
 <script type="text/javascript">
 	$(document).ready(
 		function() {
