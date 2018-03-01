@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.Department;
+import com.beta.exception.UserException;
+import com.beta.exception.VendorMgmtException;
 import com.beta.services.CompanyAdminstratorAccountService;
 import com.beta.services.DepartmentService;
 
@@ -30,7 +32,9 @@ public class DepartmentUpdateImpl {
 	
 	@RequestMapping(value = "/updateDepartment", method = RequestMethod.GET)
 	public ModelAndView Registration(HttpServletRequest request,HttpServletResponse response,HttpSession session)
+	
 	{
+		try {
 		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
 		List<Department> departmentlist = deptService.findByCompanyRef(account.getCompanyReferenceNumber());
 //		List<String> deptNamelist = new ArrayList();
@@ -45,13 +49,39 @@ public class DepartmentUpdateImpl {
 		mav.addObject("size", size);
 		session.setAttribute("deps", departmentlist);
 		return mav;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "Update Department is not successful!");
+	    	
+		   return mav;
+		}
 	}
+	
+	
 	
 	@RequestMapping(value = "/storeNewDeptInfo", method= RequestMethod.POST)
 	public ModelAndView StoreNewCompanyInfo(HttpSession session,
 			@RequestParam(value = "deptName") String departmentName)
+	
 		
 	{
+		try {
 		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
 		List<String> theList = Arrays.asList(departmentName.split(","));
 		for (String s: theList) {
@@ -64,6 +94,28 @@ public class DepartmentUpdateImpl {
 		ModelAndView successMAV = new ModelAndView("redirect:updateDepartment");
 		
 		return successMAV;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "Storing department information is not successful!");
+	    	
+		   return mav;
+		}
 		
 	}
 	
@@ -72,7 +124,7 @@ public class DepartmentUpdateImpl {
 			
 		
 	{
-		
+		try {
 		String depid = request.getParameter("depid");
 		Long did = Long.parseLong(depid);
 		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
@@ -84,6 +136,28 @@ public class DepartmentUpdateImpl {
 		ModelAndView successMAV = new ModelAndView("redirect:updateDepartment");
 		
 		return successMAV;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "Delete department information is not successful!");
+	    	
+		   return mav;
+		}
 		
 	}
 	
