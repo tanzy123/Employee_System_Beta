@@ -3,6 +3,7 @@ package com.beta.controllerImpl;
 import java.util.Arrays;
 import java.util.List;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,58 +17,52 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.Department;
+import com.beta.entity.Role;
 import com.beta.services.CompanyAdminstratorAccountService;
-import com.beta.services.DepartmentService;
+import com.beta.services.RoleService;
 
 @Controller
-public class departmentUpdateImpl {
+public class RoleUpdateImpl {
 
-	@Autowired
-	DepartmentService deptService;
-	
 	@Autowired
 	CompanyAdminstratorAccountService accountService;
 	
-	@RequestMapping(value = "/updateDepartment", method = RequestMethod.GET)
+	@Autowired
+	RoleService roleService;
+	
+	@RequestMapping(value = "/updateRole", method = RequestMethod.GET)
 	public ModelAndView Registration(HttpServletRequest request,HttpServletResponse response,HttpSession session)
 	{
 		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
-		List<Department> departmentlist = deptService.findByCompanyRef(account.getCompanyReferenceNumber());
-//		List<String> deptNamelist = new ArrayList();
-//		for (Department d: departmentlist) {
-//			deptNamelist.add(d.getDepartmentName());
-//		}
-		int size = departmentlist.size();
-		ModelAndView mav = new ModelAndView("updateDepartment");
-		mav.addObject("departmentlist",departmentlist);
-		mav.addObject("comRef", account.getCompanyReferenceNumber());
-		//mav.addObject("deptNamelist", deptNamelist);
-		mav.addObject("size", size);
-		session.setAttribute("deps", departmentlist);
+		List<Role> rolelist = roleService.findByCompanyRef(account.getCompanyReferenceNumber());
+
+		ModelAndView mav = new ModelAndView("updateRole");
+		mav.addObject("rolelist",rolelist);
+		
 		return mav;
 	}
 	
-	@RequestMapping(value = "/storeNewDeptInfo", method= RequestMethod.POST)
+	@RequestMapping(value = "/storeNewRoleInfo", method= RequestMethod.POST)
 	public ModelAndView StoreNewCompanyInfo(HttpSession session,
-			@RequestParam(value = "deptName") String departmentName)
+			@RequestParam(value = "roleName") String roleName)
 		
 	{
 		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
-		List<String> theList = Arrays.asList(departmentName.split(","));
+		List<String> theList = Arrays.asList(roleName.split(","));
 		for (String s: theList) {
-		Department department = new Department();
-		department.setCompanyReferenceNumber(account.getCompanyReferenceNumber());
-		department.setDepartmentName(s);
-		deptService.saveOrUpdate(department);
+		Role role = new Role();
+		role.setCompanyReferenceNumber(account.getCompanyReferenceNumber());
+		role.setRole(s);
+		roleService.saveOrUpdate(role);
 		}
 		
-		ModelAndView successMAV = new ModelAndView("redirect:updateDepartment");
+		ModelAndView successMAV = new ModelAndView("redirect:updateRole");
 		
 		return successMAV;
 		
 	}
 	
-	@RequestMapping(value = "/deleteDeptInfo", method= RequestMethod.GET)
+	@RequestMapping(value = "/deleteRoleInfo", method= RequestMethod.GET)
 	public ModelAndView DeleteCompanyInfo(HttpSession session, HttpServletRequest request)
 			
 		
@@ -78,13 +73,12 @@ public class departmentUpdateImpl {
 		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
 	
 		
-		deptService.removeDepartment(did);
 		
+		roleService.removeRole(did);
 		
-		ModelAndView successMAV = new ModelAndView("redirect:updateDepartment");
+		ModelAndView successMAV = new ModelAndView("redirect:updateRole");
 		
 		return successMAV;
 		
 	}
-	
 }

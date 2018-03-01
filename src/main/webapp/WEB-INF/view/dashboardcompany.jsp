@@ -36,6 +36,12 @@
 	<form action="updateDepartment">
 		<input type="submit" value="Edit Department Info" />
 	</form>
+	<form action="updateRole">
+		<input type="submit" value="Edit Role Info" />
+	</form>
+	<form action="updateCat">
+		<input type="submit" value="Edit Category Info" />
+	</form>
 	<form action="login">
 		<input type="submit" value="Log Out" />
 	</form>
