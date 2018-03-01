@@ -496,24 +496,26 @@ public class EmployeeManagementControllerImpl {
 			throws NumberFormatException, Exception {
 
 		     ModelAndView mav=new ModelAndView();
-		//try {
+		try {
 
 			employeeAccountService.deleteByUserName(userName);
-//		} catch(UserException e)
-//		{
-//			mav=new ModelAndView("error");
-//
-//			mav.addObject("message", e.getMessage());
-//			return mav;
-//		} catch (VendorMgmtException e) {
-//			mav=new ModelAndView("error");
-//			mav.addObject("message", "System error");
-//			return mav;
-//		} catch (Exception e) {
-//			mav=new ModelAndView("error");
-//			mav.addObject("message", "System error, please contact System administrator");
-//			return mav;}
+		} catch(UserException e)
+		{
+			mav=new ModelAndView("error");
 
+			mav.addObject("message", e.getMessage());
+			return mav;
+		} catch (VendorMgmtException e) {
+			mav=new ModelAndView("error");
+			mav.addObject("message", "System error");
+			return mav;
+		} catch (Exception e) {
+			mav=new ModelAndView("error");
+			mav.addObject("message", "System error, please contact System administrator");
+			return mav;
+		}
+
+		mav.addObject("message", "employee deleted successfully!");
 		return mav;
 	}
 

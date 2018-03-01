@@ -17,7 +17,7 @@
 		Please key in the Employee UserName to delete <input type="text" name="userName" required />
 		<input type="submit" value="delete" id="delete" name="delete" class="btn btn-danger">
 		
-
+        <div>${message}</div>
 	</form>
 
 	
