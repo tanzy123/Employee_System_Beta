@@ -11,6 +11,8 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
+	@NamedQuery(name="EmployeeAccount.findByEmpId",
+            query="SELECT e FROM EmployeeAccount e WHERE e.employeeId = :employeeId"),
     @NamedQuery(name="EmployeeAccount.findByUsername",
                 query="SELECT e FROM EmployeeAccount e WHERE e.userName = :userName"),
     @NamedQuery(name="EmployeeAccount.checkEmpIdDuplicate",

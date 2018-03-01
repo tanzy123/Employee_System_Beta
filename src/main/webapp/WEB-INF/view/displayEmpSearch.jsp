@@ -21,6 +21,7 @@
 			<tr>
 			<td>${empAccount.employeeName}</td>
 			<td>${empAccount.employeeId}</td>
+			<td>Sequence<input id="Sequence" name="Sequence" type="text"/></td>
 			<td>
 			<button><a href="javascript:addVet('${empAccount.employeeId}', '${appRef}')">add as vetter</a></button>
 			</td>
@@ -38,7 +39,7 @@
   <script type="text/javascript">
   
   function addVet(id,appRef){
-	   window.location = 'addVetInfo?appRef='+appRef+'&id='+id;
+	   window.location = 'addVetInfo?appRef='+appRef+'&id='+id+'&Sequence='+document.getElementById('Sequence').value;
   }
    
    </script>
