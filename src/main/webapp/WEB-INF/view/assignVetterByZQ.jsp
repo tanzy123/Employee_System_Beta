@@ -19,10 +19,10 @@
 		
 		<c:forEach var="vetter" items="${vetterList}">
 			<tr>
-			<td>${vetter.employeeName}</td>
-			<td>${vetter.employeeId}</td>
+			<td>Name :  ${vetter.employeeName}</td>
+			<td>Id   :  ${vetter.employeeId}</td>
 			<td>
-            <button><a href="javascript:deleteDep(${roles.roleId})">Delete</a></button>
+            <button><a href="javascript:deleteVet('${vetter.userName}','${appRef}')">Delete</a></button>
             </td>
 			</tr>
 		</c:forEach>
@@ -30,7 +30,7 @@
 		
 		
 	</table>
-	<form action="findByEmpName/${comRef}/${appRef}" method="post">
+	<form action="findByEmpName" method="get">
 	<tr>
 		<td><input type="submit" value="Submit"
 			id="submitCompanyRegistration" name="submitCompanyRegistration" />
@@ -40,13 +40,18 @@
 		<tbody>
 			<tr id='row1'>
 				<td>SEARCH BY EMPLOYEE NAME TO ADD</td>
-				<td><input id="empName" name="empName"  type="text" /></td>
+				<td>Employee Name<input id="empName" name="empName"  type="text" /></td>
+				<td>Company Reference<input id="empName" name="comRef"  type="text" value ="${comRef}" /></td>
+				<td>Application Reference<input id="empName" name="appRef"  type="text" value ="${appRef}" /></td>
 			</tr>
 		</tbody>
 	</form>
 </body>
 
 <script type="text/javascript">
+function deleteVet(userName,appRef){
+	   window.location = 'deleteVetInfo?userName='+userName+'&appRef='+appRef;
+}
 	
 </script>
 </html>

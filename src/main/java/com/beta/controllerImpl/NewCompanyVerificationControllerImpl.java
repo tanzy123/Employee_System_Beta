@@ -19,6 +19,7 @@ import com.beta.entity.Category;
 import com.beta.entity.Company;
 import com.beta.entity.Department;
 import com.beta.entity.Role;
+import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.CompanyValidation;
 import com.beta.services.CompanyService;
@@ -41,9 +42,32 @@ public class NewCompanyVerificationControllerImpl implements NewCompanyVerificat
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public ModelAndView Registration(HttpServletRequest request,HttpServletResponse response)
 	{
+		try {
 		ModelAndView mav = new ModelAndView("registration");
 		mav.addObject("registration", new Company());
 		return mav;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "Registration view could not be displayed");
+	    	
+		   return mav;
+		}
 	}
 	@RequestMapping(value = "/storeRegistration", method= RequestMethod.POST)
 	public ModelAndView StoreRegistration(
@@ -111,6 +135,21 @@ public class NewCompanyVerificationControllerImpl implements NewCompanyVerificat
 			mav.addObject("message", e.getMessage());
 			return mav;
 		}
+	
+		catch(UserException e)
+		{
+        	 mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	 mav = new ModelAndView("error");
+	    	mav.addObject("message", "Storing registration is not successful");
+	    	
+		   return mav;
+		}
 		companyService.saveOrUpdate(company);
 		registrationService.registerCompanyAccount(company, userName, password);
 		registrationService.sendVerificationEmail(company, userName);
@@ -133,6 +172,7 @@ public class NewCompanyVerificationControllerImpl implements NewCompanyVerificat
 			@RequestParam(value = "token") String token,
 			@RequestParam(value = "username") String username) 
 	{
+		
 		ModelAndView mav=null;
 		if(registrationService.tokenComparison(token, username))
 		{

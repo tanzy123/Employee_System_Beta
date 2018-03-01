@@ -20,7 +20,7 @@ public interface EmployeeAccountService extends BaseService<Long, EmployeeAccoun
 
 	public List<EmployeeAccount> findByEmpNameAndCompany(String companyReferencenumber, String employeeName);
 
-
+	public List<EmployeeAccount> findByEmpId(String employeeId);
 	
 	void saveOrUpdateByCompAdmin(EmployeeAccount entity) throws VendorMgmtException;
 

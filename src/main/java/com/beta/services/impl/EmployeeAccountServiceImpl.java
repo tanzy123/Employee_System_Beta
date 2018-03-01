@@ -9,6 +9,7 @@ import javax.annotation.PreDestroy;
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -18,6 +19,7 @@ import com.beta.dao.EmployeeAccountDao;
 import com.beta.dao.JPADAO;
 import com.beta.entity.Company;
 import com.beta.entity.EmployeeAccount;
+import com.beta.entity.UserAccount;
 import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.FieldCopyUtil;
@@ -57,8 +59,12 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 	
 	@Override
 	public void saveOrUpdateByCompAdmin(EmployeeAccount entity) throws VendorMgmtException {
-		EmployeeAccount validatedAccount = findByUserName(entity.getUserName());
-		updateAccountDetails(entity, validatedAccount);
+		
+	
+			EmployeeAccount validatedAccount = findByUserName(entity.getUserName());
+			updateAccountDetails(entity, validatedAccount);
+			
+		
 
 	}
 
@@ -88,6 +94,8 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 		else if (list.isEmpty())
 			throw new UserException("Invalid company entered while validating account");
 
+	
+
 	}
 
 	@Override
@@ -111,18 +119,24 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 			return validatedAccount;
 		else
 			throw new UserException("Invalid Username or Password"); 
+		
 	}
 
 	public EmployeeAccount findByUserName(String userName) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("userName", userName);
 		List<EmployeeAccount> list = dao.findByNamedQueryAndNamedParams("EmployeeAccount.findByUsername", params);
+		System.out.println(list);
 		if (list.size() > 1)
 			throw new VendorMgmtException("More than one company found while validating account");
 		else if (list.isEmpty())
 			throw new UserException("Invalid username entered while validating account");
 		return list.get(0);
 	}
+	
+
+	
+	
 	public List<EmployeeAccount> checkDuplicateEmployeeIdInSameCompany(String companyReferencenumber, String employeeId)
 	{
 		Map<String, Object> params = new HashMap<>();
@@ -140,6 +154,18 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 		params.put("companyReferenceNumber", companyReferencenumber);
 		params.put("employeeName", employeeName);
 		return dao.findByNamedQueryAndNamedParams("EmployeeAccount.findByEmpNameAndCompanyRef", params);
+		
+	}
+
+	@Override
+	public List<EmployeeAccount> findByEmpId(String employeeId) {
+		// TODO Auto-generated method stub
+		
+		Map<String, Object> params = new HashMap<>();
+		
+		params.put("employeeId", employeeId);
+		return dao.findByNamedQueryAndNamedParams("EmployeeAccount.findByEmpId", params);
+		
 		
 	}
 	

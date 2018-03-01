@@ -26,7 +26,7 @@ String roleName  = account.getRole().getRole();
 		<table>
 			<tr>
 				<td><form:label path="userName">Employee UserName</form:label></td>
-				<td><form:input path="userName"/></td>
+				<td><form:input path="userName" readonly="true"/></td>
 
 			</tr>
 			<tr>
@@ -43,24 +43,26 @@ String roleName  = account.getRole().getRole();
 			</tr> --%>
 			<tr>
 				<td><form:label path="role">Role</form:label></td>
-				<%-- <td><input type="text" value="<%= roleName %>"></input></td> --%>
 				<%-- <td><input type="text" value="${employee.role.role}"></input></td> --%> 
 				<td><select name="role">
+				<option value="${employee.role.role}" selected>${employee.role.role}</option>
 						<c:forEach var="role" items="${roleNames}">
-						<option>${role}
-							<%-- <option<c:if test="${role == employee.role.role}">selected</c:if>>${role} --%>
-							
-							</option>
+						<%-- <option>${role} --%>
+							<c:if test="${role !=employee.role.role}">
+							<option value="${role}">${role}</option>
+							 </c:if>
 						</c:forEach>
 				</select></td>
 			</tr>
-			<tr>
+				<tr>
 				<td><form:label path="department">Department</form:label></td>
-					<td><select name="department">
-						<c:forEach var="department" items="${departmentNames}">
-						<option>${department}
-							<%-- <option<c:if test="${department == employee.department.departmentName}">selected</c:if>>${department} --%>
-							</option>
+				<td><select name="department">
+				<option value="${employee.department.departmentName}" selected>${employee.department.departmentName}</option>
+						<c:forEach var="department" items="${roleNames}">
+						<%-- <option>${role} --%>
+							<c:if test="${department !=employee.department.departmentName}">
+							<option value="${department}">${department}</option>
+							 </c:if>
 						</c:forEach>
 				</select></td>
 			</tr>
@@ -69,7 +71,7 @@ String roleName  = account.getRole().getRole();
 			</form:form>
 </body>
 </html>			
-			
+	<form action="BackToEmployeemanagementPage"><button name="back">Back</button></form>		
 			
 			
 			

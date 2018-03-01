@@ -6,12 +6,14 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beta.controller.object.CompanyApplication;
@@ -21,6 +23,7 @@ import com.beta.entity.Application;
 import com.beta.entity.ApplicationStatus;
 import com.beta.entity.Company;
 import com.beta.entity.CompanyAdministratorAccount;
+import com.beta.exception.UserException;
 import com.beta.entity.Documents;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.VendorVettingProcess;
@@ -54,38 +57,107 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
 	
 	@RequestMapping(value = "/dashboardcompany", method = RequestMethod.GET)
 	public ModelAndView showDashboard(HttpSession session) {
+		
+		try {
 		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
 		session.setAttribute("account", account);
 		
 		ModelAndView mav = new ModelAndView("dashboardcompany");
 		mav.addObject("username", session.getAttribute("username").toString());
 		return mav;
+		} catch (VendorMgmtException e)
+		{
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+			return mav;
+		}
+		catch (UserException e)
+		{
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+			return mav;
+		}
+		catch (Exception e)
+		{
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", "Company page could not be displayed");
+			return mav;
+		}
 	}
 
 	@RequestMapping(value = "/vetterManagement", method = RequestMethod.GET)  
     public ModelAndView showVetters(HttpSession session){
+		try {
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount)session.getAttribute("account");
-		
         List<CompanyApplication> companyApplicationlist = getListOfApplicationsToBeVetted(account.getCompanyReferenceNumber());
         ModelAndView mav = new ModelAndView("vettermanagement");
         mav.addObject("companyApplicationlist", companyApplicationlist);
      
         return mav;
+		} catch (VendorMgmtException e)
+		{
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+			return mav;
+			
+		}
+		catch (UserException e)
+		{
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+			return mav;
+			
+		}
+		catch (Exception e)
+		{
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", "Vetter list could not be display.");
+			return mav;
+			
+		}
+		
     }
 	
 	@RequestMapping(value = "/pendingApplication", method = RequestMethod.GET)  
     public ModelAndView getApplicationsToBeVetted(HttpSession session){
+		try {
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount)session.getAttribute("account");
-		
         List<CompanyApplication> companyApplicationlist = getListOfApplicationsToBeVetted(account.getCompanyReferenceNumber());
         ModelAndView mav = new ModelAndView("vettermanagement");
         mav.addObject("companyApplicationlist", companyApplicationlist);
      
         return mav;
+        
+		} catch(VendorMgmtException e)
+		
+		{
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+			return mav;
+			
+		}
+        catch(UserException e)
+		
+		{
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+			return mav;
+			
+		}
+		
+		catch (Exception e)
+		{
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", "Pending application page could not be displayed.");
+			return mav;
+			
+		}
     }
 	
 	@RequestMapping(value = "/vendorApplication/{applicationRef}", method = RequestMethod.GET)  
     public ModelAndView showDetailsOfApplication(@PathVariable String applicationRef, HttpSession session){
+		
+		try {
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount)session.getAttribute("account");
 		CompanyApplication companyApplication = getCompanyApplication(account.getCompanyReferenceNumber(), applicationRef);
 		List<DocumentFiles> files = getApplicationDocumentsFromDropBox(applicationRef);
@@ -93,10 +165,34 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
         mav.addObject("companyApplication", companyApplication);
         mav.addObject("files", files);
         return mav;
-    }
+    } catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "Vetter applications could not be displayed");
+	    	
+		   return mav;
+		}
+	}
 	
 	@RequestMapping(value = "/assignVetter/{applicationRef}", method = RequestMethod.GET)  
     public ModelAndView assignVetters(@PathVariable String applicationRef, HttpSession session){
+		try
+		{
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount)session.getAttribute("account");
 		CompanyApplication companyApplication = getCompanyApplication(account.getCompanyReferenceNumber(), applicationRef);
 		
@@ -104,6 +200,30 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
         mav.addObject("companyApplication", companyApplication);
      
         return mav;
+		}
+		
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "Assign vetter view could not be displayed");
+	    	
+		   return mav;
+		}
+		
     }
 	
 	@RequestMapping(value = "/setVetters", method = RequestMethod.POST)  
@@ -139,6 +259,7 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
 		return list;
 	}
 	
+
 	private List<DocumentFiles> getApplicationDocumentsFromDropBox(String applicationRef) {
 		List<Documents> documents = documentsService.findByApplicationRef(applicationRef);
 		List<DocumentFiles> documentFiles = new ArrayList<>();
