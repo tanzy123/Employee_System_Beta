@@ -43,7 +43,7 @@
 		</table>
 		<br /> <input id="saveRequirement" type="button"
 			class="btn btn-success" value="Save" /> <br>
-		<form action="dashboardcompany">
+		<form action="/VendorApplication/vetterManagement">
 			<input class="btn btn-default" type="submit" value="Go Back" />
 		</form>
 		<h2>Search for Employee by Name</h2>

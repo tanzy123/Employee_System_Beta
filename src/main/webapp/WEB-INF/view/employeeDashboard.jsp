@@ -11,7 +11,13 @@
 
 </head>
 <body>
-	<h1>Employee Log In View**</h1>
+<div class="container">
+	<h1>
+	Welcome!
+		<%= request.getSession().getAttribute("employeeName")%>
+    	<%= request.getSession().getAttribute("employeeRefNumber")%>
+	
+	</h1>
 
 
 <form action="pendingvendorapplication">
@@ -21,14 +27,7 @@
 			<form action="login">
 				<input class="btn btn-default btn-lg btn-block" type="submit" value="Log Out" />
 			</form>
-=======
 	
-	<h1>
-	Welcome!
-		<%= request.getSession().getAttribute("employeeName")%>
-    	<%= request.getSession().getAttribute("employeeRefNumber")%>
-	
-	</h1>
-
+</div>
 </body>
 </html>
