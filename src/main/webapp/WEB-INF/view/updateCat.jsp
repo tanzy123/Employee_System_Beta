@@ -5,16 +5,16 @@
     <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>Seems to be a problem while login in</title>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <title>Edit Category</title>
     </head>
-    <%@ page import="com.beta.entity.Category, java.util.*" %>
    
     <body>
-    
-    
-	<table>
-	<tr>list of category in your company</th>
-	</tr>
+    <div class="container">
+    <h1>List of Categories in Your Company</h1>
+	<table class="table">
 	<tr>
 		<c:forEach var="cat" items="${catlist}">
 			<tr>
@@ -27,26 +27,18 @@
 	</tr>
 	</table>
 	
-	<form action="storeNewCatInfo" method="post">
-	<tr>
-		<td><input type="submit" value="Submit"
+	<form action="storeNewCatInfo" method="post">		
+				<p>Add new category(s) here, separate each category by comma, (eg. Category1,Category2,etc.)</p>
+				<input id="catName" name="catName"  type="text" />
+				<input type="submit" class="btn btn-success" value="Submit"
 			id="submitCompanyRegistration" name="submitCompanyRegistration" />
-		</td>
-	</tr>
-	
-	
-	
-		<tbody>
-			<tr id='row1'>
-				<td>ADD NEW Category HERE, SEPARATE EACH ENTRY USING A COMMA</td>
-				<td><input id="catName" name="catName"  type="text" /></td>
-			</tr>
-		</tbody>
+			
 	</form>
 		<form action="dashboardcompany">
 			
-   			 <input type="submit" value="Go Back" />
+   			 <input class="btn btn-default" type="submit" value="Go Back" />
     	</form>
+    	</div>
     </body>
   <script type="text/javascript">
    function deleteDep(depId){

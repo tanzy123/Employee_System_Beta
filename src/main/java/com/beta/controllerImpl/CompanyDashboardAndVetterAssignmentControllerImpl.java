@@ -56,7 +56,9 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
 	public ModelAndView showDashboard(HttpSession session) {
 		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
 		session.setAttribute("account", account);
+		
 		ModelAndView mav = new ModelAndView("dashboardcompany");
+		mav.addObject("username", session.getAttribute("username").toString());
 		return mav;
 	}
 

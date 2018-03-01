@@ -5,22 +5,15 @@
     <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>Seems to be a problem while login in</title>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <title>Edit Department</title>
     </head>
-    <%@ page import="com.beta.entity.Department, java.util.*" %>
-    <%
-    List<Department> deps = (List<Department>)session.getAttribute("deps");
-    	for(Department dep : deps){
-    		System.out.println(dep.getDepartmentName());
-    	}
-    %>
     <body>
-    
-    
-	<table>
-	<tr>
-		<th>List of departments in your company</th>
-	</tr>
+    <div class="container">
+    <h1>List of Departments in Your Company</h1>
+	<table class="table">
 	<tr>
 		<c:forEach var="dep" items="${departmentlist}">
 			<tr>
@@ -34,25 +27,15 @@
 	</table>
 	
 	<form action="storeNewDeptInfo" method="post">
-	<tr>
-		<td><input type="submit" value="Submit"
-			id="submitCompanyRegistration" name="submitCompanyRegistration" />
-		</td>
-	</tr>
-	
-	
-	
-		<tbody>
-			<tr id='row1'>
-				<td>ADD NEW DEPARTMENT HERE, SEPARATE EACH ENTRY USING A COMMA</td>
-				<td><input id="deptName" name="deptName"  type="text" /></td>
-			</tr>
-		</tbody>
+	<p>Add new department(s) here, separate each category by comma, (eg. Department1,Department2,etc.)</p>
+	<input id="deptName" name="deptName"  type="text" />
+	<input type="submit" value="Submit" class="btn btn-success"
+			id="submitCompanyRegistration" name="submitCompanyRegistration" />			
 	</form>
-		<form action="dashboardcompany">
-			
-   			 <input type="submit" value="Go Back" />
+		<form action="dashboardcompany">		
+   			 <input type="submit" class="btn btn-default" value="Go Back" />
     	</form>
+    	</div>
     </body>
   <script type="text/javascript">
    function deleteDep(depId){

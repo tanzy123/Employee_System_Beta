@@ -44,9 +44,8 @@ public class LoginControllerImpl implements LoginController {
 	
 	@Override
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView showLogin(HttpServletRequest request,
-			HttpServletResponse response) {
-
+	public ModelAndView showLogin(HttpSession session) {
+		session.invalidate();	
 		ModelAndView mav = new ModelAndView("login");
 		mav.addObject("login", new UserAccount());
 		return mav;

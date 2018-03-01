@@ -4,14 +4,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <title>Registration</title>
 </head>
 
 <body>
+	
+	<div class="container">
 	<h1>Company Infomation Update</h1>
-	<div class="companyRegistration" style="float: left;">
 		<form action="storeNewCompanyInfo" method="post">
-			<table>
+			<table class="table">
 				<tr>
 					<td>Company Reference Number</td>
 					<td><input type="text" name="companyReferenceNumber" required value="${company.companyReferenceNumber}" /></td>
@@ -51,7 +55,7 @@
 						required /></td>
 				</tr>
 				<tr>
-					<td><input type="submit" value="Submit"
+					<td><input type="submit" class="btn btn-success" value="Submit"
 						id="submitCompanyRegistration" name="submitCompanyRegistration" />
 					</td>
 				</tr>
@@ -59,7 +63,7 @@
 		</form>
 		
 		<form action="dashboardcompany">
-			<input type="submit" value="Go Back" />
+			<input type="submit" class="btn btn-default" value="Go Back" />
 		</form>
 	</div>
 
