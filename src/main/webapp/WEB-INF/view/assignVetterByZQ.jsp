@@ -27,15 +27,10 @@
 			</tr>
 		</c:forEach>
 		
-		
-		
 	</table>
 	<form action="findByEmpName" method="get">
-	<tr>
-		<td><input type="submit" value="Submit"
+	<input type="submit" value="Submit"
 			id="submitCompanyRegistration" name="submitCompanyRegistration" />
-		</td>
-	</tr>
 	
 		<tbody>
 			<tr id='row1'>

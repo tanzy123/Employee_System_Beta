@@ -6,14 +6,13 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beta.controller.object.CompanyApplication;
@@ -23,14 +22,16 @@ import com.beta.entity.Application;
 import com.beta.entity.ApplicationStatus;
 import com.beta.entity.Company;
 import com.beta.entity.CompanyAdministratorAccount;
-import com.beta.exception.UserException;
 import com.beta.entity.Documents;
+import com.beta.entity.EmployeeAccount;
+import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.VendorVettingProcess;
 import com.beta.services.ApplicationService;
 import com.beta.services.CompanyAdminstratorAccountService;
 import com.beta.services.CompanyService;
 import com.beta.services.DocumentsService;
+import com.beta.services.EmployeeAccountService;
 import com.beta.services.RequirementService;
 
 @Controller
@@ -42,6 +43,9 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
 	
 	@Autowired
 	CompanyService companyService;
+	
+	@Autowired
+	EmployeeAccountService employeeAccountService;
 	
 	@Autowired
 	CompanyAdminstratorAccountService accountService;
@@ -222,9 +226,40 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
 	    	mav.addObject("message", "Assign vetter view could not be displayed");
 	    	
 		   return mav;
-		}
-		
+		}		
     }
+	
+	@RequestMapping(value = "assignVetter/findByEmpName", method = RequestMethod.GET)
+	public ModelAndView Registration(HttpSession session, @RequestParam(value = "empName") String empName) {
+		try {
+			CompanyAdministratorAccount account = accountService
+					.findByUserName(session.getAttribute("username").toString());
+
+			List<EmployeeAccount> empList = employeeAccountService.findByEmpNameAndCompany(account.getCompanyReferenceNumber(), empName);
+
+			ModelAndView mav = new ModelAndView("assignVetter");
+			mav.addObject("empList", empList);
+			return mav;
+		}
+
+		catch (VendorMgmtException e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+
+			return mav;
+		} catch (UserException e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+
+			return mav;
+		} catch (Exception e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", "Registration could not be carried out.");
+
+			return mav;
+		}
+
+	}
 	
 	@RequestMapping(value = "/setVetters", method = RequestMethod.POST)  
 	@ResponseBody

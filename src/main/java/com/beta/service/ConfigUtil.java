@@ -14,7 +14,7 @@ public class ConfigUtil {
 	
 	static{
 		try {
-			FileInputStream fis = new FileInputStream("c:\\Leave Management Project\\Employee_System_Beta\\config.properties");
+			FileInputStream fis = new FileInputStream("C:\\Users\\645686\\Desktop\\personal workspace\\VendorApplication\\config.properties");
 			props.load(fis );
 			fis.close();
 		} catch (FileNotFoundException e) {

@@ -79,40 +79,38 @@ public class VetterMgmtControllerImpl {
 
 	}
 
-	@RequestMapping(value = "vetterDisplay/findByEmpName", method = RequestMethod.GET)
-	public ModelAndView Registration(HttpSession session, @RequestParam(value = "empName") String empName,
-			@RequestParam(value = "comRef") String comRef, @RequestParam(value = "appRef") String appRef) {
-		try {
-			CompanyAdministratorAccount account = accountService
-					.findByUserName(session.getAttribute("username").toString());
-
-			List<EmployeeAccount> empList = empAcctServ.findByEmpNameAndCompany(comRef, empName);
-
-			ModelAndView mav = new ModelAndView("displayEmpSearch");
-			mav.addObject("empList", empList);
-			mav.addObject("appRef", appRef);
-
-			return mav;
-		}
-
-		catch (VendorMgmtException e) {
-			ModelAndView mav = new ModelAndView("error");
-			mav.addObject("message", e.getMessage());
-
-			return mav;
-		} catch (UserException e) {
-			ModelAndView mav = new ModelAndView("error");
-			mav.addObject("message", e.getMessage());
-
-			return mav;
-		} catch (Exception e) {
-			ModelAndView mav = new ModelAndView("error");
-			mav.addObject("message", "Registration could not be carried out.");
-
-			return mav;
-		}
-
-	}
+//	@RequestMapping(value = "vetterDisplay/findByEmpName", method = RequestMethod.GET)
+//	public ModelAndView Registration(HttpSession session, @RequestParam(value = "empName") String empName,
+//			@RequestParam(value = "comRef") String comRef, @RequestParam(value = "appRef") String appRef) {
+//		try {
+//			CompanyAdministratorAccount account = accountService
+//					.findByUserName(session.getAttribute("username").toString());
+//
+//			List<EmployeeAccount> empList = empAcctServ.findByEmpNameAndCompany(comRef, empName);
+//
+//			ModelAndView mav = new ModelAndView("assignVetter");
+//			mav.addObject("empList", empList);
+//			return mav;
+//		}
+//
+//		catch (VendorMgmtException e) {
+//			ModelAndView mav = new ModelAndView("error");
+//			mav.addObject("message", e.getMessage());
+//
+//			return mav;
+//		} catch (UserException e) {
+//			ModelAndView mav = new ModelAndView("error");
+//			mav.addObject("message", e.getMessage());
+//
+//			return mav;
+//		} catch (Exception e) {
+//			ModelAndView mav = new ModelAndView("error");
+//			mav.addObject("message", "Registration could not be carried out.");
+//
+//			return mav;
+//		}
+//
+//	}
 
 	@RequestMapping(value = "vetterDisplay/addVetInfo", method= RequestMethod.GET)
 	public ModelAndView addVetterInfo(HttpSession session, HttpServletRequest request)
