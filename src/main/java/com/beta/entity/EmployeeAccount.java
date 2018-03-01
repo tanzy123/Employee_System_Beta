@@ -13,8 +13,11 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     @NamedQuery(name="EmployeeAccount.findByUsername",
                 query="SELECT e FROM EmployeeAccount e WHERE e.userName = :userName"),
-                @NamedQuery(name="EmployeeAccount.checkEmpIdDuplicate",
+    @NamedQuery(name="EmployeeAccount.checkEmpIdDuplicate",
                 query="SELECT e FROM EmployeeAccount e WHERE e.companyReferenceNumber = :companyReferenceNumber and e.employeeId = :employeeId"),
+    @NamedQuery(name="EmployeeAccount.findByEmpNameAndCompanyRef",
+    query="SELECT e FROM EmployeeAccount e WHERE e.companyReferenceNumber = :companyReferenceNumber and e.employeeName = :employeeName"),
+
 })
 public class EmployeeAccount extends UserAccount {
 
@@ -22,26 +25,26 @@ public class EmployeeAccount extends UserAccount {
 	
 	private String employeeEmail;
 	
-	private String contactNumber;
+	private String employeeName;
 
 	@Enumerated(EnumType.STRING)
 	private LogInType logInType = LogInType.EMPLOYEE;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name="roleId", referencedColumnName="roleId")
 	private Role role;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name="departmentId", referencedColumnName="departmentId")
 	private Department department;
 
-	public EmployeeAccount(String userName, String password, String employeeId, String employeeEmail, String contactNumber,
+	public EmployeeAccount(String userName, String password, String employeeId, String employeeEmail, String employeeName,
 			String companyReferenceNumber, Role role, Department department) {
 		
 		super(userName, password, companyReferenceNumber);
 		this.employeeId = employeeId;
 		this.employeeEmail = employeeEmail;
-		this.contactNumber = contactNumber;
+		this.employeeName = employeeName;
 		this.role = role;
 		this.department = department;
 		
@@ -89,12 +92,12 @@ public class EmployeeAccount extends UserAccount {
 		this.employeeEmail = employeeEmail;
 	}
 
-	public String getContactNumber() {
-		return contactNumber;
+	public String getEmployeeName() {
+		return employeeName;
 	}
 
-	public void setContactNumber(String contactNumber){
-		this.contactNumber = contactNumber;
+	public void setEmployeeName(String employeeName){
+		this.employeeName = employeeName;
 	}
 
 }

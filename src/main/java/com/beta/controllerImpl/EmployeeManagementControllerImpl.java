@@ -1,4 +1,3 @@
-
 package com.beta.controllerImpl;
 
 import java.util.ArrayList;
@@ -10,18 +9,24 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.beta.entity.Application;
 import com.beta.entity.Department;
 import com.beta.entity.EmployeeAccount;
 import com.beta.entity.Role;
 import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
+import com.beta.service.NotificationService;
+
 import com.beta.services.DepartmentService;
 import com.beta.services.EmployeeAccountService;
 import com.beta.services.RoleService;
@@ -40,7 +45,11 @@ public class EmployeeManagementControllerImpl {
 	@Autowired
 	EmployeeAccountService employeeAccountService;
 	
-//--------------------------------------load jsp pages----------------------------------------------------------------------------
+	@Autowired
+	NotificationService notificationService;
+
+	// --------------------------------------load jsp
+	// pages----------------------------------------------------------------------------
 	@RequestMapping(value = "/employeeManagement", method = RequestMethod.GET)
 	public ModelAndView showLogin(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -53,7 +62,7 @@ public class EmployeeManagementControllerImpl {
 	@RequestMapping(value = "/showCreateEmployee", method = RequestMethod.GET)
 	public ModelAndView showCreaeteEmployee(HttpServletRequest request,
 
-			HttpServletResponse response, HttpSession session) {
+	HttpServletResponse response, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView("createEmployee");
 		mav.addObject("employeeManagement", new EmployeeAccount());
@@ -68,7 +77,7 @@ public class EmployeeManagementControllerImpl {
 		mav.addObject("roleNames", roleNames);
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/showSearchEmployee", method = RequestMethod.GET)
 	public ModelAndView showSearchEmployee(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -77,15 +86,16 @@ public class EmployeeManagementControllerImpl {
 		mav.addObject("employeeManagement", new EmployeeAccount());
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/showUpdateEmployee", method = RequestMethod.GET)
-	public ModelAndView showUpdateEmployee(HttpServletRequest request,HttpServletResponse response) {
+	public ModelAndView showUpdateEmployee(HttpServletRequest request,
+			HttpServletResponse response) {
 
 		ModelAndView mav = new ModelAndView("updateEmployee");
 		mav.addObject("employeeManagement", new EmployeeAccount());
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/showDeleteEmployee", method = RequestMethod.GET)
 	public ModelAndView showDeleteEmployee(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -93,55 +103,56 @@ public class EmployeeManagementControllerImpl {
 		mav.addObject("employeeManagement", new EmployeeAccount());
 		return mav;
 	}
-	
-	//------------------------------------------------CRUD-------------------------------------------------------------------------
+
+	// ------------------------------------------------Create-------------------------------------------------------------------------
 
 	@RequestMapping(value = "/createEmployee", method = RequestMethod.POST)
-	public ModelAndView createEmployee(HttpSession session,@RequestParam(value = "employeeId") String employeeId,
+	public ModelAndView createEmployee(HttpSession session,
+			@RequestParam(value = "employeeId") String employeeId,
 			@RequestParam(value = "employeeEmail") String employeeEmail,
-			@RequestParam(value = "contactNumber") String contactNumber,
+			@RequestParam(value = "employeeName") String employeeName,
 			@RequestParam(value = "role") String role,
 			@RequestParam(value = "department") String departmentName,
 			@RequestParam(value = "userName") String userName,
-			@RequestParam(value = "password") String password
-			)
-	{
-		ModelAndView mav=new ModelAndView();
-		EmployeeAccount employeeAccount =new EmployeeAccount();
+			@RequestParam(value = "password") String password) {
+		ModelAndView mav = new ModelAndView();
+		EmployeeAccount employeeAccount = new EmployeeAccount();
 		Department employeeDepartment = new Department();
 		Role employeeRole=new Role();
 		String companyReferenceNumber=session.getAttribute("companyRefNumber").toString();
 		
-		employeeAccount.setContactNumber(contactNumber);
+		employeeAccount.setEmployeeName(employeeName);
+
 		employeeAccount.setCompanyReferenceNumber(companyReferenceNumber);
-		
-		//need to check if department doesn't exist, haven't done yet
-		employeeDepartment = departmentService.findByNameAndCompanyRef(departmentName, companyReferenceNumber);
+
+		// need to check if department doesn't exist, haven't done yet
+		employeeDepartment = departmentService.findByNameAndCompanyRef(
+				departmentName, companyReferenceNumber);
 		employeeAccount.setDepartment(employeeDepartment);
-		
-		//need to check if role doesn't exist, haven't done yet
-		employeeRole = roleService.findByCompanyReferenceNumberAndRole(companyReferenceNumber, role);
+
+		// need to check if role doesn't exist, haven't done yet
+		employeeRole = roleService.findByCompanyReferenceNumberAndRole(
+				companyReferenceNumber, role);
 		employeeAccount.setRole(employeeRole);
 		employeeAccount.setEmployeeEmail(employeeEmail);
-		if(employeeAccountService.checkDuplicateEmployeeIdInSameCompany(companyReferenceNumber, employeeId).isEmpty())
-	   {
+		if (employeeAccountService.checkDuplicateEmployeeIdInSameCompany(
+				companyReferenceNumber, employeeId).isEmpty()) {
 			employeeAccount.setEmployeeId(employeeId);
-	   }
-		else
-		{
-			mav=new ModelAndView("error");
+		} else {
+			mav = new ModelAndView("error");
 			mav.addObject("message", "the same Employee ID already exist!");
 			return mav;
 		}
-		
 		employeeAccount.setUserName(userName);
 		employeeAccount.setPassword(password);
+
 		
 		try{
 		employeeAccountService.createNewAccount(employeeAccount);
 		}catch(UserException e)
 		{
 			mav=new ModelAndView("error");
+
 			mav.addObject("message", e.getMessage());
 			return mav;
 		} catch (VendorMgmtException e) {
@@ -153,87 +164,109 @@ public class EmployeeManagementControllerImpl {
 			mav.addObject("message", "System error, please contact System administrator");
 			return mav;
 		}
-		
+
 		mav = new ModelAndView("employeemanagement");
 		return mav;
 		
+
 	}
 
+	// --------------------------------------------------------------search----------------------------------------------------------
 	@RequestMapping(value = "/searchEmployee", method = RequestMethod.GET)
-	public ModelAndView searchEmployee(@RequestParam(value = "employeeUserName") String employeeUserName) 
-	{
+	public ModelAndView searchEmployee(
+			@RequestParam(value = "employeeUserName") String employeeUserName) {
+
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("employee", employeeAccountService.findByUserName(employeeUserName));
+		mav.addObject("employee",employeeAccountService.findByUserName(employeeUserName));
 		return mav;
 	}
-	
 
+	// ---------------------------------------------------------------update---------------------------------------------------------
 
+	@RequestMapping(value = "/update", method = { RequestMethod.GET,
+			RequestMethod.POST })
+	public ModelAndView searchEmployeeToUpdate(HttpSession session, HttpServletRequest req) {
+		String userName = req.getParameter("userName");
+		ModelAndView mav = new ModelAndView("updateEmployeeUpdate");
+		EmployeeAccount employee = new EmployeeAccount();
 
-	 @RequestMapping(value = "/searchEmployeeToUpdate", method =RequestMethod.GET)
-	 public ModelAndView searchEmployeeToUpdate(HttpServletRequest request,HttpSession session,@ModelAttribute("EmployeeToUpdate") EmployeeAccount EmployeeToUpdate,@RequestParam(value ="employeeUserName") String employeeUserName) 
-	 {
-	 ModelAndView mav=new ModelAndView("updateEmployee");
-	// mav.addObject("employee", employeeAccountService.findByUserName(employeeUserName));
-	// mav.addObject("department", new Department());
-	// mav.addObject("role", new Role());
-	 mav.addObject("employee", employeeAccountService.findByUserName(EmployeeToUpdate.getUserName()));
-	 mav.addObject("department", EmployeeToUpdate.getRole());
-	 mav.addObject("department", EmployeeToUpdate.getDepartment());
-	 mav.addObject("EmployeeToUpdate", EmployeeToUpdate);
+		employee = employeeAccountService.findByUserName(userName);
+		mav.addObject("updateEmployeeUpdate", employee);
+		req.getSession().setAttribute("employee", employee);
 
-		List<String> departmentNames = generateListOfDepartmentOfCompany(session.getAttribute("companyRefNumber").toString());
-		List<String> roleNames = generateListOfRoleOfCompany(session.getAttribute("companyRefNumber").toString());
+		String companyReferenceNumber = session.getAttribute("companyRefNumber").toString();
+		List<String> departmentNames = generateListOfDepartmentOfCompany(companyReferenceNumber);
+		List<String> roleNames = generateListOfRoleOfCompany(companyReferenceNumber);
 		mav.addObject("departmentNames", departmentNames);
 		mav.addObject("roleNames", roleNames);
-	 return mav;
-	 }
-	 
-	@RequestMapping(value = "/updateEmployee", method = {RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView updateEmployee(HttpSession session,
-			@RequestParam(value = "employeeUserName") String employeeUserName,
+		
+		
+		return mav;
+	}
+
+	@RequestMapping(value = "/showUpdateEdit", method = RequestMethod.GET)
+	public ModelAndView showUpdateEmployeeEdit(
+			HttpServletRequest request,
+			HttpServletResponse response,
+			HttpSession session,
+			@ModelAttribute("updateEmployeeUpdate") EmployeeAccount employee) {
+
+		ModelAndView mav = new ModelAndView("updateEmployeeUpdate");
+		mav.addObject("employee", employee);
+		
+		
+		return mav;
+	}
+
+	@RequestMapping(value = "/edited", method = RequestMethod.POST)
+	public ModelAndView updateEmployee(HttpServletRequest request,HttpSession session,
+			@RequestParam(value = "userName") String userName,
 			@RequestParam(value = "employeeId") String employeeId,
 			@RequestParam(value = "employeeEmail") String employeeEmail,
 			@RequestParam(value = "role") String role,
-			@RequestParam(value = "departmentName") String departmentName)
-	{
+			@RequestParam(value = "department") String departmentName,
+			@ModelAttribute("updateEmployeeUpdate") EmployeeAccount employee) {
 
-		    ModelAndView mav=new ModelAndView("updateEmployee");
-		    mav.addObject("employee", employeeAccountService.findByUserName(employeeUserName));
-		    mav.addObject("department", new Department());
-			mav.addObject("role", new Role());
+		
+		ModelAndView mav = new ModelAndView("updateEmployeeUpdate");
+		String companyReferenceNumber = session
+				.getAttribute("companyRefNumber").toString();
 
-			List<String> departmentNames = generateListOfDepartmentOfCompany(session.getAttribute("companyRefNumber").toString());
-			List<String> roleNames = generateListOfRoleOfCompany(session.getAttribute("companyRefNumber").toString());
-			mav.addObject("departmentNames", departmentNames);
-			mav.addObject("roleNames", roleNames);
+		// mav.addObject("employee",
+		// employeeAccountService.findByUserName(request.getParameter("empUpdateSearchByUserName")));
 
 		EmployeeAccount employeeAccount = new EmployeeAccount();
 		Department employeeDepartment = new Department();
 		Role employeeRole = new Role();
-		String companyReferenceNumber = session.getAttribute("companyRefNumber").toString();
 
-		//setComRefNo
+		employeeAccount.setUserName(userName);
+				                                   // setComRefNo
 		employeeAccount.setCompanyReferenceNumber(companyReferenceNumber);
 
-		//setDept
-		employeeDepartment = departmentService.findByNameAndCompanyRef(departmentName, companyReferenceNumber);
+		// setDept
+		employeeDepartment = departmentService.findByNameAndCompanyRef(
+				departmentName, companyReferenceNumber);
 		employeeAccount.setDepartment(employeeDepartment);
-		
 
-		//setRole
-		employeeRole = roleService.findByCompanyReferenceNumberAndRole(companyReferenceNumber, role);
+		// setRole
+		employeeRole = roleService.findByCompanyReferenceNumberAndRole(
+				companyReferenceNumber, role);
 		employeeAccount.setRole(employeeRole);
 
-		//setEmail
+		// setEmail
 		employeeAccount.setEmployeeEmail(employeeEmail);
-		//setId
+		// setId
 		employeeAccount.setEmployeeId(employeeId);
-		
 
-		employeeAccountService.validateAccount(employeeAccount);
-		employeeAccountService.saveOrUpdate(employeeAccount);
-
+		try {
+			employeeAccountService.saveOrUpdateByCompAdmin(employeeAccount);
+		} catch (VendorMgmtException e) {
+			mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+			return mav;
+		}
+		mav = new ModelAndView("employeemanagement");
+		//registrationService.sendVerificationEmail
 		return mav;
 	}
 
@@ -256,8 +289,6 @@ public class EmployeeManagementControllerImpl {
 			categoryNames.add(R.getRole());
 		return categoryNames;
 	}
-	
-
 
 	@RequestMapping(value = "/deleteEmployee", method = { RequestMethod.DELETE,
 			RequestMethod.GET })
@@ -274,10 +305,10 @@ public class EmployeeManagementControllerImpl {
 
 		return null;
 	}
+
 	@RequestMapping(value = "/BackToEmployeemanagementPage", method = RequestMethod.GET)
 	public ModelAndView createEmployeeBack(HttpServletRequest request,
-			HttpServletResponse response, HttpSession session) 
-	{
+			HttpServletResponse response, HttpSession session) {
 		ModelAndView mav = new ModelAndView("employeemanagement");
 		return mav;
 	}
