@@ -9,7 +9,13 @@
 </head>
 <body>
 	<h1>Employee Log In View**</h1>
-
+	
+	<h1>
+	Welcome!
+		<%= request.getSession().getAttribute("employeeName")%>
+    	<%= request.getSession().getAttribute("employeeRefNumber")%>
+	
+	</h1>
 </body>
 
 

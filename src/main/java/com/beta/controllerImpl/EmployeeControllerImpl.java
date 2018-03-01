@@ -21,7 +21,6 @@ import com.beta.entity.ApprovalStatus;
 import com.beta.entity.Company;
 import com.beta.entity.EmployeeAccount;
 import com.beta.entity.Requirement;
-import com.beta.exception.ExceptionHandler;
 import com.beta.exception.UserException;
 import com.beta.service.VendorVettingProcess;
 import com.beta.services.ApplicationService;
@@ -32,9 +31,9 @@ import com.beta.services.RequirementService;
 @Controller
 public class EmployeeControllerImpl {
 
-	
-	@Autowired
-	ExceptionHandler exceptionHandler;
+//	
+//	@Autowired
+//	ExceptionHandler exceptionHandler;
 	
 	@Autowired
 	EmployeeAccountService employeeAccountService;
@@ -100,7 +99,7 @@ public class EmployeeControllerImpl {
 		} 
 		catch(Exception e)
 		{
-			exceptionHandler.handleException(e);
+			//exceptionHandler.handleException(e);
 		}
 
 		ModelAndView mav = new ModelAndView("success");
