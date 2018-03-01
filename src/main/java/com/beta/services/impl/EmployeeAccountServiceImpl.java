@@ -124,4 +124,15 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 		return dao.findByNamedQueryAndNamedParams("EmployeeAccount.checkEmpIdDuplicate", params);
 		
 	}
+	
+	@Override
+	public List<EmployeeAccount> findByEmpNameAndCompany(String companyReferencenumber, String employeeName)
+	{
+		Map<String, Object> params = new HashMap<>();
+		params.put("companyReferenceNumber", companyReferencenumber);
+		params.put("employeeName", employeeName);
+		return dao.findByNamedQueryAndNamedParams("EmployeeAccount.findByEmpNameAndCompanyRef", params);
+		
+	}
+	
 }

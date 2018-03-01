@@ -92,7 +92,7 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount)session.getAttribute("account");
 		CompanyApplication companyApplication = getCompanyApplication(account.getCompanyReferenceNumber(), applicationRef);
 		
-        ModelAndView mav = new ModelAndView("assignVetter");
+        ModelAndView mav = new ModelAndView("assignVetter"); // used to be assignVetter
         mav.addObject("companyApplication", companyApplication);
      
         return mav;

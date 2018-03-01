@@ -23,7 +23,7 @@
 				<td><input type="text" name="employeeEmail" required /></td>
 			</tr>
 			<tr>
-				<td>Contact Number</td>
+				<td>Employee Name</td>
 				<td><input type="text" name="contactNumber" required /></td>
 			</tr>
 			<tr>

@@ -112,7 +112,7 @@ public class EmployeeManagementControllerImpl {
 		Role employeeRole=new Role();
 		String companyReferenceNumber=session.getAttribute("companyRefNumber").toString();
 		
-		employeeAccount.setContactNumber(contactNumber);
+		employeeAccount.setEmployeeName(contactNumber);
 		employeeAccount.setCompanyReferenceNumber(companyReferenceNumber);
 		
 		//need to check if department doesn't exist, haven't done yet

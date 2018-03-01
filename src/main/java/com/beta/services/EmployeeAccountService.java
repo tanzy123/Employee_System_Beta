@@ -15,4 +15,6 @@ public interface EmployeeAccountService extends BaseService<Long, EmployeeAccoun
 	EmployeeAccount validateAccount(EmployeeAccount entity);
 	
 	List<EmployeeAccount> checkDuplicateEmployeeIdInSameCompany(String companyReferencenumber, String employeeId);
+	
+	public List<EmployeeAccount> findByEmpNameAndCompany(String companyReferencenumber, String employeeName);
 }
