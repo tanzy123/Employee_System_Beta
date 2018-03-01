@@ -53,6 +53,13 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 		updateAccountDetails(entity, validatedAccount);
 
 	}
+	
+	@Override
+	public void saveOrUpdateByCompAdmin(EmployeeAccount entity) throws VendorMgmtException {
+		EmployeeAccount validatedAccount = findByUserName(entity.getUserName());
+		updateAccountDetails(entity, validatedAccount);
+
+	}
 
 	private void updateAccountDetails(EmployeeAccount entity, EmployeeAccount validatedAccount) {
 		entity.setPassword(null);
@@ -121,5 +128,13 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 		params.put("employeeId", employeeId);
 		return dao.findByNamedQueryAndNamedParams("EmployeeAccount.checkEmpIdDuplicate", params);
 		
+	}
+	public EmployeeAccount saveOrUpdate2(EmployeeAccount entity) throws VendorMgmtException {
+		try {
+			entity = dao.merge(entity);
+			return dao.flush(entity);
+		} catch (Exception e) {
+			throw new VendorMgmtException(entityClass.getName() + " - ", e);
+		}
 	}
 }
