@@ -156,6 +156,15 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 		return dao.findByNamedQueryAndNamedParams("EmployeeAccount.findByEmpNameAndCompanyRef", params);
 		
 	}
+	@Override
+	public void deleteByUserName(String userName)
+	{
+		
+		dao.remove(findByUserName(userName));
+		
+	}
+	
+
 
 	@Override
 	public List<EmployeeAccount> findByEmpId(String employeeId) {

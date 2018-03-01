@@ -488,21 +488,33 @@ public class EmployeeManagementControllerImpl {
 			categoryNames.add(R.getRole());
 		return categoryNames;
 	}
-
+//------------------------------------------------------delete------------------------------------------------------------
 	@RequestMapping(value = "/deleteEmployee", method = { RequestMethod.DELETE,
 			RequestMethod.GET })
 	public ModelAndView deleteEmployee(
-			@RequestParam(value = "employeeId") String employeeId)
+			@RequestParam(value = "userName") String userName)
 			throws NumberFormatException, Exception {
 
-		try {
+		     ModelAndView mav=new ModelAndView();
+		//try {
 
-			employeeAccountService.deleteIfExisting(Long.parseLong(employeeId));
-		} catch (VendorMgmtException e) {
+			employeeAccountService.deleteByUserName(userName);
+//		} catch(UserException e)
+//		{
+//			mav=new ModelAndView("error");
+//
+//			mav.addObject("message", e.getMessage());
+//			return mav;
+//		} catch (VendorMgmtException e) {
+//			mav=new ModelAndView("error");
+//			mav.addObject("message", "System error");
+//			return mav;
+//		} catch (Exception e) {
+//			mav=new ModelAndView("error");
+//			mav.addObject("message", "System error, please contact System administrator");
+//			return mav;}
 
-		}
-
-		return null;
+		return mav;
 	}
 
 	@RequestMapping(value = "/BackToEmployeemanagementPage", method = RequestMethod.GET)
