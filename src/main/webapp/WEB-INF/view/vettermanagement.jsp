@@ -21,9 +21,6 @@
 			<td>${companyApplication.application.category.categoryName}</td>
 			<td><a href="/VendorApplication/vendorApplication/${companyApplication.application.applicationRef}" >Details</a></td>
 			<td><a href="/VendorApplication/assignVetter/${companyApplication.application.applicationRef}" >Assign Vetters</a></td>
-			<button> <a href="assignVetter">Assign Vetters</a></button> 
-			<td><a href="vendorApplication/${companyApplication.application.applicationRef}" >Details</a></td>
-			<td><a href="assignVetter/${companyApplication.application.applicationRef}" >Assign Vetters</a></td>
 
 		</c:forEach>
 		

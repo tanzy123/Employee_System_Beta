@@ -49,12 +49,13 @@ public class DropboxSaveDocumentServiceImpl implements SaveDocumentService {
 	}
 
 	@Override
-	public void uploadFile(String path, String foldername) {
+	public String uploadFile(String path, String foldername) {
 		
 		 try {
-		
 	            InputStream in = new FileInputStream(path);
 	            FileMetadata metadata = client.files().uploadBuilder(foldername).uploadAndFinish(in);
+	            String url = client.sharing().createSharedLinkWithSettings(foldername).getUrl();
+	            return url;
 	        }
 	        catch (FileNotFoundException fne)
 	        {

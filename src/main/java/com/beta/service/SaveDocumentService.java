@@ -6,7 +6,7 @@ public interface SaveDocumentService {
 	
 	void createFolder(String folderName) throws DbxException;
 	
-	void uploadFile(String path, String foldername);
+	String uploadFile(String path, String foldername);
 	
 	void readAndDownloadFile(String foldername, String filename);
 	
