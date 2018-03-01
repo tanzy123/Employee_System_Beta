@@ -32,12 +32,12 @@
 			<form action="employeeManagement">
 				<input class="btn btn-default btn-lg btn-block" type="submit" value="Employee Management" />
 			</form>
-			<form action="requestService">
+		<!-- 	<form action="requestService">
 				<input class="btn btn-default btn-lg btn-block" type="submit" value="Request Services from Vendor" />
 			</form>
 			<form action="serviceRequestFromVendor" method="get">
 				<input class="btn btn-default btn-lg btn-block" type="submit" value="Service Requests from Vendor" />
-			</form>
+			</form> -->
 			<form action="updateCompany">
 				<input class="btn btn-default btn-lg btn-block" type="submit" value="Edit Company Info" />
 			</form>

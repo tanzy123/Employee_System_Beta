@@ -9,8 +9,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
-<%@ page import="com.beta.entity.*" %>
+<%-- <%@ page import="com.beta.entity.*" %>
 <%
 EmployeeAccount account = (EmployeeAccount)session.getAttribute("employee");
 
@@ -19,11 +22,12 @@ EmployeeAccount account = (EmployeeAccount)session.getAttribute("employee");
 String roleName  = account.getRole().getRole();
 
 //String role
-%>
+%> --%>
 </head>
 <body>
+<div class="container">
 	<form:form method="post" action="edited" modelAttribute="updateEmployeeUpdate">
-		<table>
+		<table class="table">
 			<tr>
 				<td><form:label path="userName">Employee UserName</form:label></td>
 				<td><form:input path="userName" readonly="true"/></td>
@@ -67,11 +71,13 @@ String roleName  = account.getRole().getRole();
 				</select></td>
 			</tr>
 			</table>
-			<input type="submit" value="update" id="update" name="update">
+			<input type="submit" class="btn btn-success" value="update" id="update" name="update">
 			</form:form>
+			<form action="BackToEmployeemanagementPage"><button name="back" class="btn">Back</button></form>	
+			</div>
 </body>
 </html>			
-	<form action="BackToEmployeemanagementPage"><button name="back">Back</button></form>		
+		
 			
 			
 			

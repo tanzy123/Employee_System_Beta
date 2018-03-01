@@ -7,24 +7,29 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
+<div class="container">
 	<h1>Search For Existing Employee</h1>
 	<form action="update">
 		Employee UserName <input type="text" name="userName" required />
-
-		
-	
-	<input type="submit" value="Search" />
+	<input type="submit" value="Search" class="btn btn-success"/>
 	</form>
 		<!-- <input type="submit" value="search" id="search" name="search"> -->
 		
 
 
 	<form action="BackToEmployeemanagementPage">
-		<button name="back">Back</button>
+		<button name="back" class="btn">Back</button>
 	</form>
+	</div>
+	</body>
+</html>
 	<%-- <table>
 			<tr>
 				<td>Employee Id</td>
@@ -96,8 +101,7 @@
 
 
 
-</body>
-</html>
+
 
 
 

@@ -12,7 +12,7 @@
 </head>
 <body>
 	<h1>Employee Log In View**</h1>
-<<<<<<< HEAD
+
 
 <form action="pendingvendorapplication">
 				<input class="btn btn-default btn-lg btn-block" type="submit" value="Pending
@@ -29,6 +29,6 @@
     	<%= request.getSession().getAttribute("employeeRefNumber")%>
 	
 	</h1>
->>>>>>> 57752d93543164e15c466fd83e58e170c00a4cb4
+
 </body>
 </html>
