@@ -492,7 +492,7 @@ public class EmployeeManagementControllerImpl {
 	@RequestMapping(value = "/deleteEmployee", method = { RequestMethod.DELETE,
 			RequestMethod.GET })
 	public ModelAndView deleteEmployee(
-			@RequestParam(value = "employeeId") String userName)
+			@RequestParam(value = "userName") String userName)
 			throws NumberFormatException, Exception {
 
 		     ModelAndView mav=new ModelAndView();

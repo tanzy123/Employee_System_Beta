@@ -14,7 +14,7 @@
 <h1>Delete Existing Employee</h1>
 	<form action="deleteEmployee">
 
-		Please key in the Employee ID to delete <input type="text" name="employeeId" required />
+		Please key in the Employee UserName to delete <input type="text" name="userName" required />
 		<input type="submit" value="delete" id="delete" name="delete" class="btn btn-danger">
 		
 
