@@ -9,4 +9,6 @@ public interface RoleService extends BaseService<Long, Role> {
 	public Role findByCompanyReferenceNumberAndRole(String companyReferenceNumber, String role);
 
 	List<Role> findByCompanyRef(String companyReferenceNumber);
+	
+	public void removeRole(Long id);
 }

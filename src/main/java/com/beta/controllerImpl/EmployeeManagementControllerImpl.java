@@ -23,9 +23,10 @@ import com.beta.entity.Application;
 import com.beta.entity.Department;
 import com.beta.entity.EmployeeAccount;
 import com.beta.entity.Role;
+import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.NotificationService;
-import com.beta.service.RegistrationService;
+
 import com.beta.services.DepartmentService;
 import com.beta.services.EmployeeAccountService;
 import com.beta.services.RoleService;
@@ -98,7 +99,6 @@ public class EmployeeManagementControllerImpl {
 	@RequestMapping(value = "/showDeleteEmployee", method = RequestMethod.GET)
 	public ModelAndView showDeleteEmployee(HttpServletRequest request,
 			HttpServletResponse response) {
-
 		ModelAndView mav = new ModelAndView("deleteEmployee");
 		mav.addObject("employeeManagement", new EmployeeAccount());
 		return mav;
@@ -147,11 +147,22 @@ public class EmployeeManagementControllerImpl {
 		employeeAccount.setUserName(userName);
 		employeeAccount.setPassword(password);
 
-		try {
-			employeeAccountService.createNewAccount(employeeAccount);
-		} catch (VendorMgmtException e) {
-			mav = new ModelAndView("error");
+		
+		try{
+		employeeAccountService.createNewAccount(employeeAccount);
+		}catch(UserException e)
+		{
+			mav=new ModelAndView("error");
+
 			mav.addObject("message", e.getMessage());
+			return mav;
+		} catch (VendorMgmtException e) {
+			mav=new ModelAndView("error");
+			mav.addObject("message", "System error");
+			return mav;
+		} catch (Exception e) {
+			mav=new ModelAndView("error");
+			mav.addObject("message", "System error, please contact System administrator");
 			return mav;
 		}
 
@@ -256,7 +267,7 @@ public class EmployeeManagementControllerImpl {
 			return mav;
 		}
 		mav = new ModelAndView("employeemanagement");
-		registrationService.sendVerificationEmail
+		//registrationService.sendVerificationEmail
 		return mav;
 	}
 

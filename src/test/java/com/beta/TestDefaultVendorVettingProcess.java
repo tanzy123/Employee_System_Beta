@@ -1,8 +1,5 @@
 package com.beta;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +13,9 @@ import com.beta.entity.ApprovalStatus;
 import com.beta.entity.Company;
 import com.beta.entity.Requirement;
 import com.beta.service.VendorVettingProcess;
+import com.beta.services.ApplicationService;
 import com.beta.services.CompanyService;
+import com.beta.services.RequirementService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:appContext.xml"})
@@ -24,9 +23,6 @@ import com.beta.services.CompanyService;
 public class TestDefaultVendorVettingProcess {
 
 	private static final String SAMPLE_USERNAME1 = "John";
-	private static final String SAMPLE_USERNAME2 = "Mary";
-	private List<Requirement> list = new ArrayList<>();
-	
 
 	@Autowired
 	private CompanyService companyService;
@@ -34,23 +30,57 @@ public class TestDefaultVendorVettingProcess {
 	@Autowired
 	private VendorVettingProcess vettingProcess;
 	
+	@Autowired
+	private RequirementService requirementService;
+	
+	@Autowired
+	private ApplicationService applicationService;
 	
 	@Before
 	public void initialize() {
 		Company company = TestConstant.SAMPLE_COMPANY;
-		company.setApplications(new ArrayList<>());
 		companyService.saveOrUpdate(company);
 	}
 	
 	@Test
-	public void testSucessfulVetVendor() throws Exception {
+	public void testApproveVetVendor() throws Exception {
 		
 		Application application = TestConstant.SAMPLE_APPLICATION1;
 		application.setCompanyReferenceNumber(TestConstant.SAMPLE_COMPANY.getCompanyReferenceNumber());
-		List<Requirement> list = new ArrayList<>();
-		Requirement r = new Requirement(SAMPLE_USERNAME1, "asd", ApprovalStatus.PENDING);
-		list.add(r);
-		application.setVettorRequirement(list);
-		vettingProcess.vetVendor(SAMPLE_USERNAME1, application, ApprovalStatus.APPROVE, "asd");
+		applicationService.saveOrUpdate(application);
+		Company vendor = new Company();
+		vendor.setCompanyEmail("ZhiYi.Tan@cognizant.com");
+		vendor.setCompanyReferenceNumber(application.getVendorReferenceNumber());
+		vendor.setCompanyName("sampleVendor");
+		vendor.setCompanyAddress("Singapore");
+		vendor.setContactNumber("12312345435");
+		vendor.setTurnover(2L);
+		companyService.saveOrUpdate(vendor);
+		Requirement r1 = new Requirement(SAMPLE_USERNAME1, "", ApprovalStatus.PENDING);
+		r1.setSequence(1);
+		r1.setApplicationRef(TestConstant.SAMPLE_APPLICATION1.getApplicationRef());
+		requirementService.saveOrUpdate(r1);
+		vettingProcess.vetVendor(SAMPLE_USERNAME1, application, ApprovalStatus.APPROVE, "qweqweqwe");
+	}
+	
+	@Test
+	public void testRejectVetVendor() throws Exception {
+		
+		Application application = TestConstant.SAMPLE_APPLICATION1;
+		application.setCompanyReferenceNumber(TestConstant.SAMPLE_COMPANY.getCompanyReferenceNumber());
+		applicationService.saveOrUpdate(application);
+		Company vendor = new Company();
+		vendor.setCompanyEmail("ZhiYi.Tan@cognizant.com");
+		vendor.setCompanyReferenceNumber(application.getVendorReferenceNumber());
+		vendor.setCompanyName("sampleVendor");
+		vendor.setCompanyAddress("Singapore");
+		vendor.setContactNumber("12312345435");
+		vendor.setTurnover(2L);
+		companyService.saveOrUpdate(vendor);
+		Requirement r1 = new Requirement(SAMPLE_USERNAME1, "", ApprovalStatus.PENDING);
+		r1.setSequence(1);
+		r1.setApplicationRef(TestConstant.SAMPLE_APPLICATION1.getApplicationRef());
+		requirementService.saveOrUpdate(r1);
+		vettingProcess.vetVendor(SAMPLE_USERNAME1, application, ApprovalStatus.REJECT, "qweqweqwe");
 	}
 }

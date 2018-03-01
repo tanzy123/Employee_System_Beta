@@ -18,6 +18,7 @@ import com.beta.dao.DocDao;
 import com.beta.dao.JPADAO;
 import com.beta.entity.Application;
 import com.beta.entity.Documents;
+import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.FieldCopyUtil;
 import com.beta.services.DocumentsService;
@@ -110,7 +111,7 @@ public class DocumentsServiceImpl extends BaseServiceImpl<Long, Documents> imple
 		if (list.size() > 1)
 			throw new VendorMgmtException("More than one application found while validating documents");
 		else if (list.isEmpty())
-			throw new VendorMgmtException("Invalid application entered while validating documents");
+			throw new UserException("Invalid application entered while validating documents");
 	}
 
 

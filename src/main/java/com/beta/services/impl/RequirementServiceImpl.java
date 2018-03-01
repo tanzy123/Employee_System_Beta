@@ -16,6 +16,7 @@ import com.beta.dao.ApplicationDao;
 import com.beta.dao.JPADAO;
 import com.beta.dao.RequirementDao;
 import com.beta.entity.Application;
+import com.beta.entity.ApplicationStatus;
 import com.beta.entity.ApprovalStatus;
 import com.beta.entity.Requirement;
 import com.beta.exception.VendorMgmtException;
@@ -47,7 +48,7 @@ public class RequirementServiceImpl extends BaseServiceImpl<Long, Requirement> i
     }
 
 	@Override
-	public List<Requirement> getRequirementByUsernameAndStatus(String userName, ApprovalStatus status) {
+	public List<Requirement> findByUsernameAndStatus(String userName, ApprovalStatus status) {
 		
 		Map<String,Object> params = new HashMap<>();
 		params.put("userName", userName);
@@ -109,6 +110,23 @@ public class RequirementServiceImpl extends BaseServiceImpl<Long, Requirement> i
 			throw new VendorMgmtException("More than one application found with the same application reference");
 		else if (list.isEmpty())
 			throw new VendorMgmtException("No application found with the same application reference");
+	}
+
+	@Override
+	public List<Requirement> findByApplicationRef(String applicationRef) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("applicationRef", applicationRef);
+		List<Requirement> list = dao.findByNamedQueryAndNamedParams("Requirement.findByApplicationRef", params);
+		return list;
+	}
+	
+	@Override
+	public List<Requirement> findByApplicationRefAndStatus(String applicationRef, ApprovalStatus status) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("applicationRef", applicationRef);
+		params.put("status", status);
+		List<Requirement> list = dao.findByNamedQueryAndNamedParams("Requirement.findByApplicationRefAndStatus", params);
+		return list;
 	}
 	
 }

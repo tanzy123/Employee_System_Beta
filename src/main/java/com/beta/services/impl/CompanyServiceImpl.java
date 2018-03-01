@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Propagation;
 import com.beta.dao.CompanyDao;
 import com.beta.dao.JPADAO;
 import com.beta.entity.Company;
+import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.FieldCopyUtil;
 import com.beta.services.CompanyService;
@@ -49,9 +50,9 @@ public class CompanyServiceImpl extends BaseServiceImpl<Long, Company> implement
 	}
 
 	@Override
-	public void saveOrUpdate(Company entity) throws VendorMgmtException {
+	public void saveOrUpdate(Company entity) throws UserException {
 		if (entity.getCompanyReferenceNumber() == null || entity.getCompanyName() == null)
-			throw new VendorMgmtException("Company reference number or company name not found!");
+			throw new UserException("Company reference number or company name not found!");
 		Company company = findbyCompanyNameAndRefNo(entity.getCompanyReferenceNumber(), entity.getCompanyName());
 
 		if (company == null)
@@ -59,7 +60,9 @@ public class CompanyServiceImpl extends BaseServiceImpl<Long, Company> implement
 		else
 		//	updateCompanyDetails(entity, company);
 			company.setCompanyAddress(entity.getCompanyAddress());
+			
 			company.setCompanyEmail(entity.getCompanyEmail());
+			
 			company.setCompanyName(entity.getCompanyName());
 			company.setCompanyReferenceNumber(entity.getCompanyReferenceNumber());
 			company.setCompanyWebsite(entity.getCompanyWebsite());
@@ -77,7 +80,7 @@ public class CompanyServiceImpl extends BaseServiceImpl<Long, Company> implement
 		Map<String, Object> params = new HashMap<>();
 		params.put("companyReferenceNumber", companyReferenceNumber);
 		params.put("companyName", companyName);
-		List<Company> list = findByNamedQueryAndNamedParams("Company.findByNameAndRefNo", params);
+		List<Company> list = dao.findByNamedQueryAndNamedParams("Company.findByNameAndRefNo", params);
 		if (list.size() > 1)
 			throw new VendorMgmtException("More than one company found");
 		else if (list.isEmpty())
@@ -90,7 +93,7 @@ public class CompanyServiceImpl extends BaseServiceImpl<Long, Company> implement
 	public Company findbyRefNo(String companyReferenceNumber) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("companyReferenceNumber", companyReferenceNumber);
-		List<Company> list = findByNamedQueryAndNamedParams("Company.findByRefNo", params);
+		List<Company> list = dao.findByNamedQueryAndNamedParams("Company.findByRefNo", params);
 		if (list.size() > 1)
 			throw new VendorMgmtException("More than one company found");
 		else if (list.isEmpty())

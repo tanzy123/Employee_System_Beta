@@ -111,6 +111,12 @@ public class RoleServiceImpl extends BaseServiceImpl<Long, Role> implements Role
 		return dao.findByNamedQueryAndNamedParams("Role.findByCompRefNo", params);
 		
 	}
+
+	@Override
+	public void removeRole(Long id) {
+		// TODO Auto-generated method stub
+		super.delete(id);
+	}
 	
 
 	

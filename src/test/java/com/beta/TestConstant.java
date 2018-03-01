@@ -44,8 +44,8 @@ public class TestConstant {
 	public static final Documents SAMPLE_DOCUMENT2 = new Documents();
 	public static final List<Documents> SAMPLE_DOCUMENT_LIST;
 	
-	public static final Requirement SAMPLE_REQUIREMENT1 = new Requirement("E102023", "onboard ASAP", ApprovalStatus.PENDING);
-	public static final Requirement SAMPLE_REQUIREMENT2 = new Requirement("RX1234", "need more money", ApprovalStatus.PENDING);
+	public static final Requirement SAMPLE_REQUIREMENT1 = new Requirement("E102023", "onboard ASAP", ApprovalStatus.WAITING);
+	public static final Requirement SAMPLE_REQUIREMENT2 = new Requirement("RX1234", "need more money", ApprovalStatus.WAITING);
 	public static final List<Requirement> SAMPLE_REQUIREMENT_LIST;
 	
 	public static final Company SAMPLE_VENDOR;
@@ -98,7 +98,7 @@ public class TestConstant {
 		SAMPLE_REQUIREMENT_LIST = Collections.unmodifiableList(requirementList);
 		
 		SAMPLE_VENDOR = new Company("CS123213", "Credit-Suisse", 
-				"Switzerland", "cs@cs.com", "+31123123", "www.creditsuisse.com",
+				"Switzerland", "hello@cognizant.com", "+31123123", "www.creditsuisse.com",
 				65000000L, SAMPLE_ROLE_LIST, SAMPLE_DEPARTMENT_LIST, SAMPLE_CATEGORY_LIST);
 		
 		List<Company> vendorList = new ArrayList<>();
@@ -131,7 +131,7 @@ public class TestConstant {
 		SAMPLE_APPLICATION_LIST = Collections.unmodifiableList(applicationList);
 		
 		SAMPLE_COMPANY = new Company("CTS123", "Cognizant", 
-				"India", "ZhiYi.Tan@cognizant.com", "+6122343243", "www.cognizant.com", 
+				"India", "Richard.Ong@cognizant.com", "+6122343243", "www.cognizant.com", 
 				25000000L, SAMPLE_APPLICATION_LIST, 
 				SAMPLE_ROLE_LIST, SAMPLE_DEPARTMENT_LIST, SAMPLE_CATEGORY_LIST);
 		

@@ -37,12 +37,14 @@ public class EmployeeAccount extends UserAccount {
 
 	public EmployeeAccount(String userName, String password, String employeeId, String employeeEmail, String contactNumber,
 			String companyReferenceNumber, Role role, Department department) {
+		
 		super(userName, password, companyReferenceNumber);
 		this.employeeId = employeeId;
 		this.employeeEmail = employeeEmail;
 		this.contactNumber = contactNumber;
 		this.role = role;
 		this.department = department;
+		
 	}
 
 	public EmployeeAccount() {}
@@ -59,11 +61,11 @@ public class EmployeeAccount extends UserAccount {
 		this.employeeId = employeeId;
 	}
 
-	public Role getRole() {
+	public Role getRole() {	
 		return role;
 	}
 
-	public void setRole(Role role) {
+	public void setRole(Role role){
 		this.role = role;
 	}
 
@@ -79,7 +81,7 @@ public class EmployeeAccount extends UserAccount {
 		return logInType;
 	}
 
-	public String getEmployeeEmail() {
+	public String getEmployeeEmail(){
 		return employeeEmail;
 	}
 
@@ -91,7 +93,7 @@ public class EmployeeAccount extends UserAccount {
 		return contactNumber;
 	}
 
-	public void setContactNumber(String contactNumber) {
+	public void setContactNumber(String contactNumber){
 		this.contactNumber = contactNumber;
 	}
 

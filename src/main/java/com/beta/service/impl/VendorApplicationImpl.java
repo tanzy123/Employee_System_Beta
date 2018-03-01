@@ -15,6 +15,7 @@ import com.beta.entity.Application;
 import com.beta.entity.ApplicationStatus;
 import com.beta.entity.Category;
 import com.beta.entity.Documents;
+import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.SaveDocumentService;
 import com.beta.service.VendorApplication;
@@ -22,6 +23,7 @@ import com.beta.services.ApplicationService;
 import com.beta.services.CategoryService;
 import com.beta.services.CompanyService;
 import com.beta.services.DocumentsService;
+
 
 @Service("VendorApplication")
 @org.springframework.transaction.annotation.Transactional(propagation = Propagation.REQUIRED, rollbackFor = VendorMgmtException.class)
@@ -35,12 +37,13 @@ public class VendorApplicationImpl implements VendorApplication {
 
 	@Autowired
 	CompanyService companyService;
+
+	@Autowired
+	DocumentsService documentsService;
 	
 	@Autowired
 	SaveDocumentService saveDocumentService;
 	
-	@Autowired
-	DocumentsService documentsService;
 
 	@Override
 	public Application generateVendorApplication(Application application) {
@@ -79,7 +82,7 @@ public class VendorApplicationImpl implements VendorApplication {
 				throw new NullPointerException();
 			}
 			if (vendorRef.equals(companyRef)) {
-				throw new VendorMgmtException("VENDOR REFERENCE NUMBER CANNOT BE THE SAME AS COMPANY REFERENCE NUMBER");
+				throw new UserException("VENDOR REFERENCE NUMBER CANNOT BE THE SAME AS COMPANY REFERENCE NUMBER");
 			}
 			{
 				for (Category c : category) {
@@ -91,13 +94,13 @@ public class VendorApplicationImpl implements VendorApplication {
 					}
 				}
 				if (counter != 1) {
-					throw new VendorMgmtException("VENDOR CATEGORY DO NOT FALL INTO COMPANY'S REQUESTED CATEGORY LIST");
+					throw new UserException("VENDOR CATEGORY DO NOT FALL INTO COMPANY'S REQUESTED CATEGORY LIST");
 				}
 			}
 		} catch (
 
 		NullPointerException e) {
-			throw new VendorMgmtException("MANDATORY FIELDS ARE NOT ALL FILLED UP");
+			throw new UserException("MANDATORY FIELDS ARE NOT ALL FILLED UP");
 		}
 	}
 
@@ -111,31 +114,56 @@ public class VendorApplicationImpl implements VendorApplication {
 		
 	}
 
-	private void saveDocumentsToDatabase(String applicationRef, MultipartFile[] files) throws IOException {
+	public void saveDocumentsToDatabase(String applicationRef, MultipartFile[] files) throws IOException {
 		final String workingDirectory = System.getProperty("user.dir") + "/";
 		for (MultipartFile file : files) {
 			if (!file.getOriginalFilename().isEmpty()) {
 				File tempFile = getTempFile(file, workingDirectory);
-				String folderName = "/" + applicationRef + "/" + file.getOriginalFilename();
-				saveDocumentService.uploadFile(tempFile.getAbsolutePath(), folderName);
-				createDocumentToStoreInDB(folderName, applicationRef, file.getOriginalFilename());
-				
+				String foldername = obtainUniqueFoldername(applicationRef, file.getOriginalFilename());
+				String url = saveDocumentService.uploadFile(tempFile.getAbsolutePath(), foldername);
+				String storedUrl = makeFileLinkDownloadableOnly(url);
+				createDocumentToStoreInDropBox(storedUrl, foldername, applicationRef, file.getOriginalFilename());
+				tempFile.delete();
 			}
 		}
 	}
 
-	private void createDocumentToStoreInDB(String filePath, String applicationRef, String originalFileName) {
+	private String makeFileLinkDownloadableOnly(String url) {
+		int index = url.lastIndexOf('0');
+		String storedUrl = url.substring(0, index) + "1";
+		return storedUrl;
+	}
+
+	public String obtainUniqueFoldername(String applicationRef, String originalFilename) {
+		String originalFoldername = "/" + applicationRef + "/" + originalFilename;
+		String foldername = originalFoldername;
+		int i = 1;
+		while (saveDocumentService.checkFileExists(foldername)) {
+			int lastDotIndex = originalFoldername.lastIndexOf('.');
+			String version = String.format("(%d)", i);
+			foldername = originalFoldername.substring(0, lastDotIndex) 
+					+ version
+					+ originalFoldername.substring(lastDotIndex, originalFoldername.length());
+			i++;
+		}
+		return foldername;
+	}
+
+	public void createDocumentToStoreInDropBox(String url, String filePath, String applicationRef, String originalFileName) {
 		Documents document = new Documents();
+		document.setUrl(url);
 		document.setApplicationRef(applicationRef);
 		document.setFilePath(filePath);
 		document.setOriginalFileName(originalFileName);
 		documentsService.saveOrUpdate(document);		
 	}
 
-	private File getTempFile(MultipartFile file, String workingDirectory) throws IOException {
+	public File getTempFile(MultipartFile file, String workingDirectory) throws IOException {
 		String originalFileName = file.getOriginalFilename();
 		File tempFile = new File(workingDirectory + originalFileName);
 		file.transferTo(tempFile);
 		return tempFile;
 	}
+
+
 }

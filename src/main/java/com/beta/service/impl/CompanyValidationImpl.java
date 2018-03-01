@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 
 import com.beta.entity.Company;
+import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.CompanyValidation;
 
@@ -15,7 +16,7 @@ import com.beta.service.CompanyValidation;
 public class CompanyValidationImpl implements CompanyValidation {
 
 	@Override
-	public void validateCommpanyApplication(Company company) throws VendorMgmtException {
+	public void validateCommpanyApplication(Company company) throws UserException {
 
 		try {
 			if (company.getCompanyName().equals(null) || company.getCompanyAddress().equals(null)
@@ -23,21 +24,21 @@ public class CompanyValidationImpl implements CompanyValidation {
 					|| company.getContactNumber().equals(null) || company.getTurnover().equals(null)
 					|| company.getRoles().equals(null) || company.getDepartment().equals(null)
 					|| company.getCategory().equals(null)) {
-				throw new VendorMgmtException("MANDATORY FIELDS ARE NOT ALL FILLED UP");
+				throw new UserException("MANDATORY FIELDS ARE NOT ALL FILLED UP");
 			} else {
 				try {
 					InternetAddress emailAddr = new InternetAddress(company.getCompanyEmail());
 					emailAddr.validate();
 				} catch (AddressException ex) {
-					throw new VendorMgmtException("INVALID EMAIL ADDRESS GIVEN");
+					throw new UserException("INVALID EMAIL ADDRESS GIVEN");
 				}
 
 				if (company.getTurnover() < 0) {
-					throw new VendorMgmtException("TURNOVER CANNOT BE NEGATIVE");
+					throw new UserException("TURNOVER CANNOT BE NEGATIVE");
 				}
 			}
 		} catch (NullPointerException e) {
-			throw new VendorMgmtException("MANDATORY FIELDS ARE NOT ALL FILLED UP");
+			throw new UserException("MANDATORY FIELDS ARE NOT ALL FILLED UP");
 		}
 
 	}

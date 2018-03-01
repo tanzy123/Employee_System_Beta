@@ -4,17 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Employee Dashboard</title>
 
 </head>
 <body>
-	<h1>Employee Log In View</h1>
+	<h1>Employee Log In View**</h1>
 
 </body>
-
-
-
-
 
 <h1>
 	<td><button type="button" name="back"
@@ -28,7 +24,26 @@
 			Application History</button></td>
 </h1>
 
+<h1>
+<td><button type="button" name="back3" 
+							onclick="location.href='applytobeavendor'">Apply To Be A Vendor</button>
+							
+							</td>
+</h1>
 
+<h1>
+<td><button type="button" name="back4" 
+							onclick="location.href='editEmployeeInformation'">Edit Employee Information</button>
+							
+							</td>
+</h1>
+
+<h1>
+<td><button type="button" name="back4" 
+							onclick="location.href='pendingvendorapplicationview'">Pending Vendor Application View</button>
+							
+							</td>
+</h1>
 
 
 </html>

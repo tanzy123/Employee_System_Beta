@@ -5,6 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 
+import org.apache.cxf.service.invoker.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,7 +19,7 @@ public class EmployeeAccountDaoImpl extends JpaDAOImpl<Long, EmployeeAccount> im
 	
 	@Autowired
 	EntityManagerFactory entityManagerFactory;
-
+	
 	@PersistenceContext(unitName="VendorManagementPersistentUnit")
 	private EntityManager entityManager;
 

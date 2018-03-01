@@ -160,8 +160,8 @@ public class Application implements Serializable {
 		return vetterRequirement;
 	}
 
-	public void setVettorRequirement(List<Requirement> clientRequirement) {
-		this.vetterRequirement = clientRequirement;
+	public void setVetterRequirement(List<Requirement> vetterRequirement) {
+		this.vetterRequirement = vetterRequirement;
 	}
 
 	public List<VendorReference> getVendorReferences() {

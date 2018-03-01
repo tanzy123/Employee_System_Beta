@@ -13,14 +13,14 @@
 	<h1>Search For Existing Employee</h1>
 	<form action="update">
 		Employee UserName <input type="text" name="userName" required />
+
 		
 	
 	<input type="submit" value="Search" />
 	</form>
 		<!-- <input type="submit" value="search" id="search" name="search"> -->
 		
-		
-	
+
 
 	<form action="BackToEmployeemanagementPage">
 		<button name="back">Back</button>
@@ -106,4 +106,8 @@ function editScrap(username)
 	
 	}
 
+<<<<<<< HEAD
 </script> -->
+=======
+</script> -->
+>>>>>>> 124640a223d1cdf0320f3607c577b51121408e0b
