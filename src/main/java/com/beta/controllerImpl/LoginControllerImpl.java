@@ -73,26 +73,21 @@ public class LoginControllerImpl implements LoginController {
 				employeeAccountService.validateAccount(employeeAccount);
 				mav = new ModelAndView("redirect:/employeeDashboard");
 				
-			} catch (UserException e) 
+			} 
+			catch (UserException e) 
 			{
-				
-				
 				mav=new ModelAndView("error");
 				mav.addObject("message",e.getMessage());
 				return mav;
 			}
-               catch (VendorMgmtException e) 
+            catch (VendorMgmtException e) 
 			{
-				
-				
 				mav=new ModelAndView("error");
 				mav.addObject("message",e.getMessage());
 				return mav;
 			}
-                catch (Exception e) 
+            catch (Exception e) 
 			{
-				
-				
 				mav=new ModelAndView("error");
 				mav.addObject("message","Invalid Employee log in credentials!");
 				return mav;
@@ -100,23 +95,26 @@ public class LoginControllerImpl implements LoginController {
 			}
 			
 
-		 else if (loginType.equals("COMPANY_ADMINISTRATOR")) {
+		 else if (loginType.equals("COMPANY_ADMINISTRATOR")) 
+		 {
 			session.setAttribute("companyRefNumber", companyAdminAccountService.findByUserName(username).getCompanyReferenceNumber());
 			CompanyAdministratorAccount companyAdministratorAccount = new CompanyAdministratorAccount();
 			companyAdministratorAccount.setUserName(username);
 			companyAdministratorAccount.setPassword(password);
 			try {
-				companyAdminAccountService
-						.validateAccount(companyAdministratorAccount);
+				companyAdminAccountService.validateAccount(companyAdministratorAccount);
 				mav = new ModelAndView("redirect:/dashboardcompany");
 
-			} catch (UserException e) {
-				if (e.getMessage().equals("Account has not been validated yet")) {
+			} catch (UserException e) 
+			{
+				if (e.getMessage().equals("Account has not been validated yet")) 
+				{
 					mav = new ModelAndView("missingToken"); 
 					mav.addObject("message", e.getMessage());
 					return mav;
 				}
-				else {
+				else 
+				{
 					
 
 				   mav = new ModelAndView("error"); 
@@ -127,6 +125,7 @@ public class LoginControllerImpl implements LoginController {
 			}
 		}
 		return mav;
+		
 	}
 	
 	

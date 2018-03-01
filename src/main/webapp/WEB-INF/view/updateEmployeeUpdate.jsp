@@ -26,7 +26,7 @@ String roleName  = account.getRole().getRole();
 		<table>
 			<tr>
 				<td><form:label path="userName">Employee UserName</form:label></td>
-				<td><form:input path="userName"/></td>
+				<td><form:input path="userName" readonly="true"/></td>
 
 			</tr>
 			<tr>

@@ -72,14 +72,14 @@
 										'requirementList' : requirements
 									});
 									$.ajax({
-										url : "/VendorApplication/setVetters",
+										url : "/VendorApplication-0.0.1-SNAPSHOT/setVetters",
 										type : 'POST',
 										data : requirements,
 										dataType : "html",
 										contentType : 'application/json',
 										success : function(response) {
 											if (response==="success")
-												window.location.href = "http://localhost:8082/VendorApplication/dashboardcompany";
+												window.location.href = "http://localhost:8080/VendorApplication-0.0.1-SNAPSHOT/dashboardcompany";
 											else
 												alert("error");
 										}
