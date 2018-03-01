@@ -27,7 +27,7 @@
                 </tr>
             </table>
         </form:form>
-        <form action="/VendorApplication-0.0.1-SNAPSHOT/dashboardcompany">
+        <form action="/VendorApplication/dashboardcompany">
    					 <input type="submit" value="Go Back" />
         
 </body>

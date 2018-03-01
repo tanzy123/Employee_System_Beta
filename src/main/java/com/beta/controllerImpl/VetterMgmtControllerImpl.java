@@ -29,106 +29,90 @@ import com.beta.services.RequirementService;
 
 @Controller
 public class VetterMgmtControllerImpl {
-	
+
 	@Autowired
 	CompanyAdminstratorAccountService accountService;
-	
+
 	@Autowired
 	RequirementService reqService;
-	
+
 	@Autowired
 	EmployeeAccountService empAcctServ;
-	
-	@RequestMapping(value = "/vetterDisplay/{appRef}", method = RequestMethod.GET)  
-    public ModelAndView displayVetters(@PathVariable String appRef,HttpSession session){
-		
-		 try
-	        {
-	        
-		CompanyAdministratorAccount account = (CompanyAdministratorAccount)session.getAttribute("account");
-		
-        List <Requirement> reqList = reqService.findByApplicationRef(appRef);
-        List<EmployeeAccount> vetterList= new ArrayList();
-        for (Requirement q: reqList) {
-        	EmployeeAccount a = empAcctServ.findByUserName(q.getUserName());
-        	vetterList.add(a);
-        	
-        }
-       
-        ModelAndView mav = new ModelAndView("assignVetterByZQ");
-        mav.addObject("vetterList", vetterList);
-        mav.addObject("appRef", appRef);
-        mav.addObject("comRef", account.getCompanyReferenceNumber());
-     
-        return mav;
-        }
-        catch(VendorMgmtException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(UserException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(Exception e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", "assigning of vetter could not be carried out.");
-	    	
-		   return mav;
-		}
-        
-        
-    }
 
-	
-	@RequestMapping(value = "vetterDisplay/findByEmpName", method = RequestMethod.GET)
-	public ModelAndView Registration(HttpSession session,@RequestParam(value = "empName") String empName,@RequestParam(value = "comRef") String comRef,
-			@RequestParam(value = "appRef") String appRef)
-	{
+	@RequestMapping(value = "/vetterDisplay/{appRef}", method = RequestMethod.GET)
+	public ModelAndView displayVetters(@PathVariable String appRef, HttpSession session) {
+
 		try {
-		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
-		
-		List<EmployeeAccount>empList=empAcctServ.findByEmpNameAndCompany(comRef,empName);
 
-		ModelAndView mav = new ModelAndView("displayEmpSearch");
-		mav.addObject("empList",empList);
-		mav.addObject("appRef", appRef);
-		
-		return mav;
+			CompanyAdministratorAccount account = (CompanyAdministratorAccount) session.getAttribute("account");
+
+			List<Requirement> reqList = reqService.findByApplicationRef(appRef);
+			List<EmployeeAccount> vetterList = new ArrayList();
+			for (Requirement q : reqList) {
+				EmployeeAccount a = empAcctServ.findByUserName(q.getUserName());
+				vetterList.add(a);
+
+			}
+
+			ModelAndView mav = new ModelAndView("assignVetterByZQ");
+			mav.addObject("vetterList", vetterList);
+			mav.addObject("appRef", appRef);
+			mav.addObject("comRef", account.getCompanyReferenceNumber());
+
+			return mav;
+		} catch (VendorMgmtException e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+
+			return mav;
+		} catch (UserException e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+
+			return mav;
+		} catch (Exception e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", "assigning of vetter could not be carried out.");
+
+			return mav;
 		}
-		
-		 catch(VendorMgmtException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(UserException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(Exception e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", "Registration could not be carried out.");
-	    	
-		   return mav;
-		}
-        
-		 
+
 	}
-	
+
+	@RequestMapping(value = "vetterDisplay/findByEmpName", method = RequestMethod.GET)
+	public ModelAndView Registration(HttpSession session, @RequestParam(value = "empName") String empName,
+			@RequestParam(value = "comRef") String comRef, @RequestParam(value = "appRef") String appRef) {
+		try {
+			CompanyAdministratorAccount account = accountService
+					.findByUserName(session.getAttribute("username").toString());
+
+			List<EmployeeAccount> empList = empAcctServ.findByEmpNameAndCompany(comRef, empName);
+
+			ModelAndView mav = new ModelAndView("displayEmpSearch");
+			mav.addObject("empList", empList);
+			mav.addObject("appRef", appRef);
+
+			return mav;
+		}
+
+		catch (VendorMgmtException e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+
+			return mav;
+		} catch (UserException e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+
+			return mav;
+		} catch (Exception e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", "Registration could not be carried out.");
+
+			return mav;
+		}
+
+	}
 
 	@RequestMapping(value = "vetterDisplay/addVetInfo", method= RequestMethod.GET)
 	public ModelAndView addVetterInfo(HttpSession session, HttpServletRequest request)
@@ -166,50 +150,59 @@ public class VetterMgmtControllerImpl {
 		reqService.saveOrUpdate(req);
 		
 		return displayVetters(appRef, session);
-		
+		} catch (
+
+				VendorMgmtException e) {
+					ModelAndView mav = new ModelAndView("error");
+					mav.addObject("message", e.getMessage());
+
+					return mav;
+				} catch (UserException e) {
+					ModelAndView mav = new ModelAndView("error");
+					mav.addObject("message", e.getMessage());
+
+					return mav;
+				} catch (Exception e) {
+					ModelAndView mav = new ModelAndView("error");
+					mav.addObject("message", "adding of  vetter Info could not be carried out.");
+
+					return mav;
+				}
 	}
-	
-	@RequestMapping(value = "vetterDisplay/deleteVetInfo", method= RequestMethod.GET)
+
+	@RequestMapping(value = "vetterDisplay/deleteVetInfo", method = RequestMethod.GET)
 	public ModelAndView DeleteCompanyInfo(HttpSession session, HttpServletRequest request)
-			
-		
+
 	{
-		
-		String userName = request.getParameter("userName");
-		String appRef = request.getParameter("appRef");
-	
-		Requirement req=reqService.findByApplicationRefAndUser(appRef, userName);
-		
-		Long id = req.getRequirementId();
-		
-		reqService.removeVet(id);
-		
-		return displayVetters(appRef, session);
+		try {
+			String userName = request.getParameter("userName");
+			String appRef = request.getParameter("appRef");
+
+			Requirement req = reqService.findByApplicationRefAndUser(appRef, userName);
+
+			Long id = req.getRequirementId();
+
+			reqService.removeVet(id);
+
+			return displayVetters(appRef, session);
+		} catch (
+
+		VendorMgmtException e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+
+			return mav;
+		} catch (UserException e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+
+			return mav;
+		} catch (Exception e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", "adding of  vetter Info could not be carried out.");
+
+			return mav;
 		}
-		 catch(VendorMgmtException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(UserException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(Exception e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", "adding of  vetter Info could not be carried out.");
-	    	
-		   return mav;
-		}
-        
-		
-		
-		
+
 	}
 }

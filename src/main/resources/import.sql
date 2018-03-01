@@ -231,20 +231,20 @@ INSERT INTO vendorreference(referenceId,applicationRef,companyAddress,companyNam
 
 
 
-INSERT INTO employeeaccount(accountId,companyReferenceNumber,isLogin,isValidated,password,token,userName,contactNumber,employeeEmail,employeeId,logInType,departmentId,roleId)
+INSERT INTO employeeaccount(accountId,companyReferenceNumber,isLogin,isValidated,password,token,userName,employeeName,employeeEmail,employeeId,logInType,departmentId,roleId)
 VALUES('1234345','111111',0,1,'$2a$10$ACmX1/kJJZLEkg3R3UY4mu50dQFJHRVJraWDJpQx7YuQyGC36A9q2','1234','company_One','66635553','employee_Singapore@company.com','14231','EMPLOYEE','523423','32349');
 
-INSERT INTO employeeaccount(accountId,companyReferenceNumber,isLogin,isValidated,password,token,userName,contactNumber,employeeEmail,employeeId,logInType,departmentId,roleId)
+INSERT INTO employeeaccount(accountId,companyReferenceNumber,isLogin,isValidated,password,token,userName,employeeName,employeeEmail,employeeId,logInType,departmentId,roleId)
 VALUES('4532232','222222',0,1,'$2a$10$ACmX1/kJJZLEkg3R3UY4mu50dQFJHRVJraWDJpQx7YuQyGC36A9q2','4567','company_Two','666411331','company_Malaysia@company.com','134491','EMPLOYEE','2343549','42341');
 
-INSERT INTO employeeaccount(accountId,companyReferenceNumber,isLogin,isValidated,password,token,userName,contactNumber,employeeEmail,employeeId,logInType,departmentId,roleId)
+INSERT INTO employeeaccount(accountId,companyReferenceNumber,isLogin,isValidated,password,token,userName,employeeName,employeeEmail,employeeId,logInType,departmentId,roleId)
 VALUES('1232163','333333',0,1,'$2a$10$ACmX1/kJJZLEkg3R3UY4mu50dQFJHRVJraWDJpQx7YuQyGC36A9q2','7890','company_Three','5643352442','company_China@company.com','123112','EMPLOYEE','123424322','42346');
 
 
-INSERT INTO employeeaccount(accountId,companyReferenceNumber,isLogin,isValidated,password,token,userName,contactNumber,employeeEmail,employeeId,logInType,departmentId,roleId)
+INSERT INTO employeeaccount(accountId,companyReferenceNumber,isLogin,isValidated,password,token,userName,employeeName,employeeEmail,employeeId,logInType,departmentId,roleId)
 VALUES('1232123','444444',0,1,'$2a$10$ACmX1/kJJZLEkg3R3UY4mu50dQFJHRVJraWDJpQx7YuQyGC36A9q2','0123','company_Four','54634242423','company_UnitedStates@company.com','423131','EMPLOYEE','1143432','49654');
 
-INSERT INTO employeeaccount(accountId,companyReferenceNumber,isLogin,isValidated,password,token,userName,contactNumber,employeeEmail,employeeId,logInType,departmentId,roleId)
+INSERT INTO employeeaccount(accountId,companyReferenceNumber,isLogin,isValidated,password,token,userName,employeeName,employeeEmail,employeeId,logInType,departmentId,roleId)
 VALUES('231332','555555',0,1,'$2a$10$ACmX1/kJJZLEkg3R3UY4mu50dQFJHRVJraWDJpQx7YuQyGC36A9q2','1123','company_Five','313113121','company_Russia@company.com','121123','EMPLOYEE','1633433','50456');
 
 

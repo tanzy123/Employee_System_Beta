@@ -6,48 +6,28 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <title>Vendor Application Details</title>
 </head>
 <body>
-	<table>
-		<tr>
-			<td>Vendor Name: ${companyApplication.company.companyName}</td>
-		</tr>
-		<tr>
-			<td>Vendor Reference Number:
-				${companyApplication.company.companyReferenceNumber}</td>
-		</tr>
-		<tr>
-			<td>Vendor Address: ${companyApplication.company.companyAddress}</td>
-		</tr>
-		<tr>
-			<td>Vendor Email: ${companyApplication.company.companyEmail}</td>
-		</tr>
-		<tr>
-			<td>Vendor Contact Number:
-				${companyApplication.company.contactNumber}</td>
-		</tr>
-		<tr>
-			<td>Vendor Turnover: ${companyApplication.company.turnover}</td>
-		</tr>
-		<tr>
-			<td>Application Reference Number:
-				${companyApplication.application.applicationRef}</td>
-		</tr>
-		<tr>
-			<td>Category of Application:
-				${companyApplication.application.category.categoryName}</td>
-		</tr>
-		<tr>
-			<td>Point of Contact: ${companyApplication.application.POC}</td>
-		</tr>
-		<tr>
-			<td>Application Date:
-				${companyApplication.application.applicationDate}</td>
-		</tr>
-	</table>
+<div class="container">
+<h1>Vendor Application Details</h1>
+<ul class="list-group">
+		<li>Vendor Name: <strong>${companyApplication.company.companyName}</strong></li>
+		<li>Vendor Reference Number: <strong>${companyApplication.company.companyReferenceNumber}</strong></li>
+		<li>Vendor Address: <strong>${companyApplication.company.companyAddress}</strong></li>
+		<li>Vendor Email: <strong>${companyApplication.company.companyEmail}</strong></li>
+		<li>Vendor Contact Number: <strong>${companyApplication.company.contactNumber}</strong></li>
+		<li>Vendor Turnover: <strong>${companyApplication.company.turnover}</strong></li>
+		<li>Application Reference Number: <strong>${companyApplication.application.applicationRef}</strong></li>
+		<li>Category of Application:<strong> ${companyApplication.application.category.categoryName}</strong></li>
+		<li>Point of Contact:<strong> ${companyApplication.application.POC}</strong></li>
+		<li>Application Date: <strong>${companyApplication.application.applicationDate}</strong></li>
+		</ul>
 	<h2>Documents</h2>
-	<table>
+	<table class="table">
 		<tr>
 			<th>Filename</th>
 			<th>File</th>
@@ -58,9 +38,12 @@
 				<td><a href="${file.url}">Download File</a></td>
 		</c:forEach>
 	</table>
-	<a
-		href="/VendorApplication/assignVetter/${companyApplication.application.applicationRef}">Assign
-		Vetters</a>
+	<a class="btn btn-info" href="/VendorApplication/assignVetter/${companyApplication.application.applicationRef}">Assign Vetters</a>
+		<br><br>
+		<form action="/VendorApplication/dashboardcompany/vendorApplication">
+    <input type="submit" class="btn btn-default" value="Go Back" />
+    	</form>
+		</div>
 </body>
 
 </html>
