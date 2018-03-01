@@ -2,6 +2,7 @@ package com.beta.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -33,6 +34,7 @@ public class Requirement {
 	
 	private String userName;
 	
+	@Column(length = 1000)
 	private String requirement;
 	
 	@Temporal(TemporalType.DATE)

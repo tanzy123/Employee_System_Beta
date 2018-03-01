@@ -4,47 +4,56 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <title>Main</title>
 </head>
 <body>
 
-	<p>${message}</p>
-	<form action="vetterManagement">
-		<input type="submit" value="Vetter Management" />
-	</form>
-	<form action="pendingCompanyApplication">
-		<input type="submit" value="Pending Vendor Applications" />
-	</form>
-	<form action="companyApplication">
-		<input type="submit" value="Vendor Application History" />
-	</form>
-	<form action="vendorApplicationForm">
-		<input type="submit" value="Vendor Application Form" />
-	</form>
-	<form action="employeeManagement">
-		<input type="submit" value="Employee Management" />
-	</form>
-	<form action="requestService">
-		<input type="submit" value="Request Services from Vendor" />
-	</form>
-	<form action="serviceRequestFromVendor" method="get">
-		<input type="submit" value="Service Requests from Vendor" />
-	</form>
-	<form action="updateCompany">
-		<input type="submit" value="Edit Company Info" />
-	</form>
-	<form action="updateDepartment">
-		<input type="submit" value="Edit Department Info" />
-	</form>
-	<form action="updateRole">
-		<input type="submit" value="Edit Role Info" />
-	</form>
-	<form action="updateCat">
-		<input type="submit" value="Edit Category Info" />
-	</form>
-	<form action="login">
-		<input type="submit" value="Log Out" />
-	</form>
-	
+	<div class="container">
+
+
+			<div class="page-heading">
+				<h1>Dashboard, Welcome ${username}!</h1>
+			</div>
+			<form action="vetterManagement">
+				<input class="btn btn-default btn-lg btn-block" type="submit" value="Vetter Management" />
+			</form>
+			<form action="pendingCompanyApplication">
+				<input class="btn btn-default btn-lg btn-block" type="submit" value="Pending Vendor Applications" />
+			</form>
+			<form action="companyApplication">
+				<input class="btn btn-default btn-lg btn-block" type="submit" value="Vendor Application History" />
+			</form>
+			<form action="vendorApplicationForm">
+				<input class="btn btn-default btn-lg btn-block" type="submit" value="Vendor Application Form" />
+			</form>
+			<form action="employeeManagement">
+				<input class="btn btn-default btn-lg btn-block" type="submit" value="Employee Management" />
+			</form>
+			<form action="requestService">
+				<input class="btn btn-default btn-lg btn-block" type="submit" value="Request Services from Vendor" />
+			</form>
+			<form action="serviceRequestFromVendor" method="get">
+				<input class="btn btn-default btn-lg btn-block" type="submit" value="Service Requests from Vendor" />
+			</form>
+			<form action="updateCompany">
+				<input class="btn btn-default btn-lg btn-block" type="submit" value="Edit Company Info" />
+			</form>
+			<form action="updateDepartment">
+				<input class="btn btn-default btn-lg btn-block" type="submit" value="Edit Department Info" />
+			</form>
+			<form action="updateRole">
+				<input class="btn btn-default btn-lg btn-block" type="submit" value="Edit Role Info" />
+			</form>
+			<form action="updateCat">
+				<input class="btn btn-default btn-lg btn-block" type="submit" value="Edit Category Info" />
+			</form>
+			<form action="login">
+				<input class="btn btn-default btn-lg btn-block" type="submit" value="Log Out" />
+			</form>
+	</div>
+
 </body>
 </html>

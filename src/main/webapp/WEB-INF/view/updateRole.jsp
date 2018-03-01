@@ -5,17 +5,16 @@
     <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>Seems to be a problem while login in</title>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <title>Edit Role</title>
     </head>
-    <%@ page import="com.beta.entity.Role, java.util.*" %>
-  
+    
     <body>
-    
-    
-	<table>
-	<tr>
-		<th>List of roles in your company</th>
-	</tr>
+    <div class="container">
+    <h1>List of Roles in Your Company</h1>
+	<table class="table">
 	<tr>
 		<c:forEach var="roles" items="${rolelist}">
 			<tr>
@@ -29,23 +28,15 @@
 	</table>
 	
 	<form action="storeNewRoleInfo" method="post">
-	<tr>
-		<td><input type="submit" value="Submit"
+	<p>Add new role(s) here, separate each category by comma, (eg. Role1,Role2,etc.)</p>
+	<input id="roleName" name="roleName"  type="text" />
+	<input type="submit" value="Submit" class="btn btn-success"
 			id="submitCompanyRegistration" name="submitCompanyRegistration" />
-		</td>
-	</tr>
-	
-		<tbody>
-			<tr id='row1'>
-				<td>ADD NEW ROLE HERE, SEPARATE EACH ENTRY USING A COMMA</td>
-				<td><input id="roleName" name="roleName"  type="text" /></td>
-			</tr>
-		</tbody>
 	</form>
 		<form action="dashboardcompany">
-			
-   			 <input type="submit" value="Go Back" />
+   			 <input type="submit" class="btn btn-default" value="Go Back" />
     	</form>
+    	</div>
     </body>
   <script type="text/javascript">
    function deleteDep(depId){

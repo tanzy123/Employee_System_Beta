@@ -61,7 +61,9 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
 		try {
 		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
 		session.setAttribute("account", account);
+		
 		ModelAndView mav = new ModelAndView("dashboardcompany");
+		mav.addObject("username", session.getAttribute("username").toString());
 		return mav;
 		} catch (VendorMgmtException e)
 		{
@@ -95,10 +97,25 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
 		} catch (VendorMgmtException e)
 		{
 			ModelAndView mav = new ModelAndView("error");
-			mav.addObject("message", "Vetter Management Page could not be displayed");
+			mav.addObject("message", e.getMessage());
 			return mav;
 			
 		}
+		catch (UserException e)
+		{
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+			return mav;
+			
+		}
+		catch (Exception e)
+		{
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", "Vetter list could not be display.");
+			return mav;
+			
+		}
+		
     }
 	
 	@RequestMapping(value = "/pendingApplication", method = RequestMethod.GET)  
@@ -115,7 +132,23 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
 		
 		{
 			ModelAndView mav = new ModelAndView("error");
-			mav.addObject("message", "Vetter Management Page could not be displayed");
+			mav.addObject("message", e.getMessage());
+			return mav;
+			
+		}
+        catch(UserException e)
+		
+		{
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+			return mav;
+			
+		}
+		
+		catch (Exception e)
+		{
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", "Pending application page could not be displayed.");
 			return mav;
 			
 		}
@@ -133,6 +166,21 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
         mav.addObject("files", files);
         return mav;
     } catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
 		{
         	ModelAndView mav = new ModelAndView("error");
 	    	mav.addObject("message", "Vetter applications could not be displayed");
@@ -155,6 +203,20 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
 		}
 		
 		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
 		{
         	ModelAndView mav = new ModelAndView("error");
 	    	mav.addObject("message", "Assign vetter view could not be displayed");

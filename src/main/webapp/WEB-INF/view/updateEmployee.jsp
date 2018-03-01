@@ -98,16 +98,6 @@
 
 </body>
 </html>
-<!-- <script>
 
-function editScrap(username)
-{
-	window.location.href="http://localhost:8080/VendorApplication-0.0.1-SNAPSHOT/update?employeeUserName="+username;
-	
-	}
 
-<<<<<<< HEAD
-</script> -->
-=======
-</script> -->
->>>>>>> 124640a223d1cdf0320f3607c577b51121408e0b
+

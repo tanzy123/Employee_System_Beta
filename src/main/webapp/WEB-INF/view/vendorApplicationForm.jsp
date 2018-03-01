@@ -10,7 +10,7 @@
 </head>
 <body>
 <h3>Vendor Application Form</h3>
-        <form:form method="POST" action="/VendorApplication/applyApplicationStage2" modelAttribute="application">
+        <form:form method="POST" action="applyApplicationStage2" modelAttribute="application">
              <table>
                 <tr>
                     <td><form:label path="companyReferenceNumber">Company Reference Number (company applying to)</form:label></td>
@@ -27,7 +27,7 @@
                 </tr>
             </table>
         </form:form>
-        <form action="/VendorApplication-0.0.1-SNAPSHOT/dashboardcompany">
+        <form action="/VendorApplication/dashboardcompany">
    					 <input type="submit" value="Go Back" />
         
 </body>

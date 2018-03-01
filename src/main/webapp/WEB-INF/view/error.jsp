@@ -7,7 +7,7 @@
     </head>
     <body>
     	<h1>${message}</h1>
-    	<h2>Please contact Team_Alpha for further assistance!</h2>
+    	<h2>Please contact Team_Beta for further assistance!</h2>
     	
        <button> <a href=${header.referer}>Return to Log in Page</a></button>
         
