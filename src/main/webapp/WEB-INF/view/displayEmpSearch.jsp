@@ -5,14 +5,17 @@
     <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <title>Seems to be a problem while login in</title>
     </head>
     <%@ page import="com.beta.entity.Role, java.util.*" %>
   
     <body>
+    <div class="container">
     
-    
-	<table>
+	<table class="table">
 	<tr>
 		<th>Here is a list of employee who matches your search</th>
 	</tr>
@@ -23,7 +26,7 @@
 			<td>${empAccount.employeeId}</td>
 			<td>Sequence<input id="Sequence" name="Sequence" type="text"/></td>
 			<td>
-			<button><a href="javascript:addVet('${empAccount.employeeId}', '${appRef}')">add as vetter</a></button>
+			<button class="btn btn-primary"><a href="javascript:addVet('${empAccount.employeeId}', '${appRef}')">add as vetter</a></button>
 			</td>
 			</tr>
 		</c:forEach>
@@ -35,6 +38,7 @@
 			
    			 <input type="submit" value="Go Back" />
     	</form>
+    	</div>
     </body>
   <script type="text/javascript">
   

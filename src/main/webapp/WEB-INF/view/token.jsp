@@ -4,12 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <title>Email Verification</title>
 </head>
 <body>
+<div class="container">
 	<h1>Please Key in the 4 digit token sent to your registered Email</h1>
 	<form action="verifyToken" method="post">
-		<table>
+		<table class="table">
 			<tr>
 				<td>Token</td>
 				<td><input type="text" name="token" required /></td>
@@ -21,9 +25,10 @@
 			</tr>
 		</table>
 
-		<<input type="submit" value="Submit" id="emailToken" name="emailToken">
+		<input type="submit" class="btn btn-primary" value="Submit" id="emailToken" name="emailToken">
 
 
 	</form>
+	</div>
 </body>
 </html>

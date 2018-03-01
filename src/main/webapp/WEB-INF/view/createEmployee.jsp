@@ -6,13 +6,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <title>Create New Employee Profile</title>
 </head>
 <body>
-
+<div class="container">
 	<h1>Create New Employee Profile</h1>
 	<form action="createEmployee" method="post">
-		<table>
+		<table class="table">
 			<tr>
 				<td>Employee ID</td>
 				<td><input type="text" name="employeeId" required /></td>
@@ -51,12 +54,12 @@
 				<td><input type="password" name="password" required /></td>
 			</tr>
 		</table>
-		<input type="submit" value="Create" id="create" name="create">
+		<input type="submit" value="Create" id="create" name="create" class="btn btn-success">
 	</form>
 
-<form action="BackToEmployeemanagementPage"><button name="back">Back</button></form>
+<form action="BackToEmployeemanagementPage"><button name="back" class="btn">Back</button></form>
 
-
+</div>
 
 </body>
 </html>

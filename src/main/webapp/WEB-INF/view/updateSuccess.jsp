@@ -3,11 +3,15 @@
     <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <title>Update Success</title>
     </head>
     <body>
+    <div class="container">
     	<h1>Your update was a success</h1>
-       <button> <a href="dashboardcompany">CLICK TO RETURN TO DASHBOARD</a></button>
-        
+       <button class="btn"> <a href="dashboardcompany" >CLICK TO RETURN TO DASHBOARD</a></button>
+        </div>
     </body>
     </html>
