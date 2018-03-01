@@ -156,6 +156,18 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 		return dao.findByNamedQueryAndNamedParams("EmployeeAccount.findByEmpNameAndCompanyRef", params);
 		
 	}
+
+	@Override
+	public List<EmployeeAccount> findByEmpId(String employeeId) {
+		// TODO Auto-generated method stub
+		
+		Map<String, Object> params = new HashMap<>();
+		
+		params.put("employeeId", employeeId);
+		return dao.findByNamedQueryAndNamedParams("EmployeeAccount.findByEmpId", params);
+		
+		
+	}
 	
 
 }

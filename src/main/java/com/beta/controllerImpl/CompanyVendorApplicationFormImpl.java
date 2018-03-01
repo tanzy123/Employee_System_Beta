@@ -21,6 +21,7 @@ import com.beta.entity.Category;
 import com.beta.entity.Company;
 import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.EmailPurposeType;
+import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.MailNotification;
 import com.beta.service.VendorApplication;
@@ -52,15 +53,41 @@ public class CompanyVendorApplicationFormImpl {
 	
 	@RequestMapping(value = "/vendorApplicationForm", method = RequestMethod.GET)
 	public ModelAndView getAllPendingAndVettingApplications(HttpSession session) {
+		try
+		{
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount) session.getAttribute("account");
 		ModelAndView mav = new ModelAndView("vendorApplicationForm", "application", new Application());
 		
 		mav.addObject("account", account);
 		return mav;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "Pending and vetting application view could not be displayed");
+	    	
+		   return mav;
+		}
 	}
 	
 	@RequestMapping(value = "/applyApplicationStage2", method = RequestMethod.POST)
 	public ModelAndView applyApplicationStage2(HttpSession session, @ModelAttribute("application") Application application) {
+		try
+		{
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount) session.getAttribute("account");
 		if (companyService.findbyRefNo(application.getCompanyReferenceNumber())==null)
 			throw new VendorMgmtException("Company Reference Number does not exist");
@@ -70,11 +97,35 @@ public class CompanyVendorApplicationFormImpl {
 		mav.addObject("categoryNames", categoryNames);
 		mav.addObject("account", account);
 		return mav;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "apply Application stage 2 is not successful!");
+	    	
+		   return mav;
+		}
 	}
 
 	@RequestMapping(value = "/applyApplicationStage3", method = RequestMethod.POST)
 	public ModelAndView applyApplicationStage3(HttpSession session,
 			@ModelAttribute("application") Application application) {
+		try
+		{
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount) session.getAttribute("account");
 		Category category = categoryService.findByNameAndCompanyRef
 				(application.getCategory().getCategoryName(), application.getCompanyReferenceNumber());
@@ -85,6 +136,28 @@ public class CompanyVendorApplicationFormImpl {
 		mav.addObject("account", account);
 		
 		return mav;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "apply Application stage 3 is not successful!");
+	    	
+		   return mav;
+		}
 	}
 	
 	@RequestMapping(value = "/uploadDocumentsAndSubmit", method = RequestMethod.POST)

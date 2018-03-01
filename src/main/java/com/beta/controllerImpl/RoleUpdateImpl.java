@@ -18,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.Department;
 import com.beta.entity.Role;
+import com.beta.exception.UserException;
+import com.beta.exception.VendorMgmtException;
 import com.beta.services.CompanyAdminstratorAccountService;
 import com.beta.services.RoleService;
 
@@ -33,6 +35,7 @@ public class RoleUpdateImpl {
 	@RequestMapping(value = "/updateRole", method = RequestMethod.GET)
 	public ModelAndView Registration(HttpServletRequest request,HttpServletResponse response,HttpSession session)
 	{
+		try {
 		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
 		List<Role> rolelist = roleService.findByCompanyRef(account.getCompanyReferenceNumber());
 
@@ -40,6 +43,28 @@ public class RoleUpdateImpl {
 		mav.addObject("rolelist",rolelist);
 		
 		return mav;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "updating of role could not be achieved.");
+	    	
+		   return mav;
+		}
 	}
 	
 	@RequestMapping(value = "/storeNewRoleInfo", method= RequestMethod.POST)
@@ -47,6 +72,7 @@ public class RoleUpdateImpl {
 			@RequestParam(value = "roleName") String roleName)
 		
 	{
+		try {
 		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
 		List<String> theList = Arrays.asList(roleName.split(","));
 		for (String s: theList) {
@@ -59,6 +85,28 @@ public class RoleUpdateImpl {
 		ModelAndView successMAV = new ModelAndView("redirect:updateRole");
 		
 		return successMAV;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "Storing of new role could not be carried out.");
+	    	
+		   return mav;
+		}
 		
 	}
 	
@@ -67,7 +115,8 @@ public class RoleUpdateImpl {
 			
 		
 	{
-		
+		try
+		{
 		String depid = request.getParameter("depid");
 		Long did = Long.parseLong(depid);
 		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
@@ -79,6 +128,28 @@ public class RoleUpdateImpl {
 		ModelAndView successMAV = new ModelAndView("redirect:updateRole");
 		
 		return successMAV;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "Deleting CompanyInfo is not possible");
+	    	
+		   return mav;
+		}
 		
 	}
 }

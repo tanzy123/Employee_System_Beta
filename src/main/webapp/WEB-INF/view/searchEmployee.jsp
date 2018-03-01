@@ -27,7 +27,7 @@
 			<tr>
 			<td><input type="text" value="${employee.employeeId}"></td>
 			<td><input type="text" value="${employee.employeeEmail}"></td>
-			<td><input type="text" value="${employee.contactNumber}"></td>
+			<td><input type="text" value="${employee.employeeName}"></td>
 			<td><input type="text" value="${employee.role.role}"></td>
 			<td><input type="text" value="${employee.logInType}"></td>
 			<td><input type="text" value="${employee.department.departmentName}"></td>

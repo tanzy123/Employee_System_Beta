@@ -85,6 +85,23 @@ public class RequirementServiceImpl extends BaseServiceImpl<Long, Requirement> i
 		}
 	}
 	
+	@Override
+	public Requirement findByApplicationRefAndUser( String appReferenceNumber, String UserName) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("applicationRef", appReferenceNumber);
+		params.put("userName", UserName);
+		
+		List<Requirement> list = dao.findByNamedQueryAndNamedParams("Requirement.findByApplicationRefAndUsername", params);
+		
+		if (list.size() > 1)
+			throw new VendorMgmtException("Multiple requirement is found with given application reference number and username");
+		else if (list.isEmpty())
+			return null;
+		else
+			return list.get(0);
+	} 
+	
+	
 	public Requirement findByAppRefAndUserName( String appReferenceNumber, String UserName) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("applicationRef", appReferenceNumber);
@@ -127,6 +144,12 @@ public class RequirementServiceImpl extends BaseServiceImpl<Long, Requirement> i
 		params.put("status", status);
 		List<Requirement> list = dao.findByNamedQueryAndNamedParams("Requirement.findByApplicationRefAndStatus", params);
 		return list;
+	}
+	
+	@Override
+	public void removeVet(Long id) {
+		// TODO Auto-generated method stub
+		super.delete(id);
 	}
 	
 }

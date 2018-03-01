@@ -53,17 +53,38 @@ public class EmployeeManagementControllerImpl {
 	@RequestMapping(value = "/employeeManagement", method = RequestMethod.GET)
 	public ModelAndView showLogin(HttpServletRequest request,
 			HttpServletResponse response) {
-
+		try {
 		ModelAndView mav = new ModelAndView("employeemanagement");
 		mav.addObject("employeeManagement", new EmployeeAccount());
 		return mav;
+		}catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "employee Management view could not be displayed");
+	    	
+		   return mav;
+		}
 	}
 
 	@RequestMapping(value = "/showCreateEmployee", method = RequestMethod.GET)
 	public ModelAndView showCreaeteEmployee(HttpServletRequest request,
 
 	HttpServletResponse response, HttpSession session) {
-
+		try {
 		ModelAndView mav = new ModelAndView("createEmployee");
 		mav.addObject("employeeManagement", new EmployeeAccount());
 		mav.addObject("department", new Department());
@@ -76,32 +97,123 @@ public class EmployeeManagementControllerImpl {
 		mav.addObject("departmentNames", departmentNames);
 		mav.addObject("roleNames", roleNames);
 		return mav;
+		}catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", " Employee created view could not be displayed");
+	    	
+		   return mav;
+		}
 	}
 
 	@RequestMapping(value = "/showSearchEmployee", method = RequestMethod.GET)
 	public ModelAndView showSearchEmployee(HttpServletRequest request,
 			HttpServletResponse response) {
-
+		try
+		{
 		ModelAndView mav = new ModelAndView("searchEmployee");
 		mav.addObject("employeeManagement", new EmployeeAccount());
 		return mav;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "Search Employee view could not be displayed");
+	    	
+		   return mav;
+		}
 	}
 
 	@RequestMapping(value = "/showUpdateEmployee", method = RequestMethod.GET)
 	public ModelAndView showUpdateEmployee(HttpServletRequest request,
 			HttpServletResponse response) {
 
+		try
+		{
 		ModelAndView mav = new ModelAndView("updateEmployee");
 		mav.addObject("employeeManagement", new EmployeeAccount());
 		return mav;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", " update employee view could not be displayed");
+	    	
+		   return mav;
+		}
 	}
 
 	@RequestMapping(value = "/showDeleteEmployee", method = RequestMethod.GET)
 	public ModelAndView showDeleteEmployee(HttpServletRequest request,
 			HttpServletResponse response) {
+		try {
 		ModelAndView mav = new ModelAndView("deleteEmployee");
 		mav.addObject("employeeManagement", new EmployeeAccount());
 		return mav;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "Deleted employee view could not be displayed");
+	    	
+		   return mav;
+		}
 	}
 
 	// ------------------------------------------------Create-------------------------------------------------------------------------
@@ -116,6 +228,7 @@ public class EmployeeManagementControllerImpl {
 			@RequestParam(value = "userName") String userName,
 			@RequestParam(value = "password") String password) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		
 		EmployeeAccount employeeAccount = new EmployeeAccount();
 		Department employeeDepartment = new Department();
 
@@ -180,10 +293,32 @@ public class EmployeeManagementControllerImpl {
 	@RequestMapping(value = "/searchEmployee", method = RequestMethod.GET)
 	public ModelAndView searchEmployee(
 			@RequestParam(value = "employeeUserName") String employeeUserName) {
-
+		try {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("employee",employeeAccountService.findByUserName(employeeUserName));
 		return mav;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "Employee could not be found!");
+	    	
+		   return mav;
+		}
 	}
 
 	// ---------------------------------------------------------------update---------------------------------------------------------
@@ -191,6 +326,7 @@ public class EmployeeManagementControllerImpl {
 	@RequestMapping(value = "/update", method = { RequestMethod.GET,
 			RequestMethod.POST })
 	public ModelAndView searchEmployeeToUpdate(HttpSession session, HttpServletRequest req) {
+		try {
 		String userName = req.getParameter("userName");
 		ModelAndView mav = new ModelAndView("updateEmployeeUpdate");
 		EmployeeAccount employee = new EmployeeAccount();
@@ -207,6 +343,28 @@ public class EmployeeManagementControllerImpl {
 		
 		
 		return mav;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "Searching employee to be updated could not be displayed.");
+	    	
+		   return mav;
+		}
 	}
 
 	@RequestMapping(value = "/showUpdateEdit", method = RequestMethod.GET)
@@ -216,11 +374,34 @@ public class EmployeeManagementControllerImpl {
 			HttpSession session,
 			@ModelAttribute("updateEmployeeUpdate") EmployeeAccount employee) {
 
+		try {
 		ModelAndView mav = new ModelAndView("updateEmployeeUpdate");
 		mav.addObject("employee", employee);
 		
 		
 		return mav;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "show update employee edit view could not be displayed");
+	    	
+		   return mav;
+		}
 	}
 
 	@RequestMapping(value = "/edited", method = RequestMethod.POST)

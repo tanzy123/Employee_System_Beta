@@ -13,4 +13,8 @@ public interface RequirementService extends BaseService<Long, Requirement> {
 	List<Requirement> findByApplicationRef(String applicationRef);
 
 	List<Requirement> findByApplicationRefAndStatus(String applicationRef, ApprovalStatus status);
+	
+	public Requirement findByApplicationRefAndUser(String appRef, String user);
+
+	public void removeVet(Long id);
 }

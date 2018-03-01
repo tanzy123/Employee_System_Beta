@@ -19,6 +19,7 @@ import com.beta.entity.ApplicationStatus;
 import com.beta.entity.Company;
 import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.Documents;
+import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.SaveDocumentService;
 import com.beta.services.ApplicationService;
@@ -46,6 +47,7 @@ public class CompanyVendorApplicationHistoryControllerImpl {
 
 	@RequestMapping(value = "/pendingCompanyApplication", method = RequestMethod.GET)
 	public ModelAndView getAllPendingAndVettingApplications(HttpSession session) {
+		try {
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount) session.getAttribute("account");
 		List<CompanyApplication> vendorApplicationDetails = getAllPendingAndVettingApplications(account.getCompanyReferenceNumber());
 		
@@ -54,10 +56,33 @@ public class CompanyVendorApplicationHistoryControllerImpl {
 		mav.addObject("vendorApplicationDetails", vendorApplicationDetails);
 
 		return mav;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "Pending and vetting company application list could not be displayed.");
+	    	
+		   return mav;
+		}
 	}
 	
 	@RequestMapping(value = "/companyApplication", method = RequestMethod.GET)
 	public ModelAndView getAllApplications(HttpSession session) {
+		try {
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount) session.getAttribute("account");
 		List<CompanyApplication> vendorApplicationDetails = getAllApplications(account.getCompanyReferenceNumber());
 		
@@ -65,10 +90,33 @@ public class CompanyVendorApplicationHistoryControllerImpl {
 		mav.addObject("vendorApplicationDetails", vendorApplicationDetails);
 
 		return mav;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "vendor application history could not be displayed.");
+	    	
+		   return mav;
+		}
 	}
 	
 	@RequestMapping(value = "/companyApplicationHistory/{applicationRef}", method = RequestMethod.GET)  
     public ModelAndView showDetailsOfApplication(@PathVariable String applicationRef, HttpSession session){
+		try {
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount)session.getAttribute("account");
 		CompanyApplication companyApplication = getCompanyApplication(account.getCompanyReferenceNumber(), applicationRef);
 		List<DocumentFiles> files = getApplicationDocumentsFromDropBox(applicationRef);
@@ -77,6 +125,28 @@ public class CompanyVendorApplicationHistoryControllerImpl {
         mav.addObject("companyApplication", companyApplication);
         mav.addObject("files", files);
         return mav;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "Application history details could not be displayed.");
+	    	
+		   return mav;
+		}
     }
 
 	private List<DocumentFiles> getApplicationDocumentsFromDropBox(String applicationRef) {

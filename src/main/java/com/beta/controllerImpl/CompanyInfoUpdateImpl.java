@@ -19,6 +19,7 @@ import com.beta.entity.Company;
 import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.Department;
 import com.beta.entity.Role;
+import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.services.CompanyAdminstratorAccountService;
 import com.beta.services.CompanyService;
@@ -35,6 +36,7 @@ public class CompanyInfoUpdateImpl {
 	@RequestMapping(value = "/updateCompany", method = RequestMethod.GET)
 	public ModelAndView Registration(HttpServletRequest request,HttpServletResponse response,HttpSession session)
 	{
+		try {
 		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
 		session.setAttribute("account", account);
 		
@@ -44,6 +46,29 @@ public class CompanyInfoUpdateImpl {
 		mav.addObject("companyUpdate", new Company());
 		mav.addObject("company",com);
 		return mav;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "Updating company is not successful!");
+	    	
+		   return mav;
+		}
+		
 	}
 	
 	@RequestMapping(value = "/storeNewCompanyInfo", method= RequestMethod.POST)
@@ -59,6 +84,8 @@ public class CompanyInfoUpdateImpl {
 			@RequestParam(value = "password") String password)
 		
 	{
+		try
+		{
 		ModelAndView mav = null;
 		Company company = new Company();
 		company.setCompanyReferenceNumber(companyReferenceNumber);
@@ -74,6 +101,28 @@ public class CompanyInfoUpdateImpl {
 		ModelAndView successMAV = new ModelAndView("updateSuccess");
 		successMAV.addObject("username", userName);
 		return successMAV;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "Storing company Info is not successful!");
+	    	
+		   return mav;
+		}
 		
 	}
 	

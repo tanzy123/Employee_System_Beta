@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beta.entity.EmployeeAccount;
+import com.beta.exception.UserException;
+import com.beta.exception.VendorMgmtException;
 import com.beta.services.EmployeeAccountService;
 
 @Controller
@@ -33,17 +35,62 @@ public class PendingVendorApplicationControllerImpl {
 	
 	public ModelAndView showLogin(HttpServletRequest request,
 			HttpServletResponse response) {
-
+		try {
 		ModelAndView mav = new ModelAndView("pendingvendorapplicationview");
 		mav.addObject("employeeManagement", employeeAccountService.findAll());
 		return mav;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "pending application view could not be displayed");
+	    	
+		   return mav;
+		}
 	}
 	@RequestMapping(value = "/pendingvendorapplicationview")
 	public ModelAndView listEmployee(ModelAndView model) throws IOException {
+		try {
 		List<EmployeeAccount> listEmployee = employeeAccountService.findAll();
 		model.addObject("listEmployee", listEmployee);
 		model.setViewName("pendingvendorapplicationview");
 		return model;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", " pending application view could not be displayed");
+	    	
+		   return mav;
+		}
 	}
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)

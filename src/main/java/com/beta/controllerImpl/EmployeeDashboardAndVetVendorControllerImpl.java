@@ -23,6 +23,10 @@ import com.beta.entity.Company;
 import com.beta.entity.Documents;
 import com.beta.entity.EmployeeAccount;
 import com.beta.entity.Requirement;
+
+import com.beta.exception.UserException;
+import com.beta.exception.VendorMgmtException;
+
 import com.beta.service.VendorVettingProcess;
 import com.beta.services.ApplicationService;
 import com.beta.services.CompanyService;
@@ -54,15 +58,38 @@ public class EmployeeDashboardAndVetVendorControllerImpl {
 
 	@RequestMapping(value = "/employeeDashboard", method = RequestMethod.GET)
 	public ModelAndView showDashboard(HttpSession session) {
+		try {
 		EmployeeAccount account = employeeAccountService.findByUserName(session.getAttribute("username").toString());
 		session.setAttribute("account", account);
 		ModelAndView mav = new ModelAndView("employeeDashboard");
 		return mav;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "Employee view could not be displayed");
+	    	
+		   return mav;
+		}
 	}
 
 	@RequestMapping(value = "/pendingvendorapplication")
 	public ModelAndView employeePendingVendorApplication(HttpSession session) {
-
+		try {
 		EmployeeAccount account = (EmployeeAccount) session.getAttribute("account");
 
 		List<CompanyApplication> companyApplicationlist = getListOfPendingApplications(account.getUserName());
@@ -70,18 +97,64 @@ public class EmployeeDashboardAndVetVendorControllerImpl {
 		mav.addObject("companyApplicationlist", companyApplicationlist);
 
 		return mav;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "employee pending application view could not be displayed");
+	    	
+		   return mav;
+		}
 	}
 
 	@RequestMapping(value = "/companyApplicationPending/{applicationRef}", method = RequestMethod.GET)
 	public ModelAndView showDetailsOfApplication(@PathVariable String applicationRef,
 			HttpSession session,
 			@ModelAttribute("requirementApproval") RequirementApproval requirementApproval) {
+		try {
 		CompanyApplication companyApplication = getVendorApplication(applicationRef);
 		List<DocumentFiles> files = getApplicationDocumentsFromDropBox(applicationRef);
 		ModelAndView mav = new ModelAndView("vendorApplicationDetailsForEmployee");
 		mav.addObject("companyApplication", companyApplication);
 		mav.addObject("files", files);
 		return mav;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "Application details view could not be displayed");
+	    	
+		   return mav;
+		}
+		
 	}
 
 	@RequestMapping(value = "/companyApplicationPending/vetApplication/{applicationRef}", method = RequestMethod.POST)
