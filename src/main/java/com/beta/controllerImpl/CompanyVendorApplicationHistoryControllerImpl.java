@@ -13,14 +13,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beta.controller.object.CompanyApplication;
+import com.beta.controller.object.DocumentFiles;
 import com.beta.entity.Application;
 import com.beta.entity.ApplicationStatus;
 import com.beta.entity.Company;
 import com.beta.entity.CompanyAdministratorAccount;
+import com.beta.entity.Documents;
 import com.beta.exception.VendorMgmtException;
+import com.beta.service.SaveDocumentService;
 import com.beta.services.ApplicationService;
 import com.beta.services.CompanyAdminstratorAccountService;
 import com.beta.services.CompanyService;
+import com.beta.services.DocumentsService;
 
 @Controller
 public class CompanyVendorApplicationHistoryControllerImpl {
@@ -33,6 +37,12 @@ public class CompanyVendorApplicationHistoryControllerImpl {
 
 	@Autowired
 	CompanyAdminstratorAccountService accountService;
+	
+	@Autowired
+	DocumentsService documentsService;
+	
+	@Autowired
+	SaveDocumentService saveDocumentService;
 
 	@RequestMapping(value = "/pendingCompanyApplication", method = RequestMethod.GET)
 	public ModelAndView getAllPendingAndVettingApplications(HttpSession session) {
@@ -61,12 +71,23 @@ public class CompanyVendorApplicationHistoryControllerImpl {
     public ModelAndView showDetailsOfApplication(@PathVariable String applicationRef, HttpSession session){
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount)session.getAttribute("account");
 		CompanyApplication companyApplication = getCompanyApplication(account.getCompanyReferenceNumber(), applicationRef);
+		List<DocumentFiles> files = getApplicationDocumentsFromDropBox(applicationRef);
 		
         ModelAndView mav = new ModelAndView("companyApplicationDetails");
         mav.addObject("companyApplication", companyApplication);
-     
+        mav.addObject("files", files);
         return mav;
     }
+
+	private List<DocumentFiles> getApplicationDocumentsFromDropBox(String applicationRef) {
+		List<Documents> documents = documentsService.findByApplicationRef(applicationRef);
+		List<DocumentFiles> documentFiles = new ArrayList<>();
+		for (Documents d: documents) {
+			String oringalFilename = d.getOriginalFileName();
+			documentFiles.add(new DocumentFiles(d.getUrl(), oringalFilename));
+		}
+		return documentFiles;
+	}
 
 	private List<CompanyApplication> getAllApplications(String companyReferenceNumber) {
 		List<Application> applicationList = applicationService.findByVendorRef(companyReferenceNumber);

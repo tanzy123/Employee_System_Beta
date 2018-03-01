@@ -100,5 +100,12 @@ public class CategoryServiceImpl extends BaseServiceImpl<Long, Category> impleme
 		params.put("companyReferenceNumber", companyReferenceNumber);
 		return dao.findByNamedQueryAndNamedParams("Category.findByCompRefNo", params);
 	}
+
+	@Override
+	public void removeCat(Long id) {
+		// TODO Auto-generated method stub
+		super.delete(id);
+		
+	}
 }
 		

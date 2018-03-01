@@ -25,7 +25,7 @@ public class Documents {
 	
 	private String originalFileName;
 	
-	private String remarks;
+	private String url;
 
 	public String getFilePath() {
 		return filePath;
@@ -43,12 +43,12 @@ public class Documents {
 		this.originalFileName = originalFileName;
 	}
 
-	public String getRemarks() {
-		return remarks;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public Long getDocumentId() {

@@ -60,7 +60,9 @@ public class CompanyServiceImpl extends BaseServiceImpl<Long, Company> implement
 		else
 		//	updateCompanyDetails(entity, company);
 			company.setCompanyAddress(entity.getCompanyAddress());
+			
 			company.setCompanyEmail(entity.getCompanyEmail());
+			
 			company.setCompanyName(entity.getCompanyName());
 			company.setCompanyReferenceNumber(entity.getCompanyReferenceNumber());
 			company.setCompanyWebsite(entity.getCompanyWebsite());

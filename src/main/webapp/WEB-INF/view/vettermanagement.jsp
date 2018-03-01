@@ -19,8 +19,9 @@
 		<c:forEach var="companyApplication" items="${companyApplicationlist}"><tr>
 			<td>${companyApplication.company.companyName}</td>
 			<td>${companyApplication.application.category.categoryName}</td>
-			<td><a href="vendorApplication/${companyApplication.application.applicationRef}" >Details</a></td>
-			<td><a href="assignVetter/${companyApplication.application.applicationRef}" >Assign Vetters</a></td>
+			<td><a href="/VendorApplication/vendorApplication/${companyApplication.application.applicationRef}" >Details</a></td>
+			<td><a href="/VendorApplication/assignVetter/${companyApplication.application.applicationRef}" >Assign Vetters</a></td>
+
 		</c:forEach>
 		
 		<form action="dashboardcompany">

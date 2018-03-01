@@ -9,6 +9,7 @@ import javax.annotation.PreDestroy;
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -18,6 +19,7 @@ import com.beta.dao.EmployeeAccountDao;
 import com.beta.dao.JPADAO;
 import com.beta.entity.Company;
 import com.beta.entity.EmployeeAccount;
+import com.beta.entity.UserAccount;
 import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.FieldCopyUtil;
@@ -54,6 +56,17 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 		updateAccountDetails(entity, validatedAccount);
 
 	}
+	
+	@Override
+	public void saveOrUpdateByCompAdmin(EmployeeAccount entity) throws VendorMgmtException {
+		if(!findByUserName(entity.getUserName()).equals(null))
+		{
+			throw new UserException("The UserName alread Exist! Try another UserName");
+		}
+		EmployeeAccount validatedAccount = findByUserName(entity.getUserName());
+		updateAccountDetails(entity, validatedAccount);
+
+	}
 
 	private void updateAccountDetails(EmployeeAccount entity, EmployeeAccount validatedAccount) {
 		entity.setPassword(null);
@@ -81,6 +94,11 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 		else if (list.isEmpty())
 			throw new UserException("Invalid company entered while validating account");
 
+		if(!findByUserName(entity.getUserName()).equals(null))
+		{
+			throw new UserException("The UserName alread Exist! Try another UserName");
+		}
+
 	}
 
 	@Override
@@ -104,6 +122,7 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 			return validatedAccount;
 		else
 			throw new UserException("Invalid Username or Password"); 
+		
 	}
 
 	public EmployeeAccount findByUserName(String userName) {
@@ -124,4 +143,17 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 		return dao.findByNamedQueryAndNamedParams("EmployeeAccount.checkEmpIdDuplicate", params);
 		
 	}
+
+	
+	@Override
+	public List<EmployeeAccount> findByEmpNameAndCompany(String companyReferencenumber, String employeeName)
+	{
+		Map<String, Object> params = new HashMap<>();
+		params.put("companyReferenceNumber", companyReferencenumber);
+		params.put("employeeName", employeeName);
+		return dao.findByNamedQueryAndNamedParams("EmployeeAccount.findByEmpNameAndCompanyRef", params);
+		
+	}
+	
+
 }

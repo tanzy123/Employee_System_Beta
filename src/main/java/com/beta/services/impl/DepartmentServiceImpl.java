@@ -103,5 +103,11 @@ public class DepartmentServiceImpl extends BaseServiceImpl<Long, Department> imp
 		return dao.findByNamedQueryAndNamedParams("Department.findByCompRefNo", params);
 		
 	}
+
+	@Override
+	public void removeDepartment(Long id) {
+		// TODO Auto-generated method stub
+		super.delete(id);
+	}
 	
 }

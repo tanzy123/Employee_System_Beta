@@ -120,11 +120,18 @@ public class VendorApplicationImpl implements VendorApplication {
 			if (!file.getOriginalFilename().isEmpty()) {
 				File tempFile = getTempFile(file, workingDirectory);
 				String foldername = obtainUniqueFoldername(applicationRef, file.getOriginalFilename());
-				saveDocumentService.uploadFile(tempFile.getAbsolutePath(), foldername);
-				createDocumentToStoreInDropBox(foldername, applicationRef, file.getOriginalFilename());
+				String url = saveDocumentService.uploadFile(tempFile.getAbsolutePath(), foldername);
+				String storedUrl = makeFileLinkDownloadableOnly(url);
+				createDocumentToStoreInDropBox(storedUrl, foldername, applicationRef, file.getOriginalFilename());
 				tempFile.delete();
 			}
 		}
+	}
+
+	private String makeFileLinkDownloadableOnly(String url) {
+		int index = url.lastIndexOf('0');
+		String storedUrl = url.substring(0, index) + "1";
+		return storedUrl;
 	}
 
 	public String obtainUniqueFoldername(String applicationRef, String originalFilename) {
@@ -142,8 +149,9 @@ public class VendorApplicationImpl implements VendorApplication {
 		return foldername;
 	}
 
-	public void createDocumentToStoreInDropBox(String filePath, String applicationRef, String originalFileName) {
+	public void createDocumentToStoreInDropBox(String url, String filePath, String applicationRef, String originalFileName) {
 		Documents document = new Documents();
+		document.setUrl(url);
 		document.setApplicationRef(applicationRef);
 		document.setFilePath(filePath);
 		document.setOriginalFileName(originalFileName);

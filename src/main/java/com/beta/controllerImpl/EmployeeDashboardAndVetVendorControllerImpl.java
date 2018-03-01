@@ -15,25 +15,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beta.controller.object.CompanyApplication;
+import com.beta.controller.object.DocumentFiles;
 import com.beta.controller.object.RequirementApproval;
 import com.beta.entity.Application;
 import com.beta.entity.ApprovalStatus;
 import com.beta.entity.Company;
+import com.beta.entity.Documents;
 import com.beta.entity.EmployeeAccount;
 import com.beta.entity.Requirement;
+import com.beta.exception.ExceptionHandler;
 import com.beta.exception.UserException;
 import com.beta.service.VendorVettingProcess;
 import com.beta.services.ApplicationService;
 import com.beta.services.CompanyService;
+import com.beta.services.DocumentsService;
 import com.beta.services.EmployeeAccountService;
 import com.beta.services.RequirementService;
 
 @Controller
-public class EmployeeControllerImpl {
+public class EmployeeDashboardAndVetVendorControllerImpl {
 
-//	
-//	@Autowired
-//	ExceptionHandler exceptionHandler;
 	
 	@Autowired
 	EmployeeAccountService employeeAccountService;
@@ -49,6 +50,9 @@ public class EmployeeControllerImpl {
 	
 	@Autowired
 	VendorVettingProcess vendorVettingProcess;
+	
+	@Autowired
+	DocumentsService documentsService;
 
 	@RequestMapping(value = "/employeeDashboard", method = RequestMethod.GET)
 	public ModelAndView showDashboard(HttpSession session) {
@@ -56,12 +60,6 @@ public class EmployeeControllerImpl {
 		session.setAttribute("account", account);
 		ModelAndView mav = new ModelAndView("employeeDashboard");
 		return mav;
-	}
-
-	@RequestMapping(value = "/employeeRequestServiceFromAVendor")
-	public String employeeRequestServiceFromAVendor(@ModelAttribute("company") Company company) {
-
-		return "requestServiceFromAVendor";
 	}
 
 	@RequestMapping(value = "/pendingvendorapplication")
@@ -81,10 +79,10 @@ public class EmployeeControllerImpl {
 			HttpSession session,
 			@ModelAttribute("requirementApproval") RequirementApproval requirementApproval) {
 		CompanyApplication companyApplication = getVendorApplication(applicationRef);
-
+		List<DocumentFiles> files = getApplicationDocumentsFromDropBox(applicationRef);
 		ModelAndView mav = new ModelAndView("vendorApplicationDetailsForEmployee");
 		mav.addObject("companyApplication", companyApplication);
-
+		mav.addObject("files", files);
 		return mav;
 	}
 
@@ -93,49 +91,35 @@ public class EmployeeControllerImpl {
 			@ModelAttribute("requirementApproval") RequirementApproval requirementApproval) {	
 		String userName = session.getAttribute("username").toString();
 		Application application = applicationService.findByApplicationRefNo(applicationRef);
-	//<--	
+		
+		
 		try {
 			vendorVettingProcess.vetVendor(userName, application, requirementApproval.getStatus(), requirementApproval.getRequirements());
 		} 
 		catch(Exception e)
 		{
-			//exceptionHandler.handleException(e);
+			e.printStackTrace();
 		}
 
 		ModelAndView mav = new ModelAndView("success");
 		return mav;
 	}
-	//-->
+	
+
+	private List<DocumentFiles> getApplicationDocumentsFromDropBox(String applicationRef) {
+		List<Documents> documents = documentsService.findByApplicationRef(applicationRef);
+		List<DocumentFiles> documentFiles = new ArrayList<>();
+		for (Documents d: documents) {
+			String oringalFilename = d.getOriginalFileName();
+			documentFiles.add(new DocumentFiles(d.getUrl(), oringalFilename));
+		}
+		return documentFiles;
+	}
 
 	private CompanyApplication getVendorApplication(String applicationRef) {
 		Application application = applicationService.findByApplicationRefNo(applicationRef);
 		Company company = companyService.findbyRefNo(application.getVendorReferenceNumber());
 		return new CompanyApplication(company, application);
-	}
-
-	// applytobeavendor
-	@RequestMapping(value = "/applytobeavendor")
-	public String applytobeavendor(@ModelAttribute("company") Company company) {
-
-		return "applytobeavendor";
-	}
-
-	@RequestMapping(value = "/vendorapplicationhistory")
-	public String employeeChecksVendorApplicationHistory(@ModelAttribute("company") Company company) {
-
-		return "vendorapplicationhistory";
-	}
-
-	@RequestMapping(value = "/applyingToBeAVendor")
-	public String applyToBeAVendor(@ModelAttribute("company") Company company) {
-
-		return "applyToBeAVendor";
-	}
-
-	@RequestMapping(value = "/editEmployeeInformation")
-	public String editEmployeeInformation(@ModelAttribute("company") Company company) {
-
-		return "editemployeeinformation";
 	}
 
 	private List<CompanyApplication> getListOfPendingApplications(String userName) {
