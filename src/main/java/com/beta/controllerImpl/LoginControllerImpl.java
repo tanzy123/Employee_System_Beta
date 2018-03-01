@@ -16,6 +16,7 @@ import com.beta.controller.LoginController;
 import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.EmployeeAccount;
 import com.beta.entity.UserAccount;
+import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.CompanyValidation;
 import com.beta.services.CompanyAdminstratorAccountService;
@@ -56,25 +57,50 @@ public class LoginControllerImpl implements LoginController {
 	public ModelAndView loginVerification(HttpSession session,
 			@RequestParam(value = "username") String username,
 			@RequestParam(value = "password") String password,
-			@RequestParam(value = "selectLoginType") String loginType) 
+			@RequestParam(value = "selectLoginType") String loginType)
 	{
+		
 		ModelAndView mav = null;
 		session.setAttribute("username", username);
 		
 		if (loginType.equals("EMPLOYEE")) {
 			EmployeeAccount employeeAccount = new EmployeeAccount();
 			session.setAttribute("employeeRefNumber", employeeAccountService.findByUserName(username).getCompanyReferenceNumber());
+			session.setAttribute("employeeName", employeeAccountService.findByUserName(username).getUserName());
 			employeeAccount.setUserName(username);
 			employeeAccount.setPassword(password);
 			try {
 				employeeAccountService.validateAccount(employeeAccount);
 				mav = new ModelAndView("redirect:/employeeDashboard");
-			} catch (VendorMgmtException e) {
-				mav = new ModelAndView("error");
-				mav.addObject("message", e.getMessage());
+				
+			} catch (UserException e) 
+			{
+				
+				
+				mav=new ModelAndView("error");
+				mav.addObject("message",e.getMessage());
+				return mav;
 			}
+               catch (VendorMgmtException e) 
+			{
+				
+				
+				mav=new ModelAndView("error");
+				mav.addObject("message",e.getMessage());
+				return mav;
+			}
+                catch (Exception e) 
+			{
+				
+				
+				mav=new ModelAndView("error");
+				mav.addObject("message","Invalid Employee log in credentials!");
+				return mav;
+			}
+			}
+			
 
-		} else if (loginType.equals("COMPANY_ADMINISTRATOR")) {
+		 else if (loginType.equals("COMPANY_ADMINISTRATOR")) {
 			session.setAttribute("companyRefNumber", companyAdminAccountService.findByUserName(username).getCompanyReferenceNumber());
 			CompanyAdministratorAccount companyAdministratorAccount = new CompanyAdministratorAccount();
 			companyAdministratorAccount.setUserName(username);
@@ -84,19 +110,29 @@ public class LoginControllerImpl implements LoginController {
 						.validateAccount(companyAdministratorAccount);
 				mav = new ModelAndView("redirect:/dashboardcompany");
 
-			} catch (VendorMgmtException e) {
+			} catch (UserException e) {
 				if (e.getMessage().equals("Account has not been validated yet")) {
 					mav = new ModelAndView("missingToken"); 
 					mav.addObject("message", e.getMessage());
+					return mav;
 				}
 				else {
-				mav = new ModelAndView("error"); 
-				mav.addObject("message", e.getMessage());
+					
+
+				   mav = new ModelAndView("error"); 
+				   mav.addObject("message","the Log in credential is invalid!!");
+				   return mav;
+				
 				}
 			}
 		}
 		return mav;
 	}
+	
+	
+	
+
+	
 }
 	
 	
