@@ -110,7 +110,7 @@ public class EmployeeManagementControllerImpl {
 	public ModelAndView createEmployee(HttpSession session,
 			@RequestParam(value = "employeeId") String employeeId,
 			@RequestParam(value = "employeeEmail") String employeeEmail,
-			@RequestParam(value = "contactNumber") String contactNumber,
+			@RequestParam(value = "employeeName") String employeeName,
 			@RequestParam(value = "role") String role,
 			@RequestParam(value = "department") String departmentName,
 			@RequestParam(value = "userName") String userName,
@@ -118,10 +118,13 @@ public class EmployeeManagementControllerImpl {
 		ModelAndView mav = new ModelAndView();
 		EmployeeAccount employeeAccount = new EmployeeAccount();
 		Department employeeDepartment = new Department();
-		Role employeeRole = new Role();
-		String companyReferenceNumber = session.getAttribute("companyRefNumber").toString();
 
-		employeeAccount.setContactNumber(contactNumber);
+		Role employeeRole=new Role();
+		String companyReferenceNumber=session.getAttribute("companyRefNumber").toString();
+		
+		employeeAccount.setEmployeeName(employeeName);
+
+
 		employeeAccount.setCompanyReferenceNumber(companyReferenceNumber);
 
 		// need to check if department doesn't exist, haven't done yet
@@ -135,6 +138,7 @@ public class EmployeeManagementControllerImpl {
 		employeeAccount.setRole(employeeRole);
 		employeeAccount.setEmployeeEmail(employeeEmail);
 		employeeAccount.setIsValidated(true);
+		
 		if (employeeAccountService.checkDuplicateEmployeeIdInSameCompany(
 				companyReferenceNumber, employeeId).isEmpty()) {
 			employeeAccount.setEmployeeId(employeeId);
@@ -143,7 +147,7 @@ public class EmployeeManagementControllerImpl {
 			mav.addObject("message", "the same Employee ID already exist!");
 			return mav;
 		}
-		
+
 		employeeAccount.setUserName(userName);
 		employeeAccount.setPassword(password);
 

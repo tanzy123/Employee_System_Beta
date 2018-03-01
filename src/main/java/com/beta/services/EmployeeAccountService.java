@@ -17,7 +17,11 @@ public interface EmployeeAccountService extends BaseService<Long, EmployeeAccoun
 	
 	List<EmployeeAccount> checkDuplicateEmployeeIdInSameCompany(String companyReferencenumber, String employeeId);
 	
-	EmployeeAccount saveOrUpdate2(EmployeeAccount entity) throws VendorMgmtException;
+
+	public List<EmployeeAccount> findByEmpNameAndCompany(String companyReferencenumber, String employeeName);
+
+
 	
 	void saveOrUpdateByCompAdmin(EmployeeAccount entity) throws VendorMgmtException;
+
 }

@@ -143,12 +143,17 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 		return dao.findByNamedQueryAndNamedParams("EmployeeAccount.checkEmpIdDuplicate", params);
 		
 	}
-	public EmployeeAccount saveOrUpdate2(EmployeeAccount entity) throws VendorMgmtException {
-		try {
-			entity = dao.merge(entity);
-			return dao.flush(entity);
-		} catch (Exception e) {
-			throw new VendorMgmtException(entityClass.getName() + " - ", e);
-		}
+
+	
+	@Override
+	public List<EmployeeAccount> findByEmpNameAndCompany(String companyReferencenumber, String employeeName)
+	{
+		Map<String, Object> params = new HashMap<>();
+		params.put("companyReferenceNumber", companyReferencenumber);
+		params.put("employeeName", employeeName);
+		return dao.findByNamedQueryAndNamedParams("EmployeeAccount.findByEmpNameAndCompanyRef", params);
+		
 	}
+	
+
 }
