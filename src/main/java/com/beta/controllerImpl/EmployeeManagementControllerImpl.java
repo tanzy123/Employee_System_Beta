@@ -21,15 +21,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.beta.entity.Application;
 import com.beta.entity.Department;
+import com.beta.entity.EmailPurposeType;
 import com.beta.entity.EmployeeAccount;
 import com.beta.entity.Role;
 import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.NotificationService;
-
 import com.beta.services.DepartmentService;
 import com.beta.services.EmployeeAccountService;
 import com.beta.services.RoleService;
+import com.beta.unused.RegistrationService;
 
 @Controller
 @RequestMapping("/")
@@ -48,8 +49,7 @@ public class EmployeeManagementControllerImpl {
 	@Autowired
 	NotificationService notificationService;
 
-	// --------------------------------------load jsp
-	// pages----------------------------------------------------------------------------
+	// --------------------------------------load jsp pages----------------------------------------------------------------------------
 	@RequestMapping(value = "/employeeManagement", method = RequestMethod.GET)
 	public ModelAndView showLogin(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -114,13 +114,12 @@ public class EmployeeManagementControllerImpl {
 			@RequestParam(value = "role") String role,
 			@RequestParam(value = "department") String departmentName,
 			@RequestParam(value = "userName") String userName,
-			@RequestParam(value = "password") String password) {
+			@RequestParam(value = "password") String password) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		EmployeeAccount employeeAccount = new EmployeeAccount();
 		Department employeeDepartment = new Department();
 		Role employeeRole = new Role();
-		String companyReferenceNumber = session
-				.getAttribute("companyRefNumber").toString();
+		String companyReferenceNumber = session.getAttribute("companyRefNumber").toString();
 
 		employeeAccount.setContactNumber(contactNumber);
 		employeeAccount.setCompanyReferenceNumber(companyReferenceNumber);
@@ -135,6 +134,7 @@ public class EmployeeManagementControllerImpl {
 				companyReferenceNumber, role);
 		employeeAccount.setRole(employeeRole);
 		employeeAccount.setEmployeeEmail(employeeEmail);
+		employeeAccount.setIsValidated(true);
 		if (employeeAccountService.checkDuplicateEmployeeIdInSameCompany(
 				companyReferenceNumber, employeeId).isEmpty()) {
 			employeeAccount.setEmployeeId(employeeId);
@@ -143,7 +143,7 @@ public class EmployeeManagementControllerImpl {
 			mav.addObject("message", "the same Employee ID already exist!");
 			return mav;
 		}
-		System.out.println(password);
+		
 		employeeAccount.setUserName(userName);
 		employeeAccount.setPassword(password);
 
@@ -165,7 +165,10 @@ public class EmployeeManagementControllerImpl {
 			mav.addObject("message", "System error, please contact System administrator");
 			return mav;
 		}
-
+		String[] myStringArray = {};
+		String message= "Username : "+userName+"Employee ID : "+employeeId+"Employee Email : "+employeeEmail+"Role :" +role+"Department : "+departmentName;
+		notificationService.sendEmailWithPurposeCC(employeeEmail, myStringArray, "Employee Account Created", message, "", EmailPurposeType.AccountCreated);
+		
 		mav = new ModelAndView("employeemanagement");
 		return mav;
 		
@@ -226,7 +229,7 @@ public class EmployeeManagementControllerImpl {
 			@RequestParam(value = "employeeEmail") String employeeEmail,
 			@RequestParam(value = "role") String role,
 			@RequestParam(value = "department") String departmentName,
-			@ModelAttribute("updateEmployeeUpdate") EmployeeAccount employee) {
+			@ModelAttribute("updateEmployeeUpdate") EmployeeAccount employee) throws Exception {
 
 		
 		ModelAndView mav = new ModelAndView("updateEmployeeUpdate");
@@ -261,13 +264,26 @@ public class EmployeeManagementControllerImpl {
 
 		try {
 			employeeAccountService.saveOrUpdateByCompAdmin(employeeAccount);
-		} catch (VendorMgmtException e) {
-			mav = new ModelAndView("error");
+		} catch(UserException e)
+		{
+			mav=new ModelAndView("error");
+
 			mav.addObject("message", e.getMessage());
 			return mav;
-		}
+		} catch (VendorMgmtException e) {
+			mav=new ModelAndView("error");
+			mav.addObject("message", "System error");
+			return mav;
+		} catch (Exception e) {
+			mav=new ModelAndView("error");
+			mav.addObject("message", "System error, please contact System administrator");
+			return mav;}
+		String[] myStringArray = {};
+
+		String message= "Username : "+userName+"Employee ID : "+employeeId+"Employee Email : "+employeeEmail+"Role :" +role+"Department : "+departmentName;
+		notificationService.sendEmailWithPurposeCC(employeeEmail, myStringArray, "Employee Account Created", message, "", EmailPurposeType.AccountCreated);
 		mav = new ModelAndView("employeemanagement");
-		//registrationService.sendVerificationEmail
+	
 		return mav;
 	}
 
