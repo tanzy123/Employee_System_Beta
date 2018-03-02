@@ -27,8 +27,19 @@
                 </tr>
             </table>
         </form:form>
-        <form action="/VendorApplication/dashboardcompany">
+        <form action="findCompany">
    					 <input type="submit" value="Go Back" />
+   					 
+   		<form action="displayComSearch" method="get">
+	
+		<tbody>
+			<tr id='row1'>
+				<td>SEARCH BY COMPANY NAME TO ADD</td>
+				<td><input id="comName" name="comName"  type="text" /></td>
+				<td><input type="submit" value="Search" id="submitCompanyRegistration" name="submitCompanyRegistration" /></td>
+			</tr>
+		</tbody>
+		</form>
         
 </body>
 </html>

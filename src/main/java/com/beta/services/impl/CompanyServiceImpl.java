@@ -101,4 +101,15 @@ public class CompanyServiceImpl extends BaseServiceImpl<Long, Company> implement
 		else
 			return list.get(0);
 	}
+	
+	@Override
+	public List <Company> findByComName(String companyName) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("companyName", companyName);
+		List<Company> list = dao.findByNamedQueryAndNamedParams("Company.findByName", params);
+		return list;
+	}
+	
+	
+	
 }

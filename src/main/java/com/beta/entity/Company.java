@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 
 @Entity
 @NamedQueries({
+	@NamedQuery(name="Company.findByName",
+             query="SELECT c FROM Company c where c.companyName = :companyName"),
     @NamedQuery(name="Company.findByNameAndRefNo",
                 query="SELECT c FROM Company c where c.companyReferenceNumber = :companyReferenceNumber"
                 		+ " AND c.companyName = :companyName"),
