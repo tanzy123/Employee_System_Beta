@@ -1,6 +1,5 @@
 package com.beta.service;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,7 +13,7 @@ public class ConfigUtil {
 	
 	static{
 		try {
-			FileInputStream fis = new FileInputStream("C:\\Users\\645686\\Desktop\\personal workspace\\VendorApplication\\config.properties");
+			FileInputStream fis = new FileInputStream("config.properties");
 			props.load(fis );
 			fis.close();
 		} catch (FileNotFoundException e) {

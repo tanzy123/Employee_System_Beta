@@ -23,9 +23,9 @@ import com.beta.entity.Requirement;
 import com.beta.entity.Role;
 import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
-import com.beta.services.CompanyAdminstratorAccountService;
-import com.beta.services.EmployeeAccountService;
-import com.beta.services.RequirementService;
+import com.beta.orm.service.CompanyAdminstratorAccountService;
+import com.beta.orm.service.EmployeeAccountService;
+import com.beta.orm.service.RequirementService;
 
 @Controller
 public class VetterMgmtControllerImpl {

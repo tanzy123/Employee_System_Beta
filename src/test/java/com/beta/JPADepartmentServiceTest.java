@@ -18,8 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.beta.entity.Company;
 import com.beta.entity.Department;
 import com.beta.exception.VendorMgmtException;
-import com.beta.services.CompanyService;
-import com.beta.services.DepartmentService;
+import com.beta.orm.service.CompanyService;
+import com.beta.orm.service.DepartmentService;
+
 import static com.beta.TestConstant.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)

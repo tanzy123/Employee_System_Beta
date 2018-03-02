@@ -10,7 +10,7 @@
     	<h1>${message}</h1>
     	<h2>Please contact Team_Beta for further assistance!</h2>
     	
-       <button class="btn btn-secondary"> <a href=${header.referer}>Return to Log in Page</a></button>
+       <button class="btn btn-secondary"> <a href=${header.referer}>Return to Previous Page</a></button>
         
     
 	</div>

@@ -11,8 +11,8 @@ import com.beta.entity.Company;
 import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.CompanyValidation;
+import com.beta.service.RegistrationAndApplication;
 import com.beta.service.VendorApplication;
-import com.beta.unused.RegistrationAndApplication;
 
 @Service("RegistrationAndApplication")
 @org.springframework.transaction.annotation.Transactional(propagation = Propagation.REQUIRED, rollbackFor = VendorMgmtException.class)

@@ -12,10 +12,10 @@ import com.beta.entity.Application;
 import com.beta.entity.ApprovalStatus;
 import com.beta.entity.Company;
 import com.beta.entity.Requirement;
+import com.beta.orm.service.ApplicationService;
+import com.beta.orm.service.CompanyService;
+import com.beta.orm.service.RequirementService;
 import com.beta.service.VendorVettingProcess;
-import com.beta.services.ApplicationService;
-import com.beta.services.CompanyService;
-import com.beta.services.RequirementService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:appContext.xml"})

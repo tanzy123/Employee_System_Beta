@@ -18,8 +18,8 @@ import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.Department;
 import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
-import com.beta.services.CompanyAdminstratorAccountService;
-import com.beta.services.DepartmentService;
+import com.beta.orm.service.CompanyAdminstratorAccountService;
+import com.beta.orm.service.DepartmentService;
 
 @Controller
 public class DepartmentUpdateImpl {
@@ -37,10 +37,6 @@ public class DepartmentUpdateImpl {
 		try {
 		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
 		List<Department> departmentlist = deptService.findByCompanyRef(account.getCompanyReferenceNumber());
-//		List<String> deptNamelist = new ArrayList();
-//		for (Department d: departmentlist) {
-//			deptNamelist.add(d.getDepartmentName());
-//		}
 		int size = departmentlist.size();
 		ModelAndView mav = new ModelAndView("updateDepartment");
 		mav.addObject("departmentlist",departmentlist);

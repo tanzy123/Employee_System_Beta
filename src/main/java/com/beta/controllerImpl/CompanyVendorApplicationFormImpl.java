@@ -1,11 +1,9 @@
 package com.beta.controllerImpl;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
-import javax.xml.crypto.KeySelector.Purpose;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,12 +21,12 @@ import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.EmailPurposeType;
 import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
+import com.beta.orm.service.ApplicationService;
+import com.beta.orm.service.CategoryService;
+import com.beta.orm.service.CompanyAdminstratorAccountService;
+import com.beta.orm.service.CompanyService;
 import com.beta.service.MailNotification;
 import com.beta.service.VendorApplication;
-import com.beta.services.ApplicationService;
-import com.beta.services.CategoryService;
-import com.beta.services.CompanyAdminstratorAccountService;
-import com.beta.services.CompanyService;
 
 @Controller
 public class CompanyVendorApplicationFormImpl {

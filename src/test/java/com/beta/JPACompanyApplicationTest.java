@@ -18,9 +18,9 @@ import com.beta.entity.Company;
 import com.beta.entity.Department;
 import com.beta.entity.Role;
 import com.beta.exception.VendorMgmtException;
+import com.beta.orm.service.CategoryService;
+import com.beta.orm.service.CompanyService;
 import com.beta.service.CompanyValidation;
-import com.beta.services.CategoryService;
-import com.beta.services.CompanyService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:appContext.xml"})

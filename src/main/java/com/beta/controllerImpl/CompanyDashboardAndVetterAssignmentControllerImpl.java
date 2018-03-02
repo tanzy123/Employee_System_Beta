@@ -1,12 +1,16 @@
 package com.beta.controllerImpl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,27 +19,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.beta.controller.CompanyDashboardAndVetterAssignmentController;
 import com.beta.controller.object.CompanyApplication;
 import com.beta.controller.object.DocumentFiles;
-import com.beta.controller.object.RequirementList;
+import com.beta.controller.object.VetterList;
+import com.beta.controller.object.VetterdDTO;
 import com.beta.entity.Application;
 import com.beta.entity.ApplicationStatus;
 import com.beta.entity.Company;
 import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.Documents;
 import com.beta.entity.EmployeeAccount;
+import com.beta.entity.Requirement;
 import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
+import com.beta.orm.service.ApplicationService;
+import com.beta.orm.service.CompanyAdminstratorAccountService;
+import com.beta.orm.service.CompanyService;
+import com.beta.orm.service.DocumentsService;
+import com.beta.orm.service.EmployeeAccountService;
+import com.beta.orm.service.RequirementService;
 import com.beta.service.VendorVettingProcess;
-import com.beta.services.ApplicationService;
-import com.beta.services.CompanyAdminstratorAccountService;
-import com.beta.services.CompanyService;
-import com.beta.services.DocumentsService;
-import com.beta.services.EmployeeAccountService;
-import com.beta.services.RequirementService;
 
 @Controller
-public class CompanyDashboardAndVetterAssignmentControllerImpl {
+public class CompanyDashboardAndVetterAssignmentControllerImpl implements CompanyDashboardAndVetterAssignmentController {
 	
 	
 	@Autowired
@@ -59,6 +66,10 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
 	@Autowired
 	DocumentsService documentsService;
 	
+	/* (non-Javadoc)
+	 * @see com.beta.controllerImpl.CompanyDashboardAndVetterAssignmentController#showDashboard(javax.servlet.http.HttpSession)
+	 */
+	@Override
 	@RequestMapping(value = "/dashboardcompany", method = RequestMethod.GET)
 	public ModelAndView showDashboard(HttpSession session) {
 		
@@ -89,6 +100,10 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.beta.controllerImpl.CompanyDashboardAndVetterAssignmentController#showVetters(javax.servlet.http.HttpSession)
+	 */
+	@Override
 	@RequestMapping(value = "/vetterManagement", method = RequestMethod.GET)  
     public ModelAndView showVetters(HttpSession session){
 		try {
@@ -122,6 +137,10 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
 		
     }
 	
+	/* (non-Javadoc)
+	 * @see com.beta.controllerImpl.CompanyDashboardAndVetterAssignmentController#getApplicationsToBeVetted(javax.servlet.http.HttpSession)
+	 */
+	@Override
 	@RequestMapping(value = "/pendingApplication", method = RequestMethod.GET)  
     public ModelAndView getApplicationsToBeVetted(HttpSession session){
 		try {
@@ -158,6 +177,10 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
 		}
     }
 	
+	/* (non-Javadoc)
+	 * @see com.beta.controllerImpl.CompanyDashboardAndVetterAssignmentController#showDetailsOfApplication(java.lang.String, javax.servlet.http.HttpSession)
+	 */
+	@Override
 	@RequestMapping(value = "/vendorApplication/{applicationRef}", method = RequestMethod.GET)  
     public ModelAndView showDetailsOfApplication(@PathVariable String applicationRef, HttpSession session){
 		
@@ -193,16 +216,22 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.beta.controllerImpl.CompanyDashboardAndVetterAssignmentController#assignVetters(java.lang.String, javax.servlet.http.HttpSession)
+	 */
+	@Override
 	@RequestMapping(value = "/assignVetter/{applicationRef}", method = RequestMethod.GET)  
     public ModelAndView assignVetters(@PathVariable String applicationRef, HttpSession session){
 		try
 		{
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount)session.getAttribute("account");
 		CompanyApplication companyApplication = getCompanyApplication(account.getCompanyReferenceNumber(), applicationRef);
-		
+		List<VetterdDTO> vetters = new ArrayList<>();
+		session.setAttribute("vetters", vetters);
+		session.setAttribute("applicationRef", applicationRef);
         ModelAndView mav = new ModelAndView("assignVetter"); // used to be assignVetter
         mav.addObject("companyApplication", companyApplication);
-     
+        mav.addObject("vetters", vetters);
         return mav;
 		}
 		
@@ -229,6 +258,10 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
 		}		
     }
 	
+	/* (non-Javadoc)
+	 * @see com.beta.controllerImpl.CompanyDashboardAndVetterAssignmentController#Registration(javax.servlet.http.HttpSession, java.lang.String)
+	 */
+	@Override
 	@RequestMapping(value = "assignVetter/findByEmpName", method = RequestMethod.GET)
 	public ModelAndView Registration(HttpSession session, @RequestParam(value = "empName") String empName) {
 		try {
@@ -236,8 +269,11 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
 					.findByUserName(session.getAttribute("username").toString());
 
 			List<EmployeeAccount> empList = employeeAccountService.findByEmpNameAndCompany(account.getCompanyReferenceNumber(), empName);
+			List<VetterdDTO> vetters = (ArrayList<VetterdDTO>)session.getAttribute("vetters");
 
+			session.setAttribute("vetters", vetters);
 			ModelAndView mav = new ModelAndView("assignVetter");
+			mav.addObject("vetters", vetters);
 			mav.addObject("empList", empList);
 			return mav;
 		}
@@ -261,16 +297,128 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
 
 	}
 	
+	@RequestMapping(value = "addVetter/{empUsername}", method = RequestMethod.GET)
+	public ModelAndView addVetter(HttpSession session, @PathVariable String empUsername) {
+		try {
+			CompanyAdministratorAccount account = accountService
+					.findByUserName(session.getAttribute("username").toString());
+
+			EmployeeAccount emp = employeeAccountService.findByUserName(empUsername);
+			VetterdDTO v = new VetterdDTO();
+			v.setUserName(emp.getUserName());
+			
+			List<VetterdDTO> vetters = (ArrayList<VetterdDTO>)session.getAttribute("vetters");
+			vetters.add(v);
+			for (int i=0;i<vetters.size();i++) {
+				VetterdDTO vetter = vetters.get(i);
+				vetter.setSequenceNo(i+1);
+			}
+			session.setAttribute("vetters", vetters);
+			ModelAndView mav = new ModelAndView("assignVetter");
+			mav.addObject("vetters", vetters);
+			return mav;
+		}
+
+		catch (VendorMgmtException e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+
+			return mav;
+		} catch (UserException e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+
+			return mav;
+		} catch (Exception e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", "Registration could not be carried out.");
+
+			return mav;
+		}
+	}
+	
+	@RequestMapping(value = "deleteVetter/{empUsername}", method = RequestMethod.GET)
+	public ModelAndView deleteVetter(HttpSession session, @PathVariable String empUsername) {
+		try {
+			CompanyAdministratorAccount account = accountService
+					.findByUserName(session.getAttribute("username").toString());
+
+			EmployeeAccount emp = employeeAccountService.findByUserName(empUsername);
+			VetterdDTO v = new VetterdDTO();
+			v.setUserName(emp.getUserName());
+			
+			List<VetterdDTO> vetters = (ArrayList<VetterdDTO>)session.getAttribute("vetters");
+			for (Iterator<VetterdDTO> iterator = vetters.iterator(); iterator.hasNext();) {
+				VetterdDTO vetter = iterator.next();
+				if (vetter.getUserName().equals(empUsername)) {
+					iterator.remove();
+				}
+			}
+			for (int i=0;i<vetters.size();i++) {
+				VetterdDTO vetter = vetters.get(i);
+				vetter.setSequenceNo(i+1);
+			}
+			session.setAttribute("vetters", vetters);
+			ModelAndView mav = new ModelAndView("assignVetter");
+			mav.addObject("vetters", vetters);
+			return mav;
+		}
+
+		catch (VendorMgmtException e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+
+			return mav;
+		} catch (UserException e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+
+			return mav;
+		} catch (Exception e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", "Registration could not be carried out.");
+
+			return mav;
+		}
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.beta.controllerImpl.CompanyDashboardAndVetterAssignmentController#setVetters(com.beta.controller.object.RequirementList, javax.servlet.http.HttpSession)
+	 */
+	@Override
 	@RequestMapping(value = "/setVetters", method = RequestMethod.POST)  
 	@ResponseBody
-    public String setVetters(@RequestBody RequirementList requirementList, HttpSession session){
-		CompanyAdministratorAccount account = (CompanyAdministratorAccount)session.getAttribute("account");
+    public ModelAndView setVetters(HttpSession session){
 		try {
-		vendorVettingProcess.initialVettersAssignmentByApplicationRef(account.getCompanyReferenceNumber(), requirementList.getRequirementList());
-		} catch (Exception e) {
-			return "error";
+		CompanyAdministratorAccount account = (CompanyAdministratorAccount)session.getAttribute("account");
+		List<VetterdDTO> list = (ArrayList<VetterdDTO>)session.getAttribute("vetters");
+		List<Requirement> requirementList = new ArrayList<>();
+		for (VetterdDTO v: list) {
+			Requirement r = new Requirement();
+			r.setSequence(v.getSequenceNo());
+			r.setUserName(v.getUserName());
+			r.setApplicationRef(session.getAttribute("applicationRef").toString());
+			requirementList.add(r);
 		}
-		return "success";
+		vendorVettingProcess.initialVettersAssignmentByApplicationRef(account.getCompanyReferenceNumber(), requirementList);
+		return new ModelAndView("dashboardcompany");
+		}
+		catch (VendorMgmtException e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+
+			return mav;
+		} catch (UserException e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+
+			return mav;
+		} catch (Exception e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", "Registration could not be carried out.");
+
+			return mav;
+		}
     }
 	
 	private CompanyApplication getCompanyApplication(String companyReferenceNumber, String applicationRef) {
@@ -303,5 +451,11 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl {
 			documentFiles.add(new DocumentFiles(d.getUrl(), oringalFilename));
 		}
 		return documentFiles;
+	}
+	@RequestMapping(value = "/BackToDashboardCompanyPage", method = RequestMethod.GET)
+	public ModelAndView createEmployeeBack(HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) {
+		ModelAndView mav = new ModelAndView("dashboardcompany");
+		return mav;
 	}
 }

@@ -14,41 +14,42 @@
 </head>
 <body>
 <div class="container">
+<h1>Vendor Application Details</h1>
 	<table class="table">
 		<tr>
-			<td>Vendor Name: ${companyApplication.company.companyName}</td>
+			<td>Vendor Name: <strong>${companyApplication.company.companyName}</strong></td>
 		</tr>
 		<tr>
 			<td>Vendor Reference Number:
-				${companyApplication.company.companyReferenceNumber}</td>
+				<strong>${companyApplication.company.companyReferenceNumber}</strong></td>
 		</tr>
 		<tr>
-			<td>Vendor Address: ${companyApplication.company.companyAddress}</td>
+			<td>Vendor Address:<strong> ${companyApplication.company.companyAddress}</strong></td>
 		</tr>
 		<tr>
-			<td>Vendor Email: ${companyApplication.company.companyEmail}</td>
+			<td>Vendor Email:<strong> ${companyApplication.company.companyEmail}</strong></td>
 		</tr>
 		<tr>
 			<td>Vendor Contact Number:
-				${companyApplication.company.contactNumber}</td>
+			<strong>	${companyApplication.company.contactNumber}</strong></td>
 		</tr>
 		<tr>
-			<td>Vendor Turnover: ${companyApplication.company.turnover}</td>
+			<td>Vendor Turnover:<strong> ${companyApplication.company.turnover}</strong></td>
 		</tr>
 		<tr>
 			<td>Application Reference Number:
-				${companyApplication.application.applicationRef}</td>
+			<strong>	${companyApplication.application.applicationRef}</strong></td>
 		</tr>
 		<tr>
 			<td>Category of Application:
-				${companyApplication.application.category.categoryName}</td>
+			<strong>	${companyApplication.application.category.categoryName}</strong></td>
 		</tr>
 		<tr>
-			<td>Point of Contact: ${companyApplication.application.POC}</td>
+			<td>Point of Contact:<strong> ${companyApplication.application.POC}</strong></td>
 		</tr>
 		<tr>
 			<td>Application Date:
-				${companyApplication.application.applicationDate}</td>
+				<strong>${companyApplication.application.applicationDate}</strong></td>
 		</tr>
 	</table>
 	<table class="table">

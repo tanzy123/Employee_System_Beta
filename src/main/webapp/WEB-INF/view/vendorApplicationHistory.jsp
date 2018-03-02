@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="container">
-<h2>Pending/Vetting Applications</h2>
+<h1>${msg} Application History</h1>
 	<table class="table">
 	<tr>
 		<th>Company Name</th>

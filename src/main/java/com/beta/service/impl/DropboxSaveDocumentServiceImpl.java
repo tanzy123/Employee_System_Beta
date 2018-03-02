@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 
 import com.beta.exception.VendorMgmtException;
+import com.beta.service.ConfigUtil;
 import com.beta.service.SaveDocumentService;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
@@ -26,7 +27,7 @@ import com.dropbox.core.v2.files.Metadata;
 @org.springframework.transaction.annotation.Transactional(propagation = Propagation.REQUIRED, rollbackFor = VendorMgmtException.class)
 public class DropboxSaveDocumentServiceImpl implements SaveDocumentService {
 
-	private static final String ACCESS_TOKEN = "I66zWXoReFAAAAAAAAAAGkStTcEm2olgXLiCTYGvzhKq87QBc0bkO9Sl9GivDNMM";
+	private static final String ACCESS_TOKEN = ConfigUtil.getKey("DROPBOX_ACCESS_TOKEN");
 	
 	DbxRequestConfig config = new DbxRequestConfig("dropbox/java-tutorial", "en_US");
 

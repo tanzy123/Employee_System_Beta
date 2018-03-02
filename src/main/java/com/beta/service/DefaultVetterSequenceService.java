@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 
 import com.beta.entity.Requirement;
 import com.beta.exception.VendorMgmtException;
-import com.beta.services.RequirementService;
+import com.beta.orm.service.RequirementService;
 
 @Service("defaultVetterSequenceServiceImpl")
 @org.springframework.transaction.annotation.Transactional(propagation= Propagation.REQUIRED, rollbackFor=VendorMgmtException.class)

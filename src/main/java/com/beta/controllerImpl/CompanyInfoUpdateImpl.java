@@ -1,8 +1,5 @@
 package com.beta.controllerImpl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,18 +11,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.beta.entity.Category;
+import com.beta.controller.CompanyInfoUpdateController;
 import com.beta.entity.Company;
 import com.beta.entity.CompanyAdministratorAccount;
-import com.beta.entity.Department;
-import com.beta.entity.Role;
 import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
-import com.beta.services.CompanyAdminstratorAccountService;
-import com.beta.services.CompanyService;
+import com.beta.orm.service.CompanyAdminstratorAccountService;
+import com.beta.orm.service.CompanyService;
 
 @Controller
-public class CompanyInfoUpdateImpl {
+public class CompanyInfoUpdateImpl implements CompanyInfoUpdateController {
 	
 	@Autowired
 	CompanyAdminstratorAccountService accountService;
@@ -33,6 +28,10 @@ public class CompanyInfoUpdateImpl {
 	@Autowired
 	CompanyService companyService;
 	
+	/* (non-Javadoc)
+	 * @see com.beta.controllerImpl.CompanyInfoUpdateController#Registration(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, javax.servlet.http.HttpSession)
+	 */
+	@Override
 	@RequestMapping(value = "/updateCompany", method = RequestMethod.GET)
 	public ModelAndView Registration(HttpServletRequest request,HttpServletResponse response,HttpSession session)
 	{
@@ -71,6 +70,10 @@ public class CompanyInfoUpdateImpl {
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.beta.controllerImpl.CompanyInfoUpdateController#StoreNewCompanyInfo(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
 	@RequestMapping(value = "/storeNewCompanyInfo", method= RequestMethod.POST)
 	public ModelAndView StoreNewCompanyInfo(
 			@RequestParam(value = "companyReferenceNumber") String companyReferenceNumber,

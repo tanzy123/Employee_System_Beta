@@ -20,8 +20,8 @@ import com.beta.entity.Department;
 import com.beta.entity.Role;
 import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
-import com.beta.services.CompanyAdminstratorAccountService;
-import com.beta.services.RoleService;
+import com.beta.orm.service.CompanyAdminstratorAccountService;
+import com.beta.orm.service.RoleService;
 
 @Controller
 public class RoleUpdateImpl {

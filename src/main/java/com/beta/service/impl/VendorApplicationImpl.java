@@ -17,12 +17,12 @@ import com.beta.entity.Category;
 import com.beta.entity.Documents;
 import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
+import com.beta.orm.service.ApplicationService;
+import com.beta.orm.service.CategoryService;
+import com.beta.orm.service.CompanyService;
+import com.beta.orm.service.DocumentsService;
 import com.beta.service.SaveDocumentService;
 import com.beta.service.VendorApplication;
-import com.beta.services.ApplicationService;
-import com.beta.services.CategoryService;
-import com.beta.services.CompanyService;
-import com.beta.services.DocumentsService;
 
 
 @Service("VendorApplication")

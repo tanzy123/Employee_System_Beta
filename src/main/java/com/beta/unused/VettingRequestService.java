@@ -1,8 +1,0 @@
-package com.beta.unused;
-
-import com.beta.entity.Application;
-
-public interface VettingRequestService {
-
-	Application vettingRequest(final Application application);
-}
