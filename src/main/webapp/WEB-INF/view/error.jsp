@@ -6,12 +6,13 @@
         <title>Seems to be a problem while login in</title>
     </head>
     <body>
+    <div class="container">
     	<h1>${message}</h1>
     	<h2>Please contact Team_Beta for further assistance!</h2>
     	
-       <button> <a href=${header.referer}>Return to Log in Page</a></button>
+       <button class="btn btn-secondary"> <a href=${header.referer}>Return to Log in Page</a></button>
         
     
-	
+	</div>
     </body>
     </html>

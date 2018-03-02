@@ -6,10 +6,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <title>Company Application Details</title>
 </head>
 <body>
-	<table>
+<div class="container">
+	<table class="table">
 		<tr>
 			<td>Company Name: ${companyApplication.company.companyName}</td>
 		</tr>
@@ -48,7 +52,7 @@
 		</tr>
 	</table>
 	<h2>Documents</h2>
-	<table>
+	<table class="table">
 		<tr>
 			<th>Filename</th>
 			<th>File</th>
@@ -59,5 +63,6 @@
 				<td><a href="${file.url}">Download File</a></td>
 		</c:forEach>
 	</table>
+	</div>
 </body>
 </html>

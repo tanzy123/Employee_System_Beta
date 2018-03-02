@@ -6,11 +6,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <title>Vendor Application History</title>
 </head>
 <body>
+<div class="container">
 <h2>Pending/Vetting Applications</h2>
-	<table>
+	<table class="table">
 	<tr>
 		<th>Company Name</th>
 		<th>Category</th>
@@ -18,8 +22,9 @@
 		<c:forEach var="vendorApplication" items="${vendorApplicationDetails}"><tr>
 			<td>${vendorApplication.company.companyName}</td>
 			<td>${vendorApplication.application.category.categoryName}</td>
-			<td><a href="companyApplicationHistory/${vendorApplication.application.applicationRef}" >Details</a></td>
+			<td><a href="companyApplicationHistory/${vendorApplication.application.applicationRef}" class="btn btn-info" >Details</a></td>
 		</c:forEach>
 	</table>
+</div>
 </body>
 </html>
