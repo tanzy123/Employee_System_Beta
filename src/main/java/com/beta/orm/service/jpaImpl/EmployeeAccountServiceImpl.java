@@ -126,7 +126,6 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 		Map<String, Object> params = new HashMap<>();
 		params.put("userName", userName);
 		List<EmployeeAccount> list = dao.findByNamedQueryAndNamedParams("EmployeeAccount.findByUsername", params);
-		System.out.println(list);
 		if (list.size() > 1)
 			throw new VendorMgmtException("More than one company found while validating account");
 		else if (list.isEmpty())
