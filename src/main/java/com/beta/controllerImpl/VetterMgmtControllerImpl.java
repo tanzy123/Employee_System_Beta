@@ -168,11 +168,38 @@ public class VetterMgmtControllerImpl {
 		return displayVetters(appRef, session);
 		
 	}
+		
+		 catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "adding of  vetter Info could not be carried out.");
+	    	
+		   return mav;
+		}
+	}
+		
+		
+		
 	
 	@RequestMapping(value = "vetterDisplay/deleteVetInfo", method= RequestMethod.GET)
 	public ModelAndView DeleteCompanyInfo(HttpSession session, HttpServletRequest request)
-			
+	{	
 		
+	try
 	{
 		
 		String userName = request.getParameter("userName");
@@ -186,6 +213,7 @@ public class VetterMgmtControllerImpl {
 		
 		return displayVetters(appRef, session);
 		}
+	
 		 catch(VendorMgmtException e)
 		{
         	ModelAndView mav = new ModelAndView("error");
@@ -209,7 +237,8 @@ public class VetterMgmtControllerImpl {
 		}
         
 		
-		
+	
 		
 	}
 }
+
