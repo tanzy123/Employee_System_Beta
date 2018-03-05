@@ -34,7 +34,7 @@
 
         <form action="findCompany">
    					 <input type="submit" value="Go Back" />
-   					 
+   				</form>	 
    		<form action="displayComSearch" method="get">
 		<tbody>
 			<tr id='row1'>
@@ -46,7 +46,7 @@
 		</form>
         <form action="/VendorApplication/dashboardcompany">
    					 <input type="submit" value="Go Back" class="btn"/>
-</form>        
->>>>>>> 4c5dd911ff88017c409843601cf84248c39ba867
+</form>       
+</div>
 </body>
 </html>

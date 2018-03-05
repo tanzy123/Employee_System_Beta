@@ -17,7 +17,7 @@ import com.beta.dao.ApplicationDao;
 import com.beta.entity.Application;
 import com.beta.entity.ApprovalStatus;
 import com.beta.entity.Requirement;
-import com.beta.services.RequirementService;
+import com.beta.orm.service.RequirementService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:appContext.xml"})

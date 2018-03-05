@@ -22,9 +22,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.beta.entity.Category;
 import com.beta.exception.VendorMgmtException;
-import com.beta.services.CategoryService;
-import com.beta.services.CompanyService;
-import com.beta.services.impl.CategoryServiceImpl;
+import com.beta.orm.service.CategoryService;
+import com.beta.orm.service.CompanyService;
+import com.beta.orm.service.jpaImpl.CategoryServiceImpl;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)

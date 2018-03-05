@@ -17,8 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.beta.entity.Role;
 import com.beta.exception.VendorMgmtException;
-import com.beta.services.CompanyService;
-import com.beta.services.RoleService;
+import com.beta.orm.service.CompanyService;
+import com.beta.orm.service.RoleService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)

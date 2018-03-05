@@ -10,7 +10,7 @@
     </head>
     <body>
     <div class="container">
-        <a href="dashboardcompany" class="btn btn-info">YOUR APPLICATION/REQUEST IS SUCCESSFUL! CLICK HERE TO RETURN TO DASHBOARD.</a>
+        <a href="/VendorApplication/dashboardcompany" class="btn btn-info">YOUR APPLICATION/REQUEST IS SUCCESSFUL! CLICK HERE TO RETURN TO DASHBOARD.</a>
       </div>  
     </body>
     </html>

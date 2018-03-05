@@ -40,7 +40,7 @@
 	</table>
 	<a class="btn btn-info" href="/VendorApplication/assignVetter/${companyApplication.application.applicationRef}">Assign Vetters</a>
 		<br><br>
-		<form action="/VendorApplication/dashboardcompany/vendorApplication">
+		<form action="/VendorApplication/vetterManagement">
     <input type="submit" class="btn btn-default" value="Go Back" />
     	</form>
 		</div>

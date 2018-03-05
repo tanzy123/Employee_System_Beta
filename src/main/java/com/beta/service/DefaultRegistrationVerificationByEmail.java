@@ -10,9 +10,8 @@ import com.beta.entity.Company;
 import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.EmailPurposeType;
 import com.beta.exception.VendorMgmtException;
-import com.beta.services.CompanyAdminstratorAccountService;
-import com.beta.services.CompanyService;
-import com.beta.unused.RegistrationService;
+import com.beta.orm.service.CompanyAdminstratorAccountService;
+import com.beta.orm.service.CompanyService;
 
 @Service("DefaultRegistrationVerificationByEmail")
 @org.springframework.transaction.annotation.Transactional(propagation = Propagation.REQUIRED, rollbackFor = VendorMgmtException.class)

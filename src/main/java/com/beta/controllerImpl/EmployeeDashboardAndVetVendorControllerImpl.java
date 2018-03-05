@@ -26,13 +26,12 @@ import com.beta.entity.Requirement;
 
 import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
-
+import com.beta.orm.service.ApplicationService;
+import com.beta.orm.service.CompanyService;
+import com.beta.orm.service.DocumentsService;
+import com.beta.orm.service.EmployeeAccountService;
+import com.beta.orm.service.RequirementService;
 import com.beta.service.VendorVettingProcess;
-import com.beta.services.ApplicationService;
-import com.beta.services.CompanyService;
-import com.beta.services.DocumentsService;
-import com.beta.services.EmployeeAccountService;
-import com.beta.services.RequirementService;
 
 @Controller
 public class EmployeeDashboardAndVetVendorControllerImpl {

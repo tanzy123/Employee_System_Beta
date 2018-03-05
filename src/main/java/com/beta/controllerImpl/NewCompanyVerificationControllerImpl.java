@@ -21,9 +21,9 @@ import com.beta.entity.Department;
 import com.beta.entity.Role;
 import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
+import com.beta.orm.service.CompanyService;
 import com.beta.service.CompanyValidation;
-import com.beta.services.CompanyService;
-import com.beta.unused.RegistrationService;
+import com.beta.service.RegistrationService;
 
 
 @Controller
@@ -85,6 +85,8 @@ public class NewCompanyVerificationControllerImpl implements NewCompanyVerificat
 			@RequestParam(value = "role") String role)
 	{
 		ModelAndView mav = null;
+		try
+		{
 		Company company = new Company();
 		company.setCompanyReferenceNumber(companyReferenceNumber);
 		company.setCompanyName(companyName);
@@ -126,9 +128,15 @@ public class NewCompanyVerificationControllerImpl implements NewCompanyVerificat
 		}
 		company.setRoles(roleAtRegistration);
 		
-		try
-		{
+		
 		companyValidationService.validateCommpanyApplication(company);
+		
+		companyService.saveOrUpdate(company);
+		registrationService.registerCompanyAccount(company, userName, password);
+		registrationService.sendVerificationEmail(company, userName);
+		ModelAndView successMAV = new ModelAndView("token");
+		successMAV.addObject("username", userName);
+		return successMAV;
 		}catch(VendorMgmtException e)
 		{
 			mav = new ModelAndView("error");
@@ -146,16 +154,10 @@ public class NewCompanyVerificationControllerImpl implements NewCompanyVerificat
 		catch(Exception e)
 		{
         	 mav = new ModelAndView("error");
-	    	mav.addObject("message", "Storing registration is not successful");
+	    	mav.addObject("message", "Error in registering account");
 	    	
 		   return mav;
 		}
-		companyService.saveOrUpdate(company);
-		registrationService.registerCompanyAccount(company, userName, password);
-		registrationService.sendVerificationEmail(company, userName);
-		ModelAndView successMAV = new ModelAndView("token");
-		successMAV.addObject("username", userName);
-		return successMAV;
 		
 	}
 	
@@ -174,6 +176,7 @@ public class NewCompanyVerificationControllerImpl implements NewCompanyVerificat
 	{
 		
 		ModelAndView mav=null;
+		try {
 		if(registrationService.tokenComparison(token, username))
 		{
 			mav=new ModelAndView("redirect:/login");
@@ -185,5 +188,27 @@ public class NewCompanyVerificationControllerImpl implements NewCompanyVerificat
 			
 		}
 		return mav;
+		}catch(VendorMgmtException e)
+		{
+			mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+			return mav;
+		}
+	
+		catch(UserException e)
+		{
+        	 mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	 mav = new ModelAndView("error");
+	    	mav.addObject("message", "Error in verifying token");
+	    	
+		   return mav;
+		}
+		
 	}
 }

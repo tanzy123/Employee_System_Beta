@@ -16,8 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.beta.entity.EmployeeAccount;
 import com.beta.exception.VendorMgmtException;
-import com.beta.services.CompanyService;
-import com.beta.services.EmployeeAccountService;
+import com.beta.orm.service.CompanyService;
+import com.beta.orm.service.EmployeeAccountService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:appContext.xml"})

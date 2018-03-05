@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class TestImport {
 	
 	@Test
-	@Rollback(value=false)
+	@Rollback()
 	public void asd() {
 	}
 	

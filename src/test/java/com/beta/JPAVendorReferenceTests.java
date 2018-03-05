@@ -26,10 +26,10 @@ import com.beta.entity.Category;
 import com.beta.entity.Company;
 import com.beta.entity.VendorReference;
 import com.beta.exception.VendorMgmtException;
-import com.beta.services.ApplicationService;
-import com.beta.services.CategoryService;
-import com.beta.services.CompanyService;
-import com.beta.services.VendorReferenceService;
+import com.beta.orm.service.ApplicationService;
+import com.beta.orm.service.CategoryService;
+import com.beta.orm.service.CompanyService;
+import com.beta.orm.service.VendorReferenceService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:appContext.xml"})

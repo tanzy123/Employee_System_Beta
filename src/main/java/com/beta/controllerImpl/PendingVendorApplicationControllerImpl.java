@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.beta.entity.EmployeeAccount;
 import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
-import com.beta.services.EmployeeAccountService;
+import com.beta.orm.service.EmployeeAccountService;
 
 @Controller
 public class PendingVendorApplicationControllerImpl {

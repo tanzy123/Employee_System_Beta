@@ -18,10 +18,10 @@ import com.beta.entity.EmployeeAccount;
 import com.beta.entity.UserAccount;
 import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
+import com.beta.orm.service.CompanyAdminstratorAccountService;
+import com.beta.orm.service.CompanyService;
+import com.beta.orm.service.EmployeeAccountService;
 import com.beta.service.CompanyValidation;
-import com.beta.services.CompanyAdminstratorAccountService;
-import com.beta.services.CompanyService;
-import com.beta.services.EmployeeAccountService;
 
 @Controller
 @RequestMapping("/")
@@ -46,10 +46,32 @@ public class LoginControllerImpl implements LoginController {
 	@Override
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView showLogin(HttpSession session) {
+		try {
 		session.invalidate();	
 		ModelAndView mav = new ModelAndView("login");
 		mav.addObject("login", new UserAccount());
 		return mav;
+		}catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "employee Management view could not be displayed");
+	    	
+		   return mav;
+		}
 	}
 
 	@RequestMapping(value = "/loginVerification", method = RequestMethod.POST)
@@ -63,12 +85,13 @@ public class LoginControllerImpl implements LoginController {
 		session.setAttribute("username", username);
 		
 		if (loginType.equals("EMPLOYEE")) {
+			try {
 			EmployeeAccount employeeAccount = new EmployeeAccount();
 			session.setAttribute("employeeRefNumber", employeeAccountService.findByUserName(username).getCompanyReferenceNumber());
 			session.setAttribute("employeeName", employeeAccountService.findByUserName(username).getUserName());
 			employeeAccount.setUserName(username);
 			employeeAccount.setPassword(password);
-			try {
+			
 				employeeAccountService.validateAccount(employeeAccount);
 				mav = new ModelAndView("redirect:/employeeDashboard");
 				
@@ -96,11 +119,12 @@ public class LoginControllerImpl implements LoginController {
 
 		 else if (loginType.equals("COMPANY_ADMINISTRATOR")) 
 		 {
+			try {
 			session.setAttribute("companyRefNumber", companyAdminAccountService.findByUserName(username).getCompanyReferenceNumber());
 			CompanyAdministratorAccount companyAdministratorAccount = new CompanyAdministratorAccount();
 			companyAdministratorAccount.setUserName(username);
 			companyAdministratorAccount.setPassword(password);
-			try {
+			
 				companyAdminAccountService.validateAccount(companyAdministratorAccount);
 				mav = new ModelAndView("redirect:/dashboardcompany");
 
@@ -124,13 +148,7 @@ public class LoginControllerImpl implements LoginController {
 			}
 		}
 		return mav;
-		
 	}
-	
-	
-	
-
-	
 }
 	
 	

@@ -9,28 +9,23 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.beta.entity.Application;
 import com.beta.entity.Department;
 import com.beta.entity.EmailPurposeType;
 import com.beta.entity.EmployeeAccount;
 import com.beta.entity.Role;
 import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
+import com.beta.orm.service.DepartmentService;
+import com.beta.orm.service.EmployeeAccountService;
+import com.beta.orm.service.RoleService;
 import com.beta.service.NotificationService;
-import com.beta.services.DepartmentService;
-import com.beta.services.EmployeeAccountService;
-import com.beta.services.RoleService;
-import com.beta.unused.RegistrationService;
 
 @Controller
 @RequestMapping("/")
@@ -227,8 +222,9 @@ public class EmployeeManagementControllerImpl {
 			@RequestParam(value = "department") String departmentName,
 			@RequestParam(value = "userName") String userName,
 			@RequestParam(value = "password") String password) throws Exception {
-		ModelAndView mav = new ModelAndView();
 		
+		ModelAndView mav = new ModelAndView();
+		try{
 		EmployeeAccount employeeAccount = new EmployeeAccount();
 		Department employeeDepartment = new Department();
 
@@ -262,7 +258,7 @@ public class EmployeeManagementControllerImpl {
 		
 
 		
-		try{
+		
 		employeeAccountService.createNewAccount(employeeAccount);
 		}catch(UserException e)
 		{
@@ -412,9 +408,10 @@ public class EmployeeManagementControllerImpl {
 			@RequestParam(value = "role") String role,
 			@RequestParam(value = "department") String departmentName,
 			@ModelAttribute("updateEmployeeUpdate") EmployeeAccount employee) throws Exception {
-
+		
 		
 		ModelAndView mav = new ModelAndView("updateEmployeeUpdate");
+		try {
 		String companyReferenceNumber = session
 				.getAttribute("companyRefNumber").toString();
 
@@ -444,7 +441,7 @@ public class EmployeeManagementControllerImpl {
 		// setId
 		employeeAccount.setEmployeeId(employeeId);
 
-		try {
+		
 			employeeAccountService.saveOrUpdateByCompAdmin(employeeAccount);
 		} catch(UserException e)
 		{

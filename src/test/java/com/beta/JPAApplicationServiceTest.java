@@ -17,8 +17,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.beta.entity.Application;
-import com.beta.services.ApplicationService;
-import com.beta.services.CompanyService;
+import com.beta.orm.service.ApplicationService;
+import com.beta.orm.service.CompanyService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:appContext.xml"})

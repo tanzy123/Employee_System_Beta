@@ -63,6 +63,7 @@
 				<td><a href="${file.url}">Download File</a></td>
 		</c:forEach>
 	</table>
+	
 	</div>
 </body>
 </html>
