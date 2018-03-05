@@ -13,7 +13,7 @@ public class ConfigUtil {
 	
 	static{
 		try {
-			FileInputStream fis = new FileInputStream("config.properties");
+			FileInputStream fis = new FileInputStream("C:\\Users\\645716\\Employee_System_Beta\\config.properties");
 			props.load(fis );
 			fis.close();
 		} catch (FileNotFoundException e) {

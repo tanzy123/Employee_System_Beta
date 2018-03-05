@@ -10,16 +10,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beta.controller.CompanyVendorApplicationController;
 import com.beta.controller.object.CompanyApplication;
 import com.beta.controller.object.DocumentFiles;
+import com.beta.controller.object.VetterdDTO;
 import com.beta.entity.Application;
 import com.beta.entity.ApplicationStatus;
 import com.beta.entity.Company;
 import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.Documents;
+import com.beta.entity.EmployeeAccount;
 import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.orm.service.ApplicationService;
@@ -29,7 +32,7 @@ import com.beta.orm.service.DocumentsService;
 import com.beta.service.SaveDocumentService;
 
 @Controller
-public class CompanyVendorApplicationHistoryControllerImpl implements CompanyVendorApplicationController {
+public  class CompanyVendorApplicationHistoryControllerImpl implements CompanyVendorApplicationController {
 
 	@Autowired
 	ApplicationService applicationService;
@@ -85,6 +88,46 @@ public class CompanyVendorApplicationHistoryControllerImpl implements CompanyVen
 		   return mav;
 		}
 	}
+	
+	@Override
+	@RequestMapping(value = "/pendingCompanyApplication/findbycompanyname", method = RequestMethod.GET)
+	public ModelAndView getAllPendingAndVettingApplicationsWithEmpSearch(HttpSession session, @RequestParam(value = "comName") String comName) {
+		try {
+		CompanyAdministratorAccount account = (CompanyAdministratorAccount) session.getAttribute("account");
+		List<CompanyApplication> vendorApplicationDetails = getAllPendingAndVettingApplications(account.getCompanyReferenceNumber());
+		
+		List <Company> comList = companyService.findByComName(comName);
+		
+		ModelAndView mav = new ModelAndView("vendorApplicationHistory");
+		mav.addObject("vendorApplicationDetails", vendorApplicationDetails);
+		mav.addObject("msg", "Pending");
+		mav.addObject("comList", comList);
+
+		return mav;
+		}
+		catch(VendorMgmtException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(UserException e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", e.getMessage());
+	    	
+		   return mav;
+		}
+		catch(Exception e)
+		{
+        	ModelAndView mav = new ModelAndView("error");
+	    	mav.addObject("message", "Pending and vetting company application list could not be displayed.");
+	    	
+		   return mav;
+		}
+	}
+
 	
 	/* (non-Javadoc)
 	 * @see com.beta.controllerImpl.CompanyVendorApplicationController#getAllApplications(javax.servlet.http.HttpSession)

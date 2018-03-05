@@ -9,12 +9,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.beta.controller.object.CompanyApplication;
 import com.beta.entity.Application;
 import com.beta.entity.ApprovalStatus;
 import com.beta.entity.Category;
@@ -85,6 +87,38 @@ public class CompanyVendorApplicationFormImpl {
 		   return mav;
 		}
 	}
+
+	@RequestMapping(value = "/addCompany/{companyRef}", method = RequestMethod.GET)
+	public ModelAndView addCompany(HttpSession session, @PathVariable String companyRef) {
+		try {
+			CompanyAdministratorAccount account = (CompanyAdministratorAccount) session.getAttribute("account");
+			
+			ModelAndView mav = new ModelAndView("vendorApplicationForm", "application", new Application()); 
+			mav.addObject("companyReferenceNumber", companyRef);
+			mav.addObject("account", account);
+			
+			return mav;
+		}
+
+		catch (VendorMgmtException e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+
+			return mav;
+		} catch (UserException e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+
+			return mav;
+		} catch (Exception e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", "Registration could not be carried out.");
+
+			return mav;
+		}
+	}
+	
+	
 	
 	@RequestMapping(value = "/findCompany", method = RequestMethod.GET)
 	public ModelAndView companySearch(HttpSession session, @RequestParam(value = "comName") String comName) {
@@ -94,9 +128,9 @@ public class CompanyVendorApplicationFormImpl {
 			
 			List <Company>comList=companyService.findByComName(comName);
 			
-			ModelAndView mav = new ModelAndView("displayComSearch");
+			ModelAndView mav = new ModelAndView("vendorApplicationForm", "application", new Application());
 			mav.addObject("comList", comList);
-			
+			mav.addObject("account", account);
 			return mav;
 		}
 
