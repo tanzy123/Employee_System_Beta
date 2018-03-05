@@ -241,19 +241,17 @@ public class EmployeeManagementControllerImpl {
 		employeeAccount.setCompanyReferenceNumber(companyReferenceNumber);
 
 		// need to check if department doesn't exist, haven't done yet
-		employeeDepartment = departmentService.findByNameAndCompanyRef(
-				departmentName, companyReferenceNumber);
+		employeeDepartment = departmentService.findByNameAndCompanyRef(departmentName, companyReferenceNumber);
 		employeeAccount.setDepartment(employeeDepartment);
 
 		// need to check if role doesn't exist, haven't done yet
-		employeeRole = roleService.findByCompanyReferenceNumberAndRole(
-				companyReferenceNumber, role);
+		employeeRole = roleService.findByCompanyReferenceNumberAndRole(companyReferenceNumber, role);
 		employeeAccount.setRole(employeeRole);
 		employeeAccount.setEmployeeEmail(employeeEmail);
 		employeeAccount.setIsValidated(true);
-		
-		if (employeeAccountService.checkDuplicateEmployeeIdInSameCompany(
-				companyReferenceNumber, employeeId).isEmpty()) {
+		employeeAccount.setUserName(userName);
+		employeeAccount.setPassword(password);
+		if (employeeAccountService.checkDuplicateEmployeeIdInSameCompany(companyReferenceNumber, employeeId).isEmpty()) {
 			employeeAccount.setEmployeeId(employeeId);
 		} else {
 			mav = new ModelAndView("error");
@@ -261,8 +259,7 @@ public class EmployeeManagementControllerImpl {
 			return mav;
 		}
 
-		employeeAccount.setUserName(userName);
-		employeeAccount.setPassword(password);
+		
 
 		
 		try{
@@ -491,21 +488,35 @@ public class EmployeeManagementControllerImpl {
 			categoryNames.add(R.getRole());
 		return categoryNames;
 	}
-
+//------------------------------------------------------delete------------------------------------------------------------
 	@RequestMapping(value = "/deleteEmployee", method = { RequestMethod.DELETE,
 			RequestMethod.GET })
 	public ModelAndView deleteEmployee(
-			@RequestParam(value = "employeeId") String employeeId)
+			@RequestParam(value = "userName") String userName)
 			throws NumberFormatException, Exception {
 
+		     ModelAndView mav=new ModelAndView();
 		try {
 
-			employeeAccountService.deleteIfExisting(Long.parseLong(employeeId));
-		} catch (VendorMgmtException e) {
+			employeeAccountService.deleteByUserName(userName);
+		} catch(UserException e)
+		{
+			mav=new ModelAndView("error");
 
+			mav.addObject("message", e.getMessage());
+			return mav;
+		} catch (VendorMgmtException e) {
+			mav=new ModelAndView("error");
+			mav.addObject("message", "System error");
+			return mav;
+		} catch (Exception e) {
+			mav=new ModelAndView("error");
+			mav.addObject("message", "System error, please contact System administrator");
+			return mav;
 		}
 
-		return null;
+		mav.addObject("message", "employee deleted successfully!");
+		return mav;
 	}
 
 	@RequestMapping(value = "/BackToEmployeemanagementPage", method = RequestMethod.GET)

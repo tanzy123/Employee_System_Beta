@@ -57,8 +57,7 @@ public class CompanyServiceImpl extends BaseServiceImpl<Long, Company> implement
 
 		if (company == null)
 			save(entity);
-		else
-		//	updateCompanyDetails(entity, company);
+		else {
 			company.setCompanyAddress(entity.getCompanyAddress());
 			
 			company.setCompanyEmail(entity.getCompanyEmail());
@@ -69,6 +68,7 @@ public class CompanyServiceImpl extends BaseServiceImpl<Long, Company> implement
 			company.setContactNumber(entity.getContactNumber());
 			company.setTurnover(entity.getTurnover());
 			dao.merge(company);
+		}
 
 	}
 
@@ -101,4 +101,15 @@ public class CompanyServiceImpl extends BaseServiceImpl<Long, Company> implement
 		else
 			return list.get(0);
 	}
+	
+	@Override
+	public List <Company> findByComName(String companyName) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("companyName", companyName);
+		List<Company> list = dao.findByNamedQueryAndNamedParams("Company.findByName", params);
+		return list;
+	}
+	
+	
+	
 }

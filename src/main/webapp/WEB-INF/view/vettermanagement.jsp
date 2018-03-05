@@ -7,26 +7,34 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Pending Applications to be Vet</title>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-
-<h2>Pending Applications to be Vet</h2>
-	<table>
+<div class="container">
+<h1>Pending Applications to be Vet</h1>
+	<table class="table">
 	<tr>
 		<th>Vendor Name</th>
 		<th>Category</th>
+		<th></th>
+		<th></th>
 	</tr>
 		<c:forEach var="companyApplication" items="${companyApplicationlist}"><tr>
 			<td>${companyApplication.company.companyName}</td>
 			<td>${companyApplication.application.category.categoryName}</td>
 			<td><a href="vendorApplication/${companyApplication.application.applicationRef}" >Details</a></td>
 			<td><a href="assignVetter/${companyApplication.application.applicationRef}" >Assign Vetters</a></td>
+
 			<td><a href="vetterDisplay/${companyApplication.application.applicationRef}" >Assign Vetters</a></td>	
+
 		</c:forEach>
-		
+		</table>
 		<form action="dashboardcompany">
     <input type="submit" value="Go Back" />
     	</form>
-	</table>
+	
+	</div>
 </body>
 </html>

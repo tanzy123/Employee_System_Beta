@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.crypto.KeySelector.Purpose;
 
@@ -17,10 +18,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beta.entity.Application;
+import com.beta.entity.ApprovalStatus;
 import com.beta.entity.Category;
 import com.beta.entity.Company;
 import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.EmailPurposeType;
+import com.beta.entity.EmployeeAccount;
+import com.beta.entity.Requirement;
 import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.service.MailNotification;
@@ -83,6 +87,42 @@ public class CompanyVendorApplicationFormImpl {
 		   return mav;
 		}
 	}
+	
+	@RequestMapping(value = "/findCompany", method = RequestMethod.GET)
+	public ModelAndView companySearch(HttpSession session, @RequestParam(value = "comName") String comName) {
+		try {
+			CompanyAdministratorAccount account = accountService
+					.findByUserName(session.getAttribute("username").toString());
+			
+			List <Company>comList=companyService.findByComName(comName);
+			
+			ModelAndView mav = new ModelAndView("displayComSearch");
+			mav.addObject("comList", comList);
+			
+			return mav;
+		}
+
+		catch (VendorMgmtException e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+
+			return mav;
+		} catch (UserException e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+
+			return mav;
+		} catch (Exception e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", "Registration could not be carried out.");
+
+			return mav;
+		}
+
+	}
+	
+	
+	
 	
 	@RequestMapping(value = "/applyApplicationStage2", method = RequestMethod.POST)
 	public ModelAndView applyApplicationStage2(HttpSession session, @ModelAttribute("application") Application application) {
@@ -173,6 +213,8 @@ public class CompanyVendorApplicationFormImpl {
 //		return to dashboard
 	      return "dashboardcompany";
 	}
+	
+	
 	
 	private void sendEmailNotificationToCompany(Application application) throws Exception {
 		Company company = companyService.findbyRefNo(application.getCompanyReferenceNumber());

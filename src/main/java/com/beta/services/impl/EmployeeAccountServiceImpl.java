@@ -59,12 +59,12 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 	
 	@Override
 	public void saveOrUpdateByCompAdmin(EmployeeAccount entity) throws VendorMgmtException {
-		if(!findByUserName(entity.getUserName()).equals(null))
-		{
-			throw new UserException("The UserName alread Exist! Try another UserName");
-		}
-		EmployeeAccount validatedAccount = findByUserName(entity.getUserName());
-		updateAccountDetails(entity, validatedAccount);
+		
+	
+			EmployeeAccount validatedAccount = findByUserName(entity.getUserName());
+			updateAccountDetails(entity, validatedAccount);
+			
+		
 
 	}
 
@@ -94,10 +94,7 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 		else if (list.isEmpty())
 			throw new UserException("Invalid company entered while validating account");
 
-		if(!findByUserName(entity.getUserName()).equals(null))
-		{
-			throw new UserException("The UserName alread Exist! Try another UserName");
-		}
+	
 
 	}
 
@@ -129,12 +126,17 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 		Map<String, Object> params = new HashMap<>();
 		params.put("userName", userName);
 		List<EmployeeAccount> list = dao.findByNamedQueryAndNamedParams("EmployeeAccount.findByUsername", params);
+		System.out.println(list);
 		if (list.size() > 1)
 			throw new VendorMgmtException("More than one company found while validating account");
 		else if (list.isEmpty())
 			throw new UserException("Invalid username entered while validating account");
 		return list.get(0);
 	}
+	
+
+	
+	
 	public List<EmployeeAccount> checkDuplicateEmployeeIdInSameCompany(String companyReferencenumber, String employeeId)
 	{
 		Map<String, Object> params = new HashMap<>();
@@ -154,6 +156,15 @@ public class EmployeeAccountServiceImpl extends BaseServiceImpl<Long, EmployeeAc
 		return dao.findByNamedQueryAndNamedParams("EmployeeAccount.findByEmpNameAndCompanyRef", params);
 		
 	}
+	@Override
+	public void deleteByUserName(String userName)
+	{
+		
+		dao.remove(findByUserName(userName));
+		
+	}
+	
+
 
 	@Override
 	public List<EmployeeAccount> findByEmpId(String employeeId) {
