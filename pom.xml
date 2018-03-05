@@ -447,7 +447,7 @@
 
 	</profiles>
 	<build>
-	
+	<finalName>VendorApplication</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>

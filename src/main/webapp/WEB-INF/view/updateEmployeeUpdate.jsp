@@ -1,5 +1,5 @@
-<%@page import="com.beta.services.impl.RoleServiceImpl"%>
-<%@page import="com.beta.services.RoleService"%>
+<%@page import="com.beta.orm.service.jpaImpl.RoleServiceImpl"%>
+<%@page import="com.beta.orm.service.RoleService"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
