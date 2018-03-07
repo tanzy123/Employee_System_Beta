@@ -40,210 +40,101 @@ public class EmployeeManagementControllerImpl {
 
 	@Autowired
 	EmployeeAccountService employeeAccountService;
-	
+
 	@Autowired
 	NotificationService notificationService;
 
-	// --------------------------------------load jsp pages----------------------------------------------------------------------------
+	// --------------------------------------load jsp
+	// pages----------------------------------------------------------------------------
 	@RequestMapping(value = "/employeeManagement", method = RequestMethod.GET)
-	public ModelAndView showLogin(HttpServletRequest request,
-			HttpServletResponse response, HttpSession session) {
-		if (session.getAttribute("username")==null)
+	public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		if (session.getAttribute("username") == null)
 			return new ModelAndView("redirect:/login");
-		try {
+
 		ModelAndView mav = new ModelAndView("employeemanagement");
 		mav.addObject("employeeManagement", new EmployeeAccount());
 		return mav;
-		}catch(VendorMgmtException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(UserException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(Exception e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", "employee Management view could not be displayed");
-	    	
-		   return mav;
-		}
+
 	}
 
 	@RequestMapping(value = "/showCreateEmployee", method = RequestMethod.GET)
 	public ModelAndView showCreaeteEmployee(HttpServletRequest request,
 
-	HttpServletResponse response, HttpSession session) {
-		if (session.getAttribute("username")==null)
+			HttpServletResponse response, HttpSession session) {
+		if (session.getAttribute("username") == null)
 			return new ModelAndView("redirect:/login");
-		try {
+
 		ModelAndView mav = new ModelAndView("createEmployee");
 		mav.addObject("employeeManagement", new EmployeeAccount());
 		mav.addObject("department", new Department());
 		mav.addObject("role", new Role());
 
-		List<String> departmentNames = generateListOfDepartmentOfCompany(session
-				.getAttribute("companyRefNumber").toString());
-		List<String> roleNames = generateListOfRoleOfCompany(session
-				.getAttribute("companyRefNumber").toString());
+		List<String> departmentNames = generateListOfDepartmentOfCompany(
+				session.getAttribute("companyRefNumber").toString());
+		List<String> roleNames = generateListOfRoleOfCompany(session.getAttribute("companyRefNumber").toString());
 		mav.addObject("departmentNames", departmentNames);
 		mav.addObject("roleNames", roleNames);
 		return mav;
-		}catch(VendorMgmtException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(UserException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(Exception e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", " Employee created view could not be displayed");
-	    	
-		   return mav;
-		}
+
 	}
 
 	@RequestMapping(value = "/showSearchEmployee", method = RequestMethod.GET)
-	public ModelAndView showSearchEmployee(HttpServletRequest request,
-			HttpServletResponse response, HttpSession session) {
-		if (session.getAttribute("username")==null)
+	public ModelAndView showSearchEmployee(HttpServletRequest request, HttpServletResponse response,
+			HttpSession session) {
+		if (session.getAttribute("username") == null)
 			return new ModelAndView("redirect:/login");
-		try
-		{
+
 		ModelAndView mav = new ModelAndView("searchEmployee");
 		mav.addObject("employeeManagement", new EmployeeAccount());
 		return mav;
-		}
-		catch(VendorMgmtException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(UserException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(Exception e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", "Search Employee view could not be displayed");
-	    	
-		   return mav;
-		}
+
 	}
 
 	@RequestMapping(value = "/showUpdateEmployee", method = RequestMethod.GET)
-	public ModelAndView showUpdateEmployee(HttpServletRequest request,
-			HttpServletResponse response, HttpSession session) {
+	public ModelAndView showUpdateEmployee(HttpServletRequest request, HttpServletResponse response,
+			HttpSession session) {
 
-		if (session.getAttribute("username")==null)
+		if (session.getAttribute("username") == null)
 			return new ModelAndView("redirect:/login");
-		try
-		{
+
 		ModelAndView mav = new ModelAndView("updateEmployee");
 		mav.addObject("employeeManagement", new EmployeeAccount());
 		return mav;
-		}
-		catch(VendorMgmtException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(UserException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(Exception e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", " update employee view could not be displayed");
-	    	
-		   return mav;
-		}
+
 	}
 
 	@RequestMapping(value = "/showDeleteEmployee", method = RequestMethod.GET)
-	public ModelAndView showDeleteEmployee(HttpServletRequest request,
-			HttpServletResponse response, HttpSession session) {
-		if (session.getAttribute("username")==null)
+	public ModelAndView showDeleteEmployee(HttpServletRequest request, HttpServletResponse response,
+			HttpSession session) {
+		if (session.getAttribute("username") == null)
 			return new ModelAndView("redirect:/login");
-		try {
+
 		ModelAndView mav = new ModelAndView("deleteEmployee");
 		mav.addObject("employeeManagement", new EmployeeAccount());
 		return mav;
-		}
-		catch(VendorMgmtException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(UserException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(Exception e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", "Deleted employee view could not be displayed");
-	    	
-		   return mav;
-		}
+
 	}
 
 	// ------------------------------------------------Create-------------------------------------------------------------------------
 
 	@RequestMapping(value = "/createEmployee", method = RequestMethod.POST)
-	public ModelAndView createEmployee(HttpSession session,
-			@RequestParam(value = "employeeId") String employeeId,
+	public ModelAndView createEmployee(HttpSession session, @RequestParam(value = "employeeId") String employeeId,
 			@RequestParam(value = "employeeEmail") String employeeEmail,
-			@RequestParam(value = "employeeName") String employeeName,
-			@RequestParam(value = "role") String role,
+			@RequestParam(value = "employeeName") String employeeName, @RequestParam(value = "role") String role,
 			@RequestParam(value = "department") String departmentName,
-			@RequestParam(value = "userName") String userName,
-			@RequestParam(value = "password") String password) throws Exception {
-		if (session.getAttribute("username")==null)
+			@RequestParam(value = "userName") String userName, @RequestParam(value = "password") String password)
+			throws Exception {
+		if (session.getAttribute("username") == null)
 			return new ModelAndView("redirect:/login");
 		ModelAndView mav = new ModelAndView();
-		try{
+
 		EmployeeAccount employeeAccount = new EmployeeAccount();
 		Department employeeDepartment = new Department();
 
-		Role employeeRole=new Role();
-		String companyReferenceNumber=session.getAttribute("companyRefNumber").toString();
-		
-		employeeAccount.setEmployeeName(employeeName);
+		Role employeeRole = new Role();
+		String companyReferenceNumber = session.getAttribute("companyRefNumber").toString();
 
+		employeeAccount.setEmployeeName(employeeName);
 
 		employeeAccount.setCompanyReferenceNumber(companyReferenceNumber);
 
@@ -258,7 +149,8 @@ public class EmployeeManagementControllerImpl {
 		employeeAccount.setIsValidated(true);
 		employeeAccount.setUserName(userName);
 		employeeAccount.setPassword(password);
-		if (employeeAccountService.checkDuplicateEmployeeIdInSameCompany(companyReferenceNumber, employeeId).isEmpty()) {
+		if (employeeAccountService.checkDuplicateEmployeeIdInSameCompany(companyReferenceNumber, employeeId)
+				.isEmpty()) {
 			employeeAccount.setEmployeeId(employeeId);
 		} else {
 			mav = new ModelAndView("error");
@@ -266,33 +158,16 @@ public class EmployeeManagementControllerImpl {
 			return mav;
 		}
 
-		
-
-		
-		
 		employeeAccountService.createNewAccount(employeeAccount);
-		}catch(UserException e)
-		{
-			mav=new ModelAndView("error");
 
-			mav.addObject("message", e.getMessage());
-			return mav;
-		} catch (VendorMgmtException e) {
-			mav=new ModelAndView("error");
-			mav.addObject("message", "System error");
-			return mav;
-		} catch (Exception e) {
-			mav=new ModelAndView("error");
-			mav.addObject("message", "System error, please contact System administrator");
-			return mav;
-		}
 		String[] myStringArray = {};
-		String message= "Username : "+userName+"Employee ID : "+employeeId+"Employee Email : "+employeeEmail+"Role :" +role+"Department : "+departmentName;
-		notificationService.sendEmailWithPurposeCC(employeeEmail, myStringArray, "Employee Account Created", message, "", EmailPurposeType.AccountCreated);
-		
+		String message = "Username : " + userName + "Employee ID : " + employeeId + "Employee Email : " + employeeEmail
+				+ "Role :" + role + "Department : " + departmentName;
+		notificationService.sendEmailWithPurposeCC(employeeEmail, myStringArray, "Employee Account Created", message,
+				"", EmailPurposeType.AccountCreated);
+
 		mav = new ModelAndView("employeemanagement");
 		return mav;
-		
 
 	}
 
@@ -300,44 +175,22 @@ public class EmployeeManagementControllerImpl {
 	@RequestMapping(value = "/searchEmployee", method = RequestMethod.GET)
 	public ModelAndView searchEmployee(HttpSession session,
 			@RequestParam(value = "employeeUserName") String employeeUserName) {
-		if (session.getAttribute("username")==null)
+		if (session.getAttribute("username") == null)
 			return new ModelAndView("redirect:/login");
-		try {
+
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("employee",employeeAccountService.findByUserName(employeeUserName));
+		mav.addObject("employee", employeeAccountService.findByUserName(employeeUserName));
 		return mav;
-		}
-		catch(VendorMgmtException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(UserException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(Exception e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", "Employee could not be found!");
-	    	
-		   return mav;
-		}
+
 	}
 
 	// ---------------------------------------------------------------update---------------------------------------------------------
 
-	@RequestMapping(value = "/update", method = { RequestMethod.GET,
-			RequestMethod.POST })
+	@RequestMapping(value = "/update", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView searchEmployeeToUpdate(HttpSession session, HttpServletRequest req) {
-		if (session.getAttribute("username")==null)
+		if (session.getAttribute("username") == null)
 			return new ModelAndView("redirect:/login");
-		try {
+
 		String userName = req.getParameter("userName");
 		ModelAndView mav = new ModelAndView("updateEmployeeUpdate");
 		EmployeeAccount employee = new EmployeeAccount();
@@ -351,86 +204,35 @@ public class EmployeeManagementControllerImpl {
 		List<String> roleNames = generateListOfRoleOfCompany(companyReferenceNumber);
 		mav.addObject("departmentNames", departmentNames);
 		mav.addObject("roleNames", roleNames);
-		
-		
+
 		return mav;
-		}
-		catch(VendorMgmtException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(UserException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(Exception e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", "Searching employee to be updated could not be displayed.");
-	    	
-		   return mav;
-		}
+
 	}
 
 	@RequestMapping(value = "/showUpdateEdit", method = RequestMethod.GET)
-	public ModelAndView showUpdateEmployeeEdit(
-			HttpServletRequest request,
-			HttpServletResponse response,
-			HttpSession session,
-			@ModelAttribute("updateEmployeeUpdate") EmployeeAccount employee) {
-		if (session.getAttribute("username")==null)
+	public ModelAndView showUpdateEmployeeEdit(HttpServletRequest request, HttpServletResponse response,
+			HttpSession session, @ModelAttribute("updateEmployeeUpdate") EmployeeAccount employee) {
+		if (session.getAttribute("username") == null)
 			return new ModelAndView("redirect:/login");
-		try {
+
 		ModelAndView mav = new ModelAndView("updateEmployeeUpdate");
 		mav.addObject("employee", employee);
-		
-		
+
 		return mav;
-		}
-		catch(VendorMgmtException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(UserException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(Exception e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", "show update employee edit view could not be displayed");
-	    	
-		   return mav;
-		}
 	}
 
 	@RequestMapping(value = "/edited", method = RequestMethod.POST)
-	public ModelAndView updateEmployee(HttpServletRequest request,HttpSession session,
-			@RequestParam(value = "userName") String userName,
-			@RequestParam(value = "employeeId") String employeeId,
-			@RequestParam(value = "employeeEmail") String employeeEmail,
-			@RequestParam(value = "role") String role,
+	public ModelAndView updateEmployee(HttpServletRequest request, HttpSession session,
+			@RequestParam(value = "userName") String userName, @RequestParam(value = "employeeId") String employeeId,
+			@RequestParam(value = "employeeEmail") String employeeEmail, @RequestParam(value = "role") String role,
 			@RequestParam(value = "department") String departmentName,
 			@ModelAttribute("updateEmployeeUpdate") EmployeeAccount employee) throws Exception {
-		
-		if (session.getAttribute("username")==null)
+
+		if (session.getAttribute("username") == null)
 			return new ModelAndView("redirect:/login");
 		ModelAndView mav = new ModelAndView("updateEmployeeUpdate");
-		try {
-		String companyReferenceNumber = session
-				.getAttribute("companyRefNumber").toString();
+
+		String companyReferenceNumber = session.getAttribute("companyRefNumber").toString();
 
 		// mav.addObject("employee",
 		// employeeAccountService.findByUserName(request.getParameter("empUpdateSearchByUserName")));
@@ -440,17 +242,15 @@ public class EmployeeManagementControllerImpl {
 		Role employeeRole = new Role();
 
 		employeeAccount.setUserName(userName);
-				                                   // setComRefNo
+		// setComRefNo
 		employeeAccount.setCompanyReferenceNumber(companyReferenceNumber);
 
 		// setDept
-		employeeDepartment = departmentService.findByNameAndCompanyRef(
-				departmentName, companyReferenceNumber);
+		employeeDepartment = departmentService.findByNameAndCompanyRef(departmentName, companyReferenceNumber);
 		employeeAccount.setDepartment(employeeDepartment);
 
 		// setRole
-		employeeRole = roleService.findByCompanyReferenceNumberAndRole(
-				companyReferenceNumber, role);
+		employeeRole = roleService.findByCompanyReferenceNumberAndRole(companyReferenceNumber, role);
 		employeeAccount.setRole(employeeRole);
 
 		// setEmail
@@ -458,73 +258,55 @@ public class EmployeeManagementControllerImpl {
 		// setId
 		employeeAccount.setEmployeeId(employeeId);
 
-		
-			employeeAccountService.saveOrUpdateByCompAdmin(employeeAccount);
-		} catch(UserException e)
-		{
-			mav=new ModelAndView("error");
+		employeeAccountService.saveOrUpdateByCompAdmin(employeeAccount);
 
-			mav.addObject("message", e.getMessage());
-			return mav;
-		} catch (VendorMgmtException e) {
-			mav=new ModelAndView("error");
-			mav.addObject("message", "System error");
-			return mav;
-		} catch (Exception e) {
-			mav=new ModelAndView("error");
-			mav.addObject("message", "System error, please contact System administrator");
-			return mav;}
 		String[] myStringArray = {};
 
-		String message= "Username : "+userName+"Employee ID : "+employeeId+"Employee Email : "+employeeEmail+"Role :" +role+"Department : "+departmentName;
-		notificationService.sendEmailWithPurposeCC(employeeEmail, myStringArray, "Employee Account Created", message, "", EmailPurposeType.AccountCreated);
+		String message = "Username : " + userName + "Employee ID : " + employeeId + "Employee Email : " + employeeEmail
+				+ "Role :" + role + "Department : " + departmentName;
+		notificationService.sendEmailWithPurposeCC(employeeEmail, myStringArray, "Employee Account Created", message,
+				"", EmailPurposeType.AccountCreated);
 		mav = new ModelAndView("employeemanagement");
-	
+
 		return mav;
 	}
 
-	private List<String> generateListOfDepartmentOfCompany(
-			String companyReferenceNumber) {
-		List<Department> departmentList = departmentService
-				.findByCompanyRef(companyReferenceNumber);
+	private List<String> generateListOfDepartmentOfCompany(String companyReferenceNumber) {
+		List<Department> departmentList = departmentService.findByCompanyRef(companyReferenceNumber);
 		List<String> categoryNames = new ArrayList<>();
 		for (Department d : departmentList)
 			categoryNames.add(d.getDepartmentName());
 		return categoryNames;
 	}
 
-	private List<String> generateListOfRoleOfCompany(
-			String companyReferenceNumber) {
-		List<Role> roleList = roleService
-				.findByCompanyRef(companyReferenceNumber);
+	private List<String> generateListOfRoleOfCompany(String companyReferenceNumber) {
+		List<Role> roleList = roleService.findByCompanyRef(companyReferenceNumber);
 		List<String> categoryNames = new ArrayList<>();
 		for (Role R : roleList)
 			categoryNames.add(R.getRole());
 		return categoryNames;
 	}
-//------------------------------------------------------delete------------------------------------------------------------
-	@RequestMapping(value = "/deleteEmployee", method = { RequestMethod.DELETE,
-			RequestMethod.GET })
-	public ModelAndView deleteEmployee(
-			@RequestParam(value = "userName") String userName)
+
+	// ------------------------------------------------------delete------------------------------------------------------------
+	@RequestMapping(value = "/deleteEmployee", method = { RequestMethod.DELETE, RequestMethod.GET })
+	public ModelAndView deleteEmployee(@RequestParam(value = "userName") String userName)
 			throws NumberFormatException, Exception {
 
-		     ModelAndView mav=new ModelAndView();
+		ModelAndView mav = new ModelAndView();
 		try {
 
 			employeeAccountService.deleteByUserName(userName);
-		} catch(UserException e)
-		{
-			mav=new ModelAndView("error");
+		} catch (UserException e) {
+			mav = new ModelAndView("error");
 
 			mav.addObject("message", e.getMessage());
 			return mav;
 		} catch (VendorMgmtException e) {
-			mav=new ModelAndView("error");
+			mav = new ModelAndView("error");
 			mav.addObject("message", "System error");
 			return mav;
 		} catch (Exception e) {
-			mav=new ModelAndView("error");
+			mav = new ModelAndView("error");
 			mav.addObject("message", "System error, please contact System administrator");
 			return mav;
 		}
@@ -534,8 +316,8 @@ public class EmployeeManagementControllerImpl {
 	}
 
 	@RequestMapping(value = "/BackToEmployeemanagementPage", method = RequestMethod.GET)
-	public ModelAndView createEmployeeBack(HttpServletRequest request,
-			HttpServletResponse response, HttpSession session) {
+	public ModelAndView createEmployeeBack(HttpServletRequest request, HttpServletResponse response,
+			HttpSession session) {
 		ModelAndView mav = new ModelAndView("employeemanagement");
 		return mav;
 	}

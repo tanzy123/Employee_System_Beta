@@ -44,7 +44,6 @@ public class CatUpdateImpl implements CategoryUpdateController {
 	public ModelAndView Registration(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		if (session.getAttribute("username") == null)
 			return new ModelAndView("redirect:/login");
-		try {
 			CompanyAdministratorAccount account = accountService
 					.findByUserName(session.getAttribute("username").toString());
 			List<Category> catlist = catService.findByCompanyRef(account.getCompanyReferenceNumber());
@@ -53,39 +52,15 @@ public class CatUpdateImpl implements CategoryUpdateController {
 			mav.addObject("catlist", catlist);
 
 			return mav;
-		} catch (VendorMgmtException e) {
-			ModelAndView mav = new ModelAndView("error");
-			mav.addObject("message", e.getMessage());
-
-			return mav;
-		} catch (UserException e) {
-			ModelAndView mav = new ModelAndView("error");
-			mav.addObject("message", e.getMessage());
-
-			return mav;
-		} catch (Exception e) {
-			ModelAndView mav = new ModelAndView("error");
-			mav.addObject("message", "Category application view could not be displayed");
-
-			return mav;
-		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.beta.controllerImpl.CategoryUpdateController#StoreNewCompanyInfo(javax.
-	 * servlet.http.HttpSession, java.lang.String)
-	 */
 	@Override
 	@RequestMapping(value = "/storeNewCatInfo", method = RequestMethod.POST)
 	public ModelAndView StoreNewCompanyInfo(HttpSession session, @RequestParam(value = "catName") String catName)
-
 	{
 		if (session.getAttribute("username") == null)
 			return new ModelAndView("redirect:/login");
-		try {
+		
 			CompanyAdministratorAccount account = accountService
 					.findByUserName(session.getAttribute("username").toString());
 			List<String> theList = Arrays.asList(catName.split(","));
@@ -99,23 +74,6 @@ public class CatUpdateImpl implements CategoryUpdateController {
 			ModelAndView successMAV = new ModelAndView("redirect:updateCat");
 
 			return successMAV;
-		} catch (VendorMgmtException e) {
-			ModelAndView mav = new ModelAndView("error");
-			mav.addObject("message", e.getMessage());
-
-			return mav;
-		} catch (UserException e) {
-			ModelAndView mav = new ModelAndView("error");
-			mav.addObject("message", e.getMessage());
-
-			return mav;
-		} catch (Exception e) {
-			ModelAndView mav = new ModelAndView("error");
-			mav.addObject("message", "Category could not be updated");
-
-			return mav;
-		}
-
 	}
 
 	/*
@@ -130,7 +88,7 @@ public class CatUpdateImpl implements CategoryUpdateController {
 	public ModelAndView DeleteCatInfo(HttpSession session, HttpServletRequest request) {
 		if (session.getAttribute("username")==null)
 			return new ModelAndView("redirect:/login");
-		try {
+		
 			String depid = request.getParameter("depid");
 			Long did = Long.parseLong(depid);
 			CompanyAdministratorAccount account = accountService
@@ -138,22 +96,6 @@ public class CatUpdateImpl implements CategoryUpdateController {
 			catService.removeCat(did);
 			ModelAndView successMAV = new ModelAndView("redirect:updateCat");
 			return successMAV;
-		} catch (VendorMgmtException e) {
-			ModelAndView mav = new ModelAndView("error");
-			mav.addObject("message", e.getMessage());
-
-			return mav;
-		} catch (UserException e) {
-			ModelAndView mav = new ModelAndView("error");
-			mav.addObject("message", e.getMessage());
-
-			return mav;
-		} catch (Exception e) {
-			ModelAndView mav = new ModelAndView("error");
-			mav.addObject("message", "Category could not be deleted");
-
-			return mav;
-		}
 	}
 
 }

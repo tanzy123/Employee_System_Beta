@@ -23,9 +23,6 @@ import com.beta.entity.Company;
 import com.beta.entity.Documents;
 import com.beta.entity.EmployeeAccount;
 import com.beta.entity.Requirement;
-
-import com.beta.exception.UserException;
-import com.beta.exception.VendorMgmtException;
 import com.beta.orm.service.ApplicationService;
 import com.beta.orm.service.CompanyService;
 import com.beta.orm.service.DocumentsService;
@@ -59,40 +56,17 @@ public class EmployeeDashboardAndVetVendorControllerImpl {
 	public ModelAndView showDashboard(HttpSession session) {
 		if (session.getAttribute("username")==null)
 			return new ModelAndView("redirect:/login");
-		try {
 		EmployeeAccount account = employeeAccountService.findByUserName(session.getAttribute("username").toString());
 		session.setAttribute("account", account);
 		ModelAndView mav = new ModelAndView("employeeDashboard");
 		return mav;
-		}
-		catch(VendorMgmtException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(UserException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(Exception e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", "Employee view could not be displayed");
-	    	
-		   return mav;
-		}
+		
 	}
 
 	@RequestMapping(value = "/pendingvendorapplication")
 	public ModelAndView employeePendingVendorApplication(HttpSession session) {
 		if (session.getAttribute("username")==null)
 			return new ModelAndView("redirect:/login");
-		try {
 		EmployeeAccount account = (EmployeeAccount) session.getAttribute("account");
 
 		List<CompanyApplication> companyApplicationlist = getListOfPendingApplications(account.getUserName());
@@ -100,28 +74,7 @@ public class EmployeeDashboardAndVetVendorControllerImpl {
 		mav.addObject("companyApplicationlist", companyApplicationlist);
 
 		return mav;
-		}
-		catch(VendorMgmtException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(UserException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(Exception e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", "employee pending application view could not be displayed");
-	    	
-		   return mav;
-		}
+		
 	}
 
 	@RequestMapping(value = "/companyApplicationPending/{applicationRef}", method = RequestMethod.GET)
@@ -130,53 +83,26 @@ public class EmployeeDashboardAndVetVendorControllerImpl {
 			@ModelAttribute("requirementApproval") RequirementApproval requirementApproval) {
 		if (session.getAttribute("username")==null)
 			return new ModelAndView("redirect:/login");
-		try {
+		
 		CompanyApplication companyApplication = getVendorApplication(applicationRef);
 		List<DocumentFiles> files = getApplicationDocumentsFromDropBox(applicationRef);
 		ModelAndView mav = new ModelAndView("vendorApplicationDetailsForEmployee");
 		mav.addObject("companyApplication", companyApplication);
 		mav.addObject("files", files);
 		return mav;
-		}
-		catch(VendorMgmtException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(UserException e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", e.getMessage());
-	    	
-		   return mav;
-		}
-		catch(Exception e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", "Application details view could not be displayed");
-	    	
-		   return mav;
-		}
 		
 	}
 
 	@RequestMapping(value = "/companyApplicationPending/vetApplication/{applicationRef}", method = RequestMethod.POST)
 	public ModelAndView approveOrRejectApplication(HttpSession session, @PathVariable String applicationRef,
-			@ModelAttribute("requirementApproval") RequirementApproval requirementApproval) {
+			@ModelAttribute("requirementApproval") RequirementApproval requirementApproval) throws Exception {
 		if (session.getAttribute("username")==null)
 			return new ModelAndView("redirect:/login");
-		try {
+		
 		String userName = session.getAttribute("username").toString();
 		Application application = applicationService.findByApplicationRefNo(applicationRef);
 		vendorVettingProcess.vetVendor(userName, application, requirementApproval.getStatus(), requirementApproval.getRequirements());
-		} 
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
+		
 		ModelAndView mav = new ModelAndView("success");
 		return mav;
 	}

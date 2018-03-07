@@ -23,7 +23,7 @@ public class GlobalDefaultExceptionHandler {
 	}
 	
 	@ExceptionHandler(value = UserException.class)
-	public ModelAndView defaultUserExceptionHandler(VendorMgmtException e) throws Exception {
+	public ModelAndView defaultUserExceptionHandler(UserException e) throws Exception {
 		
 		ModelAndView mav = new ModelAndView("error");
 		mav.addObject("message", e.getMessage());

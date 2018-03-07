@@ -17,8 +17,6 @@ import com.beta.entity.ApprovalStatus;
 import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.EmployeeAccount;
 import com.beta.entity.Requirement;
-import com.beta.exception.UserException;
-import com.beta.exception.VendorMgmtException;
 import com.beta.orm.service.CompanyAdminstratorAccountService;
 import com.beta.orm.service.EmployeeAccountService;
 import com.beta.orm.service.RequirementService;
@@ -38,170 +36,75 @@ public class VetterMgmtControllerImpl {
 	@RequestMapping(value = "/vetterDisplay/{appRef}", method = RequestMethod.GET)
 	public ModelAndView displayVetters(@PathVariable String appRef, HttpSession session) {
 
-		if (session.getAttribute("username")==null)
+		if (session.getAttribute("username") == null)
 			return new ModelAndView("redirect:/login");
-		try {
+		CompanyAdministratorAccount account = (CompanyAdministratorAccount) session.getAttribute("account");
 
-			CompanyAdministratorAccount account = (CompanyAdministratorAccount) session.getAttribute("account");
+		List<Requirement> reqList = reqService.findByApplicationRef(appRef);
+		List<EmployeeAccount> vetterList = new ArrayList();
+		for (Requirement q : reqList) {
+			EmployeeAccount a = empAcctServ.findByUserName(q.getUserName());
+			vetterList.add(a);
 
-			List<Requirement> reqList = reqService.findByApplicationRef(appRef);
-			List<EmployeeAccount> vetterList = new ArrayList();
-			for (Requirement q : reqList) {
-				EmployeeAccount a = empAcctServ.findByUserName(q.getUserName());
-				vetterList.add(a);
-
-			}
-
-			ModelAndView mav = new ModelAndView("assignVetterByZQ");
-			mav.addObject("vetterList", vetterList);
-			mav.addObject("appRef", appRef);
-			mav.addObject("comRef", account.getCompanyReferenceNumber());
-
-			return mav;
-		} catch (VendorMgmtException e) {
-			ModelAndView mav = new ModelAndView("error");
-			mav.addObject("message", e.getMessage());
-
-			return mav;
-		} catch (UserException e) {
-			ModelAndView mav = new ModelAndView("error");
-			mav.addObject("message", e.getMessage());
-
-			return mav;
-		} catch (Exception e) {
-			ModelAndView mav = new ModelAndView("error");
-			mav.addObject("message", "assigning of vetter could not be carried out.");
-
-			return mav;
 		}
 
+		ModelAndView mav = new ModelAndView("assignVetterByZQ");
+		mav.addObject("vetterList", vetterList);
+		mav.addObject("appRef", appRef);
+		mav.addObject("comRef", account.getCompanyReferenceNumber());
+
+		return mav;
 	}
 
-//	@RequestMapping(value = "vetterDisplay/findByEmpName", method = RequestMethod.GET)
-//	public ModelAndView Registration(HttpSession session, @RequestParam(value = "empName") String empName,
-//			@RequestParam(value = "comRef") String comRef, @RequestParam(value = "appRef") String appRef) {
-//		try {
-//			CompanyAdministratorAccount account = accountService
-//					.findByUserName(session.getAttribute("username").toString());
-//
-//			List<EmployeeAccount> empList = empAcctServ.findByEmpNameAndCompany(comRef, empName);
-//
-//			ModelAndView mav = new ModelAndView("assignVetter");
-//			mav.addObject("empList", empList);
-//			return mav;
-//		}
-//
-//		catch (VendorMgmtException e) {
-//			ModelAndView mav = new ModelAndView("error");
-//			mav.addObject("message", e.getMessage());
-//
-//			return mav;
-//		} catch (UserException e) {
-//			ModelAndView mav = new ModelAndView("error");
-//			mav.addObject("message", e.getMessage());
-//
-//			return mav;
-//		} catch (Exception e) {
-//			ModelAndView mav = new ModelAndView("error");
-//			mav.addObject("message", "Registration could not be carried out.");
-//
-//			return mav;
-//		}
-//
-//	}
-
-	@RequestMapping(value = "vetterDisplay/addVetInfo", method= RequestMethod.GET)
-	public ModelAndView addVetterInfo(HttpSession session, HttpServletRequest request)
-			
-		
-	{
-		if (session.getAttribute("username")==null)
+	@RequestMapping(value = "vetterDisplay/addVetInfo", method = RequestMethod.GET)
+	public ModelAndView addVetterInfo(HttpSession session, HttpServletRequest request) {
+		if (session.getAttribute("username") == null)
 			return new ModelAndView("redirect:/login");
-		try {
 		String id = request.getParameter("id");
 		String appRef = request.getParameter("appRef");
 		String Sequence = request.getParameter("Sequence");
 		int seq = Integer.parseInt(Sequence);
-		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
-		
+		CompanyAdministratorAccount account = accountService
+				.findByUserName(session.getAttribute("username").toString());
+
 		List<EmployeeAccount> list = empAcctServ.findByEmpId(id);
-		
+
 		EmployeeAccount ea = new EmployeeAccount();
-		
-		for (EmployeeAccount e:list) {
+
+		for (EmployeeAccount e : list) {
 			ea = e;
 		}
-		
+
 		Requirement req = new Requirement();
 		req.setUserName(ea.getUserName());
 		req.setApplicationRef(appRef);
-		
-		if (seq==1) {
-		req.setStatus(ApprovalStatus.PENDING);
-		}
-		else {
-			req.setStatus(ApprovalStatus.WAITING);	
+
+		if (seq == 1) {
+			req.setStatus(ApprovalStatus.PENDING);
+		} else {
+			req.setStatus(ApprovalStatus.WAITING);
 		}
 		req.setSequence(seq);
-		
+
 		reqService.saveOrUpdate(req);
-		
+
 		return displayVetters(appRef, session);
-		} catch (
 
-				VendorMgmtException e) {
-					ModelAndView mav = new ModelAndView("error");
-					mav.addObject("message", e.getMessage());
-
-					return mav;
-				} catch (UserException e) {
-					ModelAndView mav = new ModelAndView("error");
-					mav.addObject("message", e.getMessage());
-
-					return mav;
-				} catch (Exception e) {
-					ModelAndView mav = new ModelAndView("error");
-					mav.addObject("message", "adding of  vetter Info could not be carried out.");
-
-					return mav;
-				}
 	}
 
 	@RequestMapping(value = "vetterDisplay/deleteVetInfo", method = RequestMethod.GET)
-	public ModelAndView DeleteCompanyInfo(HttpSession session, HttpServletRequest request)
-
-	{
-		if (session.getAttribute("username")==null)
+	public ModelAndView DeleteCompanyInfo(HttpSession session, HttpServletRequest request) {
+		if (session.getAttribute("username") == null)
 			return new ModelAndView("redirect:/login");
-		try {
-			String userName = request.getParameter("userName");
-			String appRef = request.getParameter("appRef");
+		String userName = request.getParameter("userName");
+		String appRef = request.getParameter("appRef");
 
-			Requirement req = reqService.findByApplicationRefAndUser(appRef, userName);
+		Requirement req = reqService.findByApplicationRefAndUser(appRef, userName);
 
-			Long id = req.getRequirementId();
+		Long id = req.getRequirementId();
 
-			reqService.removeVet(id);
+		reqService.removeVet(id);
 
-			return displayVetters(appRef, session);
-		} catch (
-
-		VendorMgmtException e) {
-			ModelAndView mav = new ModelAndView("error");
-			mav.addObject("message", e.getMessage());
-
-			return mav;
-		} catch (UserException e) {
-			ModelAndView mav = new ModelAndView("error");
-			mav.addObject("message", e.getMessage());
-
-			return mav;
-		} catch (Exception e) {
-			ModelAndView mav = new ModelAndView("error");
-			mav.addObject("message", "adding of  vetter Info could not be carried out.");
-
-			return mav;
-		}
-
+		return displayVetters(appRef, session);
 	}
 }
