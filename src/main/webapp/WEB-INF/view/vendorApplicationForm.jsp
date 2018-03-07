@@ -14,11 +14,11 @@
 <body>
 <div class="container">
 <h3>Vendor Application Form</h3>
-        <form:form method="POST" action="applyApplicationStage2" modelAttribute="application">
+        <form:form method="POST" action="/VendorApplication/applyApplicationStage2" modelAttribute="application">
              <table>
                 <tr>
-                    <td><form:label path="companyReferenceNumber">Company Reference Number (company applying to)</form:label></td>
-                    <td><form:input path="companyReferenceNumber"/></td>
+                    <td><form:label path="companyReferenceNumber" >Company Reference Number (company applying to)</form:label></td>
+                    <td ><form:input path="companyReferenceNumber" value="${companyReferenceNumber}"/></td>
                 </tr>
                 <tr>
                     <td><form:label path="vendorReferenceNumber">Vendor Reference Number (your company)</form:label></td>
@@ -32,21 +32,31 @@
             </table>
         </form:form>
 
-        <form action="findCompany">
-   					 <input type="submit" value="Go Back" />
-   				</form>	 
-   		<form action="displayComSearch" method="get">
-		<tbody>
-			<tr id='row1'>
-				<td>SEARCH BY COMPANY NAME TO ADD</td>
-				<td><input id="comName" name="comName"  type="text" /></td>
-				<td><input type="submit" value="Search" id="submitCompanyRegistration" name="submitCompanyRegistration" /></td>
-			</tr>
-		</tbody>
+   					 
+   		<h2>Search for Company by Name</h2>
+		<form action="/VendorApplication/findCompany" method="get">
+			<input id="comName" name="comName" type="text" /> <input
+				type="submit" value="Search" />
 		</form>
-        <form action="/VendorApplication/dashboardcompany">
-   					 <input type="submit" value="Go Back" class="btn"/>
-</form>       
+	
+	<br>
+		<table class="table">
+			<tr>
+				<th>Company Name</th>
+				<th>Company Reference Number</th>
+				
+				<th></th>
+			</tr>
+			<c:forEach var="com" items="${comList}">
+				<tr>
+					<td>${com.companyName}</td>
+					<td>${com.companyReferenceNumber}</td>
+					
+					<td><form action="/VendorApplication/addCompany/${com.companyReferenceNumber}"><input class="btn btn-default" type="submit" value="Add Company"></form></td>
+				</tr>
+			</c:forEach>
+		</table>
+      
 </div>
 </body>
 </html>

@@ -82,7 +82,6 @@ public class LoginControllerImpl implements LoginController {
 	{
 		
 		ModelAndView mav = null;
-		session.setAttribute("username", username);
 		
 		if (loginType.equals("EMPLOYEE")) {
 			try {
@@ -93,6 +92,8 @@ public class LoginControllerImpl implements LoginController {
 			employeeAccount.setPassword(password);
 			
 				employeeAccountService.validateAccount(employeeAccount);
+
+				session.setAttribute("username", username);
 				mav = new ModelAndView("redirect:/employeeDashboard");
 				
 			} 
@@ -126,6 +127,8 @@ public class LoginControllerImpl implements LoginController {
 			companyAdministratorAccount.setPassword(password);
 			
 				companyAdminAccountService.validateAccount(companyAdministratorAccount);
+
+				session.setAttribute("username", username);
 				mav = new ModelAndView("redirect:/dashboardcompany");
 
 			} catch (UserException e) 

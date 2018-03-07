@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,9 @@ public class PendingVendorApplicationControllerImpl {
 	@RequestMapping(value="/pendingvendorapplicationview2", method = RequestMethod.GET)
 	
 	public ModelAndView showLogin(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response, HttpSession session) {
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 		ModelAndView mav = new ModelAndView("pendingvendorapplicationview");
 		mav.addObject("employeeManagement", employeeAccountService.findAll());
@@ -63,7 +66,9 @@ public class PendingVendorApplicationControllerImpl {
 		}
 	}
 	@RequestMapping(value = "/pendingvendorapplicationview")
-	public ModelAndView listEmployee(ModelAndView model) throws IOException {
+	public ModelAndView listEmployee(ModelAndView model, HttpSession session) throws IOException {
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 		List<EmployeeAccount> listEmployee = employeeAccountService.findAll();
 		model.addObject("listEmployee", listEmployee);
@@ -94,7 +99,8 @@ public class PendingVendorApplicationControllerImpl {
 	}
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public String list(Map<String,Object>map)
+	public String list(Map<String,Object>map, HttpSession session)
+	
 	{
 		map.put("vendorApplicationList", employeeAccountService.findAll());
 		

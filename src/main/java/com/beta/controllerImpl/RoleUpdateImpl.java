@@ -35,6 +35,8 @@ public class RoleUpdateImpl {
 	@RequestMapping(value = "/updateRole", method = RequestMethod.GET)
 	public ModelAndView Registration(HttpServletRequest request,HttpServletResponse response,HttpSession session)
 	{
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
 		List<Role> rolelist = roleService.findByCompanyRef(account.getCompanyReferenceNumber());
@@ -72,6 +74,8 @@ public class RoleUpdateImpl {
 			@RequestParam(value = "roleName") String roleName)
 		
 	{
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
 		List<String> theList = Arrays.asList(roleName.split(","));
@@ -115,6 +119,8 @@ public class RoleUpdateImpl {
 			
 		
 	{
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try
 		{
 		String depid = request.getParameter("depid");

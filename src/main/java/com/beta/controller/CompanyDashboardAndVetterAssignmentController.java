@@ -14,7 +14,7 @@ import com.beta.controller.object.VetterList;
 
 public interface CompanyDashboardAndVetterAssignmentController {
 
-	ModelAndView showDashboard(HttpSession session);
+	ModelAndView showDashboard(HttpSession session) throws Exception;
 
 	ModelAndView showVetters(HttpSession session);
 

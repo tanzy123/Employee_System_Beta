@@ -15,4 +15,8 @@ public interface CompanyVendorApplicationController {
 
 	ModelAndView showDetailsOfApplication(String applicationRef, HttpSession session);
 
+//	ModelAndView getAllPendingAndVettingApplicationsWithEmpSearch(HttpSession session);
+
+	ModelAndView getAllPendingAndVettingApplicationsWithEmpSearch(HttpSession session, String comName);
+
 }

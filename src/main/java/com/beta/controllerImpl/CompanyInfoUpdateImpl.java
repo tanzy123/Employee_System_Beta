@@ -35,6 +35,8 @@ public class CompanyInfoUpdateImpl implements CompanyInfoUpdateController {
 	@RequestMapping(value = "/updateCompany", method = RequestMethod.GET)
 	public ModelAndView Registration(HttpServletRequest request,HttpServletResponse response,HttpSession session)
 	{
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
 		session.setAttribute("account", account);
@@ -75,7 +77,7 @@ public class CompanyInfoUpdateImpl implements CompanyInfoUpdateController {
 	 */
 	@Override
 	@RequestMapping(value = "/storeNewCompanyInfo", method= RequestMethod.POST)
-	public ModelAndView StoreNewCompanyInfo(
+	public ModelAndView StoreNewCompanyInfo(HttpSession session,
 			@RequestParam(value = "companyReferenceNumber") String companyReferenceNumber,
 			@RequestParam(value = "companyName") String companyName,
 			@RequestParam(value = "companyAddress") String companyAddress,
@@ -87,6 +89,8 @@ public class CompanyInfoUpdateImpl implements CompanyInfoUpdateController {
 			@RequestParam(value = "password") String password)
 		
 	{
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try
 		{
 		ModelAndView mav = null;

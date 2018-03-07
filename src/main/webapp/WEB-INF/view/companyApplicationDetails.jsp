@@ -13,6 +13,7 @@
 </head>
 <body>
 <div class="container">
+<h1>Company Application Details</h1>
 	<table class="table">
 		<tr>
 			<td>Company Name: ${companyApplication.company.companyName}</td>

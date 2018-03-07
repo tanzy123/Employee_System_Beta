@@ -47,7 +47,9 @@ public class EmployeeManagementControllerImpl {
 	// --------------------------------------load jsp pages----------------------------------------------------------------------------
 	@RequestMapping(value = "/employeeManagement", method = RequestMethod.GET)
 	public ModelAndView showLogin(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response, HttpSession session) {
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 		ModelAndView mav = new ModelAndView("employeemanagement");
 		mav.addObject("employeeManagement", new EmployeeAccount());
@@ -79,6 +81,8 @@ public class EmployeeManagementControllerImpl {
 	public ModelAndView showCreaeteEmployee(HttpServletRequest request,
 
 	HttpServletResponse response, HttpSession session) {
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 		ModelAndView mav = new ModelAndView("createEmployee");
 		mav.addObject("employeeManagement", new EmployeeAccount());
@@ -117,7 +121,9 @@ public class EmployeeManagementControllerImpl {
 
 	@RequestMapping(value = "/showSearchEmployee", method = RequestMethod.GET)
 	public ModelAndView showSearchEmployee(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response, HttpSession session) {
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try
 		{
 		ModelAndView mav = new ModelAndView("searchEmployee");
@@ -149,8 +155,10 @@ public class EmployeeManagementControllerImpl {
 
 	@RequestMapping(value = "/showUpdateEmployee", method = RequestMethod.GET)
 	public ModelAndView showUpdateEmployee(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response, HttpSession session) {
 
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try
 		{
 		ModelAndView mav = new ModelAndView("updateEmployee");
@@ -182,7 +190,9 @@ public class EmployeeManagementControllerImpl {
 
 	@RequestMapping(value = "/showDeleteEmployee", method = RequestMethod.GET)
 	public ModelAndView showDeleteEmployee(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response, HttpSession session) {
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 		ModelAndView mav = new ModelAndView("deleteEmployee");
 		mav.addObject("employeeManagement", new EmployeeAccount());
@@ -222,7 +232,8 @@ public class EmployeeManagementControllerImpl {
 			@RequestParam(value = "department") String departmentName,
 			@RequestParam(value = "userName") String userName,
 			@RequestParam(value = "password") String password) throws Exception {
-		
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		ModelAndView mav = new ModelAndView();
 		try{
 		EmployeeAccount employeeAccount = new EmployeeAccount();
@@ -287,8 +298,10 @@ public class EmployeeManagementControllerImpl {
 
 	// --------------------------------------------------------------search----------------------------------------------------------
 	@RequestMapping(value = "/searchEmployee", method = RequestMethod.GET)
-	public ModelAndView searchEmployee(
+	public ModelAndView searchEmployee(HttpSession session,
 			@RequestParam(value = "employeeUserName") String employeeUserName) {
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("employee",employeeAccountService.findByUserName(employeeUserName));
@@ -322,6 +335,8 @@ public class EmployeeManagementControllerImpl {
 	@RequestMapping(value = "/update", method = { RequestMethod.GET,
 			RequestMethod.POST })
 	public ModelAndView searchEmployeeToUpdate(HttpSession session, HttpServletRequest req) {
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 		String userName = req.getParameter("userName");
 		ModelAndView mav = new ModelAndView("updateEmployeeUpdate");
@@ -369,7 +384,8 @@ public class EmployeeManagementControllerImpl {
 			HttpServletResponse response,
 			HttpSession session,
 			@ModelAttribute("updateEmployeeUpdate") EmployeeAccount employee) {
-
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 		ModelAndView mav = new ModelAndView("updateEmployeeUpdate");
 		mav.addObject("employee", employee);
@@ -409,7 +425,8 @@ public class EmployeeManagementControllerImpl {
 			@RequestParam(value = "department") String departmentName,
 			@ModelAttribute("updateEmployeeUpdate") EmployeeAccount employee) throws Exception {
 		
-		
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		ModelAndView mav = new ModelAndView("updateEmployeeUpdate");
 		try {
 		String companyReferenceNumber = session

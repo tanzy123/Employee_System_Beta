@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.security.auth.login.LoginException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -71,8 +72,9 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl implements Compan
 	 */
 	@Override
 	@RequestMapping(value = "/dashboardcompany", method = RequestMethod.GET)
-	public ModelAndView showDashboard(HttpSession session) {
-		
+	public ModelAndView showDashboard(HttpSession session) throws Exception {
+		if (session.getAttribute("username")==null)
+			throw new Exception();
 		try {
 		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
 		session.setAttribute("account", account);
@@ -100,12 +102,11 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl implements Compan
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see com.beta.controllerImpl.CompanyDashboardAndVetterAssignmentController#showVetters(javax.servlet.http.HttpSession)
-	 */
 	@Override
 	@RequestMapping(value = "/vetterManagement", method = RequestMethod.GET)  
     public ModelAndView showVetters(HttpSession session){
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount)session.getAttribute("account");
         List<CompanyApplication> companyApplicationlist = getListOfApplicationsToBeVetted(account.getCompanyReferenceNumber());
@@ -143,6 +144,8 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl implements Compan
 	@Override
 	@RequestMapping(value = "/pendingApplication", method = RequestMethod.GET)  
     public ModelAndView getApplicationsToBeVetted(HttpSession session){
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount)session.getAttribute("account");
         List<CompanyApplication> companyApplicationlist = getListOfApplicationsToBeVetted(account.getCompanyReferenceNumber());
@@ -183,7 +186,8 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl implements Compan
 	@Override
 	@RequestMapping(value = "/vendorApplication/{applicationRef}", method = RequestMethod.GET)  
     public ModelAndView showDetailsOfApplication(@PathVariable String applicationRef, HttpSession session){
-		
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount)session.getAttribute("account");
 		CompanyApplication companyApplication = getCompanyApplication(account.getCompanyReferenceNumber(), applicationRef);
@@ -222,6 +226,8 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl implements Compan
 	@Override
 	@RequestMapping(value = "/assignVetter/{applicationRef}", method = RequestMethod.GET)  
     public ModelAndView assignVetters(@PathVariable String applicationRef, HttpSession session){
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try
 		{
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount)session.getAttribute("account");
@@ -264,6 +270,8 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl implements Compan
 	@Override
 	@RequestMapping(value = "assignVetter/findByEmpName", method = RequestMethod.GET)
 	public ModelAndView Registration(HttpSession session, @RequestParam(value = "empName") String empName) {
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 			CompanyAdministratorAccount account = accountService
 					.findByUserName(session.getAttribute("username").toString());
@@ -299,6 +307,8 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl implements Compan
 	
 	@RequestMapping(value = "addVetter/{empUsername}", method = RequestMethod.GET)
 	public ModelAndView addVetter(HttpSession session, @PathVariable String empUsername) {
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 			CompanyAdministratorAccount account = accountService
 					.findByUserName(session.getAttribute("username").toString());
@@ -339,6 +349,8 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl implements Compan
 	
 	@RequestMapping(value = "deleteVetter/{empUsername}", method = RequestMethod.GET)
 	public ModelAndView deleteVetter(HttpSession session, @PathVariable String empUsername) {
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 			CompanyAdministratorAccount account = accountService
 					.findByUserName(session.getAttribute("username").toString());
@@ -389,6 +401,8 @@ public class CompanyDashboardAndVetterAssignmentControllerImpl implements Compan
 	@RequestMapping(value = "/setVetters", method = RequestMethod.POST)  
 	@ResponseBody
     public ModelAndView setVetters(HttpSession session){
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount)session.getAttribute("account");
 		List<VetterdDTO> list = (ArrayList<VetterdDTO>)session.getAttribute("vetters");

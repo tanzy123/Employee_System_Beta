@@ -34,6 +34,8 @@ public class DepartmentUpdateImpl {
 	public ModelAndView Registration(HttpServletRequest request,HttpServletResponse response,HttpSession session)
 	
 	{
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
 		List<Department> departmentlist = deptService.findByCompanyRef(account.getCompanyReferenceNumber());
@@ -77,6 +79,8 @@ public class DepartmentUpdateImpl {
 	
 		
 	{
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 		CompanyAdministratorAccount account = accountService.findByUserName(session.getAttribute("username").toString());
 		List<String> theList = Arrays.asList(departmentName.split(","));
@@ -120,6 +124,8 @@ public class DepartmentUpdateImpl {
 			
 		
 	{
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 		String depid = request.getParameter("depid");
 		Long did = Long.parseLong(depid);

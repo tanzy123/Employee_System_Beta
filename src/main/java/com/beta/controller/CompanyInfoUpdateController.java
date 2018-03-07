@@ -13,8 +13,8 @@ public interface CompanyInfoUpdateController {
 
 	ModelAndView Registration(HttpServletRequest request, HttpServletResponse response, HttpSession session);
 
-	ModelAndView StoreNewCompanyInfo(String companyReferenceNumber, String companyName, String companyAddress,
-			String companyEmail, String contactNumber, String companyWebsite, String turnover, String userName,
-			String password);
+	ModelAndView StoreNewCompanyInfo(HttpSession session, String companyReferenceNumber, String companyName,
+			String companyAddress, String companyEmail, String contactNumber, String companyWebsite, String turnover,
+			String userName, String password);
 
 }

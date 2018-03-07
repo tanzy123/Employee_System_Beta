@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.beta.controller.object.CompanyApplication;
 import com.beta.entity.ApprovalStatus;
 import com.beta.entity.CompanyAdministratorAccount;
 import com.beta.entity.EmployeeAccount;
 import com.beta.entity.Requirement;
-import com.beta.entity.Role;
 import com.beta.exception.UserException;
 import com.beta.exception.VendorMgmtException;
 import com.beta.orm.service.CompanyAdminstratorAccountService;
@@ -42,6 +38,8 @@ public class VetterMgmtControllerImpl {
 	@RequestMapping(value = "/vetterDisplay/{appRef}", method = RequestMethod.GET)
 	public ModelAndView displayVetters(@PathVariable String appRef, HttpSession session) {
 
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 
 			CompanyAdministratorAccount account = (CompanyAdministratorAccount) session.getAttribute("account");
@@ -117,7 +115,8 @@ public class VetterMgmtControllerImpl {
 			
 		
 	{
-		
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 		String id = request.getParameter("id");
 		String appRef = request.getParameter("appRef");
@@ -172,6 +171,8 @@ public class VetterMgmtControllerImpl {
 	public ModelAndView DeleteCompanyInfo(HttpSession session, HttpServletRequest request)
 
 	{
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 			String userName = request.getParameter("userName");
 			String appRef = request.getParameter("appRef");

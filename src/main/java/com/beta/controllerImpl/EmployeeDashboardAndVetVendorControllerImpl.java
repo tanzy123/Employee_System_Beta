@@ -57,6 +57,8 @@ public class EmployeeDashboardAndVetVendorControllerImpl {
 
 	@RequestMapping(value = "/employeeDashboard", method = RequestMethod.GET)
 	public ModelAndView showDashboard(HttpSession session) {
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 		EmployeeAccount account = employeeAccountService.findByUserName(session.getAttribute("username").toString());
 		session.setAttribute("account", account);
@@ -88,6 +90,8 @@ public class EmployeeDashboardAndVetVendorControllerImpl {
 
 	@RequestMapping(value = "/pendingvendorapplication")
 	public ModelAndView employeePendingVendorApplication(HttpSession session) {
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 		EmployeeAccount account = (EmployeeAccount) session.getAttribute("account");
 
@@ -124,6 +128,8 @@ public class EmployeeDashboardAndVetVendorControllerImpl {
 	public ModelAndView showDetailsOfApplication(@PathVariable String applicationRef,
 			HttpSession session,
 			@ModelAttribute("requirementApproval") RequirementApproval requirementApproval) {
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 		CompanyApplication companyApplication = getVendorApplication(applicationRef);
 		List<DocumentFiles> files = getApplicationDocumentsFromDropBox(applicationRef);
@@ -158,13 +164,13 @@ public class EmployeeDashboardAndVetVendorControllerImpl {
 
 	@RequestMapping(value = "/companyApplicationPending/vetApplication/{applicationRef}", method = RequestMethod.POST)
 	public ModelAndView approveOrRejectApplication(HttpSession session, @PathVariable String applicationRef,
-			@ModelAttribute("requirementApproval") RequirementApproval requirementApproval) {	
+			@ModelAttribute("requirementApproval") RequirementApproval requirementApproval) {
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
+		try {
 		String userName = session.getAttribute("username").toString();
 		Application application = applicationService.findByApplicationRefNo(applicationRef);
-		
-		
-		try {
-			vendorVettingProcess.vetVendor(userName, application, requirementApproval.getStatus(), requirementApproval.getRequirements());
+		vendorVettingProcess.vetVendor(userName, application, requirementApproval.getStatus(), requirementApproval.getRequirements());
 		} 
 		catch(Exception e)
 		{

@@ -9,12 +9,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.beta.controller.object.CompanyApplication;
 import com.beta.entity.Application;
 import com.beta.entity.ApprovalStatus;
 import com.beta.entity.Category;
@@ -55,6 +57,8 @@ public class CompanyVendorApplicationFormImpl {
 	
 	@RequestMapping(value = "/vendorApplicationForm", method = RequestMethod.GET)
 	public ModelAndView getAllPendingAndVettingApplications(HttpSession session) {
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try
 		{
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount) session.getAttribute("account");
@@ -85,18 +89,54 @@ public class CompanyVendorApplicationFormImpl {
 		   return mav;
 		}
 	}
+
+	@RequestMapping(value = "/addCompany/{companyRef}", method = RequestMethod.GET)
+	public ModelAndView addCompany(HttpSession session, @PathVariable String companyRef) {
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
+		try {
+			CompanyAdministratorAccount account = (CompanyAdministratorAccount) session.getAttribute("account");
+			
+			ModelAndView mav = new ModelAndView("vendorApplicationForm", "application", new Application()); 
+			mav.addObject("companyReferenceNumber", companyRef);
+			mav.addObject("account", account);
+			
+			return mav;
+		}
+
+		catch (VendorMgmtException e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+
+			return mav;
+		} catch (UserException e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", e.getMessage());
+
+			return mav;
+		} catch (Exception e) {
+			ModelAndView mav = new ModelAndView("error");
+			mav.addObject("message", "Registration could not be carried out.");
+
+			return mav;
+		}
+	}
+	
+	
 	
 	@RequestMapping(value = "/findCompany", method = RequestMethod.GET)
 	public ModelAndView companySearch(HttpSession session, @RequestParam(value = "comName") String comName) {
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try {
 			CompanyAdministratorAccount account = accountService
 					.findByUserName(session.getAttribute("username").toString());
 			
 			List <Company>comList=companyService.findByComName(comName);
 			
-			ModelAndView mav = new ModelAndView("displayComSearch");
+			ModelAndView mav = new ModelAndView("vendorApplicationForm", "application", new Application());
 			mav.addObject("comList", comList);
-			
+			mav.addObject("account", account);
 			return mav;
 		}
 
@@ -124,12 +164,15 @@ public class CompanyVendorApplicationFormImpl {
 	
 	@RequestMapping(value = "/applyApplicationStage2", method = RequestMethod.POST)
 	public ModelAndView applyApplicationStage2(HttpSession session, @ModelAttribute("application") Application application) {
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try
 		{
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount) session.getAttribute("account");
 		if (companyService.findbyRefNo(application.getCompanyReferenceNumber())==null)
 			throw new VendorMgmtException("Company Reference Number does not exist");
-		
+		if (application.getCompanyReferenceNumber().equals(application.getVendorReferenceNumber()))
+			throw new VendorMgmtException("You cannot apply to be a vendor of your own company!");
 		List<String> categoryNames = generateListOfCategoriesOfCompany(application.getCompanyReferenceNumber());
 		ModelAndView mav = new ModelAndView("vendorApplicationFormStage2", "application", application);
 		mav.addObject("categoryNames", categoryNames);
@@ -150,18 +193,20 @@ public class CompanyVendorApplicationFormImpl {
 	    	
 		   return mav;
 		}
-		catch(Exception e)
-		{
-        	ModelAndView mav = new ModelAndView("error");
-	    	mav.addObject("message", "apply Application stage 2 is not successful!");
-	    	
-		   return mav;
-		}
+//		catch(Exception e)
+//		{
+//        	ModelAndView mav = new ModelAndView("error");
+//	    	mav.addObject("message", "apply Application stage 2 is not successful!");
+//	    	
+//		   return mav;
+//		}
 	}
 
 	@RequestMapping(value = "/applyApplicationStage3", method = RequestMethod.POST)
 	public ModelAndView applyApplicationStage3(HttpSession session,
 			@ModelAttribute("application") Application application) {
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
 		try
 		{
 		CompanyAdministratorAccount account = (CompanyAdministratorAccount) session.getAttribute("account");
@@ -199,17 +244,42 @@ public class CompanyVendorApplicationFormImpl {
 	}
 	
 	@RequestMapping(value = "/uploadDocumentsAndSubmit", method = RequestMethod.POST)
-	   public String documentsUpload(@RequestParam("file") MultipartFile[] files, 
-			   @ModelAttribute("application") Application application) throws Exception {
+	   public ModelAndView documentsUpload(@RequestParam("file") MultipartFile[] files, 
+			   @ModelAttribute("application") Application application, HttpSession session) throws Exception {
+		if (session.getAttribute("username")==null)
+			return new ModelAndView("redirect:/login");
+		try {
 		Category category = categoryService.findByNameAndCompanyRef
 				(application.getCategory().getCategoryName(), application.getCompanyReferenceNumber());
 		application.setCategory(category);
 		Application generatedApplication = vendorApplicationService.generateVendorApplication(application);
 		vendorApplicationService.uploadApplicationAndDocuments(generatedApplication, files);
 		sendEmailNotificationToCompany(generatedApplication);
-		
+		ModelAndView mav = new ModelAndView("dashboard");
 //		return to dashboard
-	      return "dashboardcompany";
+	      return mav;
+		}
+	      catch(VendorMgmtException e)
+			{
+	        	ModelAndView mav = new ModelAndView("error");
+		    	mav.addObject("message", e.getMessage());
+		    	
+			   return mav;
+			}
+			catch(UserException e)
+			{
+	        	ModelAndView mav = new ModelAndView("error");
+		    	mav.addObject("message", e.getMessage());
+		    	
+			   return mav;
+			}
+			catch(Exception e)
+			{
+	        	ModelAndView mav = new ModelAndView("error");
+		    	mav.addObject("message", "Uploading of Documents and application is not successful!");
+		    	
+			   return mav;
+			}
 	}
 	
 	

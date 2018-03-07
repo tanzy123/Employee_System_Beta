@@ -27,6 +27,30 @@
 				<td><a href="companyApplicationPending/${companyApplication.application.applicationRef}">Details</a></td>
 		</c:forEach>
 	</table>
+	
+	<h2>Search for Company by Name</h2>
+		<form action="/VendorApplication/pendingCompanyApplication/findbycompanyname" method="get">
+			<input id="comName" name="comName" type="text" /> <input
+				type="submit" value="Search" />
+		</form>
+	
+	<br>
+		<table class="table">
+			<tr>
+				<th>Company Name</th>
+				<th>Company Reference Number</th>
+				
+				<th></th>
+			</tr>
+			<c:forEach var="com" items="${comList}">
+				<tr>
+					<td>${com.companyName}</td>
+					<td>${com.companyReferenceNumber}</td>
+					
+					<td><form action="/VendorApplication/addCompany/${com.companyReferenceNumber}"><input class="btn btn-default" type="submit" value="Add Company"></form></td>
+				</tr>
+			</c:forEach>
+		</table>
 </div>
 </body>
 
